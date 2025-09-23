@@ -1,0 +1,168 @@
+% ==================================================================
+% main.tex — Monograph: Lithomathematics (Diamond Standard)
+% Repository layout expected:
+%   src/
+%     main.tex
+%     macros/{environments,operators,house-style}.tex
+%     frontmatter/00-*.tex
+%     sections/..
+%     conclusion/09-conclusion.tex
+%     appendices/A-..,B-..,..
+%     bib/references.bib
+% ==================================================================
+
+\documentclass[11pt]{book}
+
+% ---------- Page geometry & fonts ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% ---------- Math & symbols ----------
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+
+% ---------- Graphics / floats ----------
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+% ---------- Micro-typography & hyperlinks ----------
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+
+% ---------- Lists / misc ----------
+\usepackage{enumitem}
+\setlist{nosep}
+\usepackage{url}
+
+% ---------- Color box for abstract ----------
+\usepackage[most]{tcolorbox}
+
+% ---------- Numbering ----------
+\numberwithin{equation}{section}
+
+% ---------- Custom macros ----------
+\input{macros/environments.tex}
+\input{macros/operators.tex}
+\input{macros/house-style.tex}
+
+% ---------- PDF metadata ----------
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!40!black,
+  citecolor=blue!40!black,
+  urlcolor=blue!40!black,
+  pdftitle={Lithomathematics: Variational--Spectral Invariants of Fractured Media},
+  pdfauthor={Alexander Stepanovich Kozhukharev},
+  pdfsubject={Localized trace, fracture geometry, variational--spectral invariants},
+  pdfkeywords={localized trace formula, fracture sets, Allen--Cahn, Griffith energy, microlocal analysis, spectral geometry, homogenization}
+}
+
+% Optional extra operators used across the text
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\WF}{WF}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Op}{Op}
+\DeclareMathOperator{\Vol}{Vol}
+
+\begin{document}
+
+% ==============================================================
+% Title page
+% ==============================================================
+\begin{titlepage}
+  \centering
+  \vspace*{6mm}
+  {\Large\scshape Monograph}\\[12mm]
+  {\LARGE\bfseries Lithomathematics}\\[3mm]
+  {\large\bfseries Variational--Spectral Invariants of Fractured Media}\\[16mm]
+
+  {\large Alexander Stepanovich Kozhukharev}\\[2mm]
+  Moscow, Russia\\[2mm]
+  \texttt{askohguharev@yandex.ru}\\[14mm]
+
+  \vfill
+
+  \begin{tcolorbox}[colback=white,colframe=black!15,sharp corners,boxrule=0.3pt]
+    \small
+    \textbf{Abstract.}\;
+    We develop a rigorous framework for \emph{lithomathematics}:
+    a theory of variational--spectral invariants on domains with
+    fracture sets and microstructural anisotropy. Combining
+    Allen--Cahn/Cahn--Hilliard ordering energies with Griffith-type
+    fracture evolution and microlocal spectral analysis, we define a
+    scale-stable invariant (the \emph{litho-ratio}) and prove its
+    ergodic limit, stability under $\Gamma$-convergence, and a
+    localized trace formula with volume/surface/fracture decomposition
+    and power-saving remainder on Paley--Wiener windows. The approach
+    yields a diamond-standard toolkit: windowed trace stability,
+    homogenized limits, and canonical examples with explicit constants.
+  \end{tcolorbox}
+
+  \vfill
+  {\small Version: \today}
+\end{titlepage}
+
+\setcounter{page}{1}
+
+% ==============================================================
+% Table of contents
+% ==============================================================
+\tableofcontents
+\clearpage
+
+% ==============================================================
+% Frontmatter (zero-chapter diamond front)
+% ==============================================================
+\input{frontmatter/00-executive-summary.tex}
+\input{frontmatter/00-readers-roadmap.tex}
+\input{frontmatter/00-notation-glossary.tex}
+
+% ==============================================================
+% Main sections (Diamond Standard)
+% ==============================================================
+\input{sections/01-diamond-preamble.tex}         % Diamond Preamble & contribution checklist
+\input{sections/02-framework.tex}                % Mathematical framework & definitions
+\input{sections/03-energies-and-evolution.tex}   % Ordering/disorder energies & evolution
+\input{sections/04-localized-trace.tex}          % Localized trace on fractured domains
+\input{sections/05-window-stability.tex}         % Windowed trace stability theorem
+\input{sections/06-homogenization.tex}           % Gamma-limits & scale invariance
+\input{sections/07-main-theorems.tex}            % Core results (precise statements & proofs)
+\input{sections/08-canonical-examples.tex}       % Canonical examples with explicit constants
+\input{sections/09-numerical-and-symbolic.tex}   % Reproducible numerical checks (arXiv-safe)
+\input{sections/10-discussion-and-outlook.tex}   % Discussion & outlook (balanced, application-safe)
+
+% ==============================================================
+% Conclusion (short, formal)
+% ==============================================================
+\input{conclusion/09-conclusion.tex}
+
+% ==============================================================
+% Appendices (technical)
+% ==============================================================
+\input{appendices/A-functional-analytic-background.tex}
+\input{appendices/B-microlocal-toolkit.tex}
+\input{appendices/C-heat-and-wave-parametrix.tex}
+\input{appendices/D-tauberian-and-pw.tex}
+\input{appendices/E-gamma-convergence-lemmas.tex}
+\input{appendices/F-constants-and-normalizations.tex}
+\input{appendices/G-proof-polish-and-audits.tex}
+\input{appendices/H-reproducibility-manifest.tex}
+
+% ==============================================================
+% Bibliography
+% ==============================================================
+\section*{References}
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{alpha}
+\nocite{*}
+\bibliography{bib/references.bib}
+
+\end{document}
