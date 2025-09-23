@@ -1,0 +1,79 @@
+% --- packages expected in preamble ---
+% \usepackage{amsmath,amssymb,amsthm,mathtools,bm,bbm,xcolor}
+% -------------------------------------
+
+% Paired delimiters
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\snorm}{\lVert}{\rVert}_{\!*}
+\DeclarePairedDelimiterX{\ip}[2]{\langle}{\rangle}{#1,#2}
+
+% Blackboard
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+% Operators
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\Area}{Area}
+\DeclareMathOperator{\Length}{Length}
+\DeclareMathOperator{\Haus}{\mathcal{H}}
+\DeclareMathOperator{\WF}{WF}
+\DeclareMathOperator{\diver}{div}
+\DeclareMathOperator{\Ric}{Ric}
+
+% Differential, Laplacian, semiclassical symbols
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Lap}{\Delta}
+\newcommand{\hsc}{h}
+
+% Pseudodifferential / quantization
+\newcommand{\Op}{\operatorname{Op}_{\hsc}}
+
+% Asymptotics
+\newcommand{\Oh}[1]{\mathcal{O}\!\left(#1\right)}
+\newcommand{\oh}[1]{o\!\left(#1\right)}
+\newcommand{\eps}{\varepsilon}
+
+% Indicators and kernels
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\kernel}{\mathsf{K}}
+\newcommand{\Pwin}{P_{\lambda,\eta}}
+\newcommand{\gwin}{g_{\eta}}
+
+% Geometry
+\newcommand{\bdry}{\partial}
+\newcommand{\Fract}{\Gamma}
+
+% Theorem styles
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% Proof sketch environment
+\newenvironment{proofsketch}{\paragraph{Proof sketch.}}{\hfill\(\square\)}
+
+% Diamond protocol boxes
+\usepackage{tcolorbox}
+\tcbset{colback=white,colframe=black!15,boxrule=0.6pt,arc=2pt}
+\newenvironment{auditblock}[1][Audit]{%
+  \begin{tcolorbox}[title=\textbf{#1}] }{ \end{tcolorbox} }
+\newenvironment{assumptionbox}{%
+  \begin{tcolorbox}[title=\textbf{Assumptions}] }{ \end{tcolorbox} }
+\newenvironment{riskbox}{%
+  \begin{tcolorbox}[title=\textbf{Non-claims / Limits}] }{ \end{tcolorbox} }
+
+% Version tag (optional)
+\newcommand{\revisiontag}[1]{\textcolor{gray}{\footnotesize[rev: #1]}}
