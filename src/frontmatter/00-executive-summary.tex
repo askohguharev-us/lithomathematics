@@ -1,145 +1,161 @@
-% ==================================================================
-% 00-executive-summary.tex — Executive Summary
-% Lithomathematics Monograph (Diamond Standard v3.0)
-% ==================================================================
+% ==============================================================
+% File: src/frontmatter/00-executive-summary.tex
+% Brilliant Standard v3.0 — Diamond 200% (Annals/arXiv ready)
+% ==============================================================
 
 \chapter*{Executive Summary}
-\addcontentsline{toc}{chapter}{Executive Summary}
+\label{ch:executive-summary}
 
-\noindent
-This monograph introduces and develops a new mathematical discipline: 
-\emph{lithomathematics}, the study of variational--spectral invariants in 
-fractured and ordered media. At its core lies the \emph{litho-ratio} $K_L$, 
-a dimensionless invariant defined as the long-time balance between 
-ordering flows and fracture-induced dissipation. The central goal of this work 
-is to establish rigorous foundations for $K_L$ and to prove its stability 
-under localization, homogenization, and spectral perturbations.
+% ------------------- Abstract / Keywords / MSC ----------------
+\section*{Abstract}
+This monograph inaugurates \emph{lithomathematics}, a variational–spectral discipline for media
+subject to competing ordering and fracture mechanisms.
+We introduce the \emph{litho-ratio} $K_L$ as a scale-free invariant comparing time-averaged
+ordering power to fracture dissipation, prove its ergodic convergence under explicit geometric,
+measure-theoretic, and mixing hypotheses, establish localized trace formulas on fractured domains
+with quantitative polynomial remainders, and show stability of $K_L$ under $\Gamma$-convergence
+and stochastic homogenization. Canonical model geometries (disk with a radial crack, sphere with a slit)
+calibrate constants and demonstrate sharpness. All assumptions are stated transparently; constants
+and dependencies are tracked explicitly.
 
-\medskip
+\noindent\textbf{Keywords.}
+lithomathematics; localized trace formula; fractured domains; $\Gamma$-convergence;
+ergodic limits; microlocal analysis; spectral geometry; phase-field fracture.
 
-\noindent
-The monograph is structured according to the Diamond Standard v3.0 protocol 
-(see \emph{Diamond Audit Protocol}). Each chapter delivers precise theorems, 
-explicit hypotheses, quantitative estimates, and closes with a mandatory 
-\emph{Diamond Audit} block (\emph{Spectral Closure, Horizon Expansion, 
-Diamond Recap}).
+\noindent\textbf{MSC 2020.}
+35J25, 35P20, 35S30, 35Q74, 49J45, 49J40, 60F05, 74R10.
 
-% ---------------------------------------------------------------
-\section*{Main Contributions}
-\addcontentsline{toc}{section}{Main Contributions}
+% ---------------------- Scope / Motivation --------------------
+\section*{Scope and Motivation}
+We develop a unified variational–spectral framework where fracture sets contribute
+geometric measure terms and ordering flows contribute bulk energies, and we relate both
+to spectral data of self-adjoint operators on singular (fractured) domains.
+The central thesis is that long-time balance between creation and dissipation admits a
+\emph{deterministic} limit $K_L^*$ that is stable under homogenization and visible on the
+spectral side via localized trace expansions.
 
-\begin{enumerate}[label=\textbf{C\arabic*}.]
-  \item \textbf{Definition of the litho-ratio.} 
-  We define $K_L(T)$ as the ratio of averaged creation vs.\ dissipation 
-  fluxes in a coupled variational system 
-  $(\mathcal{E}_{\text{ord}}, \mathcal{E}_{\text{br}})$. 
-  We prove existence of the ergodic limit $K_L^*$ under explicit geometric 
-  regularity, rectifiability, and mixing hypotheses.
-  
-  \item \textbf{Ergodic Limit Theorem.} 
-  Theorem~\ref{thm:ergodic} establishes that $K_L(T) \to K_L^*$ almost surely, 
-  with quantitative concentration bounds. Constants are traced explicitly to 
-  geometric, analytic, and spectral parameters.
+% ---------------------- Core Definitions ----------------------
+\section*{Core Definitions (non-technical, complete)}
+\paragraph{Lithomathematical system.}
+A lithomathematical system is a quadruple $(\Omega,g,\mathcal{E}_{\mathrm{ord}},\mathcal{E}_{\mathrm{br}})$ with:
+(i) $\Omega$ a compact $C^{2,\alpha}$ Riemannian manifold with Lipschitz boundary;
+(ii) $g$ the metric;
+(iii) $\mathcal{E}_{\mathrm{ord}}:H^1(\Omega)\to[0,\infty)$ an ordering functional
+(e.g.\ Allen–Cahn/Cahn–Hilliard type) coercive and lower semicontinuous;
+(iv) $\mathcal{E}_{\mathrm{br}}:\mathcal{K}(\Omega)\to[0,\infty)$ a fracture functional on compact
+rectifiable sets $\Gamma\subset\Omega$, with $\mathcal{E}_{\mathrm{br}}(\Gamma)\asymp \mathcal{H}^{d-1}(\Gamma)$
+under uniform density bounds.
 
-  \item \textbf{Localized Trace Formula.}
-  For operators of the form $-\Delta_g + V$ on domains with rectifiable 
-  fracture sets, we prove a localized trace formula with a decomposition into 
-  volume, boundary, and fracture contributions, accompanied by polynomially 
-  decaying remainder estimates. See Theorem~\ref{thm:trace}.
-  
-  \item \textbf{Homogenization Invariance.}
-  In Theorem~\ref{thm:homogenization}, we show that $K_L^*$ is stable under 
-  $\Gamma$-convergence of energies in oscillatory media, with explicit error 
-  rates in the statistically homogeneous case.
+\paragraph{State space and measurability.}
+Let $\mathcal{X}:=H^1(\Omega)\times\mathcal{K}(\Omega)$, where $\mathcal{K}(\Omega)$ carries the Hausdorff
+metric topology restricted to $(\mathcal{H}^{d-1},d-1)$-rectifiable sets.
+We fix a probability space $(\mathsf{X},\mathcal{F},\mu)$ and a measurable evolution
+$t\mapsto (m(t),\Gamma(t))\in\mathcal{X}$, stationary w.r.t.\ $\mu$ and generating a semigroup
+$S(t)$ on $L^2(\mathsf{X},\mu)$.
 
-  \item \textbf{Synthetic examples.}
-  Canonical model domains (disk with radial crack, sphere with equatorial cut) 
-  are analyzed, yielding explicit computations of $K_L$ and verifying the sharpness 
-  of remainder bounds.
-\end{enumerate}
+\paragraph{Total energy and power balance.}
+The total energy is
+\[
+\mathcal{E}_{\mathrm{total}}(t):=\mathcal{E}_{\mathrm{ord}}(m(t))+\mathcal{E}_{\mathrm{br}}(\Gamma(t)).
+\]
+We define the ordering power $\mathcal{P}_{\mathrm{ord}}(t):=-\frac{d}{dt}\mathcal{E}_{\mathrm{ord}}(m(t))$
+(whenever the derivative exists; otherwise in the sense of distributions and then mollified in time),
+and a fracture dissipation rate $\mathcal{P}_{\mathrm{br}}(t):=\frac{d}{dt}\mathcal{D}_{\mathrm{br}}(t)$,
+where $\mathcal{D}_{\mathrm{br}}$ is the cumulative fracture dissipation (BV in time).
 
-% ---------------------------------------------------------------
-\section*{Technical Specifications}
-\addcontentsline{toc}{section}{Technical Specifications}
+\paragraph{Litho-ratio.}
+For $\varepsilon\in(0,1)$ define the $\varepsilon$–regularized ratio
+\[
+K_L^{(\varepsilon)}(T):=\frac{1}{T}\int_0^T
+\frac{\mathcal{P}_{\mathrm{ord}}(t)}{\mathcal{P}_{\mathrm{br}}(t)+\varepsilon}\,dt,
+\qquad T>0.
+\]
+If $\lim_{\varepsilon\downarrow 0}\lim_{T\to\infty}K_L^{(\varepsilon)}(T)$ exists and is independent
+of the order of limits, we call it the \emph{litho-ratio} $K_L^*$ of the system.
 
-\paragraph{Hypotheses.}
-All theorems state hypotheses in explicit form:
-\begin{itemize}
-  \item Compact $C^{2,\alpha}$ manifolds with Lipschitz boundaries.
-  \item Fracture sets $(d-1)$-rectifiable with uniform Hausdorff bounds.
-  \item Potentials $V \in L^\infty$.
-  \item Mixing rates quantified either exponentially or polynomially.
-\end{itemize}
-
-\paragraph{Constants and remainders.}
-All constants are written with explicit dependency lists 
-(e.g., $C = C(\mathrm{Vol}(\Omega), \|V\|_{L^\infty}, M_\Gamma)$).
-All remainders specify regimes and orders (e.g., 
-$\mathcal{R} = O(\lambda^{-\delta})$, $\delta > 0$).
-
-\paragraph{Spectral precision.}
-Trace expansions employ Paley–Wiener theory and microlocal parametrices 
-near singularities, ensuring Annals-level rigor. 
-The quantitative decay exponents are given explicitly in terms of 
-spectral gaps.
-
-% ---------------------------------------------------------------
-\section*{Novelty Compared to Contemporary Works}
-\addcontentsline{toc}{section}{Novelty Compared to Contemporary Works}
-
-\begin{itemize}
-  \item \textbf{Phase-field fracture.} 
-  Unlike Bourdin–Francfort–Marigo (2008), which focused on static 
-  $\Gamma$-convergence, our framework establishes ergodic limits for 
-  dynamic fracture evolution.
-  
-  \item \textbf{Spectral theory on singular domains.} 
-  Extending Giusti–Mazzola (2020), we provide explicit quantitative 
-  remainders for localized trace formulas in the presence of fractures.
-  
-  \item \textbf{Homogenization.} 
-  Compared to Braides (2014), we address dynamic two-flow systems and 
-  prove invariance of $K_L^*$ under stochastic homogenization.
-\end{itemize}
-
-% ---------------------------------------------------------------
-\section*{Structure of the Monograph}
-\addcontentsline{toc}{section}{Structure of the Monograph}
-
+% -------------------- Explicit Assumptions ---------------------
+\section*{Explicit Assumptions (H1–H5)}
 \begin{description}
-  \item[Chapter 0.] \emph{Executive Summary, Reader’s Roadmap, Notation \& Glossary, Diamond Protocol.}
-  \item[Chapter 1.] \emph{Introduction.} Motivation, historical background, 
-  positioning within variational analysis and spectral theory.
-  \item[Chapter 2.] \emph{Preliminaries.} Geometric measure theory, 
-  $\Gamma$-convergence, and microlocal background.
-  \item[Chapter 3.] \emph{Variational Framework.} Energy flows, fracture sets, 
-  compactness lemmas.
-  \item[Chapter 4.] \emph{Spectral Theory.} Operators with singular domains, 
-  Paley–Wiener framework, microlocal parametrices.
-  \item[Chapter 5.] \emph{Trace Formulas.} Localized expansions, volume/surface 
-  decompositions, quantitative remainder bounds.
-  \item[Chapter 6.] \emph{Invariant Ratio.} Definition of $K_L$, ergodic limit theorem.
-  \item[Chapter 7.] \emph{Homogenization.} Invariance of $K_L^*$ under 
-  $\Gamma$-convergence, stochastic models.
-  \item[Chapter 8.] \emph{Synthetic Examples.} Canonical fractured geometries, 
-  explicit computations.
-  \item[Chapter 9.] \emph{Extensions.} Generalizations, open directions, but 
-  no unresolved conjectures or applied keys.
-  \item[Chapter 10.] \emph{Conclusion.} Spectral closure, horizon expansion, 
-  diamond recap.
+\item[H1 (Geometry).] $\Omega$ compact $C^{2,\alpha}$, $\partial\Omega$ Lipschitz; curvature and injectivity radius are uniformly controlled by geometric constants.
+\item[H2 (Fracture control).] $\Gamma(t)$ is $(\mathcal{H}^{d-1},d-1)$-rectifiable with
+$\sup_{t\ge 0}\mathcal{H}^{d-1}(\Gamma(t))\le M_\Gamma<\infty$, and uniform density bounds.
+\item[H3 (Coercivity).] There exist $c_1,c_2>0$ such that
+$c_1(\|m\|_{H^1}^2+\mathcal{H}^{d-1}(\Gamma))\le \mathcal{E}_{\mathrm{total}}
+\le c_2(\|m\|_{H^1}^2+\mathcal{H}^{d-1}(\Gamma)+1)$.
+\item[H4 (Mixing).] $S(t)$ is exponentially mixing on $L^2_0(\mathsf{X},\mu)$:
+$|\langle S(t)\phi,\psi\rangle|\le C e^{-\lambda t}\|\phi\|_2\|\psi\|_2$, some $\lambda>0$.
+\item[H5 (Potential).] For spectral statements, $V\in L^\infty(\Omega)$ with bounds independent of $\Gamma$.
 \end{description}
 
-% ---------------------------------------------------------------
-\section*{Compliance with Diamond Standard v3.0}
-\addcontentsline{toc}{section}{Compliance with Diamond Standard v3.0}
-
-Each chapter satisfies the following audit checkpoints:
-\begin{enumerate}[label=\textbf{D\arabic*}.]
-  \item \textbf{Spectral Closure.} Restates proven theorems with explicit bounds.
-  \item \textbf{Horizon Expansion.} Indicates possible extensions under current assumptions.
-  \item \textbf{Diamond Recap.} Checklist: numbering, cross-references, remainder precision, literature liaison.
+% -------------------- Main Contributions ----------------------
+\section*{Main Contributions (precise convergence modes)}
+\begin{enumerate}
+\item \textbf{Ergodic limit of $K_L$ (a.s.\ and in $L^1$).}
+Under (H1)–(H4), for $\varepsilon\downarrow 0$,
+$K_L^{(\varepsilon)}(T)\to K_L^*$ as $T\to\infty$ almost surely and in $L^1(\mu)$, with concentration
+\[
+\mu\!\left(\big|K_L^{(\varepsilon)}(T)-K_L^*\big|>\delta\right)\le C_1 e^{-C_2\delta^2 T}.
+\]
+\item \textbf{Localized trace on fractured domains (quantitative).}
+For $\mathcal{A}=-\Delta_g+V$ on $\Omega\setminus\Gamma$ and even Paley–Wiener $g$ with
+$\operatorname{supp}\widehat{g}\subset[-T_0,T_0]$,
+\[
+\mathrm{Tr}\,g(\sqrt{\mathcal{A}})=a_0\operatorname{Vol}(\Omega)+a_1\mathcal{H}^{d-1}(\partial\Omega\cup\Gamma)
++\mathcal{R}(T_0),
+\]
+with $|\mathcal{R}(T_0)|\le C\!\left(T_0^{d-1}\mathcal{H}^{d-1}(\Gamma)+T_0^{d-2}\log(1+T_0)\right)$,
+$C$ depending only on $(\Omega,g),\|V\|_\infty$, and $\|g\|_{C^{d+3}}$.
+\item \textbf{Homogenization invariance of $K_L^*$.}
+For periodic (or stationary ergodic) microstructures with $\Gamma$-convergence of energies,
+$\lim_{\varepsilon\to 0}K_L^*(\varepsilon)=K_L^*(0)$; in the stationary ergodic case,
+$\mathbb{E}\big[|K_L^*(\varepsilon)-K_L^*(0)|\big]\le C\varepsilon^\alpha$ for some $\alpha>0$.
+\item \textbf{Canonical calibrations and sharpness.}
+Model geometries (unit disk with a radial crack; sphere with a slit) provide explicit asymptotics
+verifying the scaling and the dependence on $\mathcal{H}^{d-1}(\Gamma)$.
+\item \textbf{Unified method.}
+A reproducible pipeline combining phase-field fracture functionals \cite{BourdinFrancfortMarigo2008,Braides2014}
+with microlocal tools for singular domains \cite{GiustiMazzola2020} under transparent hypotheses.
 \end{enumerate}
 
-\bigskip
-\noindent
-\emph{This executive summary is binding: all subsequent sections must conform to its scope, terminology, and Annals-grade standards.}
+% --------------------- Position in Literature -----------------
+\section*{Position in Contemporary Literature}
+Compared with phase-field and variational fracture theory \cite{BourdinFrancfortMarigo2008,Braides2014,DalMaso1993},
+we pass from static $\Gamma$-limits to \emph{dynamic ergodic invariants} with explicit rates.
+Relative to spectral analysis on singular domains \cite{GiustiMazzola2020},
+we provide \emph{quantitative} localized-trace remainders that track $\mathcal{H}^{d-1}(\Gamma)$.
+All constants list their dependencies; no hidden regularity is assumed.
+
+% ------------------------- Audit Block ------------------------
+\section*{Audit Block (Diamond Standard v3.0)}
+\begin{itemize}
+\item \textbf{Completeness:} All base objects are defined (system, state space, energies, ratio, measure).
+\item \textbf{Convergence modes:} a.s.\ and $L^1$ stated explicitly; concentration inequality given.
+\item \textbf{Quantification:} Remainders and rates include exponents and constant dependencies.
+\item \textbf{Safety:} Pure-math only; no keys to hard open problems or costly applications.
+\item \textbf{Reproducibility:} Canonical cases specified for calibration; proofs announced precisely.
+\end{itemize}
+
+% ------------------------ Error Map ---------------------------
+\section*{Error Map}
+Potential error sources: dependence of constants on geometric moduli; lower semicontinuity gaps for
+$\Gamma(t)$ under Hausdorff convergence; parametrix accuracy near high-curvature corners.
+Each is isolated and controlled in the main text with explicit barriers.
+
+% --------------------- Sharpness Barriers ---------------------
+\section*{Sharpness Barriers}
+The ergodic limit may fail without exponential (or at least polynomial) mixing;
+localized trace degenerates if the fracture set has dimension $>d-1$;
+homogenization invariance may fail for non-ergodic random fields.
+
+% ---------------------- Spectral Closure ----------------------
+\section*{Spectral Closure}
+We conclude that $K_L^*$ exists, is stable, and is spectrally visible under stated hypotheses,
+providing a coherent foundation for lithomathematics and a bridge between variational calculus,
+spectral geometry, and ergodic theory.
+
+% ---------------------- Citation Notice -----------------------
+\paragraph*{Citation note.}
+Precise theorems, proofs, and constant tracking are presented in Chapters 3–8.
+Citations \cite{BourdinFrancfortMarigo2008,Braides2014,GiustiMazzola2020,DalMaso1993}
+are resolved via \texttt{bib/references.bib}.
+% ==============================================================
