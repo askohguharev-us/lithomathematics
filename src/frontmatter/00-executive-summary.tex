@@ -1,1 +1,92 @@
+% ------------------------------------------------------------------
+% 00-executive-summary.tex — Frontmatter (Diamond Monograph Standard)
+% Lithomathematics: Variational–Spectral Invariants of Fractured Media
+% ------------------------------------------------------------------
 
+\section*{Executive Summary}
+
+\textbf{Scope.}
+This monograph develops a rigorous mathematical framework—\emph{lithomathematics}—for media whose geometry and dynamics arise from a controlled competition between \emph{ordering} and \emph{dissipation}. The core objects are (i) variational functionals encoding phase/structure formation and fracture, and (ii) localized spectral invariants of elliptic generators on domains with rectifiable singular sets. We establish existence, stability, and scale–transfer properties of a central dimensionless quantity, the \emph{litho–ratio} $K_L$, and prove localized trace formulas on fractured manifolds with power–saving remainders. The results are formulated and proved in the language of analysis and geometry only; no application keys or algorithmic shortcuts are provided.
+
+\medskip
+\textbf{Guiding principle.}
+A medium is viewed as a pair of coupled flows in function and measure spaces:
+\[
+\text{ordering flow } \dot m_t \quad\hbox{vs.}\quad \text{fracture/defect flow } \dot\Gamma_t,
+\]
+with energy balance dictating how spectral content reorganizes under localized structural change. All asymptotics are derived through microlocal analysis at controlled times and scales.
+
+\medskip
+\textbf{Setting.}
+Let $\Omega$ be a compact $d$–dimensional Riemannian manifold with boundary and a rectifiable fracture set $\Gamma\subset\Omega$. Consider
+\[
+\mathcal{A} \;=\; -\Delta_g + V \quad \text{on } \Omega\setminus\Gamma,
+\]
+with boundary/interface conditions prescribed along $\partial\Omega\cup\Gamma$. The ordering energy $\mathcal{E}_{\mathrm{ord}}$ is of Allen–Cahn/Cahn–Hilliard type; the dissipation/fracture functional $\mathcal{E}_{\mathrm{br}}$ is Griffith–type in a variational inequality formulation. The spectral side is probed by Paley–Wiener test functions and smooth windowed projectors.
+
+\medskip
+\textbf{Primary invariant (litho–ratio).}
+For evolutions $(m(t),\Gamma(t))$ satisfying an energy balance, define
+\[
+K_L(T) \;=\; \frac{\overline{L}_T}{\overline{S}_T}
+\;=\;
+\frac{\frac{1}{T}\!\int_0^T -\dot{\mathcal{E}}_{\mathrm{ord}}(t)\,dt}
+     {\frac{1}{T}\!\int_0^T \dot{\mathcal{D}}_{\mathrm{br}}(t)\,dt},
+\qquad
+K_L^\ast \;=\; \lim_{T\to\infty} K_L(T)
+\;\;\text{(if it exists)}.
+\]
+Here $\mathcal{D}_{\mathrm{br}}$ is the dissipated fracture energy. We prove existence of $K_L^\ast$ under mild compactness and tightness assumptions, show stability under $\Gamma$–convergence/homogenization, and relate $K_L^\ast$ to localized spectral content via trace identities.
+
+\medskip
+\textbf{Localized trace formula on fractured domains.}
+For even Paley–Wiener $g$ with time support $[-T_0,T_0]$ and a smooth spectral projector $P_{\lambda,\eta}$ onto $[\lambda-\eta,\lambda+\eta]$, we obtain
+\[
+\mathrm{Tr}\big(g(\sqrt{\mathcal{A}})\,P_{\lambda,\eta}\big)
+=
+\underbrace{\int_\Omega a_0(x;\lambda,\eta)\,d\mathrm{vol}_g}_{\text{bulk}}
+\;+\;
+\underbrace{\int_{\partial\Omega\cup\Gamma} a_1(s;\lambda,\eta)\,d\mathcal{H}^{d-1}}_{\text{boundary/defect}}
+\;+\;
+\mathcal{R}(\lambda,\eta;T_0),
+\]
+with a power–saving (or exponentially small, depending on $g$) remainder $\mathcal{R}$ uniform in admissible geometric classes. The coefficients $a_0,a_1$ are computed microlocally from the parametrix of the wave group near smooth and singular strata.
+
+\medskip
+\textbf{Main contributions.}
+\begin{enumerate}[label=\textbf{C\arabic*.}, leftmargin=8mm]
+  \item \textbf{Variational–spectral synthesis.} A unified definition of $K_L$ for coupled ordering/fracture evolutions and a proof of the ergodic limit $K_L^\ast$ under standard compactness, tightness, and energy–balance hypotheses.
+  \item \textbf{Localized trace with singular interfaces.} A robust trace identity for $\mathcal{A}$ on $\Omega\setminus\Gamma$ with rectifiable $\Gamma$, including sharp decomposition into bulk and interface contributions with power–saving remainders in windowed regimes.
+  \item \textbf{Stability and scale transfer.} Invariance and continuity of $K_L^\ast$ under $\Gamma$–convergence of energies and homogenization of coefficients/metrics; stability of windowed traces under small variations of $(V,\Gamma)$.
+  \item \textbf{Microlocal toolkit at logarithmic times.} Egorov–type control up to $c\log\lambda$ and Paley–Wiener propagation bounds compatible with defect layers, enabling power–saving error terms in localized trace computations.
+  \item \textbf{Canonical models and verification.} Exact computations for disks/spheres with radial slits and polygonal cracks; comparison with classical heat–kernel expansions and boundary layer contributions.
+\end{enumerate}
+
+\medskip
+\textbf{Methodological outline.}
+\begin{itemize}[leftmargin=7mm]
+  \item \emph{Variational analysis:} $\Gamma$–convergence and BV/GSBD techniques to control fracture sets and dissipation; energetic solutions for coupled flows.
+  \item \emph{Microlocal analysis:} wave parametrices near smooth and singular strata, interface calculus, and propagation of singularities compatible with transmission conditions.
+  \item \emph{Windowed spectral analysis:} smooth projectors and Paley–Wiener time cutoffs to enforce locality in frequency and in geometric propagation time.
+  \item \emph{Homogenization:} two–scale expansions and compactness to pass to effective limits for both energies and spectral invariants; preservation of $K_L^\ast$.
+\end{itemize}
+
+\medskip
+\textbf{Positioning and novelty.}
+The work bridges three mature areas—variational fracture, microlocal/spectral analysis, and homogenization—by introducing a single invariant ($K_L$) and a localized trace mechanism tailored to fractured geometries. The focus is conceptual and structural; no computational pipelines or application recipes are provided.
+
+\medskip
+\textbf{Limitations.}
+We restrict to compact settings (or finite–volume with controlled ends), rectifiable fracture sets, and second–order uniformly elliptic operators with bounded measurable coefficients adapted to the metric. Higher–order operators, random media beyond mixing regimes, and evolving topological changes of $\Gamma$ are not treated here.
+
+\medskip
+\textbf{Reading map (one–paragraph).}
+Chapter~1 motivates the framework and states the main results. Chapter~2 fixes notation and background. Chapters~3–5 develop the localized kernels, projectors, and microlocal propagation at controlled times. Chapter~6 proves the fractured trace formula. Chapter~7 establishes the existence and stability of $K_L^\ast$. Chapter~8 provides canonical models and consistency checks. Appendices collect technical lemmas, parametrix details, and normalization conventions.
+
+\medskip
+\textbf{Ethos.}
+All statements are proved in full. When multiple approaches exist, we choose the structurally transparent one, even if technically longer. Throughout, we avoid any design choices that could serve as keys to hard open problems or costly applications; the contribution is theoretical and architectural.
+
+\medskip
+\textbf{Acknowledgments (optional).}
+Omitted in the arXiv version; a short note will be added in a journal submission to credit foundational tools and discussions.
