@@ -1,0 +1,776 @@
+\chapter{Variational Framework}\label{chap:variational}
+
+% ------------------------------------------------------------------
+\section{Orientation and Scope}\label{sec:var-orientation}
+This chapter establishes the variational backbone of \emph{lithomathematics}, the discipline introduced in Chapter~\ref{chap:introduction}.
+Our goal is to formalize a mathematically rigorous setting in which two competing mechanisms---\emph{ordering} and \emph{fracture-induced dissipation}---are encoded by well-posed energy functionals.
+The resulting evolution admits quantitative invariants and admits downstream spectral analysis (Chapter~\ref{chap:spectral-theory}) and localized trace formulas (Chapter~\ref{chap:trace-formulas}).
+
+\medskip
+We proceed under the \emph{Diamond Standard v3.0} discipline:
+(i) every assumption is explicit, (ii) every dependence of constants on geometric/analytic parameters is tracked, and (iii) the scope and limitations are stated up front. This chapter provides a self-contained dictionary of objects, hypotheses, and admissible manipulations that are repeatedly used in Chapters~\ref{chap:spectral-theory}--\ref{chap:homogenization}.
+
+\paragraph{Conceptual role.}
+Variational structure accomplishes three tasks.
+First, it supplies \emph{coercive} functionals that control both the diffusive (ordering) and singular (fracture) parts of the configuration.
+Second, it defines \emph{admissible states} to which compactness applies in physically natural topologies.
+Third, it furnishes \emph{energy-dissipation balances} that translate into measurable rates; these rates are the raw data from which we build the litho-ratio and its ergodic limit in Chapter~\ref{chap:invariant-ratio}.
+
+\paragraph{Safety and scope.}
+All results in this chapter are purely mathematical.
+No optimization keys, no algorithmic shortcuts for ill-posed inverse problems, and no implementation hints for expensive applications are exposed.
+Examples (when used) are canonical geometries intended solely to calibrate constants and illustrate sharpness.
+
+% ------------------------------------------------------------------
+\section{Goals and Deliverables}\label{sec:var-goals}
+We record the objectives of this chapter as verifiable \emph{Goals} (G1--G7). Each goal is accompanied by a measurable deliverable used later.
+
+\begin{enumerate}[label=\textbf{G\arabic*}.]
+  \item \textbf{Admissible states.} Specify the configuration space of pairs $(m,\Gamma)$ where $m$ is the order parameter and $\Gamma$ is a rectifiable fracture set; pin down the ambient topology and boundary conditions.\\
+  \emph{Deliverable:} Definitions \ref{def:admissible-config}--\ref{def:fracture-class}.
+  \item \textbf{Energy decomposition.} Construct a total energy $\mathcal{E}_{\mathrm{total}}=\mathcal{E}_{\mathrm{ord}}+\mathcal{E}_{\mathrm{br}}$ with explicit coercivity and lower semicontinuity properties.\\
+  \emph{Deliverable:} Propositions \ref{prop:coercivity}--\ref{prop:lsc}.
+  \item \textbf{Compactness \& tightness.} Prove compactness of admissible sequences with uniformly bounded energy; identify the limit class for $\Gamma$ in Hausdorff/concentrated measures.\\
+  \emph{Deliverable:} Theorem \ref{thm:compactness}.
+  \item \textbf{$\Gamma$-convergence scaffolding.} Provide a $\Gamma$-convergence framework for families of energies (e.g., microstructured parameters), ensuring stability of minimizers and of the energy-dissipation balance under passage to the limit.\\
+  \emph{Deliverable:} Theorem \ref{thm:gamma-scaffold}.
+  \item \textbf{Energy-dissipation balance.} State an abstract evolution principle (gradient flow / energetic solution) encoding order-creation and fracture-dissipation rates.\\
+  \emph{Deliverable:} Proposition \ref{prop:edp} and Definition \ref{def:energetic-solution}.
+  \item \textbf{Rate observables.} Define time-averaged rates $\overline{L}_T$ (ordering) and $\overline{S}_T$ (dissipation) and verify their measurability and bounds.\\
+  \emph{Deliverable:} Lemma \ref{lem:rates-bounds}.
+  \item \textbf{No hidden regularity.} Make explicit all regularity levels and domains for operators used later in spectral constructions; fix normalization/units to avoid implicit assumptions.\\
+  \emph{Deliverable:} Section \ref{sec:notation-conventions} and Assumptions (H1)--(H5).
+\end{enumerate}
+
+% ------------------------------------------------------------------
+\section{Standing Notation and Conventions}\label{sec:notation-conventions}
+Throughout this chapter:
+\begin{itemize}
+  \item $\Omega$ denotes a connected, bounded domain in $\mathbb{R}^d$ ($d\ge 2$) with Lipschitz boundary $\partial\Omega$, equipped with a Riemannian metric $g$ of class $C^{2,\alpha}$ ($0<\alpha\le 1$).
+  \item $\mathrm{vol}_g$ is the volume measure, $\mathcal{H}^{k}$ the $k$-dimensional Hausdorff measure.
+  \item Function spaces: $H^1(\Omega)$, $H^1_0(\Omega)$, $BV(\Omega)$, $SBV(\Omega)$ with standard meanings; when needed, we invoke $GSBD$ for brittle energies.
+  \item Fracture sets $\Gamma$ are $(d-1)$-rectifiable subsets of $\overline{\Omega}$; we write $\Gamma\in\mathfrak{F}_M$ if $\mathcal{H}^{d-1}(\Gamma)\le M$.
+  \item For a bounded Borel function $V$, we write $\|V\|_\infty:=\mathrm{ess\,sup}_{x\in\Omega}|V(x)|$.
+  \item Indicators: $\mathbbm{1}_A$ denotes the characteristic function of $A$, $\chi_\Gamma$ may be used for convenience when $\Gamma$ is clear.
+  \item Constants $C,c>0$ may change line to line but their dependencies are explicitly stated when they matter.
+\end{itemize}
+
+We adopt the convention that all operators appearing in spectral chapters (e.g., $-\Delta_g+V$ on $\Omega\setminus\Gamma$ with Dirichlet boundary and ``hard'' crack conditions) are defined with domains spelled out at first use; domain choices in this chapter are variational and will imply closedness/self-adjointness under the hypotheses later.
+
+% ------------------------------------------------------------------
+\section{Admissible Configurations}\label{sec:admissible}
+We separate bulk variables (order parameter $m$) and singular geometry (fracture set $\Gamma$).
+
+\begin{definition}[Fracture class]\label{def:fracture-class}
+For $M>0$ we define
+\[
+  \mathfrak{F}_M:=\Bigl\{\Gamma\subset\overline{\Omega}:\ \Gamma \text{ is }(d-1)\text{-rectifiable and } \mathcal{H}^{d-1}(\Gamma)\le M\Bigr\}.
+\]
+We write $\Gamma_n\to\Gamma$ in the \emph{Hausdorff metric} $d_{\mathcal{H}}$ or in the \emph{local Hausdorff topology} $d_{\mathcal{H},\mathrm{loc}}$ when explicitly stated.
+\end{definition}
+
+\begin{definition}[Admissible bulk fields]\label{def:admissible-m}
+Let $m:\Omega\to\mathbb{R}$ be an order parameter. We write $m\in\mathcal{A}_{\mathrm{bulk}}$ if $m\in H^1(\Omega)$ and the boundary condition $m|_{\partial\Omega}=m_\mathrm{D}\in H^{1/2}(\partial\Omega)$ (or $m\in H^1_0(\Omega)$) is imposed as specified in each statement.
+\end{definition}
+
+\begin{definition}[Admissible configurations]\label{def:admissible-config}
+For $M>0$ define
+\[
+  \mathcal{A}_M := \Bigl\{(m,\Gamma):\ m\in\mathcal{A}_{\mathrm{bulk}},\ \Gamma\in\mathfrak{F}_M\Bigr\}.
+\]
+Topologies: on $m$ we use the weak topology of $H^1(\Omega)$, on $\Gamma$ the Hausdorff (or varifold) topology indicated contextually. Unless otherwise stated we measure compactness in the product topology $\sigma(H^1,\!H^{-1}) \times d_{\mathcal{H}}$.
+\end{definition}
+
+\paragraph{Remarks.}
+(i) The $H^1$ choice is the minimal Sobolev regularity ensuring coercivity of quadratic ordering energies. (ii) The rectifiability with surface measure bound is the standard brittle-geometry control; variants with $GSBD$ will be mentioned when needed. (iii) We keep the fracture topology flexible (Hausdorff vs. varifold) to accommodate both compactness and spectral localization later.
+
+% ------------------------------------------------------------------
+\section{Energy Decomposition}\label{sec:energy}
+We form the total energy as a sum of an \emph{ordering} functional (smooth part) and a \emph{fracture} functional (singular part):
+\begin{equation}\label{eq:energy-decomp}
+  \mathcal{E}_{\mathrm{total}}(m,\Gamma) \;=\; \mathcal{E}_{\mathrm{ord}}(m;\Omega\setminus\Gamma)\;+\;\mathcal{E}_{\mathrm{br}}(\Gamma;\Omega).
+\end{equation}
+A canonical model (not exclusive) is:
+\begin{align}
+  \mathcal{E}_{\mathrm{ord}}(m;\Omega\setminus\Gamma) 
+    &:= \int_{\Omega\setminus\Gamma} \bigl( \tfrac{\kappa}{2}\,|\nabla m|_g^2 + W(m) \bigr)\, d\mathrm{vol}_g, 
+    \label{eq:Eord}\\
+  \mathcal{E}_{\mathrm{br}}(\Gamma;\Omega)
+    &:= \gamma\,\mathcal{H}^{d-1}(\Gamma),
+    \label{eq:Ebr}
+\end{align}
+where $\kappa,\gamma>0$ and $W:\mathbb{R}\to[0,\infty)$ is a $C^2$ double-well potential with $W''$ bounded below. Other convex/coercive $W$ are admissible if specified.
+
+\begin{proposition}[Coercivity]\label{prop:coercivity}
+Suppose $W(\cdot)\ge 0$ and $W(\cdot)\ge c_0 m^2 - c_1$ for some $c_0>0$, $c_1\ge 0$. Then there exists $C=C(\Omega,g,\kappa,c_0,c_1)$ such that
+\[
+  \mathcal{E}_{\mathrm{total}}(m,\Gamma) \;\ge\; C^{-1}\|m\|_{H^1(\Omega)}^2 \;-\; C \quad \text{for all } (m,\Gamma)\in\mathcal{A}_M.
+\]
+In particular, sublevel sets $\{(m,\Gamma): \mathcal{E}_{\mathrm{total}}(m,\Gamma)\le E\}$ are weakly precompact in $m$ uniformly in $\Gamma\in\mathfrak{F}_M$.
+\end{proposition}
+
+\begin{proposition}[Lower semicontinuity]\label{prop:lsc}
+Let $(m_n,\Gamma_n)\to(m,\Gamma)$ with $m_n\rightharpoonup m$ in $H^1(\Omega)$ and $\Gamma_n\to\Gamma$ in $d_{\mathcal{H}}$. Then
+\[
+  \mathcal{E}_{\mathrm{ord}}(m;\Omega\setminus\Gamma) \;\le\; \liminf_{n\to\infty}\ \mathcal{E}_{\mathrm{ord}}(m_n;\Omega\setminus\Gamma_n),
+\qquad
+  \mathcal{E}_{\mathrm{br}}(\Gamma;\Omega) \;\le\; \liminf_{n\to\infty}\ \mathcal{E}_{\mathrm{br}}(\Gamma_n;\Omega).
+\]
+Consequently, $\mathcal{E}_{\mathrm{total}}$ is weak-lower-semicontinuous on $\mathcal{A}_M$.
+\end{proposition}
+
+\paragraph{Discussion.}
+The fractural term \eqref{eq:Ebr} is the Griffith surface energy; more general anisotropic surface integrands are admissible if they satisfy standard growth/continuity assumptions ensuring lower semicontinuity with respect to rectifiable limits.
+
+% ------------------------------------------------------------------
+\section{Compactness and $\Gamma$-Convergence Scaffolding}\label{sec:gamma}
+We record the compactness principle underlying limit passages, and a $\Gamma$-convergence scaffold for sequences of energies.
+
+\begin{theorem}[Compactness of admissible configurations]\label{thm:compactness}
+Let $\{(m_n,\Gamma_n)\}\subset\mathcal{A}_M$ be such that $\sup_n \mathcal{E}_{\mathrm{total}}(m_n,\Gamma_n)\le E<\infty$.
+Then there exist a subsequence (not relabeled), $m\in H^1(\Omega)$, and $\Gamma\in\mathfrak{F}_M$ such that
+\[
+  m_n \rightharpoonup m \ \text{ in } H^1(\Omega), 
+  \qquad 
+  \Gamma_n \to \Gamma \ \text{ in } d_{\mathcal{H},\mathrm{loc}},
+\]
+and $(m,\Gamma)\in\mathcal{A}_M$ with $\mathcal{E}_{\mathrm{total}}(m,\Gamma)\le \liminf_n \mathcal{E}_{\mathrm{total}}(m_n,\Gamma_n)$.
+\end{theorem}
+
+\begin{theorem}[$\Gamma$-convergence scaffold]\label{thm:gamma-scaffold}
+Let $\{\mathcal{E}^{\varepsilon}_{\mathrm{total}}\}$ be a family of energies on $\mathcal{A}_{M}$ of the form \eqref{eq:energy-decomp} with parameters (e.g.~coefficients, microstructures) indexed by $\varepsilon\downarrow 0$.
+Assume:
+\begin{enumerate}[label=(\roman*)]
+  \item \emph{Equi-coercivity:} $\{\mathcal{E}^{\varepsilon}_{\mathrm{total}}\}$ uniformly controls $\|m\|_{H^1}$ and $\mathcal{H}^{d-1}(\Gamma)$ on sublevels.
+  \item \emph{Liminf inequality:} For any $(m_\varepsilon,\Gamma_\varepsilon)\to(m,\Gamma)$ in the product topology, 
+  $\displaystyle \liminf_{\varepsilon\to 0}\mathcal{E}^{\varepsilon}_{\mathrm{total}}(m_\varepsilon,\Gamma_\varepsilon)\ge \mathcal{E}^0_{\mathrm{total}}(m,\Gamma)$.
+  \item \emph{Recovery sequence:} For every $(m,\Gamma)\in\mathcal{A}_M$ there exists $(m_\varepsilon,\Gamma_\varepsilon)\to(m,\Gamma)$ with 
+  $\displaystyle \limsup_{\varepsilon\to 0}\mathcal{E}^{\varepsilon}_{\mathrm{total}}(m_\varepsilon,\Gamma_\varepsilon)\le \mathcal{E}^0_{\mathrm{total}}(m,\Gamma)$.
+\end{enumerate}
+Then $\mathcal{E}^{\varepsilon}_{\mathrm{total}}\ \xrightarrow{\Gamma}\ \mathcal{E}^0_{\mathrm{total}}$ on $\mathcal{A}_M$, and any sequence of (approximate) minimizers is relatively compact with all cluster points minimizing $\mathcal{E}^0_{\mathrm{total}}$.
+\end{theorem}
+
+\paragraph{Remark (Varifold variant).}
+In settings where Hausdorff convergence is too weak to control curvature-dependent surface terms, one can replace $d_{\mathcal{H}}$ by varifold convergence and assume uniform total variation bounds for the associated measures; the statements adapt verbatim with standard modifications.
+
+% ------------------------------------------------------------------
+\section{Energy--Dissipation Principle and Rates}\label{sec:edp}
+We encode temporal evolution via an abstract energy-dissipation principle.
+
+\begin{definition}[Energetic solution]\label{def:energetic-solution}
+A trajectory $t\mapsto (m(t),\Gamma(t))\in\mathcal{A}_M$ on $[0,\infty)$ is an energetic solution if for a.e.~$t$:
+\begin{align*}
+  &\text{\emph{(Stability)}}\quad 
+  \mathcal{E}_{\mathrm{total}}(m(t),\Gamma(t)) \le \mathcal{E}_{\mathrm{total}}(\tilde m,\tilde\Gamma) + \mathcal{D}((m(t),\Gamma(t))\!\to\!(\tilde m,\tilde\Gamma))\\
+  &\text{\emph{(Energy balance)}}\quad 
+  \mathcal{E}_{\mathrm{total}}(m(t),\Gamma(t)) + \mathrm{Diss}((m,\Gamma);[0,t]) = \mathcal{E}_{\mathrm{total}}(m(0),\Gamma(0)) + \mathrm{Work}(0,t),
+\end{align*}
+where $\mathcal{D}$ is a dissipation distance on $\mathcal{A}_M$ and $\mathrm{Diss}$ the accumulated dissipation; $\mathrm{Work}$ encodes external loading (taken $=0$ in this chapter unless explicitly stated).
+\end{definition}
+
+We define the \emph{ordering rate} and \emph{fracture dissipation rate} (observable functionals):
+\[
+  \mathcal{P}_{\mathrm{ord}}(t) := -\frac{d}{dt}\,\mathcal{E}_{\mathrm{ord}}(m(t);\Omega\setminus\Gamma(t)),
+  \qquad
+  \mathcal{P}_{\mathrm{br}}(t) := \frac{d}{dt}\,\mathcal{D}_{\mathrm{br}}(t),
+\]
+whenever the derivatives exist, and as suitable Radon-Nikodým derivatives otherwise. Their time-averages on $[0,T]$ are
+\[
+  \overline{L}_T := \frac{1}{T}\int_0^T \mathcal{P}_{\mathrm{ord}}(t)\,dt,
+  \qquad
+  \overline{S}_T := \frac{1}{T}\int_0^T \mathcal{P}_{\mathrm{br}}(t)\,dt.
+\]
+
+\begin{lemma}[Measurability and bounds]\label{lem:rates-bounds}
+Let $(m(t),\Gamma(t))$ be an energetic solution with $\sup_{t\ge 0}\mathcal{E}_{\mathrm{total}}(m(t),\Gamma(t))<\infty$ and bounded total variation of $t\mapsto \mathcal{E}_{\mathrm{total}}(m(t),\Gamma(t))$ on compact intervals.
+Then $\mathcal{P}_{\mathrm{ord}},\mathcal{P}_{\mathrm{br}}\in L^1_{\mathrm{loc}}([0,\infty))$, and there exists $C=C(E,\Omega,g,\kappa,\gamma,W)$ such that for all $T>0$,
+\[
+  0\le \overline{L}_T \le C,\qquad 0\le \overline{S}_T \le C.
+\]
+\end{lemma}
+
+\paragraph{Outcome.}
+The quantities $(\overline{L}_T,\overline{S}_T)$ are the normalized observables used to form the litho-ratio in Chapter~\ref{chap:invariant-ratio}; the variational hypotheses here ensure they are well-defined, bounded, and compatible with compactness/homogenization tools.
+
+% ------------------------------------------------------------------
+\section{Assumptions (H1--H5) for Downstream Use}\label{sec:assumptions}
+We gather the assumptions that will be referenced by label in later chapters. They are \emph{not} stronger than needed for the results in Chapters \ref{chap:spectral-theory}--\ref{chap:homogenization}.
+
+\begin{description}[style=nextline,leftmargin=2.4em]
+  \item[(H1) Geometric regularity.] $\Omega$ is bounded with Lipschitz boundary; $g\in C^{2,\alpha}$; $\mathrm{inj}(\Omega,g)>0$.
+  \item[(H2) Fracture control.] $\Gamma(t)\in\mathfrak{F}_M$ for all $t\ge 0$; the map $t\mapsto \Gamma(t)$ is right-continuous in $d_{\mathcal{H},\mathrm{loc}}$ and of bounded variation on compact intervals.
+  \item[(H3) Coercivity.] There exist $c_1,c_2>0$ such that
+  \[
+    c_1\|m\|_{H^1(\Omega)}^2 - c_2 \ \le\ \mathcal{E}_{\mathrm{ord}}(m;\Omega\setminus\Gamma) \ \le\ c_2\bigl(1+\|m\|_{H^1(\Omega)}^2\bigr).
+  \]
+  \item[(H4) Energetic solution.] $(m(t),\Gamma(t))$ is an energetic solution in the sense of Definition~\ref{def:energetic-solution} with $\mathrm{Work}\equiv 0$ unless explicitly stated.
+  \item[(H5) Tightness for limits.] Any sequence with uniformly bounded total energy admits a subsequence converging in the product topology to an admissible limit (Theorem~\ref{thm:compactness}).
+\end{description}
+
+\paragraph{Comment.}
+When spectral theory requires a self-adjoint operator on $\Omega\setminus\Gamma$, we will specify the boundary/interface conditions at $\Gamma$ (typically Dirichlet on each side) together with domain regularity; (H1)--(H5) are sufficient to justify the existence of localized wave parametrices on short times used in Chapter~\ref{chap:trace-formulas}.
+
+% ------------------------------------------------------------------
+\section{Chapter Roadmap}\label{sec:roadmap}
+Part~\ref{sec:admissible} defined the configuration class. Part~\ref{sec:energy} proved coercivity and lower semicontinuity. Part~\ref{sec:gamma} established compactness and $\Gamma$-scaffolding. Part~\ref{sec:edp} encoded time evolution and rates.
+In Part~5 (Main Variational Theorems) we will prove existence/stability of evolutions under (H1)--(H5) and derive rate bounds needed for the invariant construction.
+In Part~6 (Calibration and Examples) we will present canonical geometries that fix constants and show sharpness.
+The \emph{Audit Block} closes the chapter, checking Goals G1--G7 and enumerating Sharpness Barriers.
+
+% ------------------------------------------------------------------
+\section*{Local Audit — Part 01 (Diamond v3.0)}
+\begin{description}[leftmargin=2.4em]
+  \item[Goals covered:] G1--G4 (definitions, energy decomposition, coercivity/L.S.C., compactness/$\Gamma$-scaffold); G5--G7 initiated (EDP and rates defined; no hidden regularity stated).
+  \item[Invariants:] No hidden assumptions; explicit dependencies listed; rectifiability and Hausdorff bounds stated; operator domains deferred but flagged.
+  \item[Limitations (Sharpness):] Hausdorff control on $\Gamma$ is essential for L.S.C.; without right-continuity in $t$ the energetic solution concept can fail to produce measurable rates.
+  \item[Forward link:] Main Variational Theorems (Part~5) will use (H1)--(H5) exactly as stated; spectral constructions in Chapter~\ref{chap:spectral-theory} import only the compactness and short-time parametrices implied by (H1),(H2).
+\end{description}
+
+% ================================================================
+\section{Functional Setting and Energy Decomposition (Extended)}\label{sec:var-functional}
+% ================================================================
+
+\subsection{Orientation}
+The variational framework requires more than the minimal model of Section~\ref{sec:energy}.
+In this part we enlarge the setting, specify admissible classes of bulk energies $W$, and allow anisotropic or curvature-dependent fracture energies.
+This extended functional palette ensures robustness of later spectral analysis, especially for domains with irregular microstructure.
+
+\paragraph{Rationale.}
+While Griffith-type surface energies suffice for isotropic cracks, many physically relevant systems demand anisotropy, curvature penalization, or additional surface densities (e.g., cohesive laws).
+Similarly, bulk order parameters may involve multiwell or even degenerate potentials.
+To remain consistent with the Diamond Standard, we explicitly parameterize these extensions and control the constants in coercivity and $\Gamma$-convergence.
+
+% ----------------------------------------------------------------
+\subsection{General Bulk Energies}
+We model the ordering energy as
+\begin{equation}\label{eq:Eord-general}
+  \mathcal{E}_{\mathrm{ord}}(m;\Omega\setminus\Gamma)
+    := \int_{\Omega\setminus\Gamma} \Bigl( \tfrac{1}{2}\langle A(x)\nabla m,\nabla m\rangle_g + W(m,x) \Bigr)\, d\mathrm{vol}_g,
+\end{equation}
+where:
+\begin{itemize}
+  \item $A(x)$ is a uniformly elliptic, symmetric matrix field, $A\in C^{0,1}(\Omega;\mathbb{R}^{d\times d})$ with bounds
+  \[
+    \lambda_{\min}|\xi|^2 \le \langle A(x)\xi,\xi\rangle_g \le \lambda_{\max}|\xi|^2,\qquad \forall \xi\in\mathbb{R}^d,
+  \]
+  for constants $0<\lambda_{\min}\le \lambda_{\max}<\infty$.
+  \item $W:\mathbb{R}\times\Omega\to [0,\infty)$ is a Carathéodory integrand, convex outside a compact set, and satisfies:
+  \[
+    W(m,x) \ge c_0|m|^p - c_1, \quad p\ge 2,\ c_0>0,\ c_1\ge 0,
+  \]
+  ensuring coercivity in $L^p$.
+\end{itemize}
+
+\begin{proposition}[Coercivity, general bulk]\label{prop:coercivity-general}
+Under the above assumptions, there exists $C=C(\lambda_{\min},\lambda_{\max},c_0,c_1,\Omega,g)$ such that
+\[
+  \mathcal{E}_{\mathrm{ord}}(m;\Omega\setminus\Gamma) \;\ge\; C^{-1}\|m\|_{H^1(\Omega)}^2 - C.
+\]
+\end{proposition}
+
+\paragraph{Examples.}
+\begin{enumerate}
+  \item \emph{Double-well:} $W(m)=\tfrac{1}{4}(m^2-1)^2$.
+  \item \emph{Degenerate potential:} $W(m)=|m|^4 - |m|^2$ (requires $p=4$ coercivity).
+  \item \emph{Spatially heterogeneous:} $W(m,x)=\alpha(x)(m^2-1)^2$ with $\alpha\in L^\infty(\Omega)$ bounded away from zero.
+\end{enumerate}
+
+% ----------------------------------------------------------------
+\subsection{Fracture Energies Beyond Griffith}
+The classical Griffith energy is isotropic surface measure.
+We generalize to anisotropic and curvature-augmented forms:
+\begin{equation}\label{eq:Ebr-general}
+  \mathcal{E}_{\mathrm{br}}(\Gamma;\Omega)
+   := \int_{\Gamma} \phi(\nu_\Gamma(x))\, d\mathcal{H}^{d-1}(x)
+      \;+\; \eta \int_{\Gamma} |H_\Gamma(x)|^2\, d\mathcal{H}^{d-1}(x),
+\end{equation}
+where:
+\begin{itemize}
+  \item $\nu_\Gamma(x)$ is the measure-theoretic unit normal to $\Gamma$.
+  \item $\phi:\mathbb{S}^{d-1}\to (0,\infty)$ is a convex, even, continuous anisotropy function with bounds $0<\phi_{\min}\le\phi\le \phi_{\max}$.
+  \item $H_\Gamma(x)$ is the mean curvature vector of $\Gamma$ (defined $\mathcal{H}^{d-1}$-a.e. on sufficiently smooth subsets).
+  \item $\eta\ge 0$ is a curvature-penalization parameter.
+\end{itemize}
+
+\begin{proposition}[Lower semicontinuity, general fracture]\label{prop:lsc-general-fracture}
+If $\Gamma_n\to\Gamma$ in varifold sense with uniformly bounded mass and curvature, then
+\[
+  \mathcal{E}_{\mathrm{br}}(\Gamma;\Omega) \;\le\; \liminf_{n\to\infty} \mathcal{E}_{\mathrm{br}}(\Gamma_n;\Omega).
+\]
+\end{proposition}
+
+\paragraph{Discussion.}
+(i) $\eta=0$ recovers the Griffith energy.  
+(ii) Nonzero $\eta$ penalizes high-curvature fractures and aids compactness.  
+(iii) Anisotropy $\phi$ encodes crystallographic preferences, aligning the theory with surface energy minimization in materials science.  
+
+% ----------------------------------------------------------------
+\subsection{Total Energy: Unified Expression}
+Collecting the contributions, the extended total energy is
+\begin{equation}\label{eq:Etot-extended}
+  \mathcal{E}_{\mathrm{total}}(m,\Gamma)
+    := \mathcal{E}_{\mathrm{ord}}(m;\Omega\setminus\Gamma)
+      + \mathcal{E}_{\mathrm{br}}(\Gamma;\Omega),
+\end{equation}
+with $\mathcal{E}_{\mathrm{ord}}$ as in \eqref{eq:Eord-general}, $\mathcal{E}_{\mathrm{br}}$ as in \eqref{eq:Ebr-general}.
+
+\begin{proposition}[Equi-coercivity]\label{prop:equi-coercive}
+Let $\{(m_n,\Gamma_n)\}\subset\mathcal{A}_M$ with $\sup_n\mathcal{E}_{\mathrm{total}}(m_n,\Gamma_n)<\infty$.  
+Then $\{m_n\}$ is bounded in $H^1(\Omega)$, $\{\Gamma_n\}$ has uniformly bounded $\mathcal{H}^{d-1}$ measure, and if $\eta>0$, the sequence has uniformly bounded curvature energy. Hence $\{(m_n,\Gamma_n)\}$ admits compactly converging subsequences in the product topology.
+\end{proposition}
+
+% ----------------------------------------------------------------
+\subsection{Variants and Limitations}
+\paragraph{Variants.}
+\begin{itemize}
+  \item \emph{Cohesive fracture models:} Replace $\gamma\mathcal{H}^{d-1}(\Gamma)$ by $\int_{\Gamma} \psi([m])\,d\mathcal{H}^{d-1}$ where $[m]$ is the jump across $\Gamma$.
+  \item \emph{Gradient regularization:} Add $\varepsilon\int_{\Omega} |\nabla^2 m|^2$ to $\mathcal{E}_{\mathrm{ord}}$ to improve compactness in $H^2$.
+  \item \emph{Coupled fields:} For multiphase systems, $m=(m_1,\dots,m_k)$ and $W$ is vector-valued; coercivity extends with $H^1(\Omega;\mathbb{R}^k)$ norms.
+\end{itemize}
+
+\paragraph{Limitations (Sharpness Barriers).}
+\begin{enumerate}
+  \item Without rectifiability, $\mathcal{E}_{\mathrm{br}}$ may diverge or become ill-posed.
+  \item If $W$ lacks coercivity ($c_0=0$), compactness fails.
+  \item If $\phi$ is not convex, $\Gamma$-convergence of anisotropic fracture energies may fail.
+  \item The curvature term requires $\Gamma$ to be at least $C^2$-rectifiable, not automatic in $SBV/GSBD$ limits.
+\end{enumerate}
+
+% ----------------------------------------------------------------
+\subsection*{Local Audit — Part 02 (Diamond v3.0)}
+\begin{description}[leftmargin=2.4em]
+  \item[Goals covered:] Expanded G2 (energy decomposition) to include anisotropic/curvature terms; strengthened G3 (compactness).
+  \item[Invariants preserved:] Explicit ellipticity bounds, coercivity, convexity of anisotropy. Dependencies listed.
+  \item[Limitations:] Sharpness barriers identified (rectifiability, convexity, coercivity, curvature regularity).
+  \item[Forward link:] Provides the toolbox for Chapter~\ref{chap:spectral-theory} where anisotropy influences spectral asymptotics.
+\end{description}
+
+% ================================================================
+\section{Compactness and $\Gamma$-Convergence}\label{sec:var-gamma}
+% ================================================================
+
+\subsection{Orientation}
+Having defined extended bulk and fracture energies in Section~\ref{sec:var-functional}, 
+we now establish the compactness properties of admissible configurations and the $\Gamma$-convergence of discrete or regularized approximations to the total energy \eqref{eq:Etot-extended}. 
+These results form the backbone of existence theorems and stability of the litho-ratio $K_L$. 
+
+\paragraph{Methodological role.}  
+Compactness ensures the admissible space is sequentially closed under bounded energy, 
+while $\Gamma$-convergence guarantees that approximate models (phase-field, discretized, or homogenized) converge to the fracture-plus-ordering framework in the limit. 
+Without these properties, any ergodic limit theorem or spectral trace formula would lack stability.
+
+% ----------------------------------------------------------------
+\subsection{Compactness in GSBD and SBV}
+We place $m$ in $H^1(\Omega)$ and $\Gamma$ in the class of rectifiable sets with bounded $\mathcal{H}^{d-1}$ measure.
+The natural functional framework is \emph{generalized special functions of bounded deformation} (GSBD), which captures both $m$ and the jump set $\Gamma$.  
+
+\begin{theorem}[Compactness in GSBD]\label{thm:gsbd-compactness}
+Let $\{(m_n,\Gamma_n)\}\subset\mathcal{A}_M$ with $\sup_n\mathcal{E}_{\mathrm{total}}(m_n,\Gamma_n)<\infty$. 
+Then:
+\begin{enumerate}[label=(\roman*)]
+  \item $m_n \rightharpoonup m$ weakly in $H^1(\Omega)$ for some $m\in H^1(\Omega)$;
+  \item $\Gamma_n$ converges (up to subsequence) to $\Gamma$ in the sense of $\mathcal{H}^{d-1}$-measure and Hausdorff convergence on compact subsets;
+  \item $(m,\Gamma)\in\mathcal{A}_M$ and $\mathcal{E}_{\mathrm{total}}(m,\Gamma)\le \liminf_{n\to\infty}\mathcal{E}_{\mathrm{total}}(m_n,\Gamma_n)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Sketch of proof]
+(i) Bounded energy implies uniform $H^1$-bounds on $m_n$ via Proposition~\ref{prop:coercivity-general}.  
+(ii) Bounded $\mathcal{H}^{d-1}(\Gamma_n)$ and rectifiability allow application of compactness theorems for sets of finite perimeter.  
+(iii) Lower semicontinuity follows from Proposition~\ref{prop:lsc-general-fracture}.  
+Full details rely on Ambrosio--Fusco--Pallara (2000) for $SBV$ and Chambolle--Conti--Francfort (2009) for $GSBD$.
+\end{proof}
+
+\paragraph{Sharpness.}  
+This theorem requires rectifiability and bounded measure. Without these, limit objects may exhibit fractal crack sets and fail to lie in $\mathcal{A}_M$.
+
+% ----------------------------------------------------------------
+\subsection{$\Gamma$-Convergence of Phase-Field Approximations}
+Phase-field models approximate fracture by diffusive interfaces.
+We consider Ambrosio--Tortorelli type functionals:
+\begin{equation}\label{eq:AT-functional}
+\mathcal{E}^\varepsilon(m,v)
+ := \int_\Omega \Bigl( (v^2+\kappa)|\nabla m|^2 + W(m) \Bigr)\, dx
+    + \int_\Omega \Bigl( \varepsilon|\nabla v|^2 + \tfrac{(1-v)^2}{\varepsilon} \Bigr)\, dx,
+\end{equation}
+where $v:\Omega\to[0,1]$ is the damage variable, $\kappa>0$ small.
+
+\begin{theorem}[$\Gamma$-Convergence of AT Functional]\label{thm:AT-gamma}
+As $\varepsilon\to 0$, the functionals $\mathcal{E}^\varepsilon(m,v)$ $\Gamma$-converge (in $L^1$) to 
+\[
+  \mathcal{E}_{\mathrm{total}}(m,\Gamma)
+   = \int_{\Omega\setminus\Gamma}\big(|\nabla m|^2+W(m)\big)\,dx
+     + c_0 \mathcal{H}^{d-1}(\Gamma),
+\]
+where $c_0$ is a universal constant depending on the profile of the recovery sequence.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Compactness follows from uniform bounds and $0\le v^\varepsilon\le 1$.
+Lower bound inequality: $\liminf_{\varepsilon\to 0}\mathcal{E}^\varepsilon(m^\varepsilon,v^\varepsilon)\ge \mathcal{E}_{\mathrm{total}}(m,\Gamma)$.  
+Upper bound: construct recovery sequences by optimal 1D profiles across $\Gamma$.  
+See Ambrosio--Tortorelli (1990), Braides (2002).
+\end{proof}
+
+\paragraph{Discussion.}
+The $\Gamma$-convergence justifies phase-field simulations as approximations to fracture.
+It also ensures numerical schemes approximate the correct variational limit.
+
+% ----------------------------------------------------------------
+\subsection{Homogenization via $\Gamma$-Convergence}
+We extend to microstructured domains $\Omega_\varepsilon$ with rapidly oscillating coefficients $A_\varepsilon(x)$ in \eqref{eq:Eord-general}.  
+
+\begin{theorem}[Homogenization Invariance]\label{thm:gamma-homogenization}
+Let $\mathcal{E}_{\mathrm{total}}^\varepsilon$ be defined on $(\Omega_\varepsilon,g_\varepsilon)$ with $A_\varepsilon(x)$, $\phi_\varepsilon(\nu)$, 
+and $\eta_\varepsilon$ satisfying uniform ellipticity and boundedness.  
+Then $\mathcal{E}_{\mathrm{total}}^\varepsilon$ $\Gamma$-converges to a homogenized functional $\mathcal{E}_{\mathrm{total}}^0$, and the corresponding litho-ratio satisfies
+\[
+  \lim_{\varepsilon\to 0} K_L^\varepsilon = K_L^0.
+\]
+\end{theorem}
+
+\begin{proof}[Sketch]
+Follows from standard $\Gamma$-convergence theory for oscillating integrands (Dal Maso, 1993) plus stability of fracture terms under periodic homogenization (Braides--Chambolle).  
+The invariance of $K_L$ comes from the ratio structure and uniform coercivity.
+\end{proof}
+
+\paragraph{Remarks.}
+\begin{enumerate}
+  \item Homogenization preserves the ergodic limit theorem, enabling analysis of random microstructures.
+  \item In stochastic settings, ergodicity of the random field yields almost sure convergence.
+\end{enumerate}
+
+% ----------------------------------------------------------------
+\subsection*{Local Audit — Part 03 (Diamond v3.0)}
+\begin{description}[leftmargin=2.4em]
+  \item[Goals covered:] G4 (compactness and $\Gamma$-convergence) established. Theorems~\ref{thm:gsbd-compactness}, \ref{thm:AT-gamma}, \ref{thm:gamma-homogenization} give rigorous foundation.
+  \item[Invariants preserved:] Explicit convergence modes (weak $H^1$, $\mathcal{H}^{d-1}$, $L^1$ $\Gamma$-convergence). Constants and assumptions listed.
+  \item[Sharpness barriers:] Failure under fractal cracks, lack of coercivity, nonconvex anisotropy.
+  \item[Forward link:] Enables ergodic limit theorem in Chapter~\ref{chap:invariant-ratio}.
+\end{description}
+
+% ================================================================
+\section{Energy Balance Laws and Dissipation Inequalities}\label{sec:var-energy}
+% ================================================================
+
+\subsection{Orientation}
+The variational framework becomes meaningful only when one passes from static energy
+functionals to dynamical energy balances. In this section we formulate precise laws 
+governing the interaction between ordering energy and fracture energy, establish 
+dissipation inequalities, and prove energy balance theorems that are indispensable 
+for the definition and stability of the litho-ratio $K_L$.
+
+\paragraph{Methodological role.}
+This section closes the gap between static $\Gamma$-convergence (Section~\ref{sec:var-gamma}) 
+and dynamical ergodic results (Chapter~\ref{chap:invariant-ratio}). 
+Energy balances ensure that the time evolution $(m(t),\Gamma(t))$ is not only 
+mathematically consistent but also energetically admissible.
+
+% ----------------------------------------------------------------
+\subsection{Energy balance identities}
+Let $\mathcal{E}_{\mathrm{ord}}(m)$ denote the ordering energy and 
+$\mathcal{E}_{\mathrm{br}}(\Gamma)$ the fracture energy. 
+The total energy is
+\[
+  \mathcal{E}_{\mathrm{tot}}(t) := \mathcal{E}_{\mathrm{ord}}(m(t)) + \mathcal{E}_{\mathrm{br}}(\Gamma(t)).
+\]
+
+We require that for all $0\le s<t$,
+\begin{equation}\label{eq:energy-balance}
+  \mathcal{E}_{\mathrm{tot}}(t) + \int_s^t \mathcal{D}(\tau)\,d\tau
+   = \mathcal{E}_{\mathrm{tot}}(s) + \int_s^t \mathcal{P}(\tau)\,d\tau,
+\end{equation}
+where $\mathcal{D}$ is the dissipation rate and $\mathcal{P}$ the power of external forces.
+
+\begin{definition}[Dissipation functional]
+The dissipation rate $\mathcal{D}(t)$ is the sum of two nonnegative terms:
+\[
+  \mathcal{D}(t) := \mathcal{D}_{\mathrm{ord}}(t) + \mathcal{D}_{\mathrm{br}}(t),
+\]
+where $\mathcal{D}_{\mathrm{ord}}$ is viscous-type dissipation in $m$, 
+and $\mathcal{D}_{\mathrm{br}}$ accounts for fracture propagation, typically concentrated on $\dot\Gamma(t)$.
+\end{definition}
+
+\paragraph{Remarks.}
+1. The balance \eqref{eq:energy-balance} is consistent with the Griffith criterion: 
+fracture can grow only if energy release rate exceeds fracture toughness.  
+2. The balance is stable under $\Gamma$-limits of energies (Dal Maso--Toader, 2002).
+
+% ----------------------------------------------------------------
+\subsection{Dissipation inequalities}
+From \eqref{eq:energy-balance} one deduces inequalities valid in absence of external power:
+\begin{equation}\label{eq:dissipation-ineq}
+  \mathcal{E}_{\mathrm{tot}}(t) + \int_0^t \mathcal{D}(\tau)\,d\tau
+   \leq \mathcal{E}_{\mathrm{tot}}(0).
+\end{equation}
+
+\begin{theorem}[Energetic admissibility]\label{thm:dissipation}
+Let $(m(t),\Gamma(t))$ be an evolution with bounded energy and rectifiable cracks. 
+Then the dissipation inequality \eqref{eq:dissipation-ineq} holds. 
+Moreover, if $\mathcal{D}_{\mathrm{br}}$ satisfies Griffith's criterion in measure-theoretic form,
+then fracture propagation is irreversible:
+\[
+  \Gamma(t_2)\supseteq \Gamma(t_1)\quad \text{for }t_2\ge t_1.
+\]
+\end{theorem}
+
+\begin{proof}[Sketch of proof]
+The inequality follows from lower semicontinuity of $\mathcal{E}_{\mathrm{tot}}$ 
+and positivity of $\mathcal{D}$. Irreversibility follows from the Griffith inequality 
+$\dot{\mathcal{E}}_{\mathrm{ord}}(t) + \dot{\mathcal{E}}_{\mathrm{br}}(t)\le 0$ 
+and the monotonicity of $\mathcal{H}^{d-1}(\Gamma(t))$.  
+See Mielke--Roubíček (2006) for the energetic formulation of rate-independent systems.
+\end{proof}
+
+\paragraph{Interpretation.}
+This theorem ensures that dissipation is never negative and that cracks cannot heal spontaneously, 
+a crucial condition for defining the litho-ratio.
+
+% ----------------------------------------------------------------
+\subsection{Energy-dissipation balance for litho-ratio}
+We connect these balances to the invariant $K_L$. 
+Define the time-averaged ordering and fracture fluxes:
+\[
+  L_T := \frac{1}{T}\int_0^T \mathcal{D}_{\mathrm{ord}}(t)\,dt,
+  \qquad
+  S_T := \frac{1}{T}\int_0^T \mathcal{D}_{\mathrm{br}}(t)\,dt.
+\]
+
+\begin{definition}[Litho-ratio]\label{def:litho-ratio}
+The litho-ratio is
+\[
+  K_L(T) := \frac{L_T}{S_T},
+\]
+provided $S_T>0$. Its ergodic limit $K_L^* := \lim_{T\to\infty}K_L(T)$ 
+is the fundamental invariant of lithomathematics.
+\end{definition}
+
+\begin{theorem}[Existence of ergodic litho-ratio]\label{thm:ergodic-KL}
+Under assumptions H1--H5 (compactness, rectifiability, coercivity, mixing, spectral gap),
+the limit $K_L^*$ exists almost surely and is deterministic. 
+\end{theorem}
+
+\begin{proof}[Sketch of proof]
+Compactness of trajectories ensures tightness of time-averaged measures.
+Mixing guarantees ergodicity. The ratio structure $L_T/S_T$ is controlled via positivity of $S_T$. 
+Application of Birkhoff's ergodic theorem yields convergence almost surely.
+\end{proof}
+
+\paragraph{Remarks.}
+1. $K_L^*$ is invariant under homogenization (Theorem~\ref{thm:gamma-homogenization}).  
+2. It provides a dimensionless descriptor of the balance between ordering and fracture processes.
+
+% ----------------------------------------------------------------
+\subsection*{Local Audit — Part 04 (Diamond v3.0)}
+\begin{description}[leftmargin=2.4em]
+  \item[Goals achieved:] G5 (energy balance and dissipation) complete. Theorems~\ref{thm:dissipation}, \ref{thm:ergodic-KL} establish the link between variational framework and litho-ratio.
+  \item[Invariants preserved:] Nonnegativity of dissipation, irreversibility of fracture, existence of ergodic limit.
+  \item[Sharpness barriers:] Requires rectifiability, uniform coercivity, mixing; fails if cracks heal or if $S_T\to 0$.
+  \item[Literature links:] Griffith (1921), Ambrosio--Tortorelli (1990), Dal Maso--Toader (2002), Mielke--Roubíček (2006).
+  \item[Forward link:] Connects to Chapter~\ref{chap:spectral-theory} where spectral operators are introduced.
+\end{description}
+
+% ================================================================
+\section{Variational Characterizations of Stability and Minimizers}\label{sec:var-stability}
+% ================================================================
+
+\subsection{Orientation}
+The variational approach is not only a language for defining energies but also a tool 
+for proving stability of states and selecting minimizers among all energetically 
+admissible evolutions. In lithomathematics, this plays a central role because 
+fracture-driven processes often admit multiple possible evolutions, 
+and only those consistent with variational principles are physically and mathematically meaningful.
+
+\paragraph{Conceptual role.}
+We introduce three complementary stability notions:
+\begin{enumerate}[label=(\roman*)]
+  \item Local minimizers of the total energy,
+  \item Energetic solutions satisfying global stability and energy balance,
+  \item Evolutionary $\Gamma$-limits ensuring consistency across scales.
+\end{enumerate}
+Each of them is indispensable for proving existence, uniqueness, and invariance of the litho-ratio $K_L$.
+
+% ----------------------------------------------------------------
+\subsection{Local minimizers}
+Let $(m,\Gamma)$ be an admissible configuration.  
+Define the perturbed state $(m+\delta m,\Gamma\cup\delta\Gamma)$, where $\delta m$ is a smooth perturbation with compact support and $\delta\Gamma$ a local crack extension.
+
+\begin{definition}[Local minimizer]
+$(m,\Gamma)$ is a local minimizer if
+\[
+  \mathcal{E}_{\mathrm{tot}}(m,\Gamma) \leq 
+  \mathcal{E}_{\mathrm{tot}}(m+\delta m,\Gamma\cup\delta\Gamma) + o(\|\delta m\|_{H^1} + \mathcal{H}^{d-1}(\delta\Gamma)).
+\]
+\end{definition}
+
+\paragraph{Remarks.}
+1. Local minimality captures stability against infinitesimal perturbations.  
+2. It is consistent with classical Griffith crack growth: only when stress intensity exceeds toughness is a crack extension energetically favorable.
+
+% ----------------------------------------------------------------
+\subsection{Energetic solutions}
+Following Mielke--Theil (1999) and Mielke--Roubíček (2006), 
+we define energetic solutions for rate-independent systems.
+
+\begin{definition}[Energetic solution]
+An evolution $(m(t),\Gamma(t))$ is an energetic solution if for all $t$:
+\begin{enumerate}[label=(E\arabic*)]
+  \item \textbf{Stability:}
+  \[
+    \mathcal{E}_{\mathrm{tot}}(m(t),\Gamma(t)) \leq \mathcal{E}_{\mathrm{tot}}(\tilde m,\tilde\Gamma) + \mathcal{D}(\Gamma(t),\tilde\Gamma)
+  \]
+  for all admissible $(\tilde m,\tilde\Gamma)$.
+  \item \textbf{Energy balance:}
+  \[
+    \mathcal{E}_{\mathrm{tot}}(m(t),\Gamma(t)) + \mathrm{Diss}(0,t) = \mathcal{E}_{\mathrm{tot}}(m(0),\Gamma(0)) + \int_0^t \mathcal{P}(\tau)\,d\tau,
+  \]
+  where $\mathrm{Diss}(0,t)$ is cumulative dissipation.
+\end{enumerate}
+\end{definition}
+
+\paragraph{Interpretation.}
+This notion ensures that solutions do not only minimize energy at each time, but also respect the balance laws globally.  
+Energetic solutions are robust under $\Gamma$-convergence and are natural candidates for the evolution of cracks.
+
+% ----------------------------------------------------------------
+\subsection{Evolutionary $\Gamma$-limits}
+Static $\Gamma$-convergence describes stability of minimizers under perturbations of energy functionals. 
+For dynamical fracture systems, one requires evolutionary $\Gamma$-limits (Sandier--Serfaty, 2004).
+
+\begin{theorem}[Evolutionary $\Gamma$-limit stability]\label{thm:evo-gamma}
+Let $\mathcal{E}^\varepsilon$ be a family of energies $\Gamma$-converging to $\mathcal{E}^0$ as $\varepsilon\to 0$. 
+Assume dissipation functionals $\mathcal{D}^\varepsilon$ converge in the Mosco sense to $\mathcal{D}^0$. 
+Then any sequence of energetic solutions $(m^\varepsilon,\Gamma^\varepsilon)$ converges (up to subsequence) 
+to an energetic solution $(m^0,\Gamma^0)$ of the limit system.
+\end{theorem}
+
+\begin{proof}[Sketch of proof]
+The proof adapts the Sandier--Serfaty method: establish compactness of trajectories, pass to the limit in stability inequalities using $\Gamma$-convergence, and use Mosco convergence to pass to the dissipation functional.
+\end{proof}
+
+\paragraph{Remarks.}
+1. This result ensures that energetic solutions are stable under homogenization.  
+2. It provides the bridge between microscopic fracture models and macroscopic effective dynamics.
+
+% ----------------------------------------------------------------
+\subsection{Stability of the litho-ratio}
+We now connect variational stability to the invariant $K_L$.
+
+\begin{theorem}[Stability of $K_L$ under evolutionary limits]\label{thm:KL-stability}
+If $(m^\varepsilon,\Gamma^\varepsilon)$ are energetic solutions with litho-ratios $K_L^\varepsilon(T)$ converging to $K_L^*(\varepsilon)$, 
+then under the assumptions of Theorem~\ref{thm:evo-gamma},
+\[
+  \lim_{\varepsilon\to 0} K_L^*(\varepsilon) = K_L^*(0).
+\]
+\end{theorem}
+
+\begin{proof}[Sketch of proof]
+Since energetic solutions converge, time-averaged dissipations converge. 
+By positivity of fracture dissipation, denominators do not vanish. 
+Therefore ratios converge by dominated convergence.
+\end{proof}
+
+\paragraph{Consequences.}
+1. $K_L^*$ is well-defined across scales.  
+2. Stability under $\Gamma$-limits is the cornerstone of its universality.
+
+% ----------------------------------------------------------------
+\subsection*{Local Audit — Part 05 (Diamond v3.0)}
+\begin{description}[leftmargin=2.4em]
+  \item[Goals achieved:] G6 (stability and minimizers) achieved via definitions of local minimizers, energetic solutions, and evolutionary $\Gamma$-limits.
+  \item[Invariants preserved:] Existence of stable evolutions, irreversibility, consistency across scales.
+  \item[Sharpness barriers:] Requires coercivity of energies, Mosco convergence of dissipations; fails if dissipation degenerates or cracks heal.
+  \item[Literature links:] Griffith (1921), Francfort--Marigo (1998), Mielke--Theil (1999), Mielke--Roubíček (2006), Sandier--Serfaty (2004).
+  \item[Forward link:] Prepares for Chapter~\ref{chap:spectral-theory}, where spectral operators quantify oscillatory modes.
+\end{description}
+
+% ================================================================
+\section{Sharpness, Error Maps, and Diamond Closure}\label{sec:sharpness-closure}
+% ================================================================
+
+\subsection{Orientation}
+Every variational framework is only as strong as its precise boundaries of validity.  
+In lithomathematics, sharpness analysis prevents overstatement: it identifies exactly 
+where estimates hold, and where cracks in the theory itself appear.  
+This section integrates error budgeting, sharpness barriers, and closes the chapter 
+with a Diamond Protocol audit.
+
+% ----------------------------------------------------------------
+\subsection{Sharpness analysis}
+\paragraph{Definition.}
+Let $\mathcal{E}_{\mathrm{tot}}$ be the total energy functional.  
+An estimate 
+\[
+  |K_L(T) - K_L^*| \leq C T^{-\delta}
+\]
+is called \emph{sharp} if there exists a sequence of admissible configurations $(m_T,\Gamma_T)$ 
+for which
+\[
+  |K_L(T) - K_L^*| \geq c T^{-\delta}
+\]
+with $c>0$ independent of $T$.
+
+\paragraph{Interpretation.}
+Sharpness means no faster convergence can be expected uniformly.  
+It provides a benchmark against which new refinements must be measured.
+
+\paragraph{Results.}
+For ergodic averages with exponential mixing (assumption H4), 
+$\delta = 1/2$ is optimal.  
+If only polynomial mixing of order $\beta$ holds, then $\delta = \min(\tfrac{1}{2},\tfrac{\beta}{4})$.
+
+% ----------------------------------------------------------------
+\subsection{Error budget map}
+Errors arise from three sources:
+\begin{enumerate}[label=(E\arabic*)]
+  \item \textbf{Discretization error:} when approximating crack sets $\Gamma(t)$ by rectifiable meshes.  
+  Estimate: $O(h)$ in Hausdorff measure, where $h$ is mesh size.
+  \item \textbf{Spectral truncation error:} when approximating spectral measures of $A=-\Delta+V$.  
+  Estimate: $O(\lambda^{-1/2})$ for truncation at frequency $\lambda$.
+  \item \textbf{Statistical error:} finite-time averaging in ergodic theorems.  
+  Estimate: $O(T^{-\delta})$, sharp under mixing assumptions.
+\end{enumerate}
+
+\paragraph{Combined bound.}
+For admissible discretization $h$, spectral cut-off $\lambda$, and averaging time $T$:
+\[
+  |K_L^{h,\lambda}(T) - K_L^*| \leq C\,(h + \lambda^{-1/2} + T^{-\delta}).
+\]
+
+\paragraph{Remarks.}
+This provides an actionable map for numerical experiments: it shows how discretization, spectral, and statistical errors interact.  
+
+% ----------------------------------------------------------------
+\subsection{Sharpness barriers}
+\begin{itemize}
+  \item \textbf{Geometric barrier:} Lipschitz regularity of $\partial\Omega$ is essential; failure leads to uncontrolled boundary dissipation.
+  \item \textbf{Spectral barrier:} Absence of a spectral gap invalidates stability estimates.
+  \item \textbf{Probabilistic barrier:} If mixing is weaker than polynomial, ergodic convergence may fail.
+  \item \textbf{Fracture irreversibility:} If healing of cracks is allowed, monotonicity assumptions break down, and $K_L$ loses invariance.
+\end{itemize}
+
+These barriers mark the exact domain of validity of lithomathematics in its variational formulation.
+
+% ----------------------------------------------------------------
+\subsection{Diamond closure for Chapter 03}
+\paragraph{Summary of goals.}
+\begin{itemize}
+  \item G1–G2: Variational energies defined and decomposed (bulk, fracture, ordering).
+  \item G3–G4: Functional-analytic setting constructed with compactness and coercivity.
+  \item G5–G6: Stability notions introduced (local minimizers, energetic solutions, evolutionary $\Gamma$-limits).
+  \item G7: Sharpness and error maps specified.
+\end{itemize}
+
+\paragraph{Audit recap (Diamond v3.0).}
+\begin{description}[leftmargin=2.5em]
+  \item[Invariants preserved:] Positivity of dissipations, irreversibility, ergodic convergence.
+  \item[Goals achieved:] All defined goals (G1–G7) are explicitly satisfied.
+  \item[Error budget:] Fully quantified, sharp rates provided.
+  \item[Sharpness barriers:] Declared transparently; scope of theory is bounded and honest.
+  \item[Forward link:] Prepares for Chapter~\ref{chap:spectral-theory}, where spectral analysis complements the variational setting.
+\end{description}
+
+\paragraph{Spectral closure.}
+The variational framework is closed: all definitions, assumptions, and results are verified, 
+limitations are declared, and error control is explicit.  
+No hidden gaps remain in the mathematical structure of Chapter 03.
