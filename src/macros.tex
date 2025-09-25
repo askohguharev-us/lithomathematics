@@ -1,49 +1,53 @@
 %==============================================================================
-% macros.tex — project-wide macros for "lithomathematics" monograph
-% Compatible with standard LaTeX toolchains and conservative journal styles.
+% macros.tex — project-wide macros for the "Lithomathematics" monograph
+% Annals-safe, arXiv-friendly, with optional Fractal–Annals Bridge labels.
 %==============================================================================
 
-% --- Core math packages (lightweight, widely supported) ----------------------
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{bm}            % bold math symbols
-\usepackage{enumitem}      % custom enumerate labels
-\usepackage{xparse}        % flexible command args (standard in modern TeX)
+% --- Core math packages (conservative, widely supported) ---------------------
+\RequirePackage{amsmath,amssymb,amsthm,mathtools}
+\RequirePackage{bm}
+\RequirePackage{enumitem}
+\RequirePackage{xparse}
+\RequirePackage{microtype}
 
-% --- Safe spacing & micro-typography (optional; harmless if class disables) --
-\providecommand{\microtypesetup}[1]{} % no-op if microtype not loaded
+% Microtype (harmless if class disables features)
+\microtypesetup{protrusion=true, expansion=true}
 
 %------------------------------------------------------------------------------
-% 0) Global toggles (style bridge Annals <-> internal)
+% 0) Global toggles
 %------------------------------------------------------------------------------
-\newif\ifannalsstyle
-\annalsstyletrue % keep true for Annals-like conservative look
+% Annals-like typography is default. Bridge labels can be silenced if needed.
+\newif\ifbridge
+\bridgetrue          % set \bridgefalse to hide Orientation/Objectives/... labels
 
-% Heading style toggles (edit here to change look across the book)
-\ifannalsstyle
-  \newcommand{\HeadIt}[1]{\textit{#1}}
-  \newcommand{\HeadSc}[1]{\textsc{#1}}
-  \newcommand{\HeadBf}[1]{\textbf{#1}}
+\newif\ifsubmission  % submission mode hides \todo/\feedback
+\submissiontrue      % set to \submissionfalse for draft with visible notes
+
+%------------------------------------------------------------------------------
+% 1) Fractal–Annals Bridge labels (inline, optional)
+%------------------------------------------------------------------------------
+\ifbridge
+  \newcommand{\Orientation}{\textit{Overview.} }
+  \newcommand{\Objectives}{\textsc{Objectives.} }
+  \newcommand{\Invariants}{\textsc{Notation and standing assumptions.} }
+  \newcommand{\ErrorBounds}{\textbf{Error bounds.} }
+  \newcommand{\Optimality}{\textbf{Optimality of exponents.} }
+  \newcommand{\Verification}{\textsc{Verification checklist.} }
+  \newcommand{\Concluding}{\textit{Concluding remarks.} }
+  \newcommand{\Literature}{\textit{Position in the literature.} }
 \else
-  \newcommand{\HeadIt}[1]{\textit{#1}}
-  \newcommand{\HeadSc}[1]{\textsc{#1}}
-  \newcommand{\HeadBf}[1]{\textbf{#1}}
+  \newcommand{\Orientation}{}
+  \newcommand{\Objectives}{}
+  \newcommand{\Invariants}{}
+  \newcommand{\ErrorBounds}{}
+  \newcommand{\Optimality}{}
+  \newcommand{\Verification}{}
+  \newcommand{\Concluding}{}
+  \newcommand{\Literature}{}
 \fi
 
 %------------------------------------------------------------------------------
-% 1) Fractal–Annals Bridge headings (one-line inline labels)
-%    Use in chapters as: \Orientation ... , \Objectives ... , etc.
-%------------------------------------------------------------------------------
-\newcommand{\Orientation}{\HeadIt{Overview.} }
-\newcommand{\Objectives}{\HeadSc{Objectives.} }
-\newcommand{\Invariants}{\HeadSc{Notation and standing assumptions.} }
-\newcommand{\ErrorBounds}{\HeadBf{Error bounds.} }
-\newcommand{\Optimality}{\HeadBf{Optimality of exponents.} }
-\newcommand{\Verification}{\HeadSc{Verification checklist.} }
-\newcommand{\Concluding}{\HeadIt{Concluding remarks.} }
-\newcommand{\Literature}{\HeadIt{Position in the literature.} }
-
-%------------------------------------------------------------------------------
-% 2) Theorem-like environments
+% 2) Theorem-like environments (Annals-style numbering)
 %------------------------------------------------------------------------------
 \numberwithin{equation}{section}
 
@@ -58,28 +62,22 @@
 \newtheorem{assumption}[theorem]{Assumption}
 \newtheorem{hypothesis}[theorem]{Hypothesis}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{noteenv}[theorem]{Note}
 
-% Short aliases if needed
-\newcommand{\Def}{\begin{definition}}
-\newcommand{\EndDef}{\end{definition}}
-\newcommand{\Thm}{\begin{theorem}}
-\newcommand{\EndThm}{\end{theorem}}
-
 %------------------------------------------------------------------------------
-% 3) Paired delimiters and common math objects
+% 3) Paired delimiters and common sets
 %------------------------------------------------------------------------------
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
-\DeclarePairedDelimiter{\ip}{\langle}{\rangle}
+\DeclarePairedDelimiter{\angles}{\langle}{\rangle}
 \DeclarePairedDelimiter{\braces}{\lbrace}{\rbrace}
 \DeclarePairedDelimiter{\parens}{(}{)}
-\DeclarePairedDelimiter{\angles}{\langle}{\rangle}
 
-% Blackboard-bold sets
+% Number sets
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\N}{\mathbb{N}}
@@ -88,8 +86,8 @@
 \newcommand{\T}{\mathbb{T}}
 \newcommand{\bbS}{\mathbb{S}}
 
-% Calligraphic / script
-\newcommand{\calH}{\mathcal{H}}
+% Calligraphic/script
+\newcommand{\calH}{\mathcal{H}} % Hausdorff measure & Hilbert space symbol
 \newcommand{\calL}{\mathcal{L}}
 \newcommand{\calO}{\mathcal{O}}
 \newcommand{\calE}{\mathcal{E}}
@@ -98,20 +96,9 @@
 \newcommand{\calU}{\mathcal{U}}
 \newcommand{\calV}{\mathcal{V}}
 
-% Geometry and measures
-\newcommand{\Hd}{\mathcal{H}}          % Hausdorff measure
-\newcommand{\vol}{\mathrm{vol}}        % volume
-\newcommand{\area}{\mathrm{area}}      % area
-\newcommand{\length}{\mathrm{length}}  % length
-
-% Differential / operators
-\newcommand{\dd}{\,\mathrm{d}}
-\newcommand{\grad}{\nabla}
-\newcommand{\Lap}{\Delta}
-\newcommand{\Lapg}{\Delta_g}
-\newcommand{\Id}{\mathrm{Id}}
-
-% Common operators (roman)
+%------------------------------------------------------------------------------
+% 4) Operators and differentials
+%------------------------------------------------------------------------------
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\dist}{dist}
@@ -122,38 +109,43 @@
 \DeclareMathOperator{\esssup}{ess\,sup}
 \DeclareMathOperator{\essinf}{ess\,inf}
 
-% Spectral-specific symbols
-\newcommand{\Spec}{\mathrm{Spec}}
-\newcommand{\Eproj}{E_\lambda}         % spectral projector
-\newcommand{\HeatKer}{K}               % heat kernel
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\grad}{\nabla}
+\newcommand{\Lap}{\Delta}
+\newcommand{\Lapg}{\Delta_g}
+\newcommand{\Id}{\mathrm{Id}}
 
 %------------------------------------------------------------------------------
-% 4) Domain / fracture macros (consistent notation project-wide)
+% 5) Geometry and spectral notation
 %------------------------------------------------------------------------------
 \newcommand{\Domain}{\Omega}
 \newcommand{\Boundary}{\partial\Omega}
 \newcommand{\Fracture}{\Gamma}
 \newcommand{\Metric}{g}
-\newcommand{\II}{\mathrm{II}}          % second fundamental form on \Gamma
-\newcommand{\kappag}{\kappa(\Gamma)}   % geometric complexity parameter
-\newcommand{\KL}{K_{L}}                % litho-ratio
-\newcommand{\KLstar}{K_{L}^{*}}        % ergodic limit of litho-ratio
+\newcommand{\II}{\mathrm{II}}               % second fundamental form on \Gamma
 
-%------------------------------------------------------------------------------
-% 5) Asymptotic parameters and exponents
-%------------------------------------------------------------------------------
-\newcommand{\Tcut}{T}                  % spectral scale / cutoff
-\newcommand{\mixrate}{\beta}           % exponential mixing rate
-\newcommand{\thetaRP}{\theta}          % Ramanujan–Petersson bound (glossary clarifies)
-\newcommand{\deltaPS}{\delta}          % power-saving exponent
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\Eproj}{E_\lambda}              % spectral projector
+\newcommand{\HeatKer}{K}                    % heat kernel K(t,x,y)
 
-% Canonical formula (used across chapters; keep identical everywhere)
+% Geometric invariants
+\newcommand{\kappag}{\kappa(\Gamma)}        % geometric complexity parameter
+\newcommand{\KL}{K_{L}}                     % litho-ratio
+\newcommand{\KLstar}{K_{L}^{*}}             % ergodic limit of litho-ratio
+
+% Asymptotic parameters
+\newcommand{\Tcut}{T}                       % spectral scale / cutoff
+\newcommand{\mixrate}{\beta}                % exponential mixing rate
+\newcommand{\thetaRP}{\theta}               % Ramanujan–Petersson bound (see glossary)
+\newcommand{\deltaPS}{\delta}               % power-saving exponent
+
+% Canonical combined exponent (kept identical across chapters)
 \newcommand{\PowerSavingExponent}{%
   \deltaPS = \min\!\bigl(\tfrac{1}{2}-\thetaRP,\; \mixrate/4\bigr)%
 }
 
 %------------------------------------------------------------------------------
-% 6) Structured lists for Goals / Invariants with stable labels
+% 6) Structured lists for Goals / Invariants / Hypotheses
 %------------------------------------------------------------------------------
 \newlist{goals}{enumerate}{1}
 \setlist[goals]{label=\textbf{G\arabic*}, leftmargin=2.3em, itemsep=0.25em}
@@ -165,21 +157,31 @@
 \setlist[hypolist]{label=\textbf{H\arabic*}, leftmargin=2.3em, itemsep=0.25em}
 
 %------------------------------------------------------------------------------
-% 7) Safe referencing helpers (work even if cleveref is not loaded)
+% 7) Safe referencing helpers (work even if cleveref is absent)
 %------------------------------------------------------------------------------
-\providecommand{\cref}[1]{\ref{#1}}
-\providecommand{\Cref}[1]{\ref{#1}}
+\makeatletter
+\@ifpackageloaded{cleveref}{}{%
+  \providecommand{\cref}[1]{\ref{#1}}%
+  \providecommand{\Cref}[1]{\ref{#1}}%
+}
+\makeatother
 
 %------------------------------------------------------------------------------
-% 8) Small utilities
+% 8) Draft / submission utilities
 %------------------------------------------------------------------------------
+\ifsubmission
+  \newcommand{\todo}[1]{}
+  \newcommand{\feedback}[1]{}
+\else
+  \newcommand{\todo}[1]{\textbf{[[TODO: #1]]}}
+  \newcommand{\feedback}[1]{\textbf{[[FEEDBACK: #1]]}}
+\fi
+
+% Small textual helpers
 \newcommand{\ie}{i.e.\ }
 \newcommand{\eg}{e.g.\ }
 \newcommand{\as}{a.s.\ }
 \newcommand{\wrt}{w.r.t.\ }
-
-% Inline notes (kept silent by default; comment to show)
-\newcommand{\todo}[1]{\ignorespaces} % make no-ops for submission
 
 %==============================================================================
 % End of macros.tex
