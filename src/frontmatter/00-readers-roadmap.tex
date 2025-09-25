@@ -7,96 +7,86 @@
 
 \section*{Purpose}
 
-This guide is intended to help readers with different backgrounds navigate the
-monograph efficiently. The work develops the analytic and microlocal foundations
-of spectral geometry on fractured domains (``lithomathematics''), and while it
-is self-contained, the breadth of techniques may benefit from tailored reading
-paths.
+This guide is designed to help readers with different mathematical backgrounds 
+navigate the monograph efficiently. Each chapter is written to be as 
+self-contained as possible; when a proof requires results from another part, 
+the logical flow is clearly indicated in the text or redirected to the appendices.
 
-\section*{Organization of the Monograph}
+\section*{Organization}
 
-The monograph is structured into ten chapters and eight appendices:
-
-\begin{itemize}
-  \item Chapter~1 introduces the historical context and motivation.
-  \item Chapters~2–4 establish the analytic and microlocal framework.
-  \item Chapter~5 presents the localized trace formula on fractured domains.
-  \item Chapters~6–8 extend the theory to ergodic, multiscale, and random settings.
-  \item Chapter~9 contains canonical examples and numerical verifications.
-  \item Chapter~10 synthesizes the theory and outlines future directions.
-  \item Appendices A–H provide technical lemmas, background analysis,
-        notation tables, extended error bounds, and sharpness proofs.
-\end{itemize}
+The monograph consists of ten main chapters and eight appendices. 
+The chapters develop the analytic and microlocal theory systematically, 
+while the appendices collect technical lemmas, background material, 
+and extended proofs. Cross-references are provided throughout, so that 
+no section stands in isolation.
 
 \section*{Dependencies at a Glance}
 
 The logical dependencies between chapters are as follows:
 
-\begin{center}
-\begin{tabular}{ll}
-Chapter~2 & prerequisite for Chapters~4–5 \\
-Chapter~4 & prerequisite for Chapter~5 \\
-Chapter~5 & prerequisite for Chapters~6–8 \\
-Chapter~6 & prerequisite for Chapter~7 \\
-Chapter~7 & prerequisite for Chapter~8 \\
-\end{tabular}
-\end{center}
-
-Each chapter is internally self-contained, with all technical proofs either
-included or deferred to the appendices.
+\begin{itemize}
+    \item Chapter~1 introduces the historical context and motivation.
+    \item Chapter~2 (Preliminaries) is prerequisite for Chapters~3–5.
+    \item Chapter~3 (Variational Structures) is prerequisite for Chapter~4.
+    \item Chapter~4 (Spectral Operators) is prerequisite for Chapter~5.
+    \item Chapter~5 (Trace Formulas) underpins Chapters~6–8.
+    \item Chapter~6 (Ergodic Limits) and Chapter~7 (Homogenization) are mutually independent 
+          but both feed into Chapter~8 (Nonlinear and Random Extensions).
+    \item Chapter~9 (Examples and Sharpness) draws on material from Chapters~5–8.
+    \item Chapter~10 (Conclusions) synthesizes the entire work.
+\end{itemize}
 
 \section*{Suggested Reading Paths}
 
+Different backgrounds may prefer different entry points:
+
 \paragraph{Analysts and PDE Specialists.}
-Start with Chapter~2 (Preliminaries) for function spaces and operator theory,
-then proceed to Chapter~4 (Spectral Operators) and Chapter~5 (Trace Formulas).
-Appendices~A–B contain additional background in microlocal analysis.
+Begin with Chapter~2 (Preliminaries), then proceed to Chapter~3 (Variational Structures), 
+Chapter~4 (Spectral Operators), and Chapter~5 (Trace Formulas). Appendices A–B provide 
+technical background.
 
 \paragraph{Spectral Geometers.}
-Begin with Chapter~1 (Context) for motivation, then move directly to
-Chapter~5 (Trace Formulas) and Chapter~6 (Ergodic Theorems).
-Appendix~E compares the results with classical work of Weyl, Ivrii,
-and Safarov–Vassiliev.
+Start with Chapter~1 (Introduction) for context, then move to Chapter~5 (Trace Formulas) 
+and Chapter~6 (Ergodic Limits). Appendix E provides comparisons with classical results.
 
-\paragraph{Probabilists and Random Media Specialists.}
-Focus on Chapters~6 (Ergodic Limits),~7 (Homogenization),
-and~8 (Random Extensions).
-Appendix~F develops the probabilistic details.
+\paragraph{Probabilists.}
+Focus on Chapters~6 (Ergodic Limits) and~7 (Homogenization), followed by Chapter~8 
+(Nonlinear and Random Extensions). Appendix F expands on probabilistic aspects.
 
 \paragraph{General Mathematical Audience.}
-Executive Summary (Chapter~0), Chapter~1 (Context), and Chapter~10 (Conclusion)
-provide a coherent overview without requiring the full technical background.
-
-\section*{Conventions Used Throughout}
-
-\begin{itemize}
-  \item \textbf{Proof Strategy.} Longer proofs are divided into setup,
-        key estimate, iteration, and conclusion. Technical lemmas are proved
-        separately in the appendices.
-  \item \textbf{Notation.} All operators, measures, and constants are fixed
-        in Chapter~2 and summarized in Appendix~C.
-  \item \textbf{Error Bounds.} All asymptotic results include explicit constants
-        and optimality conditions. Expanded derivations are given in
-        Appendices~F–G.
-  \item \textbf{Cross-References.} Dependencies between chapters are explicitly
-        noted; cross-references are provided for clarity.
-\end{itemize}
+Read Chapter~1 (Introduction) and Chapter~10 (Conclusions). 
+Chapter~0 (Executive Summary) gives a concise overview of the main results.
 
 \section*{Navigation Table}
 
 \begin{center}
-\begin{tabular}{lll}
-Audience & Recommended Start & Key Chapters/Appendices \\
+\begin{tabular}{|l|l|l|}
 \hline
-Analysts & Chapter 2 & 4–5, App. A–B \\
-Spectral Geometers & Chapter 1 & 5–6, App. E \\
-Probabilists & Chapter 6 & 7–8, App. F \\
-General Audience & Chapter 0 & 1, 10 \\
+Audience & Starting Point & Core Path \\
+\hline
+Analysts (PDE) & Chapter~2 & 3–5, App. A–B \\
+Spectral Geometers & Chapter~1 & 5–6, App. E \\
+Probabilists & Chapter~6 & 7–8, App. F \\
+General Audience & Chapter~1 & 10, Ch.~0 (Summary) \\
+\hline
 \end{tabular}
 \end{center}
 
+\section*{Conventions Used Throughout}
+
+\begin{itemize}
+    \item \textbf{Proof strategy.} Longer proofs are divided into steps: 
+    setup, key estimate, iteration, conclusion. Technical lemmas are proved separately.
+    \item \textbf{Error bounds.} All asymptotic results are stated with explicit constants 
+    and, when possible, with sharp exponents.
+    \item \textbf{Cross-references.} Dependencies are always indicated at the start of a section.
+    \item \textbf{Notation.} Operators, measures, and parameters are fixed in Chapter~2 
+    and summarized in Appendix~C.
+\end{itemize}
+
 \section*{Note to Readers}
 
-The text has been written to maintain full rigor while allowing flexible
-entry points. Readers are encouraged to follow the suggested paths but
-may traverse the material according to their own expertise and interest.
+We have aimed to balance accessibility and rigor. Readers may skip technical sections 
+on first pass, relying on the roadmap and appendices for orientation. 
+Every major result is stated in a form that highlights both its geometric content 
+and its analytic precision.
