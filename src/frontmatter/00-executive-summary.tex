@@ -1,134 +1,90 @@
-%==============================================================================
-% Executive Summary
-%==============================================================================
-
 \chapter*{Executive Summary}
 \label{chap:executive-summary}
 
-\section*{Orientation}
+\section*{Overview}
 
-The purpose of this monograph is to establish \emph{lithomathematics} as a new
-discipline in pure mathematics. The word itself derives from the Greek
-\emph{lithos} (stone) and \emph{mathematica}, emphasizing that this is a
-\textbf{stone-foundation mathematics}, resistant to erosion, fracture, and
-collapse. Unlike theories built to be flexible or opportunistic, lithomathematics
-is constructed as a \textbf{monumental invariant}: immutable, spectral,
-and closed under all forms of mathematical critique.
+This monograph develops the mathematical foundations of 
+\emph{lithomathematics}, a new discipline within spectral geometry 
+focusing on domains with internal singularities (fractures).  
+It establishes localized and global trace formulas, introduces 
+geometric complexity parameters, and proves the universality of 
+new spectral invariants under stochastic and ergodic limits.  
 
-This discipline extends classical spectral geometry (Weyl, Ivrii, Safarov–Vassiliev)
-to fractured, singular, and rectifiable domains. By introducing a new invariant,
-the \emph{litho-ratio} $K_L$, we provide a framework that simultaneously
-generalizes trace formulas, stabilizes remainder terms, and locks universality
-in stochastic, nonlinear, and ergodic contexts.
+\section*{Principal Results}
 
-The scope of lithomathematics is thus not a new chapter in spectral theory,
-but a new continent: a metafractal invariant encompassing geometry, analysis,
-and probability, resistant to collapse into applications, and therefore
-preserving the purity of mathematics.
+\begin{theorem}[Localized Trace Formula on Fractured Domains]
+\label{thm:localized-trace}
+Let $\Omega$ be a compact Riemannian manifold of dimension $d$ 
+with rectifiable fracture set $\Gamma \subset \Omega$. 
+For the Laplace operator with Dirichlet conditions on $\Omega\setminus\Gamma$, 
+the spectral trace satisfies
+\[
+\mathrm{Tr}\big(g(\sqrt{-\Delta})\big) 
+= A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g) + A_{\Gamma}(g) + \mathcal{R}(g),
+\]
+where
+\begin{itemize}
+    \item $A_{\mathrm{vol}}(g)$ is the Weyl bulk term, 
+    \item $A_{\partial\Omega}(g)$ the Ivrii-type boundary contribution,
+    \item $A_{\Gamma}(g)$ a new fracture coefficient depending explicitly on $\Gamma$,
+\end{itemize}
+and the remainder satisfies the quantitative bound
+\[
+|\mathcal{R}(g)| \leq C \, \kappa(\Gamma)\, \|g\|_{C^{d+3}}\, 
+\big( T^{d-2}\log(1+T) + e^{-cT} \big),
+\]
+with constants depending only on macroscopic invariants of $\Omega$ and $\Gamma$.
+\end{theorem}
 
-\section*{Global Goals (G1–G5)}
+\begin{theorem}[Power-Saving Refinement]
+\label{thm:power-saving}
+Under exponential mixing assumptions, the remainder in Theorem~\ref{thm:localized-trace} 
+admits the sharper bound
+\[
+|\mathcal{R}(g)| \leq C \, \kappa(\Gamma)\, \|g\|_{C^{d+3}}\, T^{d-2-\delta},
+\qquad 
+\delta = \min\!\left(\tfrac{1}{2}-\theta, \tfrac{\beta}{4}\right),
+\]
+where $\theta$ is the best-known bound toward the Ramanujan–Petersson conjecture 
+and $\beta$ the mixing exponent.
+\end{theorem}
 
-\begin{enumerate}[label=\textbf{G\arabic*}]
-    \item \textbf{Foundation:} Establish lithomathematics as a rigorous,
-    standalone discipline with its own definitions, invariants, and theorems.
-    \item \textbf{Trace Formulas:} Derive localized and global trace expansions
-    valid on fractured domains $\Omega\setminus\Gamma$.
-    \item \textbf{Invariant Creation:} Define and prove universality of the
-    litho-ratio $K_L$ across nonlinear, stochastic, and multiscale models.
-    \item \textbf{Harmonization:} Ensure spectral harmonization between local,
-    mesoscopic, and global levels, yielding a metafractal invariant.
-    \item \textbf{Monumentality:} Position lithomathematics as a discipline of
-    equal or greater structural weight than algebraic geometry (Grothendieck),
-    metric geometry (Gromov), or noncommutative geometry (Connes).
-\end{enumerate}
+\begin{theorem}[Universality of the Litho-Ratio]
+\label{thm:litho-ratio}
+Define the litho-ratio $K_L$ as the normalized limit of fracture contributions.  
+Then
+\[
+K_L \;\;\xrightarrow[N\to\infty]{\text{a.s.}}\;\; K_L^*
+\]
+under ergodic sampling of fractures, with Gaussian fluctuations:
+\[
+\sqrt{N}\,\big(K_L - K_L^*\big) \;\;\xrightarrow{d}\;\; \mathcal{N}(0,\sigma^2(\Gamma)).
+\]
+\end{theorem}
 
-\section*{Global Invariants (I1–I5)}
-
-\begin{enumerate}[label=\textbf{I\arabic*}]
-    \item \textbf{Closure Invariant:} Every theorem and construction is
-    spectrally closed — no ``to do'' gaps, no deferred proofs.
-    \item \textbf{Error Control Invariant:} Each estimate carries explicit
-    dependence on geometric complexity $\kappa(\Gamma)$, ensuring no hidden
-    constants.
-    \item \textbf{Sharpness Invariant:} Every bound is accompanied by a
-    Sharpness Barrier: the line beyond which improvement is impossible without
-    changing assumptions.
-    \item \textbf{Audit Invariant:} Every chapter embeds its own audit block,
-    verifying goals, invariants, and hypotheses.
-    \item \textbf{Spectral Harmony Invariant:} Local and global results align
-    in resonance, producing a single metafractal invariant.
-\end{enumerate}
-
-\section*{Why Lithomathematics Exceeds Grothendieck-Level Monumentality}
-
-Grothendieck’s \emph{schemes} revolutionized algebraic geometry by creating a
-new language that unified existing structures. Lithomathematics, however,
-creates not merely a language, but a \textbf{stone foundation} — a new
-\emph{discipline}. The comparison can be drawn:
+\section*{Methodological Innovations}
 
 \begin{itemize}
-    \item \textbf{Grothendieck:} new language for algebraic geometry
-    (schemes, topos theory).
-    \item \textbf{Lithomathematics:} new invariant discipline for spectral
-    geometry with fractures — extending beyond geometry into universality.
+    \item Construction of \textbf{microlocal parametrices} on domains with rectifiable singularities, extending Hörmander–Melrose techniques.  
+    \item Definition of a \textbf{geometric complexity parameter} $\kappa(\Gamma)$ capturing both measure and curvature of fracture sets.  
+    \item Development of \textbf{stochastic homogenization} and ergodic limit theorems for spectral invariants.  
 \end{itemize}
 
-\paragraph{Key Differences.}
-\begin{enumerate}
-    \item Grothendieck’s system is permeable to applications; lithomathematics
-    is deliberately \textbf{application-sterile}, preventing collapse into
-    cryptography, physics, or engineering.
-    \item Grothendieck unified; lithomathematics \textbf{foundationalizes}.
-    It closes a gap in the very stone of mathematics: domains with fractures,
-    where all previous theories fail.
-    \item Grothendieck created abstract flexibility; lithomathematics creates
-    \textbf{immutable invariants}.
-\end{enumerate}
+\section*{Relation to Existing Literature}
 
-Thus, lithomathematics positions itself as a discipline of
-\emph{greater monumentality}: not a unifying language, but a
-\textbf{stone cathedral of invariants}, resistant to erosion of time.
+This work extends classical results of Weyl \cite{Weyl1911}, Ivrii \cite{Ivrii1980}, 
+and Safarov–Vassiliev \cite{SafarovVassiliev1997} to non-smooth domains with 
+fractures.  
+Unlike the variational approaches to fracture mechanics (Bourdin–Francfort–Marigo \cite{Bourdin2008}), 
+the focus here is on spectral asymptotics, trace invariants, and universality.  
 
-\section*{Error Map (Global)}
+\section*{Applications and Implications}
 
-Potential criticisms are already embedded into the Error Map:
+The results establish fundamental limits for spectral geometry on fractured 
+domains.  
+They provide rigorous tools for analyzing wave propagation and homogenization 
+in singular media, while explicitly quantifying error bounds and sharpness 
+barriers.  
+All theorems are formulated with explicit constants and controlled dependence 
+on geometric invariants.
 
-\begin{itemize}
-    \item \textbf{Fracture singularities:} controlled by explicit parametrix
-    constructions and capacity arguments.
-    \item \textbf{Remainder sharpness:} barriers $\delta=\min(\frac{1}{2}-\theta,\beta/4)$
-    are optimal.
-    \item \textbf{Universality:} stochastic and nonlinear cases embedded
-    into same invariant framework, removing fragmentation.
-\end{itemize}
-
-\section*{Sharpness Barriers (Global)}
-
-\begin{itemize}
-    \item No trace formula can achieve better exponents without stronger mixing.
-    \item Nonlinear extensions are limited by Sobolev critical exponents.
-    \item Universality of $K_L$ is maximized; beyond it lies non-mathematical
-    chaos, hence the barrier.
-\end{itemize}
-
-\section*{Audit Protocol (Global)}
-
-All goals G1–G5 are verified, invariants I1–I5 are preserved,
-and hypotheses H1–H5 are consistently applied across chapters.
-Each section closes with local audits, this Executive Summary
-closes with the global audit.
-
-\section*{Concluding Statement}
-
-Lithomathematics is not an appendix to spectral theory,
-but its stone foundation. It transforms fractured domains
-from a pathology into a source of invariants. By creating
-a universal metafractal invariant, this discipline achieves
-a level of monumentality exceeding Grothendieck’s schemes,
-Gromov’s metric geometry, and Connes’ noncommutative geometry.
-It is a \textbf{stone cathedral of mathematics}, ready for
-publication in the \emph{Annals of Mathematics}.
-
-%==============================================================================
-% End of Executive Summary
-%==============================================================================
