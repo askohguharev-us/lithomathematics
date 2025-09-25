@@ -1,5 +1,5 @@
 %==============================================================================
-% Executive Summary
+% File: 00-executive-summary.tex
 %==============================================================================
 
 \chapter*{Executive Summary}
@@ -7,114 +7,115 @@
 
 \section*{Overview}
 
-This monograph establishes the mathematical foundations of 
-\emph{lithomathematics}, a discipline extending spectral geometry to domains 
-with internal singular structures such as fractures, cracks, and rectifiable 
-sets of codimension one. While classical spectral asymptotics---originating 
-in the works of Weyl~\cite{Weyl1911}, Ivrii~\cite{Ivrii1980}, and 
-Safarov--Vassiliev~\cite{SafarovVassiliev1997}---apply to smooth or piecewise 
-smooth manifolds, they do not directly extend to fractured domains. 
-Our goal is to develop a coherent analytic, microlocal, and probabilistic 
-framework for such singular settings.
+This monograph develops the mathematical foundations of \emph{lithomathematics}, 
+a framework extending spectral geometry to domains with internal singular 
+structures. The primary motivation is that classical trace formulas and 
+spectral asymptotics, as established by Weyl, Ivrii, and Safarov–Vassiliev, 
+do not apply directly in the presence of internal fractures or singular sets. 
+Our aim is to establish a coherent analytic and microlocal theory that 
+quantifies spectral invariants in such settings, with explicit remainder 
+estimates and universal limits.
 
 \section*{Principal Results}
 
-\begin{theorem}[Localized Trace Formula on Fractured Domains]
-Let $(\Omega,g)$ be a compact Riemannian manifold with boundary 
-$\partial\Omega$ and an internal rectifiable fracture set $\Gamma$. 
-For the Laplace operator with Dirichlet boundary conditions on 
-$\Omega\setminus\Gamma$, one has
+\begin{theorem}[A. Localized Trace Formula on Fractured Domains]
+\label{thm:main-trace}
+Let $(\Omega,g)$ be a compact $d$-dimensional Riemannian manifold with 
+smooth boundary $\partial\Omega$ and an internal fracture set 
+$\Gamma \subset \Omega$ of class $C^2$, rectifiable with finite 
+$(d-1)$-dimensional Hausdorff measure. 
+Consider the Laplace operator with Dirichlet boundary conditions on 
+$\Omega\setminus\Gamma$. Then, for any $g \in C^\infty_c(\mathbb{R})$,
 \[
-    \mathrm{Tr}(g(\sqrt{-\Delta})) 
-    = A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g) + A_{\Gamma}(g) + \mathcal{R}(g),
+    \mathrm{Tr}(g(\sqrt{-\Delta})) \;=\;
+    A_{\mathrm{vol}}(g) \;+\; A_{\partial\Omega}(g) \;+\; A_{\Gamma}(g) \;+\; \mathcal{R}(g),
 \]
-where the coefficients $A_{\mathrm{vol}}, A_{\partial\Omega}, A_{\Gamma}$ are 
-explicitly determined by the geometry of $\Omega$ and $\Gamma$, and the 
-remainder satisfies
+where the coefficients are explicitly determined by the geometry of 
+$\Omega$ and $\Gamma$, and the remainder satisfies
 \[
-    |\mathcal{R}(g)| 
-    \;\leq\; C\,\kappa(\Gamma)\,\|g\|_{C^{d+3}}
-        \left( T^{d-2}\log(1+T) + e^{-cT}\right).
+    |\mathcal{R}(g)| \;\leq\;
+    C(\Omega,\Gamma)\,\kappa(\Gamma)\,\|g\|_{C^{d+3}}\,
+    \Big(T^{d-2}\log(1+T) + e^{-c(\Omega,\Gamma)T}\Big).
 \]
 \end{theorem}
 
-\begin{theorem}[Geometric Complexity Parameter]
+\begin{theorem}[B. Geometric Complexity Parameter]
+\label{thm:complexity}
 The influence of the fracture set $\Gamma$ on spectral asymptotics is 
 captured by the geometric complexity parameter
 \[
-    \kappa(\Gamma) \;=\; 
-        H^{d-1}(\Gamma) 
-        + \int_\Gamma (1+|II(x)|^2)^{1/2}\,dH^{d-1}(x) 
+    \kappa(\Gamma) \;=\;
+        \mathcal{H}^{d-1}(\Gamma)
+        + \int_\Gamma (1+|II(x)|^2)^{1/2}\,d\mathcal{H}^{d-1}(x)
         + N_{\mathrm{comp}}(\Gamma),
 \]
-where $H^{d-1}$ is the Hausdorff measure, $II(x)$ the second fundamental form, 
-and $N_{\mathrm{comp}}(\Gamma)$ the number of connected components. 
+where $\mathcal{H}^{d-1}$ denotes $(d-1)$-dimensional Hausdorff measure, 
+$II(x)$ is the second fundamental form at $x\in\Gamma$, and 
+$N_{\mathrm{comp}}(\Gamma)$ the number of connected components. 
 All constants in the trace expansions depend polynomially on $\kappa(\Gamma)$.
 \end{theorem}
 
-\begin{theorem}[Power-Saving Refinements]
-Assume exponential mixing in the geodesic flow on $\Omega\setminus\Gamma$. 
-Then the spectral remainder admits a power-saving refinement:
+\begin{theorem}[C. Power-Saving Refinements]
+\label{thm:power-saving}
+Assume the geodesic flow on $(\Omega\setminus\Gamma,g)$ is exponentially 
+mixing with spectral gap parameter $\beta>0$, and let $\theta$ denote the 
+Ramanujan--Petersson bound associated with relevant automorphic forms. 
+Then the remainder exponent $\delta$ in Theorem~\ref{thm:main-trace} 
+admits the power-saving estimate
 \[
-    |\mathcal{R}(g)| \;\leq\; C_\varepsilon\, T^{d-2-\delta+\varepsilon},
-    \qquad 
-    \delta = \min\!\left(\tfrac{1}{2}-\theta,\;\tfrac{\beta}{4}\right),
+    \delta \;=\; \min\!\left(\tfrac{1}{2}-\theta,\;\tfrac{\beta}{4}\right).
 \]
-where $\theta$ is the best known exponent toward the Ramanujan--Petersson 
-conjecture and $\beta$ the mixing rate.
+This exponent is sharp under the stated assumptions.
 \end{theorem}
 
-\begin{theorem}[Universality of the Litho-Ratio]
-Define the litho-ratio $K_L$ as the normalized difference between bulk and 
-fracture contributions in the trace formula. Under ergodic sampling of 
-fractures, one has
+\begin{theorem}[D. Universality of the Litho-Ratio]
+\label{thm:universality}
+Define the litho-ratio $K_L$ as the normalized limit of fracture 
+contributions in the trace expansion. 
+Under an ergodic probability measure on the space of admissible 
+fracture sets $\Gamma$, one has
 \[
-    K_L \;\to\; K_L^* 
-    \quad\text{almost surely},
+    K_L \;\to\; K_L^* \quad \text{almost surely},
 \]
-with Gaussian fluctuations of order $O(N^{-1/2})$. 
-The limit $K_L^*$ is universal across classes of fractured domains.
+with Gaussian fluctuations at rate $O(N^{-1/2})$ for $N$ independent samples. 
+The universal constant $K_L^*$ is independent of microscopic geometry.
 \end{theorem}
 
 \section*{Methodological Innovations}
 
 \begin{itemize}
-    \item \textbf{Microlocal parametrix construction} for Laplacians on domains 
-    with rectifiable singularities, extending Hörmander--Melrose theory.
-    \item \textbf{Fracture coefficient $a_\Gamma(g)$} explicitly quantifying 
-    spectral contributions of cracks.
-    \item \textbf{Geometric complexity parameter $\kappa(\Gamma)$} 
-    governing all error terms in trace expansions.
-    \item \textbf{Stochastic homogenization and ergodic limits} 
-    proving stability and universality of $K_L$.
+\item \textbf{Microlocal parametrix construction} adapted to domains with rectifiable singularities.
+\item \textbf{Geometric complexity parameter} $\kappa(\Gamma)$ providing quantitative control over spectral remainders.
+\item \textbf{Stochastic homogenization and ergodic limits} for fracture ensembles, proving universality of the litho-ratio $K_L$.
 \end{itemize}
 
-\section*{Relation to Existing Literature}
+\section*{Relation to the Literature}
 
-\begin{itemize}
-    \item Extends Weyl’s law~\cite{Weyl1911}, Ivrii’s boundary 
-    asymptotics~\cite{Ivrii1980}, and the microlocal framework of 
-    Safarov--Vassiliev~\cite{SafarovVassiliev1997}.
-    \item Complements variational fracture models of 
-    Bourdin--Francfort--Marigo~\cite{BourdinFrancfortMarigo2008} 
-    by introducing spectral invariants.
-    \item Connects to ergodic theorems (Lindenstrauss~\cite{Lindenstrauss2001}) 
-    and homogenization (Cioranescu--Murat~\cite{CioranescuMurat1997}).
-\end{itemize}
+This work extends the classical spectral asymptotics of Weyl~\cite{Weyl1911}, 
+Ivrii~\cite{Ivrii1980}, and Safarov–Vassiliev~\cite{SafarovVassiliev1997} 
+to singular domains with internal discontinuities. 
+Unlike variational fracture models (Bourdin–Francfort–Marigo~\cite{Bourdin2000,FrancfortMarigo1998}), 
+our approach is analytic and spectral, focusing on invariants rather than 
+energy minimization. Connections with homogenization theory 
+(Cioranescu–Murat~\cite{CioranescuMurat1997}) and ergodic theorems 
+(Lindenstrauss~\cite{Lindenstrauss2001}) are established.
+
+\section*{Structure of the Monograph}
+
+The work is organized as follows.  
+Chapters~1–2 establish the analytic and variational framework.  
+Chapters~3–5 derive the trace formulas, geometric invariants, and power-saving refinements.  
+Chapters~6–8 extend the theory to ergodic limits, homogenization, and nonlinear settings.  
+Chapter~9 presents canonical examples, and Chapter~10 synthesizes the results.  
+Appendices contain technical lemmas, error maps, and bibliographic notes.
 
 \section*{Implications}
 
-The results establish lithomathematics as a coherent extension of spectral 
-geometry to fractured media. They provide:
-\begin{enumerate}
-    \item Explicit trace formulas with controlled remainders.
-    \item Geometric quantification via $\kappa(\Gamma)$.
-    \item Universality of invariants under stochastic and ergodic limits.
-\end{enumerate}
-
-All statements are proven with explicit constants, sharpness barriers, and 
-audited error maps, ensuring full reproducibility and mathematical rigor.
+The theory provides a rigorous foundation for spectral geometry in the 
+presence of internal singularities. It yields explicit error bounds, 
+sharpness barriers, and universal invariants, forming a coherent extension 
+of spectral asymptotics into the setting of fractured domains. 
 
 %==============================================================================
-% End of Executive Summary
+% End of 00-executive-summary.tex
 %==============================================================================
