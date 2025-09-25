@@ -1,77 +1,102 @@
 %==============================================================================
-% Readers' Roadmap
+% 00-readers-roadmap.tex
 %==============================================================================
 
-\chapter*{Readers' Roadmap}
-\label{chap:readers-roadmap}
+\chapter*{Readers' Guide}
+\label{chap:readers-guide}
 
-\section*{Orientation}
+\section*{Purpose}
 
-This monograph is designed as a \emph{closed metafractal}: every chapter is 
-self-contained yet linked, each proof is embedded within a global audit 
-protocol, and all error structures are explicitly mapped. The reader, regardless 
-of background, will find a consistent path through the work. The roadmap 
-ensures that no part of the exposition is isolated and that every claim is 
-anchored in explicit theorems, invariants, and barriers.
+This guide is intended to help readers with different backgrounds navigate the
+monograph efficiently. The work develops the analytic and microlocal foundations
+of spectral geometry on fractured domains (``lithomathematics''), and while it
+is self-contained, the breadth of techniques may benefit from tailored reading
+paths.
 
-\section*{Paths for Different Audiences}
+\section*{Organization of the Monograph}
 
-\paragraph{Analysts and PDE Specialists.}
-Begin with Chapter~2 (\emph{Preliminaries and Framework}) for Sobolev spaces 
-and operator self-adjointness. Then proceed to Chapter~4 (\emph{Spectral 
-Operators}) and Chapter~5 (\emph{Trace Formulas}), where microlocal parametrix 
-methods are applied to fractured domains. Technical proofs are expanded in 
-Appendices A and B. Error Maps guarantee that all constants and estimates are 
-transparent.
+The monograph is structured into ten chapters and eight appendices:
 
-\paragraph{Spectral Geometers.}
-Start with Chapter~1 (\emph{Historical Context}) to situate lithomathematics 
-within classical spectral geometry. Move directly to Chapter~5 for the trace 
-formulas and Chapter~6 for ergodic limits. Appendix E provides historical 
-comparisons with Weyl, Ivrii, and Safarov--Vassiliev. Sharpness Barriers 
-explicitly delimit the range of validity.
-
-\paragraph{Probability and Stochastics.}
-Chapters~6 and~7 develop ergodic and homogenization limits. Chapter~8 extends 
-the framework to random ensembles. Appendix F expands on error structures 
-in stochastic settings, ensuring that central limit theorems and variance 
-formulas are fully reproducible.
-
-\paragraph{Geometric Analysts.}
-Focus on Chapters~3 (\emph{Variational Structures}) and~7 (\emph{Homogenization}). 
-These chapters link fracture geometry with $\Gamma$-convergence and 
-multiscale stability. The geometric complexity parameter $\kappa(\Gamma)$ 
-serves as the unifying invariant. Appendix G contains proofs of optimality 
-(Sharpness Barriers).
-
-\paragraph{General Mathematical Audience.}
-Read Chapters~1 and~10. The introduction provides motivation and scope; 
-the conclusion synthesizes results and positions lithomathematics within 
-the broader mathematical landscape. The Executive Summary (\S0) distills 
-the main theorems.
-
-\section*{Fractal Closure Protocol}
-
-Each path is embedded in a closure system:
 \begin{itemize}
-    \item \textbf{Audit Protocol:} Every chapter concludes with an audit 
-    verifying goals, invariants, and hypotheses.
-    \item \textbf{Error Maps:} All approximations include explicit error 
-    structures, preventing hidden assumptions.
-    \item \textbf{Sharpness Barriers:} Limitations are codified, ensuring 
-    no result can be overstated.
-    \item \textbf{Forward/Backward Links:} Each section references its 
-    prerequisites and successors, forming a spectral chain without gaps.
+  \item Chapter~1 introduces the historical context and motivation.
+  \item Chapters~2–4 establish the analytic and microlocal framework.
+  \item Chapter~5 presents the localized trace formula on fractured domains.
+  \item Chapters~6–8 extend the theory to ergodic, multiscale, and random settings.
+  \item Chapter~9 contains canonical examples and numerical verifications.
+  \item Chapter~10 synthesizes the theory and outlines future directions.
+  \item Appendices A–H provide technical lemmas, background analysis,
+        notation tables, extended error bounds, and sharpness proofs.
 \end{itemize}
 
-\section*{Guarantee of Integrity}
+\section*{Dependencies at a Glance}
 
-The roadmap forms part of the metafractal invariant: every possible 
-trajectory through the text returns to the same global closure. This ensures 
-that reviewers cannot encounter unanchored claims or missing steps. Any 
-criticism automatically maps to a predefined barrier or error ledger, thus 
-protecting the coherence and rigor of the work.
+The logical dependencies between chapters are as follows:
 
-%==============================================================================
-% End of Readers' Roadmap
-%==============================================================================
+\begin{center}
+\begin{tabular}{ll}
+Chapter~2 & prerequisite for Chapters~4–5 \\
+Chapter~4 & prerequisite for Chapter~5 \\
+Chapter~5 & prerequisite for Chapters~6–8 \\
+Chapter~6 & prerequisite for Chapter~7 \\
+Chapter~7 & prerequisite for Chapter~8 \\
+\end{tabular}
+\end{center}
+
+Each chapter is internally self-contained, with all technical proofs either
+included or deferred to the appendices.
+
+\section*{Suggested Reading Paths}
+
+\paragraph{Analysts and PDE Specialists.}
+Start with Chapter~2 (Preliminaries) for function spaces and operator theory,
+then proceed to Chapter~4 (Spectral Operators) and Chapter~5 (Trace Formulas).
+Appendices~A–B contain additional background in microlocal analysis.
+
+\paragraph{Spectral Geometers.}
+Begin with Chapter~1 (Context) for motivation, then move directly to
+Chapter~5 (Trace Formulas) and Chapter~6 (Ergodic Theorems).
+Appendix~E compares the results with classical work of Weyl, Ivrii,
+and Safarov–Vassiliev.
+
+\paragraph{Probabilists and Random Media Specialists.}
+Focus on Chapters~6 (Ergodic Limits),~7 (Homogenization),
+and~8 (Random Extensions).
+Appendix~F develops the probabilistic details.
+
+\paragraph{General Mathematical Audience.}
+Executive Summary (Chapter~0), Chapter~1 (Context), and Chapter~10 (Conclusion)
+provide a coherent overview without requiring the full technical background.
+
+\section*{Conventions Used Throughout}
+
+\begin{itemize}
+  \item \textbf{Proof Strategy.} Longer proofs are divided into setup,
+        key estimate, iteration, and conclusion. Technical lemmas are proved
+        separately in the appendices.
+  \item \textbf{Notation.} All operators, measures, and constants are fixed
+        in Chapter~2 and summarized in Appendix~C.
+  \item \textbf{Error Bounds.} All asymptotic results include explicit constants
+        and optimality conditions. Expanded derivations are given in
+        Appendices~F–G.
+  \item \textbf{Cross-References.} Dependencies between chapters are explicitly
+        noted; cross-references are provided for clarity.
+\end{itemize}
+
+\section*{Navigation Table}
+
+\begin{center}
+\begin{tabular}{lll}
+Audience & Recommended Start & Key Chapters/Appendices \\
+\hline
+Analysts & Chapter 2 & 4–5, App. A–B \\
+Spectral Geometers & Chapter 1 & 5–6, App. E \\
+Probabilists & Chapter 6 & 7–8, App. F \\
+General Audience & Chapter 0 & 1, 10 \\
+\end{tabular}
+\end{center}
+
+\section*{Note to Readers}
+
+The text has been written to maintain full rigor while allowing flexible
+entry points. Readers are encouraged to follow the suggested paths but
+may traverse the material according to their own expertise and interest.
