@@ -1,90 +1,120 @@
+%==============================================================================
+% Executive Summary
+%==============================================================================
+
 \chapter*{Executive Summary}
 \label{chap:executive-summary}
 
 \section*{Overview}
 
-This monograph develops the mathematical foundations of 
-\emph{lithomathematics}, a new discipline within spectral geometry 
-focusing on domains with internal singularities (fractures).  
-It establishes localized and global trace formulas, introduces 
-geometric complexity parameters, and proves the universality of 
-new spectral invariants under stochastic and ergodic limits.  
+This monograph establishes the mathematical foundations of 
+\emph{lithomathematics}, a discipline extending spectral geometry to domains 
+with internal singular structures such as fractures, cracks, and rectifiable 
+sets of codimension one. While classical spectral asymptotics---originating 
+in the works of Weyl~\cite{Weyl1911}, Ivrii~\cite{Ivrii1980}, and 
+Safarov--Vassiliev~\cite{SafarovVassiliev1997}---apply to smooth or piecewise 
+smooth manifolds, they do not directly extend to fractured domains. 
+Our goal is to develop a coherent analytic, microlocal, and probabilistic 
+framework for such singular settings.
 
 \section*{Principal Results}
 
 \begin{theorem}[Localized Trace Formula on Fractured Domains]
-\label{thm:localized-trace}
-Let $\Omega$ be a compact Riemannian manifold of dimension $d$ 
-with rectifiable fracture set $\Gamma \subset \Omega$. 
-For the Laplace operator with Dirichlet conditions on $\Omega\setminus\Gamma$, 
-the spectral trace satisfies
+Let $(\Omega,g)$ be a compact Riemannian manifold with boundary 
+$\partial\Omega$ and an internal rectifiable fracture set $\Gamma$. 
+For the Laplace operator with Dirichlet boundary conditions on 
+$\Omega\setminus\Gamma$, one has
 \[
-\mathrm{Tr}\big(g(\sqrt{-\Delta})\big) 
-= A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g) + A_{\Gamma}(g) + \mathcal{R}(g),
+    \mathrm{Tr}(g(\sqrt{-\Delta})) 
+    = A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g) + A_{\Gamma}(g) + \mathcal{R}(g),
 \]
-where
-\begin{itemize}
-    \item $A_{\mathrm{vol}}(g)$ is the Weyl bulk term, 
-    \item $A_{\partial\Omega}(g)$ the Ivrii-type boundary contribution,
-    \item $A_{\Gamma}(g)$ a new fracture coefficient depending explicitly on $\Gamma$,
-\end{itemize}
-and the remainder satisfies the quantitative bound
+where the coefficients $A_{\mathrm{vol}}, A_{\partial\Omega}, A_{\Gamma}$ are 
+explicitly determined by the geometry of $\Omega$ and $\Gamma$, and the 
+remainder satisfies
 \[
-|\mathcal{R}(g)| \leq C \, \kappa(\Gamma)\, \|g\|_{C^{d+3}}\, 
-\big( T^{d-2}\log(1+T) + e^{-cT} \big),
+    |\mathcal{R}(g)| 
+    \;\leq\; C\,\kappa(\Gamma)\,\|g\|_{C^{d+3}}
+        \left( T^{d-2}\log(1+T) + e^{-cT}\right).
 \]
-with constants depending only on macroscopic invariants of $\Omega$ and $\Gamma$.
 \end{theorem}
 
-\begin{theorem}[Power-Saving Refinement]
-\label{thm:power-saving}
-Under exponential mixing assumptions, the remainder in Theorem~\ref{thm:localized-trace} 
-admits the sharper bound
+\begin{theorem}[Geometric Complexity Parameter]
+The influence of the fracture set $\Gamma$ on spectral asymptotics is 
+captured by the geometric complexity parameter
 \[
-|\mathcal{R}(g)| \leq C \, \kappa(\Gamma)\, \|g\|_{C^{d+3}}\, T^{d-2-\delta},
-\qquad 
-\delta = \min\!\left(\tfrac{1}{2}-\theta, \tfrac{\beta}{4}\right),
+    \kappa(\Gamma) \;=\; 
+        H^{d-1}(\Gamma) 
+        + \int_\Gamma (1+|II(x)|^2)^{1/2}\,dH^{d-1}(x) 
+        + N_{\mathrm{comp}}(\Gamma),
 \]
-where $\theta$ is the best-known bound toward the Ramanujan–Petersson conjecture 
-and $\beta$ the mixing exponent.
+where $H^{d-1}$ is the Hausdorff measure, $II(x)$ the second fundamental form, 
+and $N_{\mathrm{comp}}(\Gamma)$ the number of connected components. 
+All constants in the trace expansions depend polynomially on $\kappa(\Gamma)$.
+\end{theorem}
+
+\begin{theorem}[Power-Saving Refinements]
+Assume exponential mixing in the geodesic flow on $\Omega\setminus\Gamma$. 
+Then the spectral remainder admits a power-saving refinement:
+\[
+    |\mathcal{R}(g)| \;\leq\; C_\varepsilon\, T^{d-2-\delta+\varepsilon},
+    \qquad 
+    \delta = \min\!\left(\tfrac{1}{2}-\theta,\;\tfrac{\beta}{4}\right),
+\]
+where $\theta$ is the best known exponent toward the Ramanujan--Petersson 
+conjecture and $\beta$ the mixing rate.
 \end{theorem}
 
 \begin{theorem}[Universality of the Litho-Ratio]
-\label{thm:litho-ratio}
-Define the litho-ratio $K_L$ as the normalized limit of fracture contributions.  
-Then
+Define the litho-ratio $K_L$ as the normalized difference between bulk and 
+fracture contributions in the trace formula. Under ergodic sampling of 
+fractures, one has
 \[
-K_L \;\;\xrightarrow[N\to\infty]{\text{a.s.}}\;\; K_L^*
+    K_L \;\to\; K_L^* 
+    \quad\text{almost surely},
 \]
-under ergodic sampling of fractures, with Gaussian fluctuations:
-\[
-\sqrt{N}\,\big(K_L - K_L^*\big) \;\;\xrightarrow{d}\;\; \mathcal{N}(0,\sigma^2(\Gamma)).
-\]
+with Gaussian fluctuations of order $O(N^{-1/2})$. 
+The limit $K_L^*$ is universal across classes of fractured domains.
 \end{theorem}
 
 \section*{Methodological Innovations}
 
 \begin{itemize}
-    \item Construction of \textbf{microlocal parametrices} on domains with rectifiable singularities, extending Hörmander–Melrose techniques.  
-    \item Definition of a \textbf{geometric complexity parameter} $\kappa(\Gamma)$ capturing both measure and curvature of fracture sets.  
-    \item Development of \textbf{stochastic homogenization} and ergodic limit theorems for spectral invariants.  
+    \item \textbf{Microlocal parametrix construction} for Laplacians on domains 
+    with rectifiable singularities, extending Hörmander--Melrose theory.
+    \item \textbf{Fracture coefficient $a_\Gamma(g)$} explicitly quantifying 
+    spectral contributions of cracks.
+    \item \textbf{Geometric complexity parameter $\kappa(\Gamma)$} 
+    governing all error terms in trace expansions.
+    \item \textbf{Stochastic homogenization and ergodic limits} 
+    proving stability and universality of $K_L$.
 \end{itemize}
 
 \section*{Relation to Existing Literature}
 
-This work extends classical results of Weyl \cite{Weyl1911}, Ivrii \cite{Ivrii1980}, 
-and Safarov–Vassiliev \cite{SafarovVassiliev1997} to non-smooth domains with 
-fractures.  
-Unlike the variational approaches to fracture mechanics (Bourdin–Francfort–Marigo \cite{Bourdin2008}), 
-the focus here is on spectral asymptotics, trace invariants, and universality.  
+\begin{itemize}
+    \item Extends Weyl’s law~\cite{Weyl1911}, Ivrii’s boundary 
+    asymptotics~\cite{Ivrii1980}, and the microlocal framework of 
+    Safarov--Vassiliev~\cite{SafarovVassiliev1997}.
+    \item Complements variational fracture models of 
+    Bourdin--Francfort--Marigo~\cite{BourdinFrancfortMarigo2008} 
+    by introducing spectral invariants.
+    \item Connects to ergodic theorems (Lindenstrauss~\cite{Lindenstrauss2001}) 
+    and homogenization (Cioranescu--Murat~\cite{CioranescuMurat1997}).
+\end{itemize}
 
-\section*{Applications and Implications}
+\section*{Implications}
 
-The results establish fundamental limits for spectral geometry on fractured 
-domains.  
-They provide rigorous tools for analyzing wave propagation and homogenization 
-in singular media, while explicitly quantifying error bounds and sharpness 
-barriers.  
-All theorems are formulated with explicit constants and controlled dependence 
-on geometric invariants.
+The results establish lithomathematics as a coherent extension of spectral 
+geometry to fractured media. They provide:
+\begin{enumerate}
+    \item Explicit trace formulas with controlled remainders.
+    \item Geometric quantification via $\kappa(\Gamma)$.
+    \item Universality of invariants under stochastic and ergodic limits.
+\end{enumerate}
 
+All statements are proven with explicit constants, sharpness barriers, and 
+audited error maps, ensuring full reproducibility and mathematical rigor.
+
+%==============================================================================
+% End of Executive Summary
+%==============================================================================
