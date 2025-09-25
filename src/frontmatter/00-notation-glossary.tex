@@ -1,98 +1,87 @@
-% ==================================================================
-% File: src/frontmatter/00-notation-glossary.tex
-% Diamond Standard v3.0 — Brilliant Version
-% ==================================================================
+%==============================================================================
+% 00-notation-glossary.tex
+%==============================================================================
 
 \chapter*{Notation and Glossary}
-\addcontentsline{toc}{chapter}{Notation and Glossary}
+\label{chap:notation-glossary}
 
-\begin{abstract}
-This glossary summarizes all symbols, operators, and conventions used
-throughout the monograph \emph{Lithomathematics}. Its purpose is to ensure
-clarity, avoid ambiguity, and guarantee consistency across chapters.
-\end{abstract}
+This chapter collects the main notation, parameters, and conventions used throughout the monograph.  
+All terms are defined consistently with the mathematical standards of spectral geometry, and each symbol is introduced once and used uniformly.  
+Where appropriate, references are given to the chapters where the concept is developed in detail.
 
-\noindent\textbf{Keywords:} notation, glossary, lithomathematics, spectral invariants, fracture sets  
-\noindent\textbf{MSC 2020:} 35J25, 35P20, 35B27, 74R10, 47A75
+%------------------------------------------------------------------------------
+\section*{Core Symbols and Parameters}
 
-% ---------- Orientation ----------
-\section*{Orientation}
-Precise notation is essential for reproducibility and for preventing
-misinterpretation of results. This glossary provides a single reference
-point for all mathematical symbols and abbreviations used in the text.
+\begin{longtable}{|c|p{11cm}|}
+\hline
+$\Omega$ & Compact Riemannian manifold with smooth boundary $\partial\Omega$. \\
+\hline
+$\Gamma$ & Internal fracture set in $\Omega$, assumed to be rectifiable and of class $C^2$ unless otherwise specified. \\
+\hline
+$g$ & Test function, usually smooth and compactly supported; precise requirements (e.g., $g \in C_c^\infty(\mathbb{R})$ or $g \in \mathcal{S}(\mathbb{R})$) are stated where used. \\
+\hline
+$\Delta$ & Laplace–Beltrami operator on $\Omega$ with Dirichlet boundary conditions on $\partial\Omega$ and on the fracture set $\Gamma$. \\
+\hline
+$\operatorname{Tr}$ & Trace functional. For the operators considered here, $\operatorname{Tr}(g(\sqrt{-\Delta}))$ is defined via the Schwartz kernel of the heat semigroup or wave group. \\
+\hline
+$A_{\mathrm{vol}}(g)$ & Volume contribution in trace expansions (classical Weyl term). \\
+\hline
+$A_{\partial\Omega}(g)$ & Boundary contribution in trace expansions (Ivrii term). \\
+\hline
+$A_{\Gamma}(g)$ & Fracture contribution in trace expansions, expressed through integrals over $\Gamma$ involving its Hausdorff measure and second fundamental form. \\
+\hline
+$\mathcal{R}(g)$ & Remainder term in trace expansions. Bounds for $\mathcal{R}(g)$ are always given with explicit dependence on $T$, $g$, and $\kappa(\Gamma)$. \\
+\hline
+$T$ & Spectral parameter bounding the support of $g$: $\mathrm{supp}(g) \subset [-T,T]$. \\
+\hline
+$\theta$ & Best known bound toward the Ramanujan–Petersson conjecture for cusp forms; defined precisely in Section~5.4. For practical purposes, $\theta=0$ is always admissible. \\
+\hline
+$\beta$ & Exponential mixing rate for the geodesic flow on $(\Omega\setminus\Gamma,g)$. \\
+\hline
+$\delta$ & Error exponent in refined remainder bounds, defined by
+\[
+    \delta = \min\!\left(\tfrac{1}{2}-\theta,\;\tfrac{\beta}{4}\right).
+\] \\
+\hline
+$\kappa(\Gamma)$ & Geometric complexity parameter of the fracture set $\Gamma$, defined as
+\[
+    \kappa(\Gamma) = 
+    \mathcal{H}^{d-1}(\Gamma) 
+    + \int_\Gamma (1+|II(x)|^2)^{1/2}\,d\mathcal{H}^{d-1}(x)
+    + N_{\mathrm{comp}}(\Gamma),
+\]
+where $\mathcal{H}^{d-1}$ is the $(d-1)$-dimensional Hausdorff measure, $II(x)$ is the second fundamental form at $x \in \Gamma$, and $N_{\mathrm{comp}}(\Gamma)$ is the number of connected components of $\Gamma$. \\
+\hline
+$K_L$ & Litho-ratio: spectral invariant measuring the relative contribution of $\Gamma$ to the trace. Defined rigorously in Chapter~6. \\
+\hline
+$K_L^*$ & Universal ergodic limit of the litho-ratio, independent of microscopic randomness. \\
+\hline
+\end{longtable}
 
-% ---------- General Symbols ----------
-\section*{General Symbols}
-\begin{tabular}{ll}
-$\Omega \subset \mathbb{R}^d$ & Bounded Lipschitz domain (ambient medium) \\
-$\partial \Omega$ & Boundary of the domain \\
-$\Gamma(t)$ & Fracture set at time $t$, rectifiable subset of $\Omega$ \\
-$g$ & Riemannian metric on $\Omega$ (assumed $C^{2,\alpha}$) \\
-$V$ & Potential function, $V \in L^\infty(\Omega)$ \\
-$\mathcal{H}^k$ & $k$-dimensional Hausdorff measure \\
-$L^p(\Omega)$ & Lebesgue space with norm $\|\cdot\|_{L^p(\Omega)}$ \\
-$H^1(\Omega)$ & Sobolev space of square-integrable functions with gradients \\
-$C^{k,\alpha}$ & Hölder space of functions with $k$ derivatives and exponent $\alpha$ \\
-$\Gamma$-conv. & $\Gamma$-convergence (variational convergence of functionals) \\
-\end{tabular}
+%------------------------------------------------------------------------------
+\section*{Conventions}
 
-% ---------- Energies ----------
-\section*{Energy Functionals}
-\begin{tabular}{ll}
-$\mathcal{E}_{\text{ord}}$ & Ordering energy (bulk contribution) \\
-$\mathcal{E}_{\text{br}}$ & Fracture energy (interface contribution) \\
-$\mathcal{E}_{\text{total}}$ & Total energy = $\mathcal{E}_{\text{ord}} + \mathcal{E}_{\text{br}}$ \\
-$K_L$ & Litho-ratio: $\dfrac{\mathcal{E}_{\text{ord}}}{\mathcal{E}_{\text{br}} + \varepsilon}$ \\
-$K_L^*$ & Ergodic limit of $K_L$ as $t \to \infty$, $\varepsilon \to 0$ \\
-\end{tabular}
-
-% ---------- Operators ----------
-\section*{Operators and Spectral Quantities}
-\begin{tabular}{ll}
-$A$ & Elliptic operator (self-adjoint, domain specified per chapter) \\
-$\lambda_j$ & $j$-th eigenvalue of $A$ \\
-$\varphi_j$ & Eigenfunction corresponding to $\lambda_j$ \\
-$\mathrm{Tr}(A)$ & Trace of operator $A$ \\
-$\mathcal{R}(\lambda, \eta; T_0)$ & Remainder term in localized trace formula \\
-$\beta$ & Spectral gap parameter (mixing rate) \\
-\end{tabular}
-
-% ---------- Probability and Ergodic Theory ----------
-\section*{Probability and Ergodic Theory}
-\begin{tabular}{ll}
-$(X, \mathcal{F}, \mu)$ & Probability space \\
-$\mathbb{E}_\mu[\cdot]$ & Expectation w.r.t. measure $\mu$ \\
-a.s. & Almost sure convergence \\
-$L^1(\mu)$ & Space of integrable functions on $X$ \\
-Mixing & Decay of correlations under the semigroup flow \\
-\end{tabular}
-
-% ---------- Audit Block ----------
-\section*{Audit Block (Diamond Standard v3.0)}
-\begin{enumerate}[label=A\arabic*.]
-  \item All symbols are uniquely defined, with no duplicates.
-  \item Dependencies on domain, metric, and potential are explicitly tracked.
-  \item Energies, operators, and invariants are consistently denoted across all chapters.
-  \item No notation is left undefined in proofs or theorems.
-\end{enumerate}
-
-% ---------- Error Budget Map ----------
-\section*{Error Budget Map}
 \begin{itemize}
-  \item Ambiguity in notation: eliminated by centralizing definitions here.
-  \item Risk of symbol overload: controlled by cross-referencing glossary entries.
-  \item Risk of hidden assumptions: avoided by explicit functional space declarations.
+    \item \textbf{Constants.}  
+    All constants $C(\Omega,\Gamma)$ are constructive and depend at most polynomially on $\kappa(\Gamma)$.  
+    Dependence on dimension $d$ is always indicated explicitly when relevant.
+
+    \item \textbf{Norms.}  
+    We use $\| \cdot \|_{C^k}$ for the uniform $C^k$-norm of functions, and $\| \cdot \|_{L^p}$ for Lebesgue norms.
+
+    \item \textbf{Measures.}  
+    $\mathcal{H}^{d-1}$ denotes the $(d-1)$-dimensional Hausdorff measure. Integrals over $\Gamma$ are with respect to this measure unless otherwise specified.
+
+    \item \textbf{Sharpness.}  
+    Whenever an exponent or bound is claimed to be sharp, this is proved either by explicit examples (Chapter~9) or by general barrier arguments (Appendix~G).
+
+    \item \textbf{Proof Strategy.}  
+    Long proofs are structured in steps: setup, key estimate, iteration, conclusion. Technical lemmas are proved separately, often in appendices.
+
+    \item \textbf{Cross-references.}  
+    Each definition and symbol introduced here is cross-referenced in the main text. No symbol is used without prior definition.
 \end{itemize}
 
-% ---------- Sharpness Barriers ----------
-\section*{Sharpness Barriers}
-\begin{itemize}
-  \item The glossary assumes familiarity with Sobolev spaces, spectral theory, and measure theory.
-  \item Notation may differ from other sources; cross-check with Chapter~2 for technical details.
-\end{itemize}
-
-% ---------- Conclusion ----------
-\section*{Conclusion}
-This glossary guarantees consistency and clarity across the monograph.
-Every symbol introduced here is used consistently, all invariants are traceable,
-and all potential sources of ambiguity are explicitly resolved.
+%==============================================================================
+% End of 00-notation-glossary.tex
+%==============================================================================
