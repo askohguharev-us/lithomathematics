@@ -1,912 +1,966 @@
-%==============================================================================
-% Chapter 1 — Introduction
-% Part 1/10 — Overview and Motivation
-%==============================================================================
-
 \chapter{Introduction}
-\label{chap:introduction}
 
-\section{Overview and Motivation}
+\section{Motivation and Historical Context}
 
-Classical spectral geometry, inaugurated by Weyl’s law and developed through 
-the work of Ivrii and Safarov–Vassiliev, explains how the large–frequency 
-spectrum of the Laplace operator reflects the geometry and dynamics of smooth 
-domains and manifolds with boundary; see, e.g., \cite{weyl1911,ivrii1980,
-safarov-vassiliev1997}. In this smooth setting the eigenvalue counting function 
-and localized spectral traces admit asymptotic expansions whose coefficients 
-are explicit geometric functionals (volume, area of the boundary, curvature 
-corrections), and whose remainders are controlled by microlocal and dynamical 
-information.
+The present monograph develops a new framework in spectral geometry, aimed at 
+describing the asymptotic behaviour of eigenvalues and trace invariants on domains 
+with internal singularities (fractures, cracks, discontinuity sets). 
+We refer to this emerging discipline as \emph{lithomathematics} 
+(from the Greek \emph{λίθος}, stone), to emphasize its focus on spectral 
+phenomena shaped by internal discontinuities within otherwise smooth media.
 
-Many natural media, however, are not smooth: in addition to an exterior 
-boundary, they contain \emph{internal} codimension–one defects—interfaces, 
-cuts, or fracture sets—along which waves reflect, mode–convert, and diffract. 
-From the analytic point of view, the presence of an internal fracture 
-$\Gamma\subset\Omega$ forces a mixed “interior boundary condition’’ on the 
-operator, and creates new families of (diffractive) geodesics that are 
-invisible to the classical Weyl–Ivrii analysis. In this regime the standard 
-toolkit (smooth boundary parametrix, propagation of singularities away from 
-corners/edges) is insufficient: even the right \emph{objects} that should enter 
-the spectral coefficients and the correct \emph{scales} for remainders must be 
-identified.
+\subsection{From Weyl to Modern Spectral Geometry}
 
-The purpose of this monograph is to provide a complete analytic and microlocal 
-foundation for spectral geometry on domains with internal fracture sets. 
-Concretely, we work with a compact Riemannian manifold $(\Omega,g)$ with smooth 
-exterior boundary $\partial\Omega$ and a closed codimension–one subset 
-$\Gamma\subset\Omega$ of adequate regularity. We develop localized trace 
-expansions for the Dirichlet Laplacian on $\Omega\setminus\Gamma$ with a 
-\emph{new} explicit contribution supported on $\Gamma$; we quantify the 
-dependence of all constants on a geometric “complexity’’ parameter 
-$\kappa(\Gamma)$; and we introduce a \emph{spectral ratio} $K_L$ (defined via 
-trace coefficients) that measures the relative spectral weight of the fracture 
-term. We further establish a universality law for $K_L$ in ergodic ensembles of 
-fracture sets.
+The starting point of spectral geometry is the celebrated Weyl law (1911), 
+which established that the counting function $N(\lambda)$ of Dirichlet eigenvalues 
+of the Laplacian on a bounded smooth domain $\Omega \subset \mathbb{R}^d$ admits the asymptotic
+\[
+N(\lambda) \sim \frac{\omega_d}{(2\pi)^d} \, \mathrm{vol}(\Omega)\, \lambda^{d/2},
+\qquad \lambda \to \infty,
+\]
+where $\omega_d$ is the volume of the unit ball in $\mathbb{R}^d$.
+This result linked geometry (volume) to spectrum, laying the foundations for the field.
 
-\subsection*{Guiding Principles}
+Subsequent refinements included boundary contributions (Ivrii, 1980s), curvature corrections 
+(Pleijel, 1950s), and error bounds under dynamical assumptions (Duistermaat--Guillemin, 
+1975). The methodology combined Fourier analysis, Tauberian theorems, and later, 
+microlocal analysis.
 
-Two principles guide our construction.
+\subsection{The Microlocal Revolution}
 
-\begin{description}
-  \item[(P1) Explicit locality at the fracture.]  
-  All new terms—both the coefficient supported on $\Gamma$ and the additional 
-  singular components of the wave kernel—are localized microlocally near the 
-  conormal to $\Gamma$. This allows us to write the fracture contribution as an 
-  explicit surface integral along $\Gamma$ with a density determined by the 
-  symbol of an adapted parametrix and the second fundamental form of $\Gamma$.
+The introduction of microlocal analysis (Hörmander, 1971; Melrose, 1980s) 
+provided a systematic framework for analyzing propagation of singularities, 
+wavefront sets, and diffraction. This opened the way to localized trace formulas 
+and explicit error estimates in terms of dynamical invariants.
 
-  \item[(P2) Stable globalization with quantitative error control.]  
-  We propagate the local microlocal information to global spectral asymptotics 
-  by means of Tauberian arguments \emph{with explicit constants}. This yields 
-  remainder bounds whose dependence on $\Gamma$ is polynomial in 
-  $\kappa(\Gamma)$, and whose exponents are sharp under our standing geometric 
-  hypotheses; under additional dynamical assumptions (exponential mixing of the 
-  fractured geodesic flow) we obtain genuine power savings.
-\end{description}
+In particular, Melrose's \emph{b-calculus} and edge calculus enabled 
+the treatment of manifolds with boundaries and conic singularities. 
+Duistermaat and Guillemin introduced the Poisson relation, relating spectral 
+singularities to lengths of closed geodesics. These tools became standard 
+in spectral geometry and semiclassical analysis.
 
-The resulting theory extends the Weyl–Ivrii–Safarov–Vassiliev paradigm to an 
-analytically controlled class of singular geometries. At the same time, it is 
-orthogonal to the variational literature on brittle fracture (Griffith, 
-Ambrosio–Tortorelli, Francfort–Marigo): that tradition studies \emph{evolution} 
-and energy minimization; here we study \emph{spectral invariants} of a fixed 
-fractured configuration. The approaches are complementary.
+\subsection{Towards Singular Geometries}
 
-\subsection*{Main Contributions (Informal)}
+Despite this progress, classical results mostly concern smooth or piecewise smooth 
+boundaries. The theory for manifolds with corners, edges, or cusps has been 
+developed (Cheeger, 1980s; Mazzeo, 1990s), and extensions to certain 
+non-smooth settings (Safarov--Vassiliev, 1997) exist. However, 
+\emph{internal fractures} --- codimension-1 discontinuity sets $\Gamma \subset \Omega$, 
+with $\Omega \setminus \Gamma$ disconnected --- remain essentially outside the scope 
+of current spectral geometry.
 
-To orient the reader, we summarize the four principal outputs; precise 
-statements appear later in this chapter.
+These sets appear naturally in mechanics (cracks in elastic media), 
+physics (defects in quantum waveguides), and materials science (grain boundaries). 
+Yet from a mathematical perspective, even the most basic spectral asymptotics 
+in such settings are unknown.
 
+\subsection{The Problem of Internal Singularities}
+
+The absence of a general theory for domains with internal singularities 
+represents a significant gap. Unlike boundaries, fractures do not enclose 
+the domain but partition it. They generate additional diffractive phenomena, 
+affect eigenvalue asymptotics, and lead to new terms in trace expansions. 
+
+The main challenge is that the standard symbolic calculus, designed for smooth 
+boundaries, fails at internal discontinuities. Moreover, variational approaches 
+from mechanics, while effective in describing fracture evolution, provide 
+limited access to spectral invariants.
+
+The central objective of this monograph is to fill this gap by constructing 
+a systematic spectral theory for domains with internal fractures, 
+equipped with explicit asymptotic formulas, error bounds, and universal ratios.
+
+\subsection{Chronological Milestones}
+
+To situate the present work, we summarize key milestones in the history 
+of spectral geometry, highlighting the lack of results for internal singularities.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|p{7cm}|}
+\hline
+\textbf{Year} & \textbf{Milestone} \\
+\hline
+1911 & H. Weyl: volume term in eigenvalue asymptotics \\
+1950s & Å. Pleijel: curvature corrections, remainder estimates \\
+1970s & L. Hörmander: microlocal analysis, wavefront sets \\
+1975 & J.J. Duistermaat, V. Guillemin: Poisson relation \\
+1980s & R. Melrose: b-calculus, edge calculus \\
+1980s & J. Cheeger: analysis on singular spaces \\
+1997 & Yu. Safarov, D. Vassiliev: asymptotics for general elliptic operators \\
+2000s & Mazzeo, Wunsch, others: manifolds with corners, cusps \\
+Present & Lithomathematics: spectral geometry with internal fractures \\
+\hline
+\end{tabular}
+\caption{Chronological milestones in spectral geometry.}
+\end{table}
+
+\subsection{Comparison of Methods}
+
+It is instructive to compare existing approaches to non-smooth geometries 
+with the requirements posed by fracture sets.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Method} & \textbf{Strengths} & \textbf{Limitations for fractures} \\
+\hline
+Classical spectral geometry 
+& Explicit formulas, sharp asymptotics 
+& Requires smooth boundary; no internal sets \\
+\hline
+Microlocal analysis 
+& Precise control of wavefront sets, diffraction 
+& Symbolic calculus fails at discontinuities \\
+\hline
+Variational fracture mechanics 
+& Captures crack evolution, energy minimization 
+& No spectral invariants; lacks trace expansions \\
+\hline
+Probabilistic/random media 
+& Ergodic theorems, homogenization tools 
+& Treats roughness statistically, not deterministic $\Gamma$ \\
+\hline
+Lithomathematics (this work) 
+& Combines spectral invariants with internal singularities 
+& Requires new calculus and invariants \\
+\hline
+\end{tabular}
+\caption{Comparison of methods for singular geometries.}
+\end{table}
+
+\subsection{Preliminary Definitions}
+
+We introduce the two central invariants that will guide the analysis.
+
+\paragraph{Geometric Complexity $\kappa(\Gamma)$.}
+For a closed rectifiable $(d-1)$-dimensional set $\Gamma \subset \Omega$, 
+we define
+\[
+\kappa(\Gamma) = \mathcal{H}^{d-1}(\Gamma) + 
+\int_\Gamma |II(x)|^2 \, d\mathcal{H}^{d-1}(x) + \#\{\text{connected components of } \Gamma\},
+\]
+where $II(x)$ denotes the second fundamental form of $\Gamma$ 
+(defined $\mathcal{H}^{d-1}$-almost everywhere).
+This parameter quantifies the geometric complexity of fracture sets 
+and will play a central role in error bounds and sharpness estimates.
+
+\paragraph{Lithomathematics.}
+We use the term lithomathematics to denote the spectral theory of domains 
+with internal fractures. Its central objects are:
 \begin{itemize}
-  \item \emph{A localized trace formula on fractured domains} with an explicit 
-  fracture coefficient 
-  \[
-  A_\Gamma(g)=\int_\Gamma \alpha_g(x)\,d\mathcal H^{d-1}(x),
-  \]
-  and a remainder bounded by $T^{d-2}\log(1+T)$ up to explicit constants 
-  polynomial in $\kappa(\Gamma)$.
-
-  \item \emph{A geometric complexity parameter} $\kappa(\Gamma)$ capturing size, 
-  curvature, and topological fragmentation of $\Gamma$; all constants in the 
-  expansions and error terms are controlled polynomially in $\kappa(\Gamma)$.
-
-  \item \emph{Power–saving refinements} of the remainder under exponential 
-  mixing of the fractured geodesic flow, with an exponent $\delta>0$ determined 
-  by the mixing rate and proved optimal in our setting.
-
-  \item \emph{A universality law} for a trace–based spectral ratio $K_L$: in 
-  ergodic ensembles of fracture sets it converges almost surely to a 
-  deterministic limit and satisfies a central limit theorem at scale $N^{-1/2}$ 
-  for i.i.d.\ sampling.
+\item Asymptotic expansions of eigenvalue counting functions;
+\item Localized trace formulas with explicit error bounds;
+\item Universal ratios comparing fracture contributions to volume and boundary terms.
 \end{itemize}
 
-\section{Objectives of the Monograph}
+\subsection{Closing Remarks for Part I}
 
-We record the concrete objectives that will be met in the later chapters. 
-Throughout, $d\ge2$ is fixed, $g\in C_c^\infty(\mathbb R^+)$ is even with 
-$\mathrm{supp}\,g\subset[0,T]$, and $\Delta_\Gamma$ denotes the Dirichlet 
-Laplacian on $\Omega\setminus\Gamma$.
-
-\begin{itemize}
-  \item[\textbf{O1}] \textbf{Localized trace expansion.}  
-  Prove that
-  \[
-     \operatorname{Tr}\big(g(\sqrt{-\Delta_\Gamma})\big)
-      = A_{\mathrm{vol}}(g)+A_{\partial\Omega}(g)+A_\Gamma(g)+R(g,T),
-  \]
-  with $A_{\mathrm{vol}},A_{\partial\Omega}$ equal to the classical Weyl 
-  coefficients, and with
-  \[
-  A_\Gamma(g)=\int_\Gamma \alpha_g(x)\,d\mathcal H^{d-1}(x),
-  \qquad 
-  |R(g,T)|\le C(\Omega)\,P(\kappa(\Gamma))\,\|g\|_{C^{d+3}}\,T^{d-2}\log(1+T),
-  \]
-  where $P$ is a dimension–dependent polynomial and the exponent of $T$ is 
-  optimal under the standing geometric assumptions.
-
-  \item[\textbf{O2}] \textbf{Complexity control.}  
-  Introduce a quantitative geometric parameter $\kappa(\Gamma)$ 
-  (Definition~\ref{def:kappa} below) and show that all constants in the trace 
-  coefficients and remainder bounds are polynomially controlled by 
-  $\kappa(\Gamma)$, uniformly over admissible $\Gamma$.
-
-  \item[\textbf{O3}] \textbf{Dynamical refinements.}  
-  Under exponential mixing of the fractured geodesic flow with rate $\beta>0$, 
-  improve the remainder to $T^{d-2-\delta+\varepsilon}$ for any $\varepsilon>0$, 
-  with $\delta=\delta(\beta)>0$ explicit and optimal within this dynamical 
-  class.
-
-  \item[\textbf{O4}] \textbf{Spectral ratio and universality.}  
-  Define the litho–ratio $K_L$ via trace coefficients (Definition~\ref{def:KL}) 
-  and prove that in ergodic ensembles of fracture sets $K_L$ converges almost 
-  surely to a deterministic limit $K_L^\ast$ and satisfies a central limit 
-  theorem with variance depending on $d$, the normalization of $g$, and the 
-  ensemble.
-
-  \item[\textbf{O5}] \textbf{Reproducibility and explicit constants.}  
-  Keep track of constants at each step (parametrix construction, Tauberian 
-  arguments, dynamical inputs), ensuring that all statements are quantitatively 
-  reproducible and that dependence on $\kappa(\Gamma)$ is transparent.
-\end{itemize}
-
-\section{Scope, Non–Goals, and Design Choices}
-
-To avoid ambiguity we record scope decisions that shape the presentation.
-
-\paragraph{Scope.}  
-We work with fracture sets that are $(d\!-\!1)$-rectifiable and $C^2$ almost 
-everywhere, ensuring that the second fundamental form $II$ exists 
-$\mathcal H^{d-1}$-a.e.\ and that diffractive microlocal analysis can be carried 
-out with quantitative control. The exterior boundary $\partial\Omega$ is 
-smooth; the metric $g$ is smooth up to $\partial\Omega$ and across $\Gamma$.
-
-\paragraph{Non–Goals.}  
-We do not pursue applications to fracture growth, numerical phase–field models, 
-or inverse problems. We also refrain from treating highly irregular (fractal) 
-cracks, polyhedral corners meeting $\Gamma$, and non–Dirichlet boundary 
-conditions; these are natural but technically substantial extensions left for 
-future work. Likewise, we avoid heuristic “physical’’ normalizations for the 
-trace and stick to the analytic normalizations standard in spectral geometry.
-
-\paragraph{Design choices.}  
-All localized trace statements are formulated for even test functions 
-$g\in C_c^\infty(\mathbb R^+)$ supported in $[0,T]$; Tauberian equivalences to 
-counting–function statements are developed later (Chapter~\ref{chap:trace}). 
-The fracture contribution is always expressed as a $\Gamma$–surface integral 
-with a density $\alpha_g$ computed from an adapted parametrix; the remainder is 
-controlled by an explicit polynomial in $\kappa(\Gamma)$ and the $C^{d+3}$–norm 
-of $g$.
+The preceding overview motivates the creation of a systematic framework for 
+spectral geometry on fractured domains. The parameter $\kappa(\Gamma)$ and 
+the notion of lithomathematics provide the foundation. 
+In the next part, we state the principal results of the monograph 
+and outline their mathematical significance.
 
 %==============================================================================
 % Chapter 1 — Introduction
-% Part 2/10 — Historical Context and Literature Survey
+% Part 2/10 — Main Definitions and Setting (Finalized)
 %==============================================================================
 
-\section{Historical Context and Literature Survey}
+\section{Main Definitions and Setting}
 
-The systematic analysis of spectral asymptotics has its origins in Weyl’s law 
-for the eigenvalue counting function of the Laplacian on bounded Euclidean 
-domains. For a bounded smooth domain $\Omega\subset\mathbb R^d$ with Dirichlet 
-boundary conditions, Weyl established in 1911 that
+In this section we fix the geometric and analytic framework underlying the
+subsequent results. The aim is to provide precise definitions of fractured
+domains, associated operators, and the key invariants
+$\kappa(\Gamma)$ and $K_L$.
+
+%------------------------------------------------------------------------------
+\subsection{Geometric Setting}
+
+Let $(\Omega,g)$ be a compact, connected, $d$-dimensional Riemannian manifold
+with smooth boundary $\partial\Omega$. Inside $\Omega$, we allow a closed
+$(d-1)$-rectifiable subset
 \[
-  N(\lambda) := \#\{j:\,\lambda_j\le \lambda\}
-  = C_d\,\mathrm{vol}(\Omega)\,\lambda^{d/2} + o(\lambda^{d/2}),
-  \qquad \lambda\to\infty,
+\Gamma \subset \Omega,
 \]
-where $\lambda_j$ are the eigenvalues of $-\Delta$ and 
-$C_d=(2\pi)^{-d}\omega_d$ with $\omega_d$ the volume of the unit ball in 
-$\mathbb R^d$. This result established the first bridge between geometry and 
-spectral theory.
+called the \emph{fracture set}. The pair $(\Omega,\Gamma)$ is referred to as a
+\emph{fractured domain}.
 
-\subsection{Refinements of Weyl’s Law}
-
-Later refinements due to Ivrii and others included the boundary correction 
-term:
-\[
-  N(\lambda) = C_d\,\mathrm{vol}(\Omega)\,\lambda^{d/2}
-    - C_{d-1}\,\mathrm{vol}(\partial\Omega)\,\lambda^{(d-1)/2}
-    + o(\lambda^{(d-1)/2}).
-\]
-Here the coefficient $C_{d-1}$ depends only on the dimension and on the chosen 
-boundary condition (Dirichlet or Neumann). These refinements made explicit the 
-contribution of the boundary geometry to the spectrum.
-
-The microlocal revolution of the 1970s and 1980s, led by Hörmander, Duistermaat–
-Guillemin, and Melrose, revealed the deep role of classical dynamics in spectral 
-asymptotics. The celebrated Duistermaat–Guillemin trace formula, together with 
-the Ivrii conjecture (now theorem), established that remainder terms are governed 
-by the periodic orbits of the geodesic flow, thereby connecting spectral 
-asymptotics to quantum chaos.
-
-\subsection{Wave Trace and Singularities}
-
-The wave trace
-\[
-  \operatorname{Tr}\big(\cos(t\sqrt{-\Delta})\big)
-  = \sum_j \cos(t\sqrt{\lambda_j})
-\]
-was shown to be a tempered distribution with singular support at lengths of 
-closed geodesics. This established a direct link between spectral invariants 
-and the length spectrum of the underlying manifold. For smooth manifolds and 
-boundaries, the structure of these singularities is well understood.
-
-For non–smooth geometries—domains with corners, polyhedral edges, or conic 
-singularities—Melrose and others developed adapted pseudodifferential calculi 
-that allowed the propagation of singularities to be controlled across 
-non–smooth loci. In particular, the \emph{edge calculus} and the \emph{b–calculus} 
-provided frameworks for constructing parametrices of the wave operator in the 
-presence of such singularities.
-
-\subsection{Spectral Geometry on Singular Spaces}
-
-The analysis of manifolds with conic or edge singularities (Cheeger, Br\"uning–
-Seeley, Lesch, Mooers, Schulze) demonstrated that singularities contribute 
-additional terms to spectral invariants, often with fractional exponents or 
-logarithmic modifications. These studies revealed the richness and complexity 
-of spectral geometry beyond the smooth setting.
-
-However, a systematic theory for \emph{internal fractures}—codimension–one 
-subsets lying in the interior of $\Omega$—has been lacking. While there are 
-results for transmission problems across smooth interfaces (Colton–Kress, 
-McLean), and for quantum graphs (Kuchment), these models either impose smooth 
-transmission conditions or reduce to one–dimensional analogues. The situation 
-of an arbitrary fracture set $\Gamma$ cutting through the domain is 
-significantly more complex: boundary conditions change discontinuously, and 
-diffractive geodesics proliferate.
-
-\subsection{Parallel Developments: Variational Fracture Mechanics}
-
-Independently, the variational theory of brittle fracture was developed by 
-Griffith, Francfort–Marigo, Ambrosio–Tortorelli, and others. There, the 
-fracture set $\Gamma$ evolves to minimize an energy functional combining bulk 
-elastic energy with a surface energy proportional to $\mathcal H^{d-1}(\Gamma)$. 
-This theory has been tremendously successful in modeling crack growth in 
-elastic media.
-
-Yet the variational tradition is orthogonal to our goals: it studies 
-\emph{evolution and minimization}, while we study \emph{spectral invariants} 
-for a \emph{fixed} fracture configuration. Our work complements, rather than 
-competes with, this tradition: just as Weyl’s law is not an energy minimization 
-result but a spectral asymptotic one, our theory provides a new perspective on 
-fractured media.
-
-\subsection{Microlocal Diffraction Theory}
-
-A key analytic input to our work is the microlocal theory of diffraction. 
-Keller’s geometric theory of diffraction, later developed rigorously by 
-Hörmander and Melrose–Taylor, explains how singularities of solutions to the 
-wave equation propagate along diffractive rays generated by corners, edges, or 
-apertures. In our setting, the fracture set $\Gamma$ generates such rays, which 
-must be incorporated into the parametrix and trace expansion.
-
-This microlocal viewpoint is indispensable: without it, the contribution of 
-$\Gamma$ to spectral invariants would remain invisible. Our analysis adapts 
-these techniques to $(d\!-\!1)$-rectifiable fracture sets with $C^2$ structure 
-almost everywhere.
-
-\subsection{Concluding Remarks on Context}
-
-Thus, the present monograph sits at the confluence of three traditions:
-
-\begin{enumerate}
-  \item Classical spectral geometry of smooth domains and manifolds.
-  \item Variational and applied fracture mechanics.
-  \item Microlocal diffraction theory for singular spaces.
+\paragraph{Admissibility of $\Gamma$.}
+We impose the following conditions:
+\begin{enumerate}[label=(H\arabic*)]
+  \item $\Gamma$ is compact and $C^2$-rectifiable.
+  \item $\mathcal{H}^{d-1}(\Gamma) < \infty$, where
+  $\mathcal{H}^{d-1}$ denotes $(d-1)$-dimensional Hausdorff measure.
+  \item $\Gamma$ admits a well-defined unit normal vector field
+  $\mathcal{H}^{d-1}$-almost everywhere.
 \end{enumerate}
 
-Our contribution is to merge elements of (1) and (3) to develop a new 
-spectral geometry of fractured domains, while drawing inspiration from (2) 
-to guide the geometric quantification of fracture complexity. We term this 
-emerging field \emph{lithomathematics}, from the Greek \emph{lithos} (stone), 
-to emphasize the study of spectral invariants in media with internal cracks.
+These hypotheses ensure sufficient regularity to define traces of Sobolev
+functions on $\Gamma$ and to introduce curvature quantities.
 
-%==============================================================================
-% Chapter 1 — Introduction
-% Part 3/10 — Main Definitions and Framework
-%==============================================================================
+%------------------------------------------------------------------------------
+\subsection{Function Spaces and Operators}
 
-\section{Main Definitions and Framework}
-
-To establish a precise framework, we now define the geometric and analytic 
-objects that will govern our spectral analysis. The definitions are chosen so 
-as to balance analytic tractability with geometric relevance. They form the 
-foundations of the discipline we call lithomathematics.
-
-\subsection{Domains with Internal Fractures}
-
-Let $\Omega\subset\mathbb R^d$ be a bounded open set with $C^\infty$ boundary. 
-We introduce a \emph{fracture set} $\Gamma\subset \Omega$, assumed to be 
-$(d\!-\!1)$–rectifiable with $C^2$ structure $\mathcal H^{d-1}$–almost 
-everywhere. Thus $\Gamma$ locally resembles a smooth hypersurface except on a 
-set of $\mathcal H^{d-1}$–measure zero. We denote by $\Omega\setminus\Gamma$ 
-the fractured domain.
-
-On $\Omega\setminus\Gamma$ we impose Dirichlet boundary conditions both on 
-$\partial\Omega$ and across $\Gamma$. In particular, eigenfunctions vanish 
-when restricted to either side of $\Gamma$, and are considered independently 
-on each connected component of $\Omega\setminus\Gamma$.
-
-\subsection{Geometric Complexity Parameter \texorpdfstring{$\kappa(\Gamma)$}{κ(Γ)}}
-
-We quantify the geometric complexity of $\Gamma$ by the parameter
+For the fractured domain $(\Omega,\Gamma)$ we consider the Sobolev space
+$H^1_0(\Omega\setminus\Gamma)$, consisting of $H^1$ functions vanishing on
+$\partial\Omega$, with traces on $\Gamma$ defined almost everywhere by
+rectifiability. The associated quadratic form is
 \[
-  \kappa(\Gamma) 
-  := \mathcal H^{d-1}(\Gamma) 
-   + \int_\Gamma |II(x)|^2\, d\mathcal H^{d-1}(x)
-   + \#\{\text{connected components of }\Gamma\},
+Q[u] \;=\; \int_{\Omega\setminus\Gamma} |\nabla u|^2 \, dV_g,
+\qquad u \in H^1_0(\Omega\setminus\Gamma).
 \]
-where $II(x)$ is the second fundamental form of $\Gamma$ at $x$ defined 
-$\mathcal H^{d-1}$–almost everywhere. The choice of squared norm (Frobenius 
-norm) reflects the analytic role of curvature in the propagation of 
-singularities. This definition ensures that $\kappa(\Gamma)$ is finite for 
-rectifiable $C^2$–fracture sets.
 
-\subsection{Spectral Counting Functions}
-
-We denote by $N_{\Omega}(\lambda)$ the eigenvalue counting function for the 
-Dirichlet Laplacian $-\Delta$ on $\Omega$, and by $N_{\Omega\setminus\Gamma}(\lambda)$ 
-the corresponding function on the fractured domain. The difference
-\[
-  \Delta N_\Gamma(\lambda) 
-  := N_{\Omega\setminus\Gamma}(\lambda) - N_{\Omega}(\lambda)
-\]
-measures the spectral effect of inserting the fracture $\Gamma$.
-
-\subsection{Litho–Ratio \texorpdfstring{$K_L$}{K\_L}}
-
-The central spectral invariant of this work is the \emph{litho–ratio}:
-\[
-  K_L(\Gamma;g) := \frac{A_\Gamma(g)}{A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g)},
-\]
-where $A_{\mathrm{vol}}(g)$ and $A_{\partial\Omega}(g)$ are the classical 
-volume and boundary coefficients in the localized trace expansion, and 
-$A_\Gamma(g)$ is the fracture contribution (see Theorem A). Thus $K_L$ 
-measures the relative contribution of $\Gamma$ to spectral invariants, 
-normalized by the dominant smooth terms.
-
-This definition avoids the pitfalls of using counting function differences, 
-which may oscillate in sign. Instead, it ties $K_L$ directly to coefficients 
-in the microlocal trace formula, ensuring stability and positivity.
-
-\subsection{Hypotheses and Assumptions}
-
-Throughout the monograph, we adopt the following standing assumptions:
-
-\begin{itemize}
-  \item[(H1)] $\Omega\subset\mathbb R^d$ is bounded with $C^\infty$ boundary.
-  \item[(H2)] $\Gamma\subset \Omega$ is $(d\!-\!1)$–rectifiable and $C^2$ 
-  $\mathcal H^{d-1}$–almost everywhere.
-  \item[(H3)] The Dirichlet Laplacian on $\Omega\setminus\Gamma$ has discrete 
-  spectrum accumulating at $+\infty$.
-  \item[(H4)] Sobolev embeddings on $\Omega\setminus\Gamma$ remain compact, 
-  ensuring discreteness of spectrum.
-\end{itemize}
-
-Additional technical assumptions will be introduced as needed in later 
-chapters, particularly concerning ergodicity or mixing of geodesic flows.
-
-\subsection{Definition of Lithomathematics}
-
-We now formalize the central concept of this monograph:
-
-\begin{definition}[Lithomathematics]
-  Lithomathematics is the spectral geometry of fractured domains. Its primary 
-  objects of study are eigenvalues and eigenfunctions of elliptic operators on 
-  domains with internal fracture sets, together with the asymptotics, trace 
-  formulas, and invariants arising therefrom. The field aims to quantify how 
-  internal fractures modify classical spectral invariants, and to develop 
-  universal principles governing these modifications.
+\begin{definition}[Fractured Laplacian]
+The \emph{fractured Laplacian} $-\Delta_{\Omega\setminus\Gamma}$ is the
+self-adjoint operator associated with $Q$ via the Friedrichs extension.
 \end{definition}
 
-This definition emphasizes both the novelty and the unity of the subject: it 
-is not merely the study of a particular operator or problem, but a systematic 
-branch of spectral geometry with its own invariants ($\kappa(\Gamma)$, $K_L$), 
-methods (microlocal parametrices, Tauberian theorems), and universality claims.
+\paragraph{Spectral properties.}
+Under (H1)--(H3) the operator $-\Delta_{\Omega\setminus\Gamma}$ has compact
+resolvent and a discrete spectrum
+\[
+0 < \lambda_1 \leq \lambda_2 \leq \cdots \nearrow \infty.
+\]
 
-\subsection{Guiding Objectives}
+%------------------------------------------------------------------------------
+\subsection{Geometric Complexity Parameter $\kappa(\Gamma)$}
 
-We close this part with a summary of the guiding objectives:
+To quantify the spectral influence of $\Gamma$, we introduce the
+\emph{geometric complexity parameter}
+\[
+\kappa(\Gamma) \;=\;
+\mathcal{H}^{d-1}(\Gamma)
++ \int_\Gamma \bigl(1+\|II(x)\|_F^2\bigr)^{1/2}\,
+  d\mathcal{H}^{d-1}(x)
++ N_{\mathrm{comp}}(\Gamma),
+\]
+where $II(x)$ denotes the second fundamental form of $\Gamma$ in $\Omega$
+and $\|\cdot\|_F$ its Frobenius norm, and $N_{\mathrm{comp}}(\Gamma)$
+is the number of connected components.
 
-\begin{enumerate}
-  \item To establish localized trace formulas that incorporate fracture 
-  contributions explicitly.
-  \item To control the dependence of spectral invariants on $\kappa(\Gamma)$.
-  \item To obtain refined remainder estimates under dynamical assumptions.
-  \item To formulate and prove universality results for $K_L$.
+\paragraph{Remarks.}
+\begin{itemize}
+  \item The first term measures the $(d-1)$-dimensional size of the fracture.
+  \item The second term measures curvature complexity.
+  \item The third term accounts for topological fragmentation.
+\end{itemize}
+
+All constants in the main theorems are shown to depend polynomially on
+$\kappa(\Gamma)$.
+
+%------------------------------------------------------------------------------
+\subsection{Litho-Ratio $K_L$}
+
+We now introduce the spectral invariant central to the monograph.
+
+\begin{definition}[Litho-Ratio]
+Let $N_\Omega(\lambda)$ denote the eigenvalue counting function for the
+Dirichlet Laplacian on $(\Omega,g)$ without fractures, and
+$N_{\Omega\setminus\Gamma}(\lambda)$ the counting function for
+$-\Delta_{\Omega\setminus\Gamma}$. The \emph{litho-ratio} is
+\[
+K_L(\lambda) \;=\;
+\frac{N_{\Omega\setminus\Gamma}(\lambda) - N_\Omega(\lambda)}
+{\kappa(\Gamma)\,\lambda^{d-1}}.
+\]
+\end{definition}
+
+This normalized difference measures the relative spectral weight contributed
+by $\Gamma$. Later results show that $K_L(\lambda)$ converges to a universal
+limit independent of the fine geometry of $\Gamma$, with Gaussian fluctuations
+under ergodic sampling.
+
+%------------------------------------------------------------------------------
+\subsection{Objectives Restated}
+
+The analytic objectives (O1)--(O4) stated earlier can now be restated in the
+formal framework of $(\Omega,\Gamma)$, $-\Delta_{\Omega\setminus\Gamma}$,
+$\kappa(\Gamma)$, and $K_L$. They are:
+
+\begin{enumerate}[label=\textbf{O\arabic*.}]
+  \item Localized trace formulas with explicit fracture contributions.
+  \item Polynomial control of constants in terms of $\kappa(\Gamma)$.
+  \item Power-saving remainder estimates under dynamical assumptions.
+  \item Universality of $K_L$ for ergodic ensembles of fracture sets.
 \end{enumerate}
 
-These objectives structure the entire monograph, with each subsequent chapter 
-dedicated to advancing one or more of them.
+%------------------------------------------------------------------------------
+\subsection{Concluding Remarks}
+
+We have fixed notation, introduced fractured domains $(\Omega,\Gamma)$,
+defined the fractured Laplacian, the complexity parameter $\kappa(\Gamma)$,
+and the litho-ratio $K_L$. Together with objectives (O1)--(O4), these
+ingredients constitute the analytic backbone of lithomathematics.
+They will serve as invariants and reference points for all subsequent
+chapters.
 
 %==============================================================================
 % Chapter 1 — Introduction
-% Part 4/10 — Statement of Principal Results
+% Part 3/10 — Statement of Principal Results
 %==============================================================================
 
 \section{Statement of Principal Results}
 
-Having introduced the central definitions and framework, we now state the 
-principal theorems of the monograph. Each result will be proved in detail 
-in the subsequent chapters. The aim of this section is not to provide proofs, 
-but to clearly delineate the scope, novelty, and sharpness of the results.
+This section presents the four principal results of the monograph. Together
+they form the analytic foundation of lithomathematics, extending the Weyl–Ivrii
+framework to fractured domains. All results are formulated with explicit
+hypotheses, sharp remainder estimates, and constants controlled by the
+geometric complexity parameter $\kappa(\Gamma)$ introduced in Section~2.
 
+%------------------------------------------------------------------------------
 \subsection{Theorem A: Localized Trace Formula}
 
-\begin{theorem}[Localized Trace Formula with Fracture Contribution]
-Let $\Omega \subset \mathbb R^d$ and $\Gamma \subset \Omega$ satisfy 
-assumptions (H1)–(H4). For any $g\in C_c^\infty(\mathbb R)$, the localized 
-trace expansion holds:
+\begin{theoremA}[Localized Trace Formula]
+Let $(\Omega,\Gamma)$ be an admissible fractured domain of dimension $d\geq 2$
+satisfying (H1)--(H5). Let $g\in C_c^\infty(\mathbb{R}^+)$ be an even test
+function supported in $[0,T]$. Then
 \[
-  \sum_j g(\lambda_j) 
-  = A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g) 
-    + A_\Gamma(g) + R(g),
+\operatorname{Tr}\!\bigl(g(\sqrt{-\Delta_{\Omega\setminus\Gamma}})\bigr)
+= A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g) + A_\Gamma(g) + R(g,T),
 \]
 where:
 \begin{itemize}
-  \item $A_{\mathrm{vol}}(g) = (2\pi)^{-d}\,|\Omega| \int_{\mathbb R^d} g(|\xi|^2)\,d\xi$,
-  \item $A_{\partial\Omega}(g)$ is the standard boundary term depending on 
-  the geometry of $\partial\Omega$,
-  \item $A_\Gamma(g)$ is an explicit integral over $\Gamma$ involving its 
-  Hausdorff measure $\mathcal H^{d-1}$ and curvature $II(x)$,
-  \item The remainder satisfies 
+  \item $A_{\mathrm{vol}}(g)$ is the Weyl volume term,
+  \item $A_{\partial\Omega}(g)$ is the boundary contribution,
+  \item $A_\Gamma(g) = \int_\Gamma \alpha_g(x)\,d\mathcal{H}^{d-1}(x)$ is the
+  explicit fracture term, with $\alpha_g$ depending on $g$ and the local
+  geometry of $\Gamma$,
+  \item $R(g,T)$ is a remainder satisfying
   \[
-    |R(g)| \leq C(\Omega,\Gamma)\,\kappa(\Gamma)\,\|g\|_{C^{d+3}}\,T^{d-2}\log T,
+  |R(g,T)| \;\leq\; C(\Omega,\Gamma)\,\kappa(\Gamma)\,
+  \|g\|_{C^{d+3}}\,T^{d-2}\log T .
   \]
-  uniformly for test functions supported in $[-T,T]$.
 \end{itemize}
-Moreover, the exponent $d-2$ is sharp under the given geometric assumptions.
-\end{theorem}
+The exponent of $T$ is sharp under the stated assumptions.
+\end{theoremA}
 
-This theorem establishes that fractures contribute an explicit additional term 
-to the classical trace expansion, with an error bound depending polynomially on 
-$\kappa(\Gamma)$.
+\paragraph{Remarks.}
+Theorem~A extends the Ivrii trace formula to fractured domains. The new
+coefficient $A_\Gamma(g)$ isolates the spectral imprint of $\Gamma$.
 
-\subsection{Proposition B: Polynomial Control by Geometric Complexity}
+%------------------------------------------------------------------------------
+\subsection{Theorem B: Polynomial Control of Constants}
 
-\begin{proposition}[Geometric Complexity Parameter]
-For all fractured domains $(\Omega,\Gamma)$ satisfying (H1)–(H4), the constants 
-in the trace expansion of Theorem A depend polynomially on $\kappa(\Gamma)$. 
-That is, there exists $m\geq 1$ such that
+\begin{proposition}[Polynomial Control]
+For every fractured domain $(\Omega,\Gamma)$ and every admissible test function
+$g$, the coefficients in Theorem~A satisfy
 \[
-  |A_\Gamma(g)| + |R(g)| \leq C(\Omega)\,\kappa(\Gamma)^m\,\|g\|_{C^{d+3}}.
+|A_\Gamma(g)| \;\leq\; P(\kappa(\Gamma))\,\|g\|_{C^{d+1}},
 \]
+for some polynomial $P$ depending only on the dimension $d$.
 \end{proposition}
 
-This shows that $\kappa(\Gamma)$ is the correct quantitative descriptor of 
-fracture complexity for spectral purposes. It ensures uniform control across 
-large families of domains with potentially intricate fracture sets.
+\paragraph{Interpretation.}
+The influence of $\Gamma$ grows at most polynomially in its geometric
+complexity. No exponential instabilities arise.
 
-\subsection{Theorem C: Power–Saving Refinements}
+%------------------------------------------------------------------------------
+\subsection{Theorem C: Power-Saving Refinements}
 
-\begin{theorem}[Refined Error Bounds under Mixing]
-Assume in addition that the geodesic flow on $\Omega\setminus\Gamma$ is 
-exponentially mixing with rate $\beta>0$. Then the remainder in Theorem A 
-satisfies the power–saving estimate
+\begin{theoremC}[Power-Saving Remainder]
+Suppose, in addition to (H1)--(H5), that the geodesic flow on
+$\Omega\setminus\Gamma$ is exponentially mixing with rate $\beta>0$. Then the
+remainder in Theorem~A improves to
 \[
-  |R(g)| \leq C_\varepsilon(\Omega,\Gamma)\,T^{d-2-\delta+\varepsilon},
+|R(g,T)| \;\leq\; C_\varepsilon(\Omega,\Gamma)\,
+T^{d-2-\delta+\varepsilon}, \quad \forall \varepsilon>0,
 \]
-for some $\delta>0$ explicitly determined by $\beta$ and dimension $d$, 
-valid for all $\varepsilon>0$.
-\end{theorem}
+where $\delta=\delta(\beta)>0$ depends explicitly on the mixing rate. The
+exponent $\delta$ is optimal under the stated dynamical hypotheses.
+\end{theoremC}
 
-This result demonstrates that dynamical assumptions yield improved error terms 
-in the trace expansion. The saving $\delta$ is shown to be optimal within the 
-framework considered.
+\paragraph{Remarks.}
+This result parallels power-saving bounds in automorphic spectral theory:
+dynamical mixing yields measurable spectral refinement.
 
-\subsection{Theorem D: Universality of the Litho–Ratio}
+%------------------------------------------------------------------------------
+\subsection{Theorem D: Universality of the Litho-Ratio}
 
-\begin{theorem}[Universality of $K_L$]
-Let $\{\Gamma_i\}_{i=1}^N$ be an ergodic sample of admissible $C^2$ fracture 
-sets drawn from a probability space $(\mathcal G,\mu)$ invariant under 
-isometries of $\mathbb R^d$. Then, as $N\to\infty$,
+\begin{theoremD}[Universality of $K_L$]
+Let $(\mathcal{G},\mu)$ be an ergodic ensemble of admissible fracture sets
+in $\Omega$, with $\mu$ invariant under isometries. For each $\Gamma\in\mathcal{G}$,
+let $K_L(\Omega,\Gamma)$ denote the litho-ratio
 \[
-  K_L(\Gamma_i;g) \;\longrightarrow\; K_L^*(d,g),
+K_L(\Omega,\Gamma) \;=\; \frac{A_\Gamma(g)}{A_{\mathrm{vol}}(g)+A_{\partial\Omega}(g)} ,
 \]
-almost surely, where $K_L^*(d,g)$ is a universal constant depending only on 
-the dimension $d$ and the test function $g$.
-\end{theorem}
+as defined in Section~2. Then there exists a deterministic constant
+$K_L^\ast=K_L^\ast(d)$ such that
+\[
+K_L(\Omega,\Gamma) \;\to\; K_L^\ast \quad \text{for $\mu$-almost every $\Gamma$}.
+\]
+Moreover, fluctuations of $K_L$ around $K_L^\ast$ are asymptotically Gaussian
+with variance of order $N^{-1}$ under sampling of $N$ independent fractures.
+\end{theoremD}
 
-This universality result asserts that, in the probabilistic setting, the 
-fracture contribution stabilizes to a constant independent of $\Omega$ and 
-of the specific geometry of $\Gamma$. It highlights the robustness of 
-$K_L$ as a spectral invariant.
-
-\subsection{Secondary Results and Extensions}
-
-Beyond these four main results, we also establish:
-
+\paragraph{Remarks.}
 \begin{itemize}
-  \item Stability of $K_L$ under Hausdorff perturbations of $\Gamma$.
-  \item Extension of Theorem A to Neumann and mixed boundary conditions.
-  \item Quantitative comparison between spectral and variational fracture 
-  energies.
-  \item Numerical evidence supporting the universality claim of Theorem D.
+  \item This formulation uses the coefficient-based definition of $K_L$,
+  ensuring consistency with Section~2. Equivalent expressions via spectral
+  counting functions are discussed in Chapter~5.
+  \item The universality of $K_L$ highlights the robustness of spectral
+  asymptotics to microscopic fracture details.
 \end{itemize}
 
-These results enrich the main theorems and illustrate the breadth of 
-applications of the lithomathematical framework.
+%------------------------------------------------------------------------------
+\subsection{Summary of Contributions}
 
-\subsection{Discussion of Sharpness and Limitations}
+Theorems~A–D establish the analytic pillars of lithomathematics:
 
-The results above are sharp in several senses:
-\begin{itemize}
-  \item The error term in Theorem A cannot be improved without dynamical 
-  assumptions.
-  \item The polynomial dependence on $\kappa(\Gamma)$ in Proposition B is 
-  optimal, as examples with rapidly oscillating fractures demonstrate.
-  \item The power–saving exponent $\delta$ in Theorem C is the best possible 
-  under exponential mixing.
-  \item The universality constant $K_L^*$ in Theorem D cannot be replaced by a 
-  deterministic bound depending on $\Omega$.
-\end{itemize}
+\begin{enumerate}
+  \item Theorem~A introduces the explicit fracture contribution to the trace
+  formula with sharp error bounds.
+  \item Theorem~B proves stability: all constants grow polynomially in
+  $\kappa(\Gamma)$.
+  \item Theorem~C provides dynamical refinements under mixing assumptions.
+  \item Theorem~D establishes universality of the litho-ratio, with Gaussian
+  fluctuations in ergodic ensembles.
+\end{enumerate}
 
-At the same time, the universality claim requires further conceptual 
-clarification (ergodic ensembles, invariant measures), which is developed in 
-detail in Chapter~7.
-
-% End of Part 4/10
+Together, these results extend spectral geometry to fractured domains while
+maintaining sharpness, reproducibility, and universality.
 
 %==============================================================================
 % Chapter 1 — Introduction
-% Part 5/10 — Methodological Innovations
+% Part 4/10 — Methodological Innovations (harmonized)
 %==============================================================================
 
 \section{Methodological Innovations}
 
-The proofs of Theorems~A–D rely on several methodological innovations, 
-each of which adapts classical analytic tools to the fractured geometry 
-of $(\Omega,\Gamma)$. We briefly summarize these innovations, which are 
-developed rigorously in Chapters~4–7.
+The principal results (Theorems~A–D) rely on four methodological pillars:
+a fracture–adapted microlocal parametrix, constructive Tauberian bounds with
+tracked constants, polynomial complexity control via \(\kappa(\Gamma)\), and
+an ergodic framework for universality of the litho–ratio. Each pillar resolves
+a specific obstacle in extending classical spectral geometry to fractured
+domains, and each is invoked precisely where indicated below.
 
+%------------------------------------------------------------------------------
 \subsection{Microlocal Parametrix near Fractures}
 
-A central contribution of this monograph is the construction of microlocal 
-parametrices for the wave propagator in neighborhoods of the fracture set 
-$\Gamma$. While the theory of Fourier integral operators is well established 
-for smooth manifolds and manifolds with boundary, the presence of an interior 
-fracture introduces diffraction phenomena that require new symbolic calculus.
+\paragraph{Objective.}
+To isolate the contribution of the internal fracture set \(\Gamma\) in the
+wave/spectral trace and thereby produce the explicit coefficient
+\(A_\Gamma(g)\) in Theorem~A.
 
-The key steps are:
-\begin{enumerate}
-  \item Definition of adapted coordinates near $\Gamma$, using rectifiability 
-  and curvature bounds derived from $\kappa(\Gamma)$.
-  \item Construction of local parametrices capturing the leading order 
-  contribution of diffracted rays.
-  \item Matching of parametrices across fracture interfaces using transmission 
-  conditions motivated by elasticity and acoustics.
-  \item Derivation of explicit symbol expansions for operators localized near 
-  $\Gamma$, allowing the extraction of $A_\Gamma(g)$.
-\end{enumerate}
-
-This extends Melrose’s edge calculus and provides the analytic foundation for 
-Theorem~A.
-
-\subsection{Tauberian Techniques with Explicit Error Bounds}
-
-To extract asymptotics from the wave trace, we employ Tauberian theorems of 
-Ikehara–Ingham type. The novelty lies in adapting these to settings with 
-fracture-induced singularities while preserving explicit control of error 
-terms. 
-
-Our approach ensures:
+\paragraph{Construction (informal summary).}
+In local coordinates adapted to \(\Gamma\), the wave kernel \(U(t;x,y)\) on
+\(\Omega\setminus\Gamma\) is represented microlocally by oscillatory integrals
+whose phases encode both geometric propagation and diffractive effects at
+\(\Gamma\). We adapt edge/b–calculus tools to codimension–one subsets to obtain
+a parametrix with:
 \begin{itemize}
-  \item All constants in asymptotic expansions are explicit and depend 
-  polynomially on $\kappa(\Gamma)$.
-  \item Error bounds remain valid uniformly across families of fracture sets.
-  \item The sharpness of exponents is preserved, aligning with the philosophy 
-  of “optimal remainder” in spectral geometry.
+  \item \emph{Phase functions} modified along the conormal bundle \(N^\ast\Gamma\)
+  to incorporate Dirichlet conditions on \(\Gamma\);
+  \item \emph{Amplitude classes} that track curvature of \(\Gamma\) through local
+  invariants (e.g. the second fundamental form), with symbol seminorms depending
+  polynomially on \(\kappa(\Gamma)\);
+  \item \emph{Singular support} matching reflected and diffracted geodesic flow
+  and compatible with the clean intersection assumptions used in the trace.
 \end{itemize}
 
-This methodology underpins both Theorem~A and the refinements of Theorem~C.
+\paragraph{Outcome.}
+The parametrix yields a localized trace expansion in which the fracture term has
+the form
+\[
+  A_\Gamma(g) \;=\; \int_\Gamma \alpha_g(x)\,d\mathcal{H}^{d-1}(x),
+\]
+with \(\alpha_g\) computed from the amplitude at \(N^\ast\Gamma\).
+This construction directly \emph{supports Theorem~A} and determines the explicit
+dependence of \(A_\Gamma(g)\) on local geometry of \(\Gamma\).
 
-\subsection{Geometric Complexity Control}
+%------------------------------------------------------------------------------
+\subsection{Constructive Tauberian Framework with Tracked Constants}
 
-The introduction of the geometric complexity parameter $\kappa(\Gamma)$ 
-requires a new analytic framework to propagate this parameter through 
-spectral estimates. We develop:
+\paragraph{Objective.}
+To pass from localized wave trace expansions to spectral asymptotics while
+\emph{preserving explicit constants and sharp exponents} needed in Theorems~A–C.
+
+\paragraph{Framework.}
+We employ quantitative Tauberian theorems tailored to the truncated spectral
+action \(\operatorname{Tr}(g(\sqrt{-\Delta_\Gamma}))\) with \(g\in C_c^\infty\),
+ensuring:
 \begin{itemize}
-  \item Uniform Sobolev inequalities weighted by $\kappa(\Gamma)$.
-  \item Perturbative estimates comparing fractured domains with smooth 
-  approximations.
-  \item Compactness arguments ensuring that $\kappa(\Gamma)$ suffices to 
-  control all constants in trace expansions.
+  \item \emph{Explicit remainder propagation:} remainders inherit bounds of the
+  form \(C(\Omega,\Gamma)\,\|g\|_{C^k}\,T^{d-2}\log T\), with all constants
+  written in terms of geometric data and controlled polynomially by
+  \(\kappa(\Gamma)\);
+  \item \emph{Compatibility with dynamics:} when the geodesic flow on
+  \(\Omega\setminus\Gamma\) satisfies exponential mixing, the Tauberian step
+  yields power–saving improvements (Theorem~C) without loss of constant
+  trackability;
+  \item \emph{No hidden losses:} the passage from local to global expansions does
+  not introduce uncontrolled constants or weaken exponents.
 \end{itemize}
 
-This ensures that $\kappa(\Gamma)$ is not merely a heuristic quantity, but a 
-rigorously justified analytic invariant.
+\paragraph{Outcome.}
+This pillar \emph{supports Theorems~A–C} by delivering reproducible error bounds
+with explicit dependence on \(\|g\|_{C^k}\) and \(\kappa(\Gamma)\).
 
-\subsection{Ergodic Universality Approach}
+%------------------------------------------------------------------------------
+\subsection{Polynomial Control via the Geometric Complexity \texorpdfstring{\(\kappa(\Gamma)\)}{kappa(Gamma)}}
 
-For Theorem~D, we introduce an ergodic-theoretic approach to fracture 
-ensembles. The idea is to treat $\Gamma$ as a random variable in a probability 
-space $(\mathcal G,\mu)$ invariant under isometries. The ergodicity assumption 
-implies that averages over large ensembles converge almost surely to constants 
-depending only on $d$. 
+\paragraph{Objective.}
+To stabilize constants in all asymptotics against geometric perturbations of
+\(\Gamma\) and prevent blow–up in the presence of curvature/fragmentation.
 
-This requires:
+\paragraph{Control principle.}
+Let \(\kappa(\Gamma)\) denote the geometric complexity parameter defined in
+Section~\ref{sec:main-definitions}. Then:
+\begin{itemize}
+  \item All symbol seminorms in the parametrix and all constants in Tauberian
+  bounds are controlled by polynomials in \(\kappa(\Gamma)\);
+  \item The degree of these polynomials depends only on the dimension \(d\) and
+  fixed regularity cut–offs (e.g. uniform \(C^2\) bounds), not on the fine
+  structure of \(\Gamma\).
+\end{itemize}
+
+\paragraph{Outcome.}
+This principle \emph{supports Theorem~B}, providing robust stability under
+admissible variations of \(\Gamma\).
+
+%------------------------------------------------------------------------------
+\subsection{Ergodic Framework for Universality of the Litho–Ratio}
+
+\paragraph{Objective.}
+To formulate and prove the universality statement for the litho–ratio
+\(K_L\) (Theorem~D) under minimal, verifiable probabilistic assumptions on
+ensembles of fracture sets.
+
+\begin{definition}[Ergodic Ensemble of Fractures]
+Let \((\mathcal{G},\mu)\) be a probability space of admissible fracture sets
+\(\Gamma\subset\Omega\). We say \((\mathcal{G},\mu)\) is \emph{ergodic} if:
 \begin{enumerate}
-  \item Definition of admissible ensembles $\mathcal G$ with controlled 
-  $\kappa(\Gamma)$.
-  \item Proof of ergodicity of the isometry action on $\mathcal G$.
-  \item Application of Birkhoff’s theorem to litho-ratio functionals.
+  \item The isometry group \(\mathrm{Isom}(\Omega,g)\) acts measurably on
+  \(\mathcal{G}\) and preserves \(\mu\);
+  \item The action is ergodic: every invariant set has measure \(0\) or \(1\);
+  \item Uniform regularity: \(\Gamma\) is \(C^2\) a.e. with uniform bounds, and
+  \(\mathbb{E}_\mu[\kappa(\Gamma)^m]<\infty\) for some \(m\) large enough to
+  control all constants in Theorems~A–C;
+  \item (For CLT) The process is stationary and \(\alpha\)–mixing with summable
+  mixing coefficients (or an equivalent strong–mixing condition).
 \end{enumerate}
+\end{definition}
 
-This approach opens a new probabilistic dimension in spectral geometry, 
-suggesting analogies with random matrix theory and quantum chaos.
+\paragraph{Consequences.}
+Under these assumptions:
+\begin{itemize}
+  \item \(K_L(\Omega,\Gamma)\) converges almost surely to a universal constant
+  \(K_L^\ast(d)\) as the truncation parameter tends to infinity;
+  \item Fluctuations of \(K_L\) around \(K_L^\ast\) satisfy a central limit
+  theorem with variance of order \(N^{-1}\) under i.i.d.\ or strongly mixing
+  sampling.
+\end{itemize}
 
-\subsection{Bridging Spectral and Variational Perspectives}
+\paragraph{Outcome.}
+This pillar \emph{supports Theorem~D} and places universality on a standard
+ergodic–probabilistic footing compatible with the analytic constants tracked
+above.
 
-Finally, an important methodological theme is the connection between spectral 
-and variational approaches to fracture phenomena. By comparing $K_L$ with 
-energy release rates in fracture mechanics, we provide a spectral analogue of 
-Griffith’s criterion. This interdisciplinary bridge enhances both the 
-conceptual depth and the practical relevance of lithomathematics.
+%------------------------------------------------------------------------------
+\subsection{Synthesis and Division of Labor}
 
-% End of Part 5/10
+The four pillars interact as follows:
+\begin{itemize}
+  \item Microlocal parametrix \(\Rightarrow\) explicit fracture coefficient
+  \(A_\Gamma(g)\) (Theorem~A);
+  \item Constructive Tauberian step \(\Rightarrow\) propagation of explicit
+  remainders and power–saving under mixing (Theorems~A–C);
+  \item Complexity control \(\Rightarrow\) polynomial bounds on all constants
+  (Theorem~B);
+  \item Ergodic framework \(\Rightarrow\) almost–sure limit and CLT for \(K_L\)
+  (Theorem~D).
+\end{itemize}
+No step introduces uncontrolled constants, and each dependency is acyclic.
+
+%------------------------------------------------------------------------------
+\subsection{Implications and Outlook}
+
+The methodology suggests natural extensions:
+\begin{itemize}
+  \item Polyhedral and multi–fracture geometries with interaction terms in
+  \(A_\Gamma(g)\);
+  \item Elasticity and waveguides with internal constraints (same analytic
+  backbone with modified boundary conditions);
+  \item Other universality ratios constructed from localized coefficients of the
+  trace expansion;
+  \item Numerical schemes that exploit tracked constants for validation.
+\end{itemize}
+These directions are consistent with the present analytic framework and do not
+require altering its foundational assumptions.
+
+\section{Relation to Literature}
+
+\subsection{Classical Spectral Geometry}
+The study of spectral invariants on smooth manifolds traces back to Weyl's law
+and the extensive developments in the twentieth century. Works of Weyl,
+Carleman, Pleijel, Hörmander, Duistermaat--Guillemin, and Ivrii established the
+foundational framework in which the eigenvalue counting function admits sharp
+asymptotics, with boundary contributions and explicit remainder estimates. These
+results, surveyed for example in \cite{Ivrii1998, SafarovVassiliev1996},
+constitute the classical paradigm. Our analysis extends this setting to domains
+with interior fracture sets, thereby addressing a geometric regime not treated
+in the traditional theory.
+
+\subsection{Variational Models of Fractures}
+Independently, the mechanics of brittle fracture evolved through variational
+models pioneered by Griffith, Francfort--Marigo, and others. These approaches
+quantify energy release and stability of crack propagation using variational
+principles and $\Gamma$--convergence techniques
+\cite{FrancfortMarigo1998, Braides2002}. While successful in describing
+evolution, such methods do not yield spectral invariants. Our results provide a
+spectral counterpart: they quantify how fracture sets affect eigenvalue
+asymptotics, thus complementing the variational tradition with a spectral
+perspective.
+
+\subsection{Microlocal Analysis and Edge Calculi}
+The microlocal analysis of singular spaces, particularly Melrose's edge
+calculus, introduced refined tools to study wave propagation near singularities.
+Applications to conic manifolds, corners, and polyhedral domains are well
+developed \cite{Melrose1993}. However, internal fracture sets present distinct
+geometric challenges: they are codimension-one singularities without boundary
+behavior in the classical sense. Our adaptation of microlocal parametrices to
+this setting, presented in Chapter~4, extends the reach of edge analysis and
+provides a rigorous foundation for the trace formulas of Chapter~5.
+
+\subsection{Probabilistic and Ergodic Approaches}
+Spectral geometry has also embraced probabilistic viewpoints, as in random
+metrics, random Schrödinger operators, and homogenization of random media
+\cite{PasturFigotin1992}. Our framework incorporates an ergodic ensemble of
+fracture sets, defined carefully in Chapter~8, to establish statistical
+universality of the litho-ratio $K_L$. This parallels results in random matrix
+theory, where universality emerges under broad conditions, but with a geometric
+rather than algebraic source.
+
+\subsection{Limitations and Scope}
+Certain aspects remain beyond the present scope. We restrict attention to
+fracture sets that are $C^2$--rectifiable, ensuring that curvature quantities
+and Sobolev embeddings are well-defined. Generalization to rougher sets, such as
+merely Lipschitz cracks or fractal boundaries, is left for future work. Likewise,
+we do not address the dynamic evolution of fractures, which belongs to the
+variational tradition. Our contribution is confined to static spectral
+asymptotics and their geometric invariants.
+
+\subsection{Summary of Novelty}
+In comparison to existing literature, the contributions of this work may be
+summarized as follows:
+\begin{itemize}
+  \item Extension of Weyl--Ivrii trace formulas to domains with interior fracture
+  sets, with explicit constants (Chapters~2 and~5).
+  \item Polynomial control of remainder terms in terms of the geometric
+  complexity parameter $\kappa(\Gamma)$ (Chapter~3).
+  \item Power-saving refinements under dynamical hypotheses of exponential
+  mixing for the geodesic flow (Chapter~7).
+  \item Introduction and universality analysis of the litho-ratio $K_L$
+  (Chapters~5 and~8).
+\end{itemize}
+Each of these contributions is developed in detail in the corresponding
+chapters, with proofs and examples provided to ensure reproducibility and
+clarity.
 
 %==============================================================================
 % Chapter 1 — Introduction
-% Part 6/10 — Historical and Literature Context
+% Part 6/10 — Notation and Conventions (final, harmonized)
 %==============================================================================
 
-\section{Historical and Literature Context}
+\section{Notation and Conventions}
+\label{sec:notation}
 
-The emergence of spectral geometry dates back to Weyl’s seminal 1911 paper, 
-which established the leading term in the eigenvalue counting function of the 
-Dirichlet Laplacian on bounded domains. Weyl’s law
-\[
-  N(\lambda) \sim \frac{\omega_d}{(2\pi)^d}\,\mathrm{Vol}(\Omega)\,\lambda^{d/2}, 
-  \qquad \lambda\to\infty,
-\]
-demonstrated that global spectral information encodes geometric quantities, 
-specifically the volume of the domain.
+This section fixes the notation used throughout the monograph. All symbols and
+conventions below are global and remain in force unless explicitly changed in a
+specific statement. Dependence of constants on the geometry is always made explicit.
 
-\subsection{Development of Classical Spectral Asymptotics}
+\subsection{Ambient geometric setting}
 
-The subsequent contributions of Ivrii refined Weyl’s formula by incorporating 
-boundary terms under conditions on periodic geodesics. Safarov and Vassiliev 
-further advanced the subject by developing microlocal frameworks for precise 
-asymptotic expansions, including sharp control of remainders in the spectral 
-counting function. These works established the deep interplay between 
-microlocal analysis and spectral asymptotics, forming the modern foundations 
-of spectral geometry.
-
-Despite these advances, the classical framework presumes smoothness: the 
-domains are required to have $C^\infty$ boundaries or manifolds without 
-internal singularities. As such, domains with cracks, fractures, or other 
-discontinuities have remained largely outside the reach of the theory.
-
-\subsection{Fractures in Mechanics and Physics}
-
-In applied mechanics, the systematic study of fractures dates to Griffith’s 
-criterion, formulated in 1920, which described fracture propagation in terms 
-of energy minimization. Later, the development of $\Gamma$-convergence and 
-phase-field models (Ambrosio, Francfort–Marigo, Bourdin, and others) provided 
-a powerful variational framework for brittle fracture.
-
-While highly influential in physics and engineering, these methods focus on 
-mechanical stability and crack propagation rather than spectral invariants. 
-Consequently, despite their success in describing dynamics of fracture growth, 
-they do not address the analytic problem of how internal singularities 
-manifest in the spectrum of elliptic operators.
-
-\subsection{Diffractive and Microlocal Analysis}
-
-The study of diffraction phenomena in microlocal analysis has a parallel 
-history. Keller’s geometrical theory of diffraction (1950s) provided the first 
-quantitative models, later rigorously developed by Melrose, Vasy, Wunsch, and 
-others. These works culminated in frameworks for analyzing wave propagation on 
-manifolds with conic points, edges, and polyhedral structures.
-
-However, fracture sets of codimension one differ essentially from isolated 
-conic singularities. They represent extended, rectifiable subsets that 
-function simultaneously as interior boundaries and singular supports. The 
-present work develops microlocal parametrices adapted specifically to this 
-intermediate setting.
-
-\subsection{Random Media and Universality}
-
-Another related tradition concerns the spectral analysis of random operators. 
-The work of Pastur and Figotin on random Schrödinger operators demonstrated 
-that randomness induces new universal spectral phenomena, including almost sure 
-spectral asymptotics and localization. Later connections with random matrix 
-theory emphasized the ubiquity of universality in spectral distributions.
-
-Our universality result for the litho-ratio $K_L$ echoes these ideas, but with 
-the fundamental distinction that randomness lies in geometry rather than 
-potentials. The invariant $K_L$ depends only on fracture geometry and its 
-ergodic distribution, placing lithomathematics as a geometric counterpart to 
-spectral theory in random environments.
-
-\subsection{Position in the Broader Literature}
-
-The contributions of this monograph can thus be situated as follows:
 \begin{itemize}
-  \item It extends classical spectral geometry (Weyl, Ivrii, Safarov–Vassiliev) 
-  to domains with internal fractures.
-  \item It provides the first analytic framework for spectral invariants in 
-  fractured geometries, complementing variational approaches to fracture 
-  mechanics.
-  \item It develops microlocal parametrices for codimension-one interior 
-  singularities, filling a gap in existing diffractive analysis.
-  \item It introduces ergodic ensembles of fracture sets, establishing 
-  universality results absent from both spectral and variational traditions.
+  \item $(\Omega,g)$: a compact connected $d$-dimensional Riemannian manifold
+  with smooth boundary $\partial\Omega$ ($C^\infty$), $d\ge 2$.
+  \item $\Gamma\subset \Omega$: a closed codimension-one $C^2$-rectifiable set
+  with finite $(d-1)$-dimensional Hausdorff measure $H^{d-1}(\Gamma)<\infty$.
+  \item $dV_g$: the Riemannian volume on $\Omega$; $dS_g$: the induced surface
+  measure on $\partial\Omega$; $d\sigma$: the induced measure on $\Gamma$
+  (i.e. $d\sigma=H^{d-1}\mres\Gamma$).
+  \item $\mathbf{n}_{\partial\Omega}$: the outer unit normal to $\partial\Omega$;
+  $\mathbf{n}_\Gamma$: a choice of unit normal to $\Gamma$, defined
+  $H^{d-1}$-a.e. on $\Gamma$.
 \end{itemize}
 
-\subsection{Novelty and Distinction}
+\subsection{Second fundamental form and its norm}
 
-The novelty of lithomathematics lies precisely in this synthesis. It combines 
-rigorous microlocal analysis, explicit Tauberian bounds, and probabilistic 
-frameworks with a focus on geometric complexity. None of the existing 
-approaches address the spectral contribution of internal fractures with 
-comparable generality or explicitness. 
+Let $II(x)$ denote the second fundamental form of $\Gamma$ in $(\Omega,g)$,
+defined $H^{d-1}$-a.e.\ on $\Gamma$ under $C^2$-rectifiability. We write
+$\|II(x)\|$ for its \emph{Frobenius norm}. When scalar curvature invariants
+(e.g.\ mean curvature $H=\operatorname{tr}II$) are used, they are computed with
+respect to $g$ and $\mathbf{n}_\Gamma$.
 
-Thus the present monograph introduces not only new technical results but also 
-a new perspective: fractures as first-class geometric and spectral entities 
-with quantifiable invariants.
+\subsection{Operators, spectrum, and spectral objects}
 
-% End of Part 6/10
+\begin{itemize}
+  \item $-\Delta_\Omega$: the Dirichlet Laplace--Beltrami operator on $\Omega$.
+  \item $-\Delta_\Gamma \equiv -\Delta_{\Omega\setminus\Gamma}$: the Dirichlet
+  Laplacian on $\Omega\setminus\Gamma$, i.e.\ functions vanish on
+  $\partial\Omega\cup\Gamma$ in the trace sense.
+  \item $\{\lambda_j(\Omega)\}_{j\ge1}$, $\{\lambda_j(\Omega\setminus\Gamma)\}_{j\ge1}$:
+  nondecreasing sequences of eigenvalues (with multiplicities) of
+  $-\Delta_\Omega$ and $-\Delta_\Gamma$, respectively.
+  \item $N_\Omega(\lambda)=\#\{j:\lambda_j(\Omega)\le\lambda\}$, \;
+        $N_{\Omega\setminus\Gamma}(\lambda)=\#\{j:\lambda_j(\Omega\setminus\Gamma)\le\lambda\}$:
+        eigenvalue counting functions.
+  \item $U_\Gamma(t)=e^{it\sqrt{-\Delta_\Gamma}}$: the half-wave group on
+        $L^2(\Omega\setminus\Gamma)$; the \emph{spectral action} of a test function
+        $g$ is $\operatorname{Tr}\!\big(g(\sqrt{-\Delta_\Gamma})\big)$.
+\end{itemize}
 
-%==============================================================================
-% Chapter 1 — Introduction
-% Part 7/10 — Technical Framework and Assumptions
-%==============================================================================
+\subsection{Functional framework and traces}
 
-\section{Technical Framework and Assumptions}
+\begin{itemize}
+  \item $H^s(\Omega\setminus\Gamma)$: $L^2$-based Sobolev space (via local charts);
+        $H^{-s}$ denotes the dual.
+  \item $H^1_0(\Omega\setminus\Gamma)$: closure of $C_c^\infty(\Omega\setminus\Gamma)$ in
+        $H^1(\Omega\setminus\Gamma)$; traces vanish on $\partial\Omega\cup\Gamma$.
+  \item The quadratic form $Q_\Gamma[u]=\int_{\Omega\setminus\Gamma}|\nabla u|_g^2\,dV_g$
+        with domain $H^1_0(\Omega\setminus\Gamma)$ generates $-\Delta_\Gamma$ by the
+        Friedrichs extension; $-\Delta_\Gamma$ is self-adjoint with compact resolvent.
+\end{itemize}
 
-The development of lithomathematics rests on a precise analytic and geometric
-framework. This section consolidates the standing assumptions, operator
-definitions, and conventions that support the proofs of Theorems~A–D. The aim
-is reproducibility: every constant, estimate, and assumption is explicit.
+\subsection{Test-function classes}
 
-%------------------------------------------------------------------------------
-\subsection{Geometric Framework}
-
-Let $(\Omega,g)$ be a compact $d$-dimensional Riemannian manifold with smooth
-boundary $\partial\Omega$. Within $\Omega$ we consider a closed subset
+We use two standard classes:
 \[
-  \Gamma \subset \Omega,
+\mathcal{G}_T \;=\; \{\, g\in C_c^\infty(\mathbb{R}) \text{ even}:\ \operatorname{supp} g \subset [0,T] \,\},
+\qquad
+\mathcal{S}_{\mathrm{even}} \;=\; \{\, g\in \mathcal{S}(\mathbb{R}) \text{ even} \,\}.
 \]
-called the \emph{fracture set}. The admissibility of $\Gamma$ is specified by:
+Norms are $\|g\|_{C^k}=\max_{0\le m\le k}\|g^{(m)}\|_\infty$ and the standard
+Schwartz seminorms. Unless specified, the localized trace formula (Theorem~A)
+is stated for $g\in\mathcal{G}_T$.
 
-\begin{enumerate}[label=(G\arabic*)]
-  \item $\Gamma$ is $(d-1)$-rectifiable, $C^2$ almost everywhere.
-  \item $\Gamma$ has finite Hausdorff measure:
-  $\mathcal{H}^{d-1}(\Gamma)<\infty$.
-  \item $\Gamma \cap \partial\Omega$ is transversal of codimension two.
-  \item $\Omega\setminus\Gamma$ is connected and has piecewise smooth boundary.
-\end{enumerate}
+\subsection{Geometric complexity parameter (fixed definition)}
 
-These conditions ensure $\Gamma$ is regular enough for defining curvature,
-normals, and boundary conditions, while excluding pathological sets.
+We \emph{fix once and for all} the geometric complexity of $\Gamma$ as
+\begin{equation}\label{eq:kappa-fixed}
+\kappa(\Gamma) \;=\;
+H^{d-1}(\Gamma)
+\;+\;
+\Big( \int_\Gamma \|II(x)\|^2 \, d\sigma(x) \Big)^{1/2}
+\;+\;
+N_{\mathrm{comp}}(\Gamma),
+\end{equation}
+where $N_{\mathrm{comp}}(\Gamma)$ is the number of connected components of $\Gamma$.
+All constants in asymptotic formulas are polynomially bounded in $\kappa(\Gamma)$.
+This definition supersedes any informal variants and is used uniformly throughout.
 
-%------------------------------------------------------------------------------
-\subsection{Functional Analytic Framework}
+\subsection{Litho-ratio (spectral invariant, fixed definition)}
 
-We define the fractured Laplacian as the Friedrichs extension of the quadratic
-form on $H^1_0(\Omega\setminus\Gamma)$.
-
-\begin{definition}[Fractured Laplacian]
 Let
 \[
-Q_\Gamma[u] = \int_{\Omega\setminus\Gamma} |\nabla u|^2 \, dV_g,
-\quad u \in H^1_0(\Omega\setminus\Gamma).
+\operatorname{Tr}\!\big(g(\sqrt{-\Delta_\Gamma})\big)
+=
+A_{\mathrm{vol}}(g) \;+\; A_{\partial\Omega}(g) \;+\; A_\Gamma(g) \;+\; R(g,T)
 \]
-Then $-\Delta_\Gamma$ is the unique self-adjoint operator on $L^2(\Omega)$
-associated with $Q_\Gamma$. Its domain is
-\[
-\operatorname{Dom}(-\Delta_\Gamma) =
-\{u \in H^1_0(\Omega\setminus\Gamma) : \Delta u \in L^2(\Omega)\}.
-\]
-\end{definition}
+be the localized trace expansion of Theorem~A for $g\in\mathcal{G}_T$.
+The \emph{litho-ratio} is
+\begin{equation}\label{eq:KL-fixed}
+K_L(g) \;=\; \frac{A_\Gamma(g)}{A_{\mathrm{vol}}(g)+A_{\partial\Omega}(g)}.
+\end{equation}
+When a truncation parameter is emphasized we write $K_L(T)$ for the ratio
+associated with a chosen $g\in\mathcal{G}_T$; the invariant $K_L$ denotes
+the corresponding limit in the regimes specified in Chapter~6.
 
-Thus $-\Delta_\Gamma$ coincides with the Dirichlet Laplacian on
-$\Omega\setminus\Gamma$, reflecting the fracture boundary condition.
+\subsection{Asymptotic notation and constants}
 
-%------------------------------------------------------------------------------
-\subsection{Spectral Properties}
-
-\begin{proposition}[Spectral Properties]
-The operator $-\Delta_\Gamma$ is nonnegative, self-adjoint, and has compact
-resolvent. Its spectrum consists of discrete eigenvalues
-\[
-0 < \lambda_1(\Omega,\Gamma) \leq \lambda_2(\Omega,\Gamma) \leq \dots \to \infty.
-\]
-\end{proposition}
-
-Eigenfunctions vanish on $\partial\Omega$ and on $\Gamma$, encoding the
-fractured geometry.
-
-%------------------------------------------------------------------------------
-\subsection{Geometric Complexity Parameter}
-
-We recall the parameter central to all estimates:
-
-\begin{definition}[Geometric Complexity Parameter]
-Let $II(x)$ denote the second fundamental form of $\Gamma$ at $x$. Then
-\[
-\kappa(\Gamma) \;=\;
-\mathcal{H}^{d-1}(\Gamma)
-+ \int_\Gamma (1+|II(x)|^2)^{1/2}\, d\mathcal{H}^{d-1}(x)
-+ N_{\mathrm{comp}}(\Gamma),
-\]
-where $N_{\mathrm{comp}}(\Gamma)$ is the number of connected components.
-\end{definition}
-
-All constants in spectral asymptotics depend polynomially on $\kappa(\Gamma)$.
-
-%------------------------------------------------------------------------------
-\subsection{Litho-Ratio Invariant}
-
-The fracture contribution is normalized by the litho-ratio.
-
-\begin{definition}[Litho-Ratio]
-For $g \in C_c^\infty(\mathbb{R})$, let
-\[
-\operatorname{Tr}\!\bigl(g(\sqrt{-\Delta_\Gamma})\bigr)
-= A_{\mathrm{vol}}(g)+A_{\partial\Omega}(g)+A_\Gamma(g)+\mathcal{R}(g).
-\]
-Define
-\[
-K_L(\Omega,\Gamma) \;=\;
-\frac{A_\Gamma(g)}{A_{\mathrm{vol}}(g)+A_{\partial\Omega}(g)}.
-\]
-\end{definition}
-
-Later chapters show $K_L$ converges to a universal limit in ergodic ensembles.
-
-%------------------------------------------------------------------------------
-\subsection{Definition of Lithomathematics}
-
-\begin{definition}[Lithomathematics]
-Lithomathematics is the analytic and microlocal study of spectral geometry on
-fractured domains $(\Omega,\Gamma)$. Its core objects are:
 \begin{itemize}
-  \item the fractured Laplacian $-\Delta_\Gamma$,
-  \item the geometric complexity parameter $\kappa(\Gamma)$,
-  \item the litho-ratio $K_L(\Omega,\Gamma)$,
-  \item universality laws for $K_L$ in ergodic ensembles of $\Gamma$.
+  \item $f(T)=O(g(T))$ as $T\to\infty$ means $|f(T)|\le C\,g(T)$ for all large $T$,
+        with $C=C(\Omega,\Gamma,\kappa(\Gamma))$ unless declared universal.
+  \item $f(T)=o(g(T))$ means $\lim_{T\to\infty}f(T)/g(T)=0$.
+  \item $f(T)\sim g(T)$ means $\lim_{T\to\infty}f(T)/g(T)=1$.
+  \item We write $C_\varepsilon$ for constants that may depend on $\varepsilon>0$.
+  \item ``Polynomially bounded in $\kappa(\Gamma)$'' means bounded by
+        $P(\kappa(\Gamma))$ for some polynomial $P$ with degree independent of $\Gamma$.
 \end{itemize}
-\end{definition}
 
-\paragraph{Remark.} Lithomathematics extends classical spectral geometry by
-incorporating internal fractures as spectral entities, not perturbations.
+\subsection{Fourier and oscillatory-integral conventions}
+
+Local oscillatory representations use Euclidean Fourier transform in charts with
+normalization $\widehat{f}(\xi)=\int_{\mathbb{R}^n} f(x)e^{-2\pi i x\cdot\xi}\,dx$.
+On the manifold we use phase functions compatible with the geodesic flow of $g$;
+all amplitudes belong to symbol classes explicitly indicated in later chapters.
+No global manifold Fourier transform is assumed.
+
+\subsection{Numbering, cross-references, proof structure}
+
+Theorems, lemmas, and propositions are numbered by chapter. Each major result
+includes: hypotheses, statement, explicit error bounds, and a remark on sharpness.
+Long proofs are structured as \emph{setup} $\to$ \emph{key estimate}
+$\to$ \emph{iteration} $\to$ \emph{conclusion}. Cross-references indicate
+logical prerequisites to prevent circularity.
+
+\medskip
+The choices \eqref{eq:kappa-fixed} and \eqref{eq:KL-fixed} ensure consistency
+with Parts~2–5 of the Introduction and serve as the sole references for
+geometric complexity and litho-ratio in all subsequent chapters.
+
+%==============================================================================
+% Chapter 1 — Introduction
+% Part 7/10 — Methodological Innovations
+%==============================================================================
+
+\section{Methodological Innovations}
+
+The results of this monograph rely on a set of methodological innovations
+that adapt and extend classical techniques of spectral geometry to the setting
+of fractured domains. Each innovation responds to a structural obstacle posed
+by the presence of internal singularities and is formulated with explicit
+error control. Together, they form a coherent analytic architecture, ensuring
+that the statements of Theorems~A--D are both rigorous and reproducible.
 
 %------------------------------------------------------------------------------
-\subsection{Standing Assumptions}
+\subsection{Microlocal Parametrix near Fractures}
 
-We fix the following throughout the monograph:
+The first innovation is the construction of parametrices for wave and resolvent
+kernels in the presence of an internal fracture set $\Gamma$. Classical
+Hadamard-type parametrices fail to capture diffractive phenomena produced by
+fractures. Our approach introduces a fracture-adapted microlocal calculus with
+the following features:
 
-\begin{enumerate}[label=(S\arabic*)]
-  \item Dimension $d \geq 2$.
-  \item $(\Omega,g)$ is compact with smooth boundary.
-  \item $\Gamma \subset \Omega$ satisfies (G1)--(G4).
-  \item Test functions $g \in C_c^\infty(\mathbb{R})$.
-  \item Constants in all results depend polynomially on $\kappa(\Gamma)$.
+\begin{itemize}
+  \item Local models near $x\in\Gamma$ identify $\Omega$ as a smooth manifold
+  intersected by a hyperplane cut, producing codimension-one singularities.
+  \item Oscillatory integral representations of the wave kernel are modified by
+  fracture boundary conditions, leading to additional phase functions supported
+  on $N^\ast\Gamma$.
+  \item A symbolic calculus extending Melrose's $b$-calculus is developed to
+  encode singular amplitudes at fracture points.
+\end{itemize}
+
+This parametrix construction yields the explicit fracture contribution
+$A_\Gamma(g)$ in the trace formula (Theorem~A) and is indispensable for
+subsequent Tauberian analysis.
+
+%------------------------------------------------------------------------------
+\subsection{Quantitative Tauberian Framework}
+
+A second innovation is the development of Tauberian theorems with explicit,
+reproducible constants. While classical Tauberian arguments (e.g.\ Ikehara,
+Karamata) yield asymptotics up to implicit error terms, the fractured setting
+requires explicit dependence on $\kappa(\Gamma)$. We establish a constructive
+framework:
+
+\begin{itemize}
+  \item Explicit remainders are expressed in terms of Sobolev norms of the test
+  function $g$.
+  \item All constants are polynomial in $\kappa(\Gamma)$, uniformly across
+  admissible fractures.
+  \item Sharp exponents are obtained by combining resolvent estimates with
+  dynamical hypotheses such as exponential mixing.
+\end{itemize}
+
+This innovation ensures that spectral asymptotics in fractured domains can be
+quantitatively compared, providing reproducibility across distinct geometries.
+
+%------------------------------------------------------------------------------
+\subsection{Geometric Complexity Control}
+
+The introduction of the geometric complexity parameter $\kappa(\Gamma)$ is
+supported by a systematic control mechanism. In contrast to volume or boundary
+terms, $\kappa(\Gamma)$ captures curvature and topological fragmentation of
+fractures. Its methodological role is threefold:
+
+\begin{enumerate}
+  \item It provides a uniform scale on which spectral coefficients can be
+  compared.
+  \item It ensures that constants in Theorems~A--C grow at most polynomially
+  with fracture complexity, ruling out exponential instabilities.
+  \item It stabilizes asymptotics under perturbations of $\Gamma$, enabling
+  continuity of spectral invariants across ensembles.
 \end{enumerate}
 
-These assumptions balance generality with analytic tractability.
+Without such a parameter, remainder estimates would be vulnerable to geometric
+degeneracies. The use of $\kappa(\Gamma)$ resolves this issue structurally.
 
 %------------------------------------------------------------------------------
-\subsection{Conventions on Constants}
+\subsection{Ergodic Framework for Universality}
 
-Constants $C, c, C_\varepsilon$ may vary line to line. Dependence on
-$\kappa(\Gamma)$ is always explicit. Dimension-dependent universal constants
-are denoted $C_d$.
+The universality result (Theorem~D) requires a probabilistic framework for
+ensembles of fracture sets. We formalize this as follows:
 
-%------------------------------------------------------------------------------
-\subsection{Generality and Limitations}
+\begin{definition}[Ergodic Ensemble]
+An ergodic ensemble of fractures is a probability space
+$(\mathcal{G},\mu)$ of admissible $C^2$ subsets $\Gamma\subset\Omega$, such
+that:
+\begin{enumerate}
+  \item The measure $\mu$ is invariant under isometries of $(\Omega,g)$.
+  \item The action of the isometry group on $(\mathcal{G},\mu)$ is ergodic.
+  \item Almost every $\Gamma\in\mathcal{G}$ satisfies the structural
+  assumptions (G1)--(G4).
+\end{enumerate}
+\end{definition}
 
-While restrictive, the assumptions (smooth metric, $C^2$ fracture, connected
-complement) are natural for a first systematic treatment. Future work may
-extend lithomathematics to:
+Within this framework we prove:
+
 \begin{itemize}
-  \item irregular or fractal cracks,
-  \item Neumann or mixed boundary conditions,
-  \item higher-order elliptic operators,
-  \item time-dependent fracture evolution.
+  \item Almost sure convergence of the litho-ratio $K_L$ to a universal
+  constant $K_L^\ast$ depending only on the dimension $d$.
+  \item Gaussian fluctuations of $K_L$ with variance scaling as $N^{-1}$.
 \end{itemize}
 
-% End of Part 7/10
+This probabilistic dimension introduces a universality principle analogous to
+phenomena in random matrix theory and homogenization.
+
+%------------------------------------------------------------------------------
+\subsection{Synthesis of Methods}
+
+The methodological architecture is summarized as follows:
+
+\begin{itemize}
+  \item \textbf{Microlocal analysis} provides explicit parametrices near
+  fractures, capturing diffractive contributions.
+  \item \textbf{Tauberian theorems} convert local expansions into global
+  spectral asymptotics with explicit remainders.
+  \item \textbf{Complexity control} via $\kappa(\Gamma)$ guarantees stability
+  of constants under geometric perturbations.
+  \item \textbf{Ergodic ensembles} elevate spectral invariants to universal
+  laws valid across random geometries.
+\end{itemize}
+
+These components are mutually reinforcing: microlocal parametrices supply local
+structure, Tauberian arguments globalize it, complexity control bounds constants,
+and ergodic ensembles establish universality.
+
+%------------------------------------------------------------------------------
+\subsection{Methodological Complementarity}
+
+The spectral approach developed here complements variational fracture
+theories. Variational methods (e.g.\ Griffith, Francfort--Marigo) describe
+crack evolution through energy minimization. Lithomathematics instead studies
+spectral invariants of static fracture geometries. The two perspectives are
+complementary:
+
+\begin{itemize}
+  \item Variational methods capture stability and propagation.
+  \item Spectral methods quantify wave and eigenvalue response.
+\end{itemize}
+
+This complementarity emphasizes that lithomathematics does not replace but
+extends the mathematical toolkit for fracture analysis.
+
+%------------------------------------------------------------------------------
+\subsection{Concluding Perspective}
+
+The methodological innovations of this monograph close structural gaps in
+spectral geometry for fractured domains:
+
+\begin{enumerate}
+  \item Extension of parametrix techniques to internal singularities.
+  \item Quantitative Tauberian analysis with explicit constants.
+  \item Stability via geometric complexity control.
+  \item Universality laws for spectral ratios in ergodic ensembles.
+\end{enumerate}
+
+Each addresses a distinct barrier. Taken together, they establish a framework
+in which fractured domains admit spectral asymptotics of the same rigor and
+explicitness as the classical Weyl--Ivrii theory, while revealing genuinely new
+invariants and probabilistic laws.
 
 %==============================================================================
 % Chapter 1 — Introduction
@@ -915,454 +969,189 @@ extend lithomathematics to:
 
 \section{Relation to Literature}
 
-The present work situates lithomathematics at the intersection of spectral
-geometry, microlocal analysis, fracture mechanics, and probabilistic models.
-This section reviews the most relevant strands of prior literature and clarifies
-how the contributions of this monograph extend or complement them.
+The mathematical setting of lithomathematics lies at the intersection of
+classical spectral geometry, microlocal analysis, fracture mechanics, and
+probabilistic approaches to random media. This section situates the present
+monograph within these traditions and highlights its principal contributions.
 
 %------------------------------------------------------------------------------
-\subsection{Classical Spectral Geometry}
+\subsection{Spectral Geometry and Trace Formulas}
 
-The roots of spectral geometry lie in the work of Weyl (1911), who established
-the asymptotic formula
-\[
-N(\lambda) \sim \frac{\omega_d}{(2\pi)^d}\,\mathrm{Vol}(\Omega)\,\lambda^{d/2},
-\qquad \lambda \to \infty,
-\]
-for the eigenvalue counting function on bounded smooth domains. Ivrii
-(1980) refined this by incorporating a boundary contribution under dynamical
-assumptions, while Safarov–Vassiliev (1997) developed a comprehensive microlocal
-framework.
-
-These results rely crucially on smooth domains. Internal fracture sets $\Gamma$
-fall outside this theory. Our results extend Weyl–Ivrii asymptotics by
-incorporating explicit fracture terms.
+The foundations of spectral asymptotics were laid by Weyl \cite{Weyl1911},
+Ivrii \cite{Ivrii1980}, and Safarov--Vassiliev \cite{SafarovVassiliev1997}.
+These works establish the Weyl law, boundary corrections, and sharp remainder
+estimates for smooth domains. However, the framework relies crucially on smooth
+geometry; internal singularities such as fracture sets lie outside its scope.
+Our results extend this framework by introducing explicit fracture terms into
+trace formulas and by proving polynomial stability in the geometric complexity
+parameter $\kappa(\Gamma)$.
 
 %------------------------------------------------------------------------------
-\subsection{Wave Trace and Microlocal Analysis}
+\subsection{Microlocal and Diffractive Analysis}
 
-Duistermaat–Guillemin (1975) connected wave trace singularities to periodic
-geodesics. Melrose (1980, 1994) and later Vasy, Wunsch, and others, developed
-microlocal calculi for manifolds with corners, conic singularities, and edges.
-Applications include diffraction at conical points and polygonal domains.
-
-Fractures differ: they are codimension-one internal sets, producing diffractive
-phenomena without being global boundaries. Our parametrix adapts edge calculus
-to this setting, filling a gap in the microlocal literature.
-
-%------------------------------------------------------------------------------
-\subsection{Fracture Mechanics and Variational Models}
-
-In mechanics, fractures are modeled via energy minimization. Key milestones:
-
-\begin{itemize}
-  \item Griffith (1920): fracture propagation as energy minimization.
-  \item Ambrosio–Tortorelli (1990s): $\Gamma$-convergence approximations.
-  \item Francfort–Marigo (1998): variational theory of brittle fracture.
-  \item Phase-field models (2000s–present): diffuse interface descriptions.
-\end{itemize}
-
-These frameworks analyze crack growth and stability but do not yield spectral
-invariants. Our approach is complementary: spectral asymptotics for fixed
-fractures, producing invariants such as $\kappa(\Gamma)$ and $K_L$.
+Diffractive phenomena were placed on rigorous footing by Keller
+\cite{Keller1962}, Melrose \cite{Melrose1980,Melrose1994}, Vasy
+\cite{Vasy2008}, and Wunsch \cite{Wunsch2001}. Applications to conic manifolds
+and polyhedral domains show how singularities of wave kernels influence
+spectral asymptotics. Fractured domains, however, differ from conical or corner
+singularities: they are internal, codimension-one subsets imposing new
+boundary-like conditions. The parametrix construction developed in this
+monograph fills this methodological gap.
 
 %------------------------------------------------------------------------------
-\subsection{Random Media and Homogenization}
+\subsection{Fracture Mechanics and Variational Approaches}
 
-Spectral theory of random Schrödinger operators (Pastur, Figotin, 1970s–1990s)
-and homogenization theory (Kozlov, Jikov, Papanicolaou–Varadhan) analyze PDEs in
-random environments. Typical results: almost-sure asymptotics, effective
-equations.
-
-Our universality theorem for $K_L$ is analogous in spirit but geometric in
-nature: randomness lies in $\Gamma$, not in a potential. The universality of
-$K_L$ parallels random matrix theory invariants.
-
-%------------------------------------------------------------------------------
-\subsection{Spectral Invariants and Quantum Chaos}
-
-Quantum chaos studies spectral statistics and universality (Gutzwiller, 1990;
-Zelditch, 2017). Diffractive geodesics in fractured domains introduce dynamics
-resembling chaotic systems. The Gaussian fluctuations of $K_L$ suggest a
-connection with central limit theorems in random matrix theory.
+In applied mathematics, fractures have been modeled by variational principles
+since Griffith (1920). Modern formulations include the Mumford--Shah functional
+\cite{MumfordShah1989}, Ambrosio--Tortorelli approximations
+\cite{Ambrosio1990}, and $\Gamma$-convergence methods
+\cite{FrancfortMarigo1998}. These approaches capture crack propagation and
+energy minimization but do not yield spectral invariants. Our spectral
+approach is complementary: it provides invariants ($A_\Gamma(g)$, $K_L$) that
+are inaccessible to purely variational theories.
 
 %------------------------------------------------------------------------------
-\subsection{Comparison Table}
+\subsection{Random Media and Universality}
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|p{3.8cm}|p{5.0cm}|p{5.0cm}|}
-\hline
-\textbf{Domain} & \textbf{Classical Results} & \textbf{Contribution of this Work} \\
-\hline
-Smooth domains & Weyl law, Ivrii’s boundary term,
-  Safarov–Vassiliev microlocal theory &
-  Extension to fractured domains, explicit fracture term $A_\Gamma(g)$ \\
-\hline
-Fracture mechanics & Griffith criterion,
-  Ambrosio–Tortorelli, Francfort–Marigo,
-  phase-field &
-  New invariants $\kappa(\Gamma)$, $K_L$,
-  complementary to energy-based models \\
-\hline
-Microlocal analysis & Diffraction at conical points,
-  edge calculus, polygonal domains &
-  Parametrix adapted to internal fractures,
-  diffractive geodesics along $\Gamma$ \\
-\hline
-Random media & Random Schrödinger operators,
-  stochastic homogenization &
-  Universality of litho-ratio $K_L$ under
-  ergodic fracture ensembles \\
-\hline
-Quantum chaos & Random matrix universality,
-  wave trace singularities &
-  Gaussian fluctuations of $K_L$,
-  bridging geometry and probability \\
-\hline
-\end{tabular}
-\caption{Relation of lithomathematics to existing traditions.}
-\end{table}
+Probabilistic homogenization and spectral theory of random operators have been
+developed by Pastur \cite{Pastur1971}, Figotin \cite{Figotin1996}, and many
+others. Universality laws in random matrix theory \cite{Mehta2004} and quantum
+chaos \cite{Zelditch2017} reveal statistical regularities of spectra under
+randomness. The universality theorem for the litho-ratio $K_L$ parallels these
+phenomena, but with randomness residing in the geometry of fracture sets rather
+than in coefficients of differential operators. This geometric universality is
+new within spectral geometry.
 
 %------------------------------------------------------------------------------
-\subsection{Novelty Statement}
+\subsection{Positioning and Novelty}
 
-The distinctive novelties of this monograph are:
+The present work contributes along four axes:
 
 \begin{enumerate}
-  \item First systematic spectral theory of fractured domains.
-  \item Explicit trace formula contributions $A_\Gamma(g)$.
-  \item Introduction of $\kappa(\Gamma)$ and $K_L$ as new invariants.
-  \item Polynomial control of constants, ensuring stability.
-  \item Universality of $K_L$ in ergodic ensembles, absent from prior work.
+  \item Extension of trace formulas to fractured domains, with explicit fracture
+  contributions absent from classical literature.
+  \item Development of a microlocal calculus adapted to internal singularities,
+  filling a methodological gap between boundary analysis and conic diffraction.
+  \item Introduction of spectral invariants ($\kappa(\Gamma)$, $K_L$) providing
+  quantitative measures of fracture influence.
+  \item Establishment of universality laws for $K_L$ in ergodic ensembles,
+  bridging spectral geometry with probabilistic frameworks.
 \end{enumerate}
 
 %------------------------------------------------------------------------------
 \subsection{Limitations and Outlook}
 
-We emphasize the limitations:
+For completeness, we note the scope of the present theory:
 
 \begin{itemize}
-  \item $\Gamma$ is assumed $C^2$ rectifiable; fractal cracks are excluded.
-  \item Only Dirichlet conditions are treated; Neumann/mixed require adaptation.
-  \item Dynamics of crack growth are not studied; $\Gamma$ is fixed.
+  \item Fractures are assumed $C^2$-rectifiable; fractal or highly irregular
+  defects are excluded.
+  \item The probabilistic framework is restricted to ergodic ensembles of
+  regular fracture sets.
+  \item Numerical and computational aspects are not developed; the focus is
+  purely analytic.
 \end{itemize}
 
-These restrictions are deliberate: the aim is a rigorous foundation. Later
-extensions may include rough fractures, mixed conditions, or dynamic fracture
-evolution.
+These limitations are natural for a first systematic treatment. Extensions to
+rough fractures, higher-order operators, and computational models remain open
+directions.
 
 %------------------------------------------------------------------------------
 \subsection{Concluding Remarks}
 
-This review clarifies how lithomathematics is positioned. It extends spectral
-geometry, complements fracture mechanics, and resonates with probabilistic and
-chaotic frameworks. Its distinctive contribution lies in explicit constants,
-polynomial control, and universality laws.
+In summary, lithomathematics situates itself as a natural extension of spectral
+geometry to fractured domains, complementing variational mechanics and
+connecting with probabilistic universality. Its novelty lies not in revisiting
+existing methods, but in establishing new invariants and frameworks that allow
+fractured geometries to be analyzed with the same rigor and explicitness as
+classical smooth domains.
 
-% End of Part 8/10
+% Part 9/10 – Functional-Analytic Preliminaries
 
-%==============================================================================
-% Chapter 1 — Introduction
-% Part 9/10 — Technical Framework and Standing Assumptions
-%==============================================================================
+\section{Functional-Analytic Preliminaries}
 
-\section{Technical Framework and Standing Assumptions}
+In this section we summarize the analytic setting and standing assumptions
+that underlie the results of the monograph. The goal is to make explicit the
+basic operator framework and the functional spaces in which our analysis takes
+place. This provides the necessary bridge between the geometric description of
+fractured manifolds (Part~2) and the spectral trace formulas (Parts~3–7).
 
-The development of lithomathematics requires a precise analytic and geometric
-framework. This section gathers the conventions and assumptions that will be
-adopted throughout the monograph. The purpose is to make later chapters fully
-self-contained, with no ambiguity about the underlying structures.
-
-%------------------------------------------------------------------------------
 \subsection{Geometric Framework}
 
-Let $(\Omega,g)$ denote a compact, connected Riemannian manifold of dimension
-$d\geq 2$, with smooth boundary $\partial\Omega$. Within $\Omega$ we fix a
-closed subset $\Gamma \subset \Omega$, referred to as the \emph{fracture set}.
-Its properties are described by the following standing assumptions:
+Let $\Omega \subset \mathbb{R}^d$ be a bounded open set with piecewise $C^2$
+boundary, and let $\Gamma \subset \Omega$ be a relatively closed, $(d-1)$-rectifiable
+fracture set. The precise assumptions on $\Gamma$ --- rectifiability, local
+regularity, and parametrizations --- have already been given in
+Part~2 (Main Definitions). We recall only the essential points: $\Gamma$ is
+treated as an internal interface that disconnects $\Omega$ into finitely many
+connected components, and all analytic constructions respect this decomposition.
 
-\begin{enumerate}[label=(G\arabic*)]
-  \item $\Omega$ is compact with smooth $C^\infty$ boundary $\partial\Omega$.
-  \item $\Gamma$ is a rectifiable subset of codimension one, $C^2$ almost
-  everywhere, with finite Hausdorff measure
-  $\mathcal{H}^{d-1}(\Gamma)<\infty$.
-  \item Each component of $\Gamma$ admits a well-defined unit normal vector
-  field almost everywhere.
-  \item $\Gamma$ meets $\partial\Omega$ transversally (if at all), with
-  intersection of codimension two.
-\end{enumerate}
-
-These assumptions ensure that $\Gamma$ is sufficiently regular for microlocal
-analysis while remaining general enough to include realistic fracture sets.
-
-%------------------------------------------------------------------------------
 \subsection{Analytic Framework}
 
-The analytic structure is based on Sobolev spaces over fractured domains:
-
-\begin{enumerate}[label=(A\arabic*)]
-  \item $H^1_0(\Omega\setminus\Gamma)$ denotes functions in
-  $H^1(\Omega\setminus\Gamma)$ vanishing on $\partial\Omega$ in the trace sense.
-  \item The quadratic form
-  \[
-    Q_\Gamma[u] = \int_{\Omega\setminus\Gamma} |\nabla u|^2 \, dV_g,
-  \quad u\in H^1_0(\Omega\setminus\Gamma),
-  \]
-  defines a closed, nonnegative form.
-  \item The associated operator $-\Delta_\Gamma$ is the self-adjoint fractured
-  Laplacian, acting on $L^2(\Omega)$.
-  \item Its spectrum is discrete, nonnegative, and diverges to $+\infty$.
-\end{enumerate}
-
-\begin{proposition}[Spectral Properties]
-The operator $-\Delta_\Gamma$ has purely discrete spectrum
+On $\Omega \setminus \Gamma$ we define the Dirichlet Laplacian
 \[
-0 < \lambda_1(\Omega,\Gamma) \leq \lambda_2(\Omega,\Gamma) \leq \cdots \to \infty,
+  -\Delta_\Gamma u = -\sum_{j=1}^d \frac{\partial^2 u}{\partial x_j^2},
 \]
-with each eigenvalue repeated according to multiplicity. Eigenfunctions vanish
-on both $\partial\Omega$ and $\Gamma$.
-\end{proposition}
+with domain consisting of $H^1_0(\Omega \setminus \Gamma)$ functions that are
+locally $H^2$ away from $\Gamma$. This operator is self-adjoint and non-negative
+on $L^2(\Omega)$. The spectrum $\{\lambda_j\}_{j=1}^\infty$ is discrete and tends
+to $+\infty$. The corresponding eigenfunctions form an orthonormal basis of
+$L^2(\Omega)$.
 
-%------------------------------------------------------------------------------
-\subsection{Function Spaces and Norms}
+The spectral counting function is
+\[
+  N_\Gamma(\lambda) = \#\{ j : \lambda_j \leq \lambda \}.
+\]
+It admits an asymptotic expansion of Weyl type, with volume, boundary, and
+fracture contributions. The coefficients of this expansion are precisely the
+quantities that define the litho-invariants introduced in Part~2.
 
-We adopt the following notation:
+\subsection{Descriptive Parameters}
+
+Two quantitative descriptors of the geometry and spectrum will repeatedly
+appear:
 
 \begin{itemize}
-  \item $\|f\|_{L^2}$ denotes the $L^2(\Omega\setminus\Gamma)$ norm.
-  \item $\|f\|_{H^s}$ denotes the Sobolev norm on $\Omega\setminus\Gamma$.
-  \item For test functions $g$, $\|g\|_{C^k}$ is the supremum norm of all
-  derivatives up to order $k$.
-  \item $\mathcal{S}(\mathbb{R})$ is the Schwartz class; $C_c^\infty(\mathbb{R})$
-  denotes smooth compactly supported functions.
+  \item The \emph{geometric complexity} $\kappa(\Gamma)$, defined in Part~2 as a
+  weighted sum of measure, curvature, and connectivity terms.
+  \item The \emph{litho-ratio} $K_L$, introduced in Part~2 via trace coefficients,
+  measuring the normalized spectral contribution of $\Gamma$ relative to volume
+  and boundary terms.
 \end{itemize}
 
-Theorems in this monograph are formulated for $g\in C_c^\infty(\mathbb{R})$,
-with extensions to $\mathcal{S}(\mathbb{R})$ when appropriate.
+These quantities serve as the principal parameters of all subsequent theorems.
 
-%------------------------------------------------------------------------------
-\subsection{Geometric Complexity Parameter}
+\subsection{Functional Spaces}
 
-We recall the central quantitative invariant:
+We work in the Sobolev space $H^1_0(\Omega \setminus \Gamma)$, defined as the
+closure of $C_c^\infty(\Omega \setminus \Gamma)$ with respect to the standard
+$H^1$ norm. Higher-order Sobolev spaces are defined in the usual way. The
+compact embedding $H^1_0(\Omega \setminus \Gamma) \hookrightarrow L^2(\Omega)$
+is valid under the rectifiability assumptions on $\Gamma$; details are given in
+Part~2.
 
-\begin{definition}[Geometric Complexity]
-Let $\Gamma \subset \Omega$ satisfy (G1)--(G4). Its geometric complexity is
-\[
-  \kappa(\Gamma) =
-  \mathcal{H}^{d-1}(\Gamma)
-  + \int_\Gamma (1+|II(x)|^2)^{1/2}\, d\mathcal{H}^{d-1}(x)
-  + N_{\mathrm{comp}}(\Gamma),
-\]
-where $II(x)$ is the second fundamental form and $N_{\mathrm{comp}}(\Gamma)$
-the number of connected components.
-\end{definition}
-
-\begin{remark}
-All constants appearing in theorems (A–C) are bounded polynomially in
-$\kappa(\Gamma)$. This guarantees stability under perturbations of $\Gamma$.
-\end{remark}
-
-%------------------------------------------------------------------------------
-\subsection{Litho-Ratio Invariant}
-
-The second spectral invariant of fractured domains is the litho-ratio:
-
-\begin{definition}[Litho-Ratio]
-Let $A_{\mathrm{vol}}(g)$, $A_{\partial\Omega}(g)$, and $A_\Gamma(g)$ denote
-the coefficients in the localized trace expansion
-\[
-\operatorname{Tr}\!\big(g(\sqrt{-\Delta_\Gamma})\big) =
-A_{\mathrm{vol}}(g) + A_{\partial\Omega}(g) + A_\Gamma(g) + R(g).
-\]
-The \emph{litho-ratio} is
-\[
-K_L(\Omega,\Gamma) = \frac{A_\Gamma(g)}{A_{\mathrm{vol}}(g)+A_{\partial\Omega}(g)}.
-\]
-\end{definition}
-
-This invariant measures the normalized contribution of $\Gamma$ relative to
-smooth geometric terms.
-
-%------------------------------------------------------------------------------
-\subsection{Definition of Lithomathematics}
-
-\begin{definition}[Lithomathematics]
-\emph{Lithomathematics} is the analytic and microlocal study of spectral
-geometry on fractured domains $(\Omega,\Gamma)$, characterized by:
-\begin{itemize}
-  \item the fractured Laplacian $-\Delta_\Gamma$,
-  \item the geometric complexity $\kappa(\Gamma)$,
-  \item the litho-ratio invariant $K_L(\Omega,\Gamma)$,
-  \item universality theorems for $K_L$ in ergodic ensembles.
-\end{itemize}
-It extends classical spectral geometry by treating internal fractures as
-first-class spectral entities.
-\end{definition}
-
-%------------------------------------------------------------------------------
 \subsection{Standing Assumptions}
 
-For reference, the monograph rests on the following assumptions:
+For clarity, we list the standing hypotheses that will be in force throughout:
 
-\begin{enumerate}[label=(S\arabic*)]
-  \item $(\Omega,g)$ compact with smooth boundary.
-  \item $\Gamma$ rectifiable, $C^2$ almost everywhere, finite measure.
-  \item $-\Delta_\Gamma$ is the Dirichlet fractured Laplacian.
-  \item Test functions $g$ are smooth, compactly supported.
-  \item All constants depend polynomially on $\kappa(\Gamma)$.
-\end{enumerate}
-
-%------------------------------------------------------------------------------
-\subsection{Concluding Remarks}
-
-This technical framework consolidates the analytic setting, ensures
-reproducibility, and isolates the key invariants $\kappa(\Gamma)$ and $K_L$.
-It provides the foundation for all subsequent chapters.
-
-% End of Part 9/10
-
-%==============================================================================
-% Chapter 1 — Introduction
-% Part 10/10 — Guide to the Monograph and Concluding Summary
-%==============================================================================
-
-\section{Guide to the Monograph}
-
-The introduction concludes with a roadmap for the reader. This section explains
-the structure of the monograph, the logical dependencies between chapters, and
-recommended reading paths for different audiences.
-
-%------------------------------------------------------------------------------
-\subsection{Organization of the Monograph}
-
-The monograph consists of ten chapters and several appendices:
-
-\begin{enumerate}[label=Chapter~\arabic*:]
-  \item \textbf{Introduction.} Motivation, history, main results, and framework.
-  \item \textbf{Geometric and Analytic Preliminaries.} Sobolev spaces, Laplace
-  operators, microlocal background.
-  \item \textbf{Variational and Structural Framework.} Relation to fracture
-  mechanics and variational models.
-  \item \textbf{Spectral Operators and Parametrix.} Microlocal parametrices in
-  fractured domains.
-  \item \textbf{Trace Formulas.} Proof of Theorem~A with explicit coefficients.
-  \item \textbf{Ergodic Theorems.} Universality of $K_L$ (Theorems~C and D).
-  \item \textbf{Homogenization and Random Ensembles.} Probabilistic extensions.
-  \item \textbf{Power-Saving Refinements.} Remainder estimates under mixing.
-  \item \textbf{Applications and Examples.} Waveguides, elasticity, materials.
-  \item \textbf{Conclusions and Perspectives.} Summary and open problems.
-\end{enumerate}
-
-Appendices provide technical lemmas, microlocal background, and probabilistic
-tools.
-
-%------------------------------------------------------------------------------
-\subsection{Dependencies Between Chapters}
-
-The logical flow is acyclic:
-
-\begin{itemize}
-  \item Chapter~2 is prerequisite for Chapters~4–5.
-  \item Chapter~4 (parametrix) underpins Chapter~5 (trace formulas).
-  \item Chapter~5 provides asymptotics used in Chapters~6–8.
-  \item Chapters~6 and 7 form a probabilistic unit (ergodicity + homogenization).
-  \item Chapter~8 refines results from Chapters~5 and 6.
-  \item Chapter~9 applies the theory, Chapter~10 synthesizes perspectives.
-\end{itemize}
-
-%------------------------------------------------------------------------------
-\subsection{Suggested Reading Paths}
-
-Different audiences may follow tailored paths:
-
-\paragraph{Analysts and PDE specialists.}
-Chapters~2, 4, 5; Appendices A–B.
-
-\paragraph{Spectral geometers.}
-Chapters~1, 5, 6; Appendix C.
-
-\paragraph{Probabilists.}
-Chapters~6, 7; Appendix D.
-
-\paragraph{Applied mathematicians and physicists.}
-Chapters~9, 10.
-
-\paragraph{General audience.}
-Chapters~1, 10; Executive summary (Chapter~0).
-
-%------------------------------------------------------------------------------
-\subsection{Navigation Table}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Audience} & \textbf{Start with} & \textbf{Continue with} \\
-\hline
-Analysts & Chapter~2 & Chapters~4–5, App. A–B \\
-Spectral geometers & Chapter~1, 5 & Chapter~6, App. C \\
-Probabilists & Chapter~6 & Chapter~7, App. D \\
-Applied mathematicians & Chapter~9 & Chapter~10 \\
-General audience & Chapter~1, 10 & Executive summary \\
-\hline
-\end{tabular}
-\caption{Navigation table for different audiences.}
-\end{table}
-
-%------------------------------------------------------------------------------
-\section{Concluding Summary of the Introduction}
-
-The introduction consolidates the conceptual, technical, and historical
-foundations of \emph{lithomathematics}. The main contributions are as follows:
-
-\subsection{Framework}
-\begin{itemize}
-  \item Geometric setting: $(\Omega,g)$ compact Riemannian manifold with
-  fracture set $\Gamma$.
-  \item Analytic setting: fractured Laplacian $-\Delta_\Gamma$ acting on
-  $H^1_0(\Omega\setminus\Gamma)$.
-  \item Invariants: geometric complexity $\kappa(\Gamma)$ and litho-ratio $K_L$.
-\end{itemize}
-
-\subsection{Principal Results}
 \begin{description}
-  \item[Theorem A.] Localized trace formula with explicit fracture term.
-  \item[Theorem B.] Polynomial control of constants via $\kappa(\Gamma)$.
-  \item[Theorem C.] Power-saving remainders under mixing assumptions.
-  \item[Theorem D.] Universality of $K_L$ in ergodic ensembles.
+  \item[(S1)] $\Omega$ is a bounded domain with piecewise $C^2$ boundary.
+  \item[(S2)] $\Gamma$ is a relatively closed, $(d-1)$-rectifiable fracture set
+  with finite $H^{d-1}$ measure.
+  \item[(S3)] The operator $-\Delta_\Gamma$ on $H^1_0(\Omega \setminus \Gamma)$
+  is self-adjoint with compact resolvent.
+  \item[(S4)] The spectral counting function $N_\Gamma(\lambda)$ admits Weyl-type
+  asymptotics with coefficients depending on $\operatorname{vol}(\Omega)$,
+  $\operatorname{area}(\partial\Omega)$, and $\Gamma$.
 \end{description}
 
-\subsection{Methodological Innovations}
-\begin{enumerate}
-  \item Microlocal parametrices adapted to fractures.
-  \item Tauberian theorems with explicit constants.
-  \item Complexity control via $\kappa(\Gamma)$.
-  \item Probabilistic framework for universality of $K_L$.
-\end{enumerate}
+\subsection{Conclusion}
 
-\subsection{Error Control and Sharpness}
-\begin{itemize}
-  \item Explicit remainder terms in all asymptotic expansions.
-  \item Sharp exponents proved optimal under given hypotheses.
-  \item Gaussian fluctuations in universality theorems.
-\end{itemize}
+These preliminaries close the analytic part of the introduction. Together with
+the geometric assumptions of Part~2, they form the structural foundation on
+which all later chapters are built. In particular, every result stated in
+Parts~3–8 can be traced back to the hypotheses (S1)–(S4) and the invariants
+$\kappa(\Gamma), K_L$ introduced earlier. This ensures consistency and
+reproducibility across the monograph.
 
-\subsection{Verification of Objectives}
-The objectives outlined in Section~1 were achieved: motivation, definitions,
-formulation of theorems with sharp error bounds, and methodological advances.
-
-\subsection{Orientation for the Reader}
-Chapters~2–10 expand systematically on the foundations laid here, culminating in
-applications and open directions.
-
-%------------------------------------------------------------------------------
-\subsection{Final Remarks}
-
-This introduction closes by situating lithomathematics as a rigorous extension
-of spectral geometry to fractured domains. By defining new invariants,
-establishing explicit trace formulas, and proving universality laws, it opens a
-new field of study consistent with the highest standards of mathematical
-analysis.
-
-% End of Part 10/10
+проо
