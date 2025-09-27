@@ -1,0 +1,104 @@
+% ==================================================================
+% Chapter Template (Archetype-Invariant Fractal — Annals Standard)
+% Depends on preamble providing: amsmath, amsthm, amssymb, mathtools, hyperref, cleveref
+% If your preamble does not define theorem-like environments, see the example file.
+% ==================================================================
+
+\chapter{<Chapter Title>}
+\label{chap:<label>}
+
+% -------- Local micro-macros for archetype labels (safe if preamble lacks them)
+\providecommand{\Orientation}{\par\noindent\textbf{Orientation.}\ }
+\providecommand{\Objectives}{\par\noindent\textbf{Objectives.}\ }
+\providecommand{\Invariants}{\par\noindent\textbf{Invariants/Assumptions.}\ }
+\providecommand{\Statement}{\par\noindent\textbf{Statement.}\ }
+\providecommand{\ErrorBounds}{\par\noindent\textbf{Error bounds.}\ }
+\providecommand{\Optimality}{\par\noindent\textbf{Optimality.}\ }
+\providecommand{\Audit}{\par\noindent\textbf{Audit/Dependencies.}\ }
+\providecommand{\Closure}{\par\noindent\textbf{Closure.}\ }
+
+% ---------------- Orientation Block ----------------
+\section*{Orientation}
+We fix the standing assumptions (SA.1--SA.4) from \Cref{sec:definitions}
+and adopt the global notation therein. This chapter develops \emph{<main idea>},
+building upon the geometric and spectral foundations established in the introduction.
+All claims are scoped by the regularity and transversality hypotheses stated globally.
+
+% ---------------- Foundational Objects ----------------
+\section{Foundational Objects}
+
+\begin{definition}[<Name of Object>]\label{def:<label>}
+\Orientation Context and role of the object within the chapter and the global program.
+\Objectives What is being defined and why this representation is chosen.
+\Invariants Fixed parameters and regularity (e.g., $C^2$, positive reach, transversality).
+\Statement Formal definition in concise, unambiguous terms (no theorems here).
+\Audit Cross-links to \Cref{sec:definitions} and any earlier objects this depends on.
+\Closure How this object will be used in lemmas/theorems below.
+\end{definition}
+
+\begin{definition}[<Optional Auxiliary Object>]\label{def:<aux-label>}
+\Orientation Minimal context.
+\Statement Formal definition.
+\Audit Compatibility with Standing Assumptions.
+\Closure Reason this is separated as a standalone object.
+\end{definition}
+
+% ---------------- Auxiliary Results ----------------
+\section{Auxiliary Results}
+
+\begin{lemma}[<Key Lemma>]\label{lem:<label>}
+\Orientation Setup and location in the dependency graph.
+\Objectives Precise claim needed for the main results.
+\Invariants All assumptions explicitly re-stated or referenced.
+\Statement Formal lemma statement (no proof sketch language inside the statement).
+\ErrorBounds State constants and their dependence (dimension, reach, curvature).
+\Audit References to definitions and prior results in this chapter.
+\Closure How this lemma will be consumed in the main theorem(s).
+\end{lemma}
+
+\begin{proof}
+Provide a complete proof with clear step structure, explicitly tracking
+all constants and indicating where global hypotheses are used.
+Avoid hidden appeals; cite precisely (definition numbers, lemmas, external refs).
+\end{proof}
+
+% ---------------- Main Results ----------------
+\section{Main Results}
+
+\begin{theorem}[<Main Theorem>]\label{thm:<label>}
+\Orientation Exact scope (domain, regularity, boundary conditions).
+\Objectives Central claim of the chapter.
+\Invariants State assumptions compactly; reference global SA.* if used.
+\Statement Formal statement with sharp exponents and explicit constants.
+\ErrorBounds Remainder terms with quantified dependence (dimension, $\kappa$, reach).
+\Optimality If known, record optimality or counterexamples; otherwise state as open.
+\Audit Dependencies: \Cref{def:<label>,lem:<label>,def:<aux-label>}, etc.
+\Closure Why this closes the chapter’s objective and how it plugs into the monograph.
+\end{theorem}
+
+\begin{proof}
+Structured proof:
+\begin{enumerate}
+  \item \textit{Localization/parametrix.} …
+  \item \textit{Uniform estimates and gluing.} …
+  \item \textit{Remainder control and scale law.} …
+\end{enumerate}
+Track all constants and their provenance; ensure scale and unit consistency.
+\end{proof}
+
+% ---------------- Corollaries and Consequences ----------------
+\section{Corollaries and Consequences}
+
+\begin{corollary}[<Immediate Consequence>]\label{cor:<label>}
+\Orientation Derived directly from \Cref{thm:<label>}.
+\Statement Concise corollary statement.
+\Audit Explicit reference to the theorem and any auxiliary lemma.
+\Closure Note how this will be used in the next chapter.
+\end{corollary}
+
+% ---------------- Closing Invariant ----------------
+\section*{Closing Invariant}
+This chapter established <summary of results> under the global standing assumptions,
+bridging \Cref{chap:<previous>} to \Cref{chap:<next>}. All definitions and constants
+are harmonized with \Cref{sec:definitions}, ensuring scale-invariant statements and
+consistent dependence on geometric complexity and reach.
