@@ -1,0 +1,125 @@
+% ==================================================================
+% Minimal Example Chapter using the Archetype-Invariant Template
+% This file is self-contained on environments; safe to drop-in.
+% ==================================================================
+
+\chapter{Localized Heat Trace near Internal Hypersurfaces}
+\label{chap:lht-internal}
+
+% --- minimal theorem envs if preamble lacks them
+\makeatletter
+\@ifundefined{theorem}{%
+  \newtheorem{theorem}{Theorem}[chapter]
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{definition}[theorem]{Definition}
+}{}
+\makeatother
+
+% --- archetype micro-macros (no-ops if already defined)
+\providecommand{\Orientation}{\par\noindent\textbf{Orientation.}\ }
+\providecommand{\Objectives}{\par\noindent\textbf{Objectives.}\ }
+\providecommand{\Invariants}{\par\noindent\textbf{Invariants/Assumptions.}\ }
+\providecommand{\Statement}{\par\noindent\textbf{Statement.}\ }
+\providecommand{\ErrorBounds}{\par\noindent\textbf{Error bounds.}\ }
+\providecommand{\Optimality}{\par\noindent\textbf{Optimality.}\ }
+\providecommand{\Audit}{\par\noindent\textbf{Audit/Dependencies.}\ }
+\providecommand{\Closure}{\par\noindent\textbf{Closure.}\ }
+
+% ---------------- Orientation Block ----------------
+\section*{Orientation}
+We work under (SA.1--SA.4) and the notation of \Cref{sec:definitions}.
+The goal is to state and prove a localized heat trace expansion for
+the Dirichlet Laplacian on $M\setminus \Gamma$ with Dirichlet condition on
+$\partial M\cup\Gamma$, isolating the fracture term and quantifying the remainder.
+
+% ---------------- Foundational Objects ----------------
+\section{Foundational Objects}
+
+\begin{definition}[Fracture-adapted partition of unity]\label{def:fa-pou}
+\Orientation Neighborhoods: a tubular neighborhood of $\Gamma$ and its complement.
+\Statement Choose $\{\chi_{\mathrm{near}},\chi_{\mathrm{far}}\}\in C^\infty(M)$ with
+$\chi_{\mathrm{near}}^2+\chi_{\mathrm{far}}^2\equiv 1$, $\operatorname{supp}\chi_{\mathrm{near}}$
+contained in a fixed tubular neighborhood of $\Gamma$, and $\operatorname{supp}\chi_{\mathrm{far}}$
+away from $\Gamma$. 
+\Audit Compatible with reach$(\Gamma)>0$ and the $C^2$ graph structure.
+\Closure Used to localize the parametrix and split the trace.
+\end{definition}
+
+\begin{definition}[Localized parametrix blocks]\label{def:blocks}
+\Orientation Near $\Gamma$ use the doubled boundary model; away from $\Gamma$ use the standard boundary parametrix.
+\Statement Define $K_{\mathrm{near}}(t,x,y)$ and $K_{\mathrm{far}}(t,x,y)$ as the respective heat kernel parametrices associated to the model problems, with standard short-time symbols.
+\Audit Symbol classes match global $C^2$ regularity; constants depend only on $(d,\mathrm{reach},\|\mathrm{II}_\Gamma\|_\infty)$.
+\Closure These feed the trace decomposition below.
+\end{definition}
+
+% ---------------- Auxiliary Results ----------------
+\section{Auxiliary Results}
+
+\begin{lemma}[Trace decomposition]\label{lem:trace-split}
+\Orientation Localization with \Cref{def:fa-pou,def:blocks}.
+\Statement For $t\downarrow 0$,
+\[
+\operatorname{Tr}(e^{-tL_\Gamma})
+=\operatorname{Tr}\big(\chi_{\mathrm{near}} e^{-tL_\Gamma}\chi_{\mathrm{near}}\big)
++\operatorname{Tr}\big(\chi_{\mathrm{far}} e^{-tL_\Gamma}\chi_{\mathrm{far}}\big)
++O(e^{-c/t}).
+\]
+\Audit Off-diagonal terms are exponentially small by finite propagation/smoothing.
+\Closure Reduces the analysis to two model contributions.
+\end{lemma}
+
+\begin{proof}
+Insert the partition of unity under the trace and estimate mixed terms via
+Gaussian off-diagonal bounds; the tubular geometry plus reach$>0$ gives the
+required separation at short times.
+\end{proof}
+
+% ---------------- Main Results ----------------
+\section{Main Results}
+
+\begin{theorem}[Localized heat trace with fracture term]\label{thm:lht}
+\Orientation $(M,g)$ compact, $\partial M$ piecewise $C^2$, $\Gamma\subset M$ closed $C^2$ embedded hypersurface, transverse to $\partial M$, reach$(\Gamma)>0$.
+\Objectives Isolate $t^{-(d-1)/2}$ term from $\Gamma$ and quantify the remainder.
+\Statement As $t\downarrow 0$,
+\[
+\operatorname{Tr}(e^{-tL_\Gamma})
+=(4\pi t)^{-d/2}\,\mathrm{vol}_d(M)
+-\tfrac14(4\pi t)^{-(d-1)/2}\,\mathrm{vol}_{d-1}(\partial M)
+-\tfrac14(4\pi t)^{-(d-1)/2}\,\mathrm{vol}_{d-1}(\Gamma)
++O\!\big(t^{-(d-2)/2}\big).
+\]
+\ErrorBounds The implicit constant depends polynomially on the dimensionless complexity $\kappa(\Gamma)$ and on uniform geometric bounds (curvature, injectivity radius, reach).
+\Audit Uses \Cref{lem:trace-split} and the model parametrices; constants tracked via symbol seminorms.
+\Closure Supplies the canonical $a_\Gamma$ coefficient and the chapter’s target expansion.
+\end{theorem}
+
+\begin{proof}
+Apply \Cref{lem:trace-split}; the far contribution reproduces the classical boundary terms.
+Near $\Gamma$, use the doubled-boundary model and reflection to obtain the universal
+$-\tfrac14(4\pi t)^{-(d-1)/2}$ density along $\Gamma$; integrate it to get
+$-\tfrac14(4\pi t)^{-(d-1)/2}\,\mathrm{vol}_{d-1}(\Gamma)$. Remainder follows
+from symbol bounds and uniform tubular control (reach$>0$).
+\end{proof}
+
+% ---------------- Corollaries and Consequences ----------------
+\section{Corollaries and Consequences}
+
+\begin{corollary}[Isotropic litho-invariant]\label{cor:KL}
+\Orientation From \Cref{thm:lht}.
+\Statement The isoperimetric normalization
+\[
+K_L^{\mathrm{iso}}(M,\Gamma)
+:=\frac{a_\Gamma}{a_0^{(d-1)/d}}
+= -\tfrac14\,\frac{\mathrm{vol}_{d-1}(\Gamma)}{\mathrm{vol}_d(M)^{(d-1)/d}}
+\]
+is scale-invariant and dimensionless.
+\Audit $a_0=(4\pi)^{-d/2}\mathrm{vol}_d(M)$; $a_\Gamma$ as in \Cref{thm:lht}.
+\Closure Provides the canonical dimensionless invariant used globally.
+\end{corollary}
+
+% ---------------- Closing Invariant ----------------
+\section*{Closing Invariant}
+We established the localized heat trace with a universal fracture term and
+dimensionless normalization. This bridges the foundational definitions to the
+dynamical refinements in the next chapter and is harmonized with \Cref{sec:definitions}.
