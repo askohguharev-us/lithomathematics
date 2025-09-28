@@ -1,0 +1,359 @@
+% ===================== PART 1/2 (append PART 2/2 directly after) =====================
+
+% =====================================================================
+% Lithomathematics — Foundational Definitions and Conventions (polished)
+% =====================================================================
+
+% Macros (safe if already defined elsewhere)
+\providecommand{\vol}{\operatorname{vol}}
+\providecommand{\Dom}{\operatorname{Dom}}
+\providecommand{\Spec}{\operatorname{Spec}}
+\providecommand{\Tr}{\operatorname{Tr}}
+
+\section{Foundational Definitions and Conventions}\label{sec:definitions}
+
+\paragraph{Orientation and scope.}
+By \emph{lithomathematics} I mean the spectral–geometric analysis of Laplace–type operators on Riemannian manifolds sliced along internal $C^2$ hypersurfaces (interfaces) $\Gamma$.
+This section fixes the standing geometric and functional conventions used throughout; all subsequent results are formulated relative to these conventions.
+Whenever a statement is called “universal”, its scope is \emph{explicitly} restricted to the local, smooth, interior setting specified below, understood microlocally and away from the singular set $\partial\Gamma\cup(\Gamma\cap\partial M)$.
+All asymptotic expansions are understood in the \emph{classical} sense as $\tau\downarrow 0$; in non-smooth (cornered/edged) settings, additional (possibly logarithmic) terms can occur at intermediate half-integer orders, which we do not use below.
+
+% --- Standing Assumptions ---
+\paragraph{Standing Assumptions (SA).}
+Throughout we fix:
+\begin{itemize}
+  \item[(SA.1)] $(M,g)$ is a compact, connected, $d$-dimensional Riemannian manifold
+  with boundary $\partial M$ of class $C^2$ (piecewise $C^2$ with finitely many Lipschitz corners allowed, in the sense of~\cite{Grisvard1985}).
+  \item[(SA.2)] $\Gamma \subset M$ is a compact, embedded $C^2$ hypersurface, possibly with boundary.
+  \item[(SA.3)] If $\partial\Gamma \neq \varnothing$, then $\partial\Gamma \subset \partial M$ and the intersection is transverse:
+  \[
+  T_p\Gamma + T_p(\partial M) = T_p M, \qquad p\in \partial\Gamma.
+  \]
+  In particular, the inclusion $\partial\Gamma\subset\partial M$ is transversal; hence $\partial\Gamma$ is a $C^1$ submanifold of codimension $2$ in $M$. If $\Gamma$ is closed (without boundary), this assumption is void.
+  \item[(SA.4)] The relative reach of $\Gamma$ in $M$ is positive, $\mathrm{reach}_M(\Gamma)>0$, i.e. there exists $r>0$ such that every $x\in M$ with $\mathrm{dist}_g(x,\Gamma)<r$ has a unique nearest point in $\Gamma$.
+  This guarantees the existence of tubular neighborhoods and the well-posedness of the normal exponential map (cf.\ Remark~\ref{rem:relative-reach}).
+  While (SA.1) alone suffices for trace continuity, (SA.4) is essential for defining curvature integrals in $\kappa(\Gamma)$ and for avoiding edge self-focalization near $\partial\Gamma$ (not used for trace continuity; see Remark~\ref{rem:trace-continuity}).
+\end{itemize}
+
+\begin{remark}[Relative reach and normal exponential map]\label{rem:relative-reach}
+The quantity $\mathrm{reach}_M(\Gamma)$ is defined intrinsically with the Riemannian distance on $M$.
+Equivalently, $\mathrm{reach}_M(\Gamma)>0$ if and only if the normal exponential map
+$\exp^\perp:\{(p,\nu)\in N\Gamma:\ |\nu|<r\}\to M$ is injective for some $r>0$; in particular,
+$\mathrm{reach}_M(\Gamma)\le \mathrm{inj}^\perp(\Gamma)$.
+For closed $C^2$ hypersurfaces, positivity follows from tubular neighborhood theorems;
+for hypersurfaces with boundary, positivity is assumed to prevent edge self-focalization near $\partial\Gamma$ (cf.\ Federer’s reach in Euclidean ambient spaces).
+\end{remark}
+
+\begin{remark}[Federer’s reach: references]\label{rem:reach-ref}
+In Euclidean ambient spaces the notion of reach was introduced by Federer \cite[Ann.\ of Math.\ (1959), §4.18]{Federer1959}.
+For Riemannian manifolds, local charts reduce the definitions to the Euclidean case on coordinate patches; positivity of reach implies existence and $C^{1,1}$ regularity of the nearest-point projection on a tubular neighborhood, hence injectivity of $\exp^\perp$ on a uniform radius.
+\end{remark}
+
+% --- Notation ---
+\paragraph{Notation.}
+We write $\vol_d(\cdot)$ for $d$-dimensional Riemannian volume and
+$\vol_{d-1}(\cdot)$ for $(d-1)$–dimensional Hausdorff measure on hypersurfaces, both induced by $g$.
+We set $R:=\mathrm{diam}_g(M)$.
+For (possibly disconnected) $\Gamma$, $N_{\mathrm{conn}}(\Gamma)$ denotes its number of connected components.
+
+% --- Dimensional Convention ---
+\paragraph{Dimensional Convention.}
+All dimensional checks are performed relative to the following fixed units:
+\[
+[{\rm Length}]=L,\quad [\vol_d]=L^d,\quad [{\rm Curvature}]=L^{-1},\quad [\Delta]=L^{-2},\quad [\tau]=L^2,\quad [t]=L.
+\]
+Here $\tau$ denotes the \emph{heat–time parameter} (diffusion scaling, consistent with $\partial_\tau u=\Delta u$),
+while $t$ denotes the \emph{geometric time parameter} for the geodesic flow.
+All dimensional consistency checks below are carried out with this convention; in particular, the heat coefficients in Definition~\ref{def:heat-expansion} are written in the diffusion scale $\tau$, while the mixing hypothesis in Hypothesis~\ref{hyp:mixing} is stated in the geometric time $t$ for the reflecting flow.
+
+% ------------------------------------------------------------
+\subsection{(FA) Functional–analytic foundation}
+
+\begin{definition}[Trace spaces and litho–Laplacian]\label{def:litho-Laplacian}
+Let $\gamma_{\partial M}$ and $\gamma_\Gamma$ denote the trace operators on $\partial M$ and $\Gamma$, respectively (well-defined and continuous under (SA.1); see Remark~\ref{rem:trace-continuity}).
+Define the Dirichlet Sobolev subspace
+\[
+H^1_0(M;\,\partial M\cup\Gamma)
+:= \{\, u\in H^1(M) \;:\; \gamma_{\partial M}(u)=0,\ \gamma_\Gamma(u)=0 \,\}.
+\]
+The \emph{litho–Laplacian} $L_\Gamma$ is the unique self–adjoint operator associated with the closed quadratic form
+\[
+Q[u] = \int_M |\nabla u|^2\,d\vol_g,\qquad \Dom(Q)=H^1_0(M;\,\partial M\cup\Gamma).
+\]
+In other words, $L_\Gamma$ acts as the negative Laplace–Beltrami operator in the distributional sense on the open manifold $M\setminus\Gamma$:
+\[
+\Dom(L_\Gamma)=\{\,u\in H^1_0(M;\,\partial M\cup\Gamma):\ \Delta_g u \in L^2(M\setminus\Gamma)\,\},\qquad
+L_\Gamma u=-\Delta_g u \quad \text{on } M\setminus\Gamma,
+\]
+where $\Delta_g u$ is taken in the distributional sense on $M\setminus\Gamma$ and represented by an $L^2$ function there.
+Equivalently, writing $M\setminus\Gamma=\bigsqcup_{j=1}^J U_j$ into connected components, the condition $\Delta_g u\in L^2(M\setminus\Gamma)$ means that the distributional Laplacian of $u$ on each $U_j$ is represented by a function in $L^2(U_j)$; no transmission conditions across $\Gamma$ are imposed beyond the Dirichlet trace $\gamma_\Gamma u=0$.
+In particular, functions in $\Dom(L_\Gamma)$ vanish on $\Gamma$ in the trace sense, so $\Gamma$ acts as an internal Dirichlet boundary: no transmission conditions across $\Gamma$ occur.
+\end{definition}
+
+\begin{remark}[Dirichlet Laplacian on the sliced domain]\label{rem:Dirichlet-on-cut}
+The space $H^1_0(M;\,\partial M\cup\Gamma)$ imposes Dirichlet conditions on both $\partial M$ and $\Gamma$ (in the trace sense).
+Equivalently, $L_\Gamma$ is the Dirichlet Laplacian on the sliced domain $M\setminus\Gamma$ with zero boundary data on $\partial M\cup \Gamma$.
+By Kato's representation theorem, the closed, densely defined, semibounded form $Q$ yields a unique self–adjoint operator $L_\Gamma$.
+Moreover, $Q[u]\ge 0$ on its domain, hence $L_\Gamma$ is a \emph{positive} self–adjoint operator; in particular, its spectrum is contained in $[0,\infty)$ and $\Tr e^{-\tau L_\Gamma}$ is well-defined for $\tau>0$.
+Consequently, $e^{-\tau L_\Gamma}$ is a trace-class contraction on $L^2(M)$ for every $\tau>0$.
+(See also Remark~\ref{rem:components} for the orthogonal decomposition across connected components of $M\setminus\Gamma$.)
+\end{remark}
+
+\begin{remark}[Continuity of trace operators]\label{rem:trace-continuity}
+Trace continuity is a boundary regularity statement (Lipschitz suffices), independent of the tubular geometry controlled by $\mathrm{reach}_M(\Gamma)$.
+Under (SA.1), the trace maps $\gamma_{\partial M}:H^1(M)\to L^2(\partial M)$ and
+$\gamma_{\Gamma}:H^1(M\setminus\Gamma)\to L^2(\Gamma)$ are continuous; moreover, the Dirichlet subspace
+$H^1_0(M;\,\partial M\cup\Gamma)$ coincides with the closure of $C^\infty(M)$–functions vanishing on $\partial M\cup\Gamma$ in the $H^1$–norm (see, e.g.,~\cite[Chs.~1–2]{Grisvard1985}).
+Assumption (SA.4) plays a geometric role (tubular neighborhoods, normal exponential map) and is not required for trace continuity.
+\end{remark}
+
+\begin{remark}[Trace and Dirichlet closures: precise citations]\label{rem:grisvard-nums}
+The continuity of trace operators and the identification
+$H^1_0(M;\partial M\cup\Gamma)=\overline{C^\infty_0(M\setminus(\partial M\cup\Gamma))}^{\,H^1}$
+follow from \cite[Thm.~1.5.1–1.5.2,\;§1.5]{Grisvard1985}.
+On cornered domains we rely exclusively on the form domain $H^1_0$ (no $H^2$ up to the boundary is used; cf.\ \cite[Ch.~4]{Grisvard1985}).
+\end{remark}
+
+\begin{remark}[No hidden $H^2$ assumptions]\label{rem:noH2}
+All variational and spectral statements below use only the closed form $Q$ on $H^1_0(M;\partial M\cup\Gamma)$ and the $L^2$–graph characterization of $L_\Gamma$ on $M\setminus\Gamma$; we never invoke $H^2$ boundary regularity.
+\end{remark}
+
+\begin{remark}[Spectral decomposition across components]\label{rem:components}
+Let $\{U_j\}_{j=1}^J$ be the connected components of $M\setminus\Gamma$.
+Then $L_\Gamma$ is unitarily equivalent to the orthogonal direct sum of Dirichlet Laplacians on the $(U_j,g|_{U_j})$, and $\Spec(L_\Gamma)$ is the union (with multiplicities) of the Dirichlet spectra of the $U_j$.
+This identification will be used tacitly in several arguments (compare, e.g., Reed–Simon IV, Thm.~XIII.85).
+\end{remark}
+
+\begin{remark}[Trivial case $\Gamma=\varnothing$]\label{rem:empty}
+If $\Gamma=\varnothing$, then $H^1_0(M;\,\partial M\cup\Gamma)=H^1_0(M;\,\partial M)$ and $L_\Gamma$ reduces to the Dirichlet Laplacian on $(M,g)$; all statements below specialize accordingly (in particular, $a_\Gamma=0$ in Definition~\ref{def:heat-expansion}).
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{(GEO) Dimensionless geometric complexity}
+
+\begin{definition}[Dimensionless geometric complexity]\label{def:complexity}
+For a $C^2$ hypersurface $\Gamma\subset M$ with $\mathrm{reach}_M(\Gamma)>0$ we set
+\[
+\boxed{\;
+\kappa(\Gamma)
+:=\;
+N_{\mathrm{conn}}(\Gamma)
+\;+\;\frac{\vol_{d-1}(\Gamma)}{R^{d-1}}
+\;+\; R^{3-d}\!\int_\Gamma |\vec H_\Gamma|^2\, d\vol_{d-1}\;,
+}
+\]
+where $\vec H_\Gamma$ is the mean curvature \emph{vector}; the squared norm $|\vec H_\Gamma|^2$ is globally defined irrespective of orientability and equals $|H_\Gamma|^2$ in the two–sided case.
+\end{definition}
+
+\begin{remark}[Dimensional check and scaling]
+Each summand in $\kappa(\Gamma)$ is dimensionless: $[\,\vol_{d-1}/R^{d-1}\,]=L^0$ and
+$[\,R^{3-d}\!\int_\Gamma |H|^2 d\vol_{d-1}\,]=L^{3-d}\cdot L^{-2}\cdot L^{d-1}=L^0$.
+Under homotheties $g\mapsto \lambda^2 g$, one has $R\mapsto \lambda R$, $\vol_{d-1}(\Gamma)\mapsto \lambda^{d-1}\vol_{d-1}(\Gamma)$ and $|H_\Gamma|\mapsto \lambda^{-1}|H_\Gamma|$, hence $\kappa(\Gamma)$ is scale–invariant.
+\end{remark}
+
+\begin{remark}[Choice of curvature invariant]
+The use of the squared mean curvature $|\vec H_\Gamma|^2$ is natural for capturing the roundness of $\Gamma$ and is orientation–independent.
+An alternative would be the squared norm of the second fundamental form $|A_\Gamma|^2$; the resulting $\kappa(\Gamma)$ would differ by a topological term (via Gauss–Bonnet in $d=3$) but remain scale-invariant and control the same geometric features.
+Among curvature scalars, $|\vec H_\Gamma|^2$ is the lowest-order, scale-compatible choice; this makes it a minimal yet robust control parameter in $\kappa(\Gamma)$.
+The term $N_{\mathrm{conn}}(\Gamma)$ encodes the topological fragmentation of the interface and supplies a dimensionless complexity counter, without invoking higher invariants such as genus or Euler characteristic.
+\end{remark}
+
+\begin{remark}[On $|A_\Gamma|^2$ vs $|\vec H_\Gamma|^2$ in $d=3$]\label{rem:gb-boundary}
+In $d=3$, the identity $|\vec H|^2 = |A|^2 - 2K_\Gamma$ relates squared mean curvature and the second fundamental form via the intrinsic Gaussian curvature $K_\Gamma$.
+For closed $\Gamma$ the integral of $K_\Gamma$ is topological by Gauss–Bonnet; with boundary, boundary geodesic curvature terms enter.
+Thus replacing $|\vec H|^2$ by $|A|^2$ changes $\kappa(\Gamma)$ by a topological/boundary term without improving scale or robustness, hence our minimal choice.
+\end{remark}
+
+\begin{remark}[Integrability of the curvature term]\label{rem:H-L2}
+Since $\Gamma$ is compact and $C^2$, one has $H_\Gamma\in L^\infty(\Gamma)$ and $\int_\Gamma |H_\Gamma|^2\,d\vol_{d-1}<\infty$; the curvature term is thus well-defined.
+\end{remark}
+
+\begin{remark}[Normalization and nondegeneracy of $\kappa(\Gamma)$]\label{rem:kappa-nondeg}
+By definition $N_{\mathrm{conn}}(\Gamma)\ge 1$ whenever $\Gamma\neq\varnothing$, hence $\kappa(\Gamma)\ge 1$.
+\end{remark}
+
+\begin{remark}[On the choice of the length scale]\label{rem:R-choice}
+Replacing $R=\mathrm{diam}_g(M)$ by any other global length scale comparable under homotheties (e.g.\ $\vol_d(M)^{1/d}$) yields an equivalent dimensionless quantity.
+We prefer $R$ because it is monotone under taking disjoint unions and is compatible with the orthogonal direct sum decomposition across components.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{(UNI) Heat trace expansion and universality convention}
+
+\begin{definition}[Heat trace expansion: scope and leading coefficients]\label{def:heat-expansion}
+As $\tau\downarrow 0$ the heat trace admits the short–time expansion
+\[
+\Tr e^{-\tau L_\Gamma}
+\;\sim\; a_0\,\tau^{-d/2}\;+\;\big(a_{1/2}+a_\Gamma\big)\,\tau^{-(d-1)/2}\;+\;O\!\big(\tau^{-(d-2)/2}\big).
+\]
+In the smooth regime ($\partial M$ and $\Gamma$ of class $C^2$, with $\Gamma\cap\partial M=\varnothing$), the leading coefficients are
+\[
+a_0=(4\pi)^{-d/2}\,\vol_d(M),\quad
+a_{1/2}=-\tfrac14(4\pi)^{-(d-1)/2}\,\vol_{d-1}(\partial M),\quad
+a_\Gamma=-\tfrac14(4\pi)^{-(d-1)/2}\,\vol_{d-1}(\Gamma).
+\]
+\end{definition}
+
+\begin{remark}[Corners and intersections]\label{rem:corners}
+If piecewise $C^2$ boundaries or transversal intersections $\Gamma\cap\partial M\neq\varnothing$ are present (the \emph{corners regime}),
+additional corner/edge contributions appear at orders different from $\tau^{-(d-1)/2}$ (and may include logarithmic factors).
+However, the \emph{interior} surface density of the $\tau^{-(d-1)/2}$ term remains universal and equals $-\tfrac14(4\pi)^{-(d-1)/2}$ away from corners.
+Whenever explicit smooth–regime formulas are invoked in proofs, we tacitly assume $\Gamma\cap\partial M=\varnothing$ for that argument; the corners regime is handled separately where stated.
+\end{remark}
+
+\begin{remark}[Existence of the short-time expansion]\label{rem:existence-heat}
+Under (SA.1)–(SA.4), the short–time heat trace asymptotics for $L_\Gamma$ follows from local parametrix constructions and known results on heat kernels for manifolds with (piecewise smooth) boundaries and internal interfaces; see, e.g., \cite{SafarovVassiliev1997,Gilkey1995} for smooth boundaries and \cite{Grisvard1985} for nonsmooth domains.
+The constant $-1/4$ for the surface density arises already in the flat half-space model with a Dirichlet hyperplane, see \cite[Sec.~1.5]{Gilkey1995}.
+In the corners regime, the full expansion may involve additional terms; our use of the leading surface density is confined to smooth points of $\Gamma$ away from $\partial M$.
+See also \cite{Grieser2002} and related works on heat kernels in domains with corners; we use only the leading interior surface term away from singular sets.
+\end{remark}
+
+\begin{remark}[Locality of the universal surface density]\label{rem:local-universal-density}
+The universality assertion for the $\tau^{-(d-1)/2}$ surface term is \emph{local} on $\Gamma$:
+it holds at every point of $\Gamma$ where $\Gamma$ is $C^2$ and separated from $\partial M$; no contribution from curvature enters at this order.
+At the next order $\tau^{-(d-2)/2}$ curvature invariants of $(M,g)$ and of $\Gamma$ do enter (cf.\ Minakshisundaram–Pleijel/Gilkey coefficients), which is consistent with the locality claim for the leading surface term.
+Accordingly, the leading surface term is represented by a measure absolutely continuous with respect to $\vol_{d-1}\!\upharpoonright\Gamma$ and supported away from the singular set $\partial\Gamma\cup(\Gamma\cap\partial M)$.
+Whenever we use the explicit smooth-regime coefficients in proofs, the argument is understood to be localized away from the singular set.
+\end{remark}
+
+\begin{remark}[Robustness of the universal coefficient]\label{rem:robust-coeff}
+The coefficient $-\tfrac14(4\pi)^{-(d-1)/2}$ for the interior surface contribution is determined locally by the model heat kernel in a Dirichlet half–space and is therefore insensitive to ambient curvature to this order.
+Equivalently, the surface density is the universal coefficient obtained from the Dirichlet half–space parametrix; stability under smooth perturbations follows from locality of heat invariants.
+\end{remark}
+
+\begin{remark}[Next order coefficients]\label{rem:seeley-dewitt}
+Curvature invariants of $(M,g)$ and $\Gamma$ enter at order $\tau^{-(d-2)/2}$ via the Seeley–DeWitt / Minakshisundaram–Pleijel coefficients; see, e.g., \cite[Ch.~1]{Gilkey1995}.
+This is consistent with the locality and curvature–independence of the leading interior surface density.
+\end{remark}
+
+\begin{convention}[Universality of the litho–term]\label{conv:universality}
+Throughout, “universality of $a_\Gamma$” refers to the \emph{leading interior surface contribution} in Definition~\ref{def:heat-expansion}:
+$a_\Gamma$ depends only on $\vol_{d-1}(\Gamma)$ and is independent of the ambient geometry away from $\Gamma$.
+Higher–order coefficients may involve curvature invariants of $\Gamma$ and of $(M,g)$ near $\Gamma$.
+\end{convention}
+
+\begin{remark}[Diffusive time $\tau$ vs geometric time $t$]\label{rem:tau-vs-t}
+Local heat coefficients are computed in the diffusive scale $\tau$.
+Refined remainder estimates rely on Tauberian arguments linking $\Tr(e^{-\tau L_\Gamma})$ to oscillatory integrals controlled by the $t$–dynamics of the reflecting flow; thus $H_{\mathrm{mix}}$ is stated in the geometric time $t$.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{(DYN) Dynamical model for refined remainders}
+
+\paragraph{Motivation for $H_{\mathrm{mix}}$.}
+We invoke $H_{\mathrm{mix}}$ to quantify decay of correlations for the reflecting flow; this hypothesis underlies refined control of spectral remainders beyond the local heat coefficients, via Tauberian arguments linking dynamical mixing to spectral error terms.
+
+\begin{hypothesis}[Exponential mixing for the reflecting model, $H_{\mathrm{mix}}$]\label{hyp:mixing}
+Let $S^*(M\setminus\Gamma)$ denote the unit cotangent bundle of $M\setminus\Gamma$.
+We consider two generalized geodesic flows on $T^*(M\setminus\Gamma)$:
+\begin{enumerate}
+  \item \emph{Reflecting model (conservative):} geodesic transport in the interior and \emph{specular reflections} at $\partial M\cup\Gamma$ (tangential covector preserved, normal covector reversed).
+  This flow preserves the Liouville probability measure $\mu$ on $S^*(M\setminus\Gamma)$ (defined modulo a Liouville-negligible set of singular trajectories) and we normalize $\mu$ so that $\mu(S^*(M\setminus\Gamma))=1$.
+  \item \emph{Absorbing model (dissipative):} specular reflections at $\partial M$ and termination at the first hitting time of $\Gamma$ (Dirichlet absorption).
+\end{enumerate}
+In the reflecting model, the billiard-type flow $\varphi^t$ is defined for $\mu$–almost every initial covector and preserves the Liouville probability measure $\mu$ (normalized by $\mu(S^*(M\setminus\Gamma))=1$).
+The $\mu$–null singular set comprises trajectories that (i) hit corner points or $\partial\Gamma$ in finite time, or (ii) belong to the grazing set (covectors tangent to $\partial M\cup\Gamma$ leading to nontransversal contacts of infinite order); it also includes covectors that hit lower–dimensional strata of $\partial M\cup\Gamma$.
+We define $\varphi^t$ on the complement of this $\mu$–null singular set; on this domain, $\varphi^t$ is $\mu$–measure preserving.
+Existence a.e.\ and measure preservation for billiard-type flows in piecewise smooth settings are classical; we rely only on these a.e.\ properties here (see, e.g., standard references in dispersing billiards and billiards with singularities such as Chernov–Markarian).
+
+% ===================== PART 2/2 (append directly after PART 1/2) =====================
+
+% --- Hermetic closure of dynamics: phase space, observables, norms, constants ---
+
+\subsection*{Appendix to (DYN): Hermetic specification of flow, observables, and mixing}
+
+\begin{definition}[Regular phase space and singular set]\label{def:regular-phase}
+Let $\Sing\subset S^*(M\setminus\Gamma)$ be the union of:
+\begin{enumerate}
+\item the \emph{grazing set} $\Gra := \{(x,\xi): \xi \text{ is tangent to } \partial M\cup\Gamma \text{ at the first hit}\}$;
+\item all covectors whose billiard trajectory hits $\partial\Gamma$ or any corner/edge point of $\partial M\cup\Gamma$ in finite time (forward or backward);
+\item all covectors that hit lower–dimensional strata created by the piecewise $C^2$ structure.
+\end{enumerate}
+Define the \emph{regular phase space} $S^*_{\reg}:=S^*(M\setminus\Gamma)\setminus \Sing$, and let $\mu$ be the Liouville probability measure on $S^*(M\setminus\Gamma)$, normalized by $\mu(S^*(M\setminus\Gamma))=1$.
+By standard results for billiard-type flows with piecewise smooth boundary, $\mu(\Sing)=0$ and $S^*_{\reg}$ is $\varphi^t$–invariant a.e.
+\end{definition}
+
+\begin{definition}[Billiard flow on $S^*_{\reg}$]\label{def:billiard-flow}
+The reflecting flow $\varphi^t:S^*_{\reg}\to S^*_{\reg}$ is defined by concatenation of unit–speed geodesic arcs and \emph{specular reflections} at $\partial M\cup\Gamma$:
+if $n$ denotes the inward unit normal covector at a regular reflection point, then the outgoing covector is obtained by reversing the normal component and keeping the tangential component unchanged.
+Along geodesic transport and at each regular reflection, the Liouville measure $\mu$ is preserved; hence $\varphi^t$ is $\mu$–measure preserving on $S^*_{\reg}$.
+\end{definition}
+
+\begin{remark}[Precise scope for correlations]\label{rem:scope-correlations}
+All correlation integrals and norms below are taken on the \emph{regular} phase space $S^*_{\reg}$; the $\mu$–null singular set $\Sing$ is excluded by definition and does not affect correlation bounds.
+All measurability statements are with respect to the Borel $\sigma$–algebra on $S^*_{\reg}$; composition $G\circ\varphi^t$ is defined $\mu$–a.e.\ by the a.e.\ definition of $\varphi^t$.
+\end{remark}
+
+\begin{definition}[Admissible observables and norms]\label{def:admissible}
+Fix $r\in\mathbb{N}$ and $\eta\in(0,1]$.
+Let $C^r(S^*_{\reg})$ denote the space of functions that are $C^r$ on $S^*_{\reg}$ in the sense of any fixed smooth atlas adapted to the piecewise $C^2$ structure and the reflection hypersurfaces; its norm is
+\[
+\|F\|_{C^r}:=\sum_{|\alpha|\le r}\sup_{S^*_{\reg}}|D^\alpha F|.
+\]
+Let $C^\eta(S^*_{\reg})$ be the Hölder class with the standard seminorms on such charts.
+By compactness of $S^*(M\setminus\Gamma)$ and equivalence of adapted atlases on $S^*_{\reg}$, any two such norms are equivalent.
+\end{definition}
+
+\begin{remark}[Chart–independence]\label{rem:chart-independence}
+All constants implicit in the norm equivalence depend only on the choice of a finite atlas subordinate to a fixed collar neighborhood of $\partial M\cup\Gamma$ and on uniform $C^2$ bounds of $g$ and of the second fundamental forms along the reflecting hypersurfaces.
+Hence bounds stated below are intrinsic and stable under $C^2$–small perturbations of the geometry.
+\end{remark}
+
+\begin{definition}[Correlation functional]\label{def:correlation}
+For $F,G\in L^2(S^*_{\reg},\mu)$ define the centered correlation
+\[
+\Corr_t(F,G):=\int_{S^*_{\reg}}\!\!\Big(F-\textstyle\int F\,d\mu\Big)\Big(G\circ\varphi^t-\textstyle\int G\,d\mu\Big)d\mu,
+\qquad t\in\mathbb{R}.
+\]
+\end{definition}
+
+\begin{hypothesis}[Hermetic exponential mixing $H_{\mix}^{\heartsuit}$]\label{hyp:mixing-hermetic}
+There exist $r\in\mathbb{N}$, $\eta\in(0,1]$, constants $\alpha>0$ and $C=C(M,g,\Gamma,r,\eta)$ such that for all $F\in C^r(S^*_{\reg})$ and $G\in C^\eta(S^*_{\reg})$ with $\int F\,d\mu=\int G\,d\mu=0$ one has
+\[
+|\Corr_t(F,G)|\ \le\ C\,\|F\|_{C^r}\,\|G\|_{C^\eta}\,e^{-\alpha |t|},\qquad t\in\mathbb{R}.
+\]
+The constants $\alpha$ and $C$ may depend on $(M,g,\Gamma)$ through sectional curvature bounds on a fixed collar of $\partial M\cup\Gamma$, the $C^2$–norms of the second fundamental forms of $\partial M$ and $\Gamma$, and the complexity $\kappa(\Gamma)$; they are invariant under homotheties $g\mapsto \lambda^2 g$ after the natural time rescaling $t\mapsto \lambda t$.
+\end{hypothesis}
+
+\begin{remark}[Why $C^r$–vs–Hölder and robustness]\label{rem:anisotropic}
+The pair $C^r$–$C^\eta$ is standard for billiard flows and suffices for Tauberian estimates of spectral remainders.
+One could replace these by anisotropic Banach spaces à la Gouëzel–Liverani/Blank–Keller–Liverani; our arguments require only \emph{some} exponentially mixing dense algebra, which $C^r\cap C^\eta$ provides on $S^*_{\reg}$.
+\end{remark}
+
+\begin{remark}[Sufficient geometric scenarios]\label{rem:sufficient-geom}
+Hypothesis~\ref{hyp:mixing-hermetic} holds in the following model settings (not used elsewhere except as sanity checks):
+\begin{itemize}
+\item \emph{Dispersing billiards in domains}: $(M,g)$ a Euclidean domain with strictly convex dispersing components of $\partial M\cup\Gamma$ and no cusps; exponential decay of correlations for Hölder observables is classical.
+\item \emph{Anosov backgrounds}: If the geodesic flow on $(M,g)$ is Anosov and reflections occur on strictly convex $\partial M\cup\Gamma$ in the sense of Sinai, one expects exponential mixing on $S^*_{\reg}$; proofs exist in several codified frameworks.
+\end{itemize}
+These examples justify the non-emptiness of the hypothesis class; the present paper \emph{assumes} $H_{\mix}^{\heartsuit}$ and exploits only its stated consequence.
+\end{remark}
+
+\begin{lemma}[A.e.\ invariance and Liouville preservation]\label{lem:liouville}
+On $S^*_{\reg}$ the flow $\varphi^t$ is defined for all $t\in\mathbb{R}$, $\mu$–a.e., and preserves $\mu$: for all Borel $E\subset S^*_{\reg}$, $\mu(\varphi^{-t}E)=\mu(E)$.
+\end{lemma}
+
+\begin{remark}[Alignment with the heat scale]\label{rem:tauberian-interface}
+We use $H_{\mix}^{\heartsuit}$ only via Tauberian transference of oscillatory integral bounds into spectral remainder estimates for $\Tr(e^{-\tau L_\Gamma})$; the partition $S^*_{\reg}\sqcup\Sing$ ensures that grazing/corner interactions do not enter correlation estimates (they are $\mu$–null).
+\end{remark}
+
+% ------------------------------------------------------------
+\paragraph{Interfaces as internal Dirichlet boundaries (recalled).}\label{rem:jump}
+For $u\in H^1_0(M;\,\partial M\cup\Gamma)$ one has $\gamma_\Gamma(u)=0$; no transmission condition is imposed for the conormal derivative, and $\partial_\nu u$ may jump across $\Gamma$.
+Thus $\Gamma$ acts as an internal Dirichlet wall in all variational identities used below.
+
+\begin{remark}[No spurious boundary terms in Green identities]\label{rem:green}
+All Green–type formulas are applied componentwise on $U_j$ and summed; the internal boundary $\Gamma$ contributes no boundary integrals because the trace of $u$ vanishes on $\Gamma$.
+\end{remark}
+
+% ------------------------------------------------------------
+\paragraph{Bibliographic anchors.}
+For boundary traces and elliptic problems in nonsmooth domains, see \cite[Chs.~1–2]{Grisvard1985}.
+For heat kernel coefficients on smooth manifolds with boundary, see \cite{Gilkey1995,SafarovVassiliev1997};
+the universal surface density $-\tfrac14\,(4\pi)^{-(d-1)/2}$ already appears in the flat half–space model \cite[Sec.~1.5]{Gilkey1995}.
+For corner/edge contributions in polyhedral settings, see, e.g., \cite{Grieser2002}.
+Classical references for billiard–type flows with singularities include Chernov–Markarian; we use only a.e.\ existence and measure preservation of the reflecting flow together with the stated exponential correlation decay hypothesis.
+
+% =====================================================================
+% End (paste PART 2/2 immediately after PART 1/2; no gaps, no edits)
+% =====================================================================
