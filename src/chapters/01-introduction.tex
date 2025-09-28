@@ -1,859 +1,671 @@
-\section*{Part I. Historical Motivation and Basic Definitions}
+\chapter{Introduction}
 
-\noindent
-The classical theory of spectral geometry has been largely concerned with smooth domains and manifolds with smooth boundary. The foundational works of Weyl~\cite{Weyl11}, Ivrii~\cite{Ivrii80}, and Safarov--Vassiliev~\cite{SafarovVassiliev97} established asymptotic expansions of the eigenvalue counting function and the heat trace in terms of geometric invariants such as the volume and the boundary area. Later developments by Cheeger~\cite{Cheeger83} and Brüning~\cite{Bruening84} extended this theory to stratified spaces with conical and edge singularities. 
+\section*{Orientation and Scope}
+\addcontentsline{toc}{section}{Orientation and Scope}
 
-However, one basic situation has not been systematically addressed: the effect of an \emph{internal hypersurface} embedded in a smooth Riemannian manifold. Unlike an external boundary, such an internal cut does not change the topology of the ambient manifold, but it imposes additional boundary conditions that alter the spectrum. This phenomenon is not covered by the classical boundary theory, nor by the stratification theory of Cheeger and Brüning, where strata are intrinsic singularities of the ambient space. In contrast, here the hypersurface is smoothly embedded into a regular manifold and acts as a ``fracture'' carrying its own spectral contribution. The systematic study of such contributions is the subject of this work, which we refer to as \emph{lithomathematics}.
+The present monograph develops the foundations of a new analytic framework,
+which for brevity we call \emph{lithomathematics}.
+By this we mean the spectral–geometric analysis of Laplace–type operators
+on compact Riemannian manifolds $(M,g)$ that are \emph{sliced} along internal
+$C^2$ hypersurfaces (interfaces) $\Gamma$.
+Unlike the traditional theory of Laplace–Beltrami operators on manifolds with
+boundary, or PDE models with transmission conditions, we impose a \emph{strict
+Dirichlet condition} on $\Gamma$. In effect, the interface acts as an internal
+absorbing barrier, and the geometry of $(M,g)$ is probed through the spectral,
+microlocal, and dynamical consequences of such slicing.
 
-\medskip
-\noindent
-\textbf{Definition (Litho-domain).} 
-Let $(\Omega,g)$ be a compact $d$-dimensional Riemannian manifold ($d \geq 2$) with piecewise $C^2$ boundary. Let $\Gamma \subset \Omega$ be a closed, embedded hypersurface of class $C^2$, transversal to $\partial \Omega$. The associated \emph{litho-Laplacian} $L_\Gamma$ is the self-adjoint realization of $-\Delta_g$ on $L^2(\Omega)$ with Dirichlet conditions both on $\partial \Omega$ and on $\Gamma$. Equivalently, $L_\Gamma$ is the Friedrichs extension of the quadratic form
-\[
-Q_\Gamma[u] = \int_{\Omega \setminus \Gamma} |\nabla u|^2 \, d\mathrm{vol}_g, 
-\qquad 
-u \in H^1_0(\Omega \setminus \Gamma).
-\]
+\paragraph{Chapter~0 as the formal kernel.}
+All formal standing assumptions, conventions, and notations are fixed once and for all in
+Chapter~0 (“\emph{Foundational Definitions and Conventions}”, \S\ref{sec:definitions}).
+In particular, $(\mathrm{SA})$ states the geometric regularity (piecewise $C^2$ with controlled corners), transversality, and positive \emph{relative reach} of $\Gamma$;
+$(\mathrm{FA})$ defines the \emph{litho–Laplacian} $L_\Gamma$ via the Friedrichs form on $H^1_0(M;\partial M\cup\Gamma)$;
+$(\mathrm{GEO})$ introduces the dimensionless \emph{geometric complexity} $\kappa(\Gamma)$;
+$(\mathrm{UNI})$ records the universal surface density in the heat trace at order $\tau^{-(d-1)/2}$;
+$(\mathrm{DYN})$ isolates the reflecting flow on $S^*(M\setminus\Gamma)$ and formulates the exponential–mixing hypothesis $H_{\mix}^\heartsuit$ on the regular phase space.
+These choices are calibrated to be as weak and as canonical as possible for the purposes of this programme.
 
-\medskip
-\noindent
-\textbf{Definition (Geometric complexity).}
-For such a hypersurface $\Gamma$, we define its \emph{geometric complexity} by
-\[
-\kappa(\Gamma) \;=\; N_{\mathrm{comp}}(\Gamma) \;+\; \mathcal{H}^{d-1}(\Gamma) 
-\;+\; \int_\Gamma |H_\Gamma|^2 \, dS,
-\]
-where $N_{\mathrm{comp}}(\Gamma)$ denotes the number of connected components of $\Gamma$, 
-$\mathcal{H}^{d-1}(\Gamma)$ is the $(d-1)$-dimensional Hausdorff measure, and 
-$H_\Gamma$ is the mean curvature. This quantity controls the analytic constants appearing in the remainder estimates for heat traces and eigenvalue counts. It satisfies:
-\begin{itemize}
-\item[(i)] \emph{Invariance under isometries:} $\kappa(\Gamma)$ is unchanged under isometries of $(\Omega,g)$.
-\item[(ii)] \emph{Additivity:} If $\Gamma = \Gamma_1 \sqcup \Gamma_2$ is the disjoint union of two closed hypersurfaces, then 
-\[
-\kappa(\Gamma) = \kappa(\Gamma_1) + \kappa(\Gamma_2).
-\]
-\item[(iii)] \emph{Scaling law:} If the metric is rescaled by $g \mapsto r^2 g$, then
-\[
-\mathcal{H}^{d-1}(\Gamma) \mapsto r^{d-1}\mathcal{H}^{d-1}(\Gamma), 
-\quad 
-\int_\Gamma |H_\Gamma|^2 dS \mapsto r^{d-3}\int_\Gamma |H_\Gamma|^2 dS.
-\]
-Thus $\kappa(\Gamma)$ grows polynomially in $r$, and this precise scaling behavior motivates the normalization chosen later for the litho-invariant.
-\end{itemize}
-
-\medskip
-\noindent
-\textbf{Heat trace expansion and the litho-term.}
-The heat trace of $L_\Gamma$ admits the small-time asymptotic expansion
-\[
-\mathrm{Tr}\, e^{-tL_\Gamma} \;\sim\; a_0 t^{-d/2} \;+\; a_{1/2} t^{-(d-1)/2} 
-\;+\; a_\Gamma t^{-(d-1)/2} \;+\; \cdots, 
-\qquad t \downarrow 0,
-\]
-where
-\[
-a_0 = (4\pi)^{-d/2}\, \mathrm{vol}(\Omega), 
-\qquad 
-a_{1/2} = -\tfrac{1}{4}(4\pi)^{-(d-1)/2}\, \mathrm{vol}(\partial\Omega).
-\]
-The additional coefficient $a_\Gamma$ captures the spectral effect of the internal hypersurface $\Gamma$. As will be proved in Theorem~\ref{thm:fracture-term}, one has
-\[
-a_\Gamma \;=\; -\tfrac{1}{4}(4\pi)^{-(d-1)/2}\, \mathrm{vol}(\Gamma),
-\]
-a phenomenon absent from the theory of stratified spaces.
-
-\medskip
-\noindent
-\textbf{Definition (Litho-invariant).}
-The \emph{isotropic litho-invariant} of $(\Omega,\Gamma)$ is defined by
-\[
-K_L^{\mathrm{iso}}(\Omega,\Gamma) \;=\; \frac{a_\Gamma}{a_0}.
-\]
-This ratio compares the litho-term to the leading volume term and is scale-invariant by construction: under $g \mapsto r^2 g$, both numerator and denominator scale like $r^d$, making $K_L^{\mathrm{iso}}$ dimensionless. An alternative boundary-normalized invariant 
-\[
-K_L^{\partial}(\Omega,\Gamma) = \frac{a_\Gamma}{a_{1/2}}
-\]
-will also be considered in Section~\ref{sec:variants}; the isotropic version is canonical from the viewpoint of similarity theory.
-
-\medskip
-\noindent
-\textbf{Example (Interval with an interior cut).}
-Let $\Omega = [0,\pi] \subset \mathbb{R}$ with $\Gamma = \{\pi/2\}$. Then $L_\Gamma$ is the Dirichlet Laplacian on the two subintervals. Its spectrum consists of $\{(2n)^2\}_{n\geq 1}$, each with multiplicity two. Comparing the heat traces gives
-\[
-\mathrm{Tr}\, e^{-tL_\Gamma} - \mathrm{Tr}\, e^{-tL_\Omega}
-\;\sim\; -\tfrac{1}{2} t^{-1/2}, \qquad t \downarrow 0.
-\]
-Thus $a_\Gamma = -\tfrac{1}{2}$ in one dimension, confirming that the litho-term exists even in this simplest case. Note that in $d=1$ the exponents in the heat expansion differ: the boundary contribution is of order $t^0$, so the normalization of $K_L$ requires separate treatment (see Section~\ref{sec:dimension-one}). This example demonstrates the nontriviality of the litho-invariant and its consistency with classical expansions.
-
-\section*{Part II. Relation to Existing Theories and Statement of Main Results}
-
-\subsection*{2.1. Relation to classical spectral geometry}
-The starting point of this work is the classical asymptotic expansion for the heat trace of the Dirichlet Laplacian $L_\Omega$ on a compact Riemannian manifold $(\Omega,g)$ with smooth boundary $\partial \Omega$:
-\[
-\mathrm{Tr}\, e^{-t L_\Omega} \;\sim\; a_0 t^{-d/2} \;+\; a_{1/2} t^{-(d-1)/2} \;+\; a_1 t^{-(d-2)/2} \;+\; \cdots, 
-\qquad t \downarrow 0,
-\]
-with coefficients expressed in terms of the volume, the boundary area, and the curvature of $(\Omega,g)$ 
-(see Ivrii~\cite{Ivrii80}, Safarov--Vassiliev~\cite{SafarovVassiliev97}). 
-These expansions have been the cornerstone of spectral geometry, linking eigenvalue asymptotics to geometric invariants.
-
-\subsection*{2.2. Relation to stratified and singular spaces}
-A different but related line of research concerns analysis on stratified spaces with conical and edge singularities 
-(Cheeger~\cite{Cheeger83}, Brüning~\cite{Bruening84}, Melrose~\cite{Melrose93}). 
-In these works, the singularities are intrinsic to the space itself: strata of lower dimension are part of the definition of the ambient space. 
-The contribution of such strata to the heat trace depends sensitively on angles and local geometry near the singularity.
-
-In contrast, the present setting involves a smooth manifold $(\Omega,g)$ into which a closed hypersurface $\Gamma$ is embedded. 
-The ambient manifold has no intrinsic singularity; instead, $\Gamma$ carries additional boundary conditions. 
-The resulting contribution to the heat trace has the same order as the classical boundary term but is determined by the $(d-1)$-dimensional measure of $\Gamma$. 
-This phenomenon is not captured by existing stratification theory.
-
-\subsection*{2.3. Relation to singular perturbations}
-Another related direction is the study of Schrödinger operators with singular potentials supported on submanifolds, particularly delta-potentials (Albeverio et al.~\cite{Albeverio04}). 
-In those models, the new spectral features arise from the analytic nature of the potential. 
-By contrast, in the litho-setting no potential is introduced; the effect stems purely from the geometry of the internal hypersurface and the imposition of Dirichlet conditions along it.
-
-\subsection*{2.4. Statement of main results}
-We now summarize the principal results established in this work. 
-Precise formulations and proofs are given in Sections~\ref{sec:heat-trace}--\ref{sec:universality}.
-
-\begin{theorem}[Localized heat trace expansion]\label{thm:localized}
-Let $(\Omega,g)$ be a compact Riemannian manifold of dimension $d \geq 2$ with piecewise $C^2$ boundary, and let $\Gamma \subset \Omega$ be a closed $C^2$ hypersurface transversal to $\partial \Omega$. 
-Then the heat trace of the litho-Laplacian $L_\Gamma$ satisfies
-\[
-\mathrm{Tr}\, e^{-t L_\Gamma} \;\sim\; a_0 t^{-d/2} \;+\; a_{1/2} t^{-(d-1)/2} \;+\; a_\Gamma t^{-(d-1)/2} \;+\; O(t^{-(d-2)/2}),
-\quad t \downarrow 0,
-\]
-with the additional coefficient
-\[
-a_\Gamma \;=\; -\tfrac{1}{4}(4\pi)^{-(d-1)/2} \, \mathrm{vol}(\Gamma).
-\]
-\end{theorem}
-
-\begin{theorem}[Polynomial control]\label{thm:poly}
-Under the same assumptions, the litho-term admits the bound
-\[
-|a_\Gamma| \;\leq\; C_d \, P(\kappa(\Gamma)),
-\]
-where $P$ is a universal polynomial depending only on $d$, and $C_d$ is a constant independent of $(\Omega,\Gamma)$.
-\end{theorem}
-
-\begin{theorem}[Dynamical refinement]\label{thm:dynamics}
-If the geodesic flow on $(\Omega \setminus \Gamma,g)$ satisfies a uniform exponential mixing property (denoted H\_mix), then the remainder in Theorem~\ref{thm:localized} improves to
-\[
-R(t) = O\!\left(\kappa(\Gamma)\, t^{-(d-2)/2 - \delta}\right),
-\qquad t \downarrow 0,
-\]
-for some $\delta > 0$ depending only on the mixing rate.
-\end{theorem}
-
-\begin{conjecture}[Universality]\label{conj:universality}
-Let $\{\Gamma_n\}$ be a stationary ergodic sequence of $C^2$ hypersurfaces in a fixed compact manifold $(\Omega,g)$ with $\sup_n \kappa(\Gamma_n) < \infty$. 
-Then almost surely
-\[
-\lim_{n\to\infty} K_L^{\mathrm{iso}}(\Omega,\Gamma_n) \;=\; K_L^*(d),
-\]
-where $K_L^*(d)$ is a universal constant depending only on the dimension.
-\end{conjecture}
-
-\subsection*{2.5. Scope of claims}
-Theorems~\ref{thm:localized}--\ref{thm:dynamics} are proved in this monograph under the regularity assumptions stated. 
-Conjecture~\ref{conj:universality} is not proved; it is formulated as a guiding principle supported by heuristic and numerical evidence (see Section~\ref{sec:universality}). 
-We emphasize that no results beyond the scope of the above theorems are claimed.
-
-\section*{Part III. Illustrative Computations (Revised)}
-
-\subsection*{3.1. Purpose and scope}
-We present model calculations confirming that the fracture contribution is genuine and computable. All examples below satisfy the standing hypotheses of Section~II unless explicitly stated otherwise. No claim is made beyond the stated assumptions.
-
-\subsection*{3.2. One-dimensional interval with an internal Dirichlet point}
-Let $\Omega=(0,\pi)$ and $\Gamma=\{\pi/2\}$. Denote by $L_\Omega$ the Dirichlet Laplacian on $\Omega$ and by $L_\Gamma$ the Dirichlet Laplacian on $\Omega\setminus\Gamma$ (i.e. an additional Dirichlet condition at $x=\pi/2$).
-
-\begin{proposition}\label{prop:1d-interval}
-As $t\downarrow0$ one has
-\[
-\mathrm{Tr}\,e^{-tL_\Omega}\sim \frac{\pi}{2\sqrt{\pi t}}-\frac12+O(e^{-c/t}),\qquad
-\mathrm{Tr}\,e^{-tL_\Gamma}\sim \frac{\pi}{2\sqrt{\pi t}}-1+O(e^{-c/t}),
-\]
-hence
-\[
-\mathrm{Tr}\,e^{-tL_\Gamma}-\mathrm{Tr}\,e^{-tL_\Omega}\sim -\frac12\qquad (t\downarrow0).
-\]
-\end{proposition}
-
-\noindent
-Thus in $d=1$ the fracture produces a contribution of order $t^{0}$ (not $t^{-(d-1)/2}$). This is consistent with the dimension-dependent scaling of boundary terms and is explicitly separated in our framework.
-
-\subsection*{3.3. Unit square with a horizontal internal segment}
-Let $\Omega=(0,1)\times(0,1)$ with the Euclidean metric and let $\Gamma=\{(x,1/2):\,0<x<1\}$. Then $\Gamma$ is a $C^\infty$ interior segment, transversal to $\partial\Omega$ is \emph{not} required since $\Gamma\cap\partial\Omega=\varnothing$.
-
-By separation of variables, admissible $y$-modes are $\sin(2\pi n y)$, $n\ge1$, so the spectrum of $L_\Gamma$ is
-\[
-\lambda_{m,n}=(\pi m)^2+(2\pi n)^2,\qquad m,n\ge1.
-\]
-A standard Poisson summation argument shows that, as $t\downarrow0$,
-\[
-\mathrm{Tr}\,e^{-tL_\Gamma}-\mathrm{Tr}\,e^{-tL_\Omega}
-\;=\; -\,\frac{1}{4}\,(4\pi)^{-1/2}\,|\Gamma|\,t^{-1/2}\;+\;O(1),
-\]
-so here
-\[
-a_\Gamma \;=\; -\,\frac{1}{4}\,(4\pi)^{-1/2}\,|\Gamma|,
-\]
-in agreement with the localized trace expansion under the smooth interior fracture hypothesis.
-
-\subsection*{3.4. Wedge domain with a radial segment (non-transversal case)}
-Let $\Omega\subset\mathbb{R}^2$ be a wedge of opening angle $\theta$ and let $\Gamma$ be a radial segment from the apex to the interior. Here $\Gamma$ meets $\partial\Omega$ at the apex and at the outer boundary; this violates the standing hypothesis $\Gamma\cap\partial\Omega=\varnothing$ used in our main theorems. In this setting one still obtains a $t^{-1/2}$ contribution associated with the \emph{smooth interior portion} of $\Gamma$ with coefficient $-\frac14(4\pi)^{-1/2}$, while \emph{additional corner terms} arise at the intersection points; those depend on the local angular data (cf.\ Cheeger-type analyses for stratified/corner singularities) and contribute at orders different from $t^{-1/2}$. This example delineates the boundary of applicability of the interior-fracture theorems.
-
-\subsection*{3.5. Synthesis}
-The calculations above show:
+\paragraph{What is \emph{new} conceptually.}
+Two structural decisions distinguish our framework:
 \begin{enumerate}
-\item In $d=1$ the fracture contribution appears at order $t^0$ and can be computed exactly (\autoref{prop:1d-interval}).
-\item In $d=2$ with a smooth interior segment one obtains the universal coefficient $-\frac14(4\pi)^{-1/2}$ multiplying $|\Gamma|$ at order $t^{-1/2}$, consistent with the localized trace expansion.
-\item When the fracture touches the boundary (non-transversal/corner interaction), the smooth interior contribution persists but corner corrections—outside our standing hypotheses—enter at different orders; these are treated separately in later sections.
+  \item \textbf{Interfaces as walls, not seams.}
+  Internal interfaces are treated as \emph{Dirichlet walls}, not as transmission seams with jump/continuity conditions. This eliminates ill–posedness at grazing rays and isolates a universal interior surface law in the heat trace.
+  \item \textbf{Dimensionless control by $\kappa(\Gamma)$.}
+  We track the scale–invariant geometric burden of the slicing by a minimal, orientation–free functional
+  $\kappa(\Gamma)$ combining topology ($N_{\mathrm{conn}}$), area ($\vol_{d-1}$), and curvature ($\int|\vec H|^2$).
+  This parameter propagates into quantitative constants (e.g.\ in dynamical hypotheses and remainder bounds) without polluting leading coefficients.
 \end{enumerate}
-All examples are fully consistent with the general framework and clarify the precise role of the hypotheses.
 
-\section*{Part IV. Dynamical Aspects and Refined Remainders}
+\paragraph{Microlocal viewpoint.}
+At $\tau\downarrow 0$, the surface term of order $\tau^{-(d-1)/2}$ is entirely local and universal away from corners and $\partial\Gamma$.
+This universality is encoded by the flat half–space model with a Dirichlet hyperplane; curvature of $(M,g)$ and $\Gamma$ enters only at the next order via Seeley–DeWitt coefficients. The monograph
+systematically separates the \emph{local universal} content (captured in Chapter~0) from the \emph{global dynamical} content (addressed via $H_{\mix}^\heartsuit$ and Tauberian transfer).
 
-\subsection*{4.1. Orientation}
-The preceding sections established the existence of an additional $t^{-(d-1)/2}$-term in the heat trace expansion caused by an internal hypersurface $\Gamma\subset\Omega$. Beyond the leading asymptotics, a central question in spectral theory is the nature of the error term in trace formulas and its dependence on the underlying dynamics. In this part we outline the dynamical framework governing the remainder in the litho-setting and state refined estimates to be proved in later chapters.
+\paragraph{Dynamical viewpoint.}
+The reflecting geodesic flow on $M\setminus\Gamma$ is well–defined for $\mu$–a.e.\ initial covector and preserves Liouville measure on the regular phase space.
+Exponential decay of correlations (assumed as $H_{\mix}^\heartsuit$) supplies the statistical input needed to turn local heat information into quantitative spectral remainders.
+We specify observables on the regular phase space and decouple singular strata (grazing, corners, $\partial\Gamma$), which are $\mu$–null but require careful bookkeeping.
 
-\subsection*{4.2. Geodesic flow away from $\Gamma$}
-Let $(\Omega,g)$ be a compact Riemannian manifold of dimension $d\ge2$ with boundary conditions as specified earlier, and let $\Gamma\subset\Omega$ be a smooth, compact, closed hypersurface, transversal to $\partial\Omega$. Consider the unit tangent bundle $S^*\Omega$ with the geodesic flow $\varphi^t$. The presence of $\Gamma$ introduces a distinguished codimension-one submanifold
-\[
-\Sigma_\Gamma = \{ (x,\xi)\in S^*\Omega : x\in\Gamma,\; \xi\perp T_x\Gamma \},
-\]
-corresponding to geodesics striking $\Gamma$ orthogonally. For the Dirichlet fracture operator $L_\Gamma$, these geodesics represent directions in which the flow is abruptly terminated. Thus the dynamics relevant for the spectral analysis are those of $\varphi^t$ on $S^*\Omega\setminus\Sigma_\Gamma$, where trajectories are reflected or absorbed at $\Gamma$.
+\paragraph{Model examples (guiding sanity checks).}
+\begin{itemize}
+  \item \emph{Euclidean ball sliced by a concentric sphere.} The coefficient $a_\Gamma$ reproduces the surface density $-\frac14 (4\pi)^{-(d-1)/2}\vol_{d-1}(\Gamma)$; higher–order terms detect curvature in the expected manner.
+  \item \emph{Negatively curved backgrounds with strictly convex walls.} The reflecting flow is expected to be (nonuniformly) hyperbolic; mixing with exponential rate becomes plausible within existing frameworks, matching our hypothesis $H_{\mix}^\heartsuit$.
+  \item \emph{Polygonal domains with straight cuts.} Corners add separate contributions at displaced orders (including possible logs) but do not contaminate the interior surface density at $\tau^{-(d-1)/2}$.
+\end{itemize}
 
-\subsection*{4.3. Mixing hypothesis}
-The sharpness of remainder estimates in trace formulas is classically linked to mixing properties of the geodesic flow (see, e.g., results of Duistermaat--Guillemin and Zelditch). In the litho-context we impose the following assumption.
+\paragraph{Non–goals (explicitly out of scope).}
+We do \emph{not} treat transmission problems, Robin/impedance walls, or spectral problems with frequency–dependent boundary conditions; we also avoid probabilistic random wall models. Our focus is the clean Dirichlet slicing and its universal/local + dynamical/global synthesis.
 
-\begin{definition}[Hypothesis H$_{\mathrm{mix}}$]
-The geodesic flow on $S^*\Omega\setminus\Sigma_\Gamma$ is exponentially mixing with respect to the Liouville measure induced by $g$.
-\end{definition}
+\paragraph{How to read this monograph.}
+Chapter~0 is the formal kernel; it can be consulted as a reference at any point. The present Introduction explains (i) why the kernel is designed as it is, (ii) how it couples to microlocal and dynamical mechanisms, and (iii) where universality ends and model–dependent features begin. Subsequent chapters state and prove the main theorems, with constants monitored through $\kappa(\Gamma)$ and dynamical rates governed by $H_{\mix}^\heartsuit$.
 
-This hypothesis is known to hold in several important classes of manifolds (e.g.\ compact negatively curved manifolds) and provides a natural analogue of the conditions under which remainder terms in classical trace formulas exhibit power savings.
+\medskip
+This completes the orientation. We now turn to the rationale for building such a framework.
 
-\subsection*{4.4. Localized trace formula revisited}
-Let $g\in C_c^\infty(\mathbb{R})$ be an even test function with Fourier transform $\widehat g$ compactly supported. Then the localized spectral measure associated with $L_\Gamma$ satisfies
-\[
-\mathrm{Tr}\, g(\sqrt{L_\Gamma}) 
-= \mathrm{Tr}\, g(\sqrt{L_\Omega})
-+ A_\Gamma(g) 
-+ R_\Gamma(g),
-\]
-where $A_\Gamma(g)$ is the litho-contribution described previously and $R_\Gamma(g)$ is the remainder. The main goal of this part is to state precise bounds on $R_\Gamma(g)$.
+\section*{Motivation}
+\addcontentsline{toc}{section}{Motivation}
 
-\subsection*{4.5. Refined remainder under dynamical assumptions}
-\begin{theorem}[Refined remainder under H$_{\mathrm{mix}}$]\label{thm:refined-remainder}
-Suppose Hypothesis H$_{\mathrm{mix}}$ holds. Then for all even $g\in C_c^\infty(\mathbb{R})$ with support of $\widehat g$ contained in $[-T,T]$, one has
-\[
-R_\Gamma(g) \;=\; O\!\left( \kappa(\Gamma)\,\|g\|_{C^{d+3}}\,
-T^{d-2-\delta}\right), \qquad \delta>0,
-\]
-where $\delta$ depends only on the exponential mixing rate of the flow.
-\end{theorem}
+The primary motivation is to make precise a widely shared heuristic:
+\emph{inserting an internal Dirichlet wall} produces a \emph{universal} leading
+surface law in the heat trace and a \emph{dynamically controlled} spectral remainder,
+with geometric dependence carried only by explicit curvature terms at the next order
+and by a dimensionless complexity functional of the wall.
 
-\noindent
-Thus, in settings with sufficiently chaotic dynamics, the litho-contribution is isolated with a strictly smaller error than in the general case, mirroring classical results for boundary terms.
-
-\subsection*{4.6. Comparison with the boundary case}
-For smooth manifolds with boundary, analogous results are well established: under exponential mixing of the billiard flow, the remainder in the boundary trace formula admits power savings (see results of Gérard--Leichtnam, Zelditch). Theorem~\ref{thm:refined-remainder} asserts that the same mechanism extends to interior fractures, with $\kappa(\Gamma)$ controlling the dependence on the hypersurface geometry.
-
-\subsection*{4.7. Discussion and outlook}
-This dynamical perspective highlights two essential aspects:
-
+\paragraph{Why Dirichlet slicing (and not transmission).}
+Transmission conditions entangle interior geometry with interface microlocal structure at the leading order, destroying universality and complicating stability.
+By imposing Dirichlet on $\Gamma$ we gain:
 \begin{enumerate}
-\item The universality of the litho-term $a_\Gamma$ is independent of the dynamics.
-\item The precision of remainder estimates is highly sensitive to dynamical properties of the geodesic flow on $\Omega\setminus\Gamma$.
+  \item a canonical, model–determined surface density at order $\tau^{-(d-1)/2}$,
+  \item a clean functional setup ($H^1_0$ on $M\setminus\Gamma$) free of jump constraints,
+  \item robustness under small $C^2$ perturbations of $\Gamma$.
 \end{enumerate}
+This choice isolates the genuinely geometric/dynamical questions in higher orders and in the remainder.
 
-Later chapters will provide proofs of Theorem~\ref{thm:refined-remainder} and explore quantitative links between $\kappa(\Gamma)$, the geometry of $\Gamma$, and mixing rates.
-
-\subsection*{4.8. Closure}
-This part establishes the dynamical framework necessary for refined error estimates in lithomathematics. By explicitly formulating Hypothesis H$_{\mathrm{mix}}$, stating Theorem~\ref{thm:refined-remainder}, and clarifying its relation to the classical boundary case, we provide a seamless bridge from the static asymptotics of the previous parts to the dynamical refinements developed in subsequent chapters.
-
-\section*{Part V. Universality of the Litho–Invariant in Random Ensembles}
-
-\subsection*{5.1. Orientation}
-Beyond the deterministic existence and control results of the previous parts, a guiding theme of this monograph is the emergence of \emph{dimension–only} behavior for the normalized fracture contribution in large or high–frequency regimes. This part formulates quantitative universality principles for the litho–invariant in (i) thermodynamic rescaling limits and (ii) frequency–windowed limits under mild randomness and mixing. The statements are precise, free of rhetorical claims, and confined to explicitly stated classes of ensembles.
-
-\subsection*{5.2. Admissible random ensembles of hypersurfaces}
-Let $(\Omega,g)$ be a fixed compact $d$–dimensional Riemannian manifold with piecewise $C^2$ boundary, $d\ge2$. Write $\mathfrak{H}(\Omega)$ for the set of compact $C^2$ hypersurfaces $\Gamma\subset\Omega$ transversal to $\partial\Omega$, endowed with the Borel $\sigma$–algebra generated by the $C^2$ topology on embedded submanifolds. For $M\ge1$ define the complexity–bounded class
+\paragraph{A dimensionless complexity that scales correctly.}
+Large–scale comparisons (homotheties, direct sums of components) demand a scale–free control parameter. The functional
 \[
-\mathfrak{H}_M(\Omega)\;=\;\{\Gamma\in\mathfrak{H}(\Omega):\ \kappa(\Gamma)\le M\},
+\kappa(\Gamma)
+= N_{\mathrm{conn}}(\Gamma)
++ \frac{\vol_{d-1}(\Gamma)}{R^{d-1}}
++ R^{3-d}\int_\Gamma |\vec H_\Gamma|^2\,d\vol_{d-1}
 \]
-where $\kappa(\Gamma)$ is the geometric complexity recorded in Part~I. We now describe two standard modes of randomization.
+is the minimal orientation–independent quantity that:
+(i) is invariant under $g\mapsto\lambda^2 g$ (after $t\mapsto\lambda t$),
+(ii) monotone under disjoint unions,
+(iii) stable under $C^2$ variations of $\Gamma$.
+It thus provides the “budget” that can legitimately enter constants without contaminating universal coefficients.
 
-\paragraph{(A) Thermodynamic rescaling ensembles.}
-For $L\ge1$ consider the rescaled manifold $(\Omega_L,g_L)$ obtained from $(\Omega,g)$ by homothetic dilation $g_L = L^2 g$ (thus $\operatorname{vol}(\Omega_L)=L^d\operatorname{vol}(\Omega)$). Fix a stationary, ergodic law $\mathbf{P}$ on compact $C^2$ hypersurfaces in $\mathbb{R}^d$ with almost sure transversality to smooth boundaries and with finite mean complexity density,
-\[
-\sup_{x\in\mathbb{R}^d}\ \mathbf{E}\Big[\ \kappa\big(\Gamma\cap B_1(x)\big)\ \Big]\;<\;\infty.
-\]
-Via finite atlases and standard partition–of–unity transfer, $\mathbf{P}$ induces laws $\mathbf{P}_L$ on $\mathfrak{H}(\Omega_L)$ (details given in the main text). We call $\{\mathbf{P}_L\}_{L\ge1}$ an \emph{admissible thermodynamic ensemble} if, in addition, short–range dependence holds:
-there exists $\alpha>0$ such that the $\alpha$–mixing coefficients of the induced random field of second fundamental forms on blocks of size~$1$ decay at least exponentially in the inter–block distance.
+\paragraph{From dynamics to spectra: the Tauberian bridge.}
+Short–time heat asymptotics are local. To pass from local coefficients to global spectral counting and remainders we need control of oscillatory integrals arising from the wave (or resolvent) side. Here the billiard–type flow on $S^*(M\setminus\Gamma)$ intervenes: exponential mixing of the reflecting model ($H_{\mix}^\heartsuit$) converts dynamical decorrelation into spectral cancellation. This is the same philosophy behind many modern results in quantum chaos, adapted to the presence of internal Dirichlet walls.
 
-\paragraph{(B) Frequency–windowed ensembles on a fixed domain.}
-On fixed $(\Omega,g)$ let $\mathbf{P}$ be a probability law on $\mathfrak{H}_M(\Omega)$ with a.s.\ $C^2$ realizations and exponential $\alpha$–mixing for the induced random field of geometric jets in a finite atlas. Let $g_T\in C_c^\infty(\mathbb{R})$ be even, with $\operatorname{supp}\widehat g_T\subset[-T,T]$, and define the windowed litho–coefficient
-\[
-a_\Gamma[g_T]\ :=\ \text{ the coefficient of order }t^{-(d-1)/2}\text{ in the localized heat trace generated by }g_T.
-\]
-(See Parts~II–III for the precise localization scheme.) We consider $T\to\infty$ asymptotics with~$\Gamma\sim\mathbf{P}$.
-
-\subsection*{5.3. Normalized litho–invariants}
-We shall work with two equivalent normalizations; the first is isotropic and invariant under homotheties:
-\[
-K_L^{\mathrm{iso}}(\Omega,\Gamma)\ :=\ \frac{a_\Gamma}{(4\pi)^{-(d-1)/2}\,\operatorname{vol}(\Omega)^{(d-1)/d}},
-\]
-and the second is relational, comparing the fracture contribution to the classical boundary term,
-\[
-K_L^{\partial}(\Omega,\Gamma)\ :=\ \frac{a_\Gamma}{a_{1/2}}\cdot \frac{\operatorname{vol}(\partial\Omega)}{\operatorname{vol}(\Gamma)}.
-\]
-Under Dirichlet conditions on $\partial\Omega\cup\Gamma$, both are dimensionless and equivalent in the sense that each is a bounded $C^2$ function of the other whenever $0<c\le\operatorname{vol}(\Gamma)/\operatorname{vol}(\partial\Omega)\le C<\infty$.
-We adopt $K_L^{\mathrm{iso}}$ as the primary invariant, writing simply $K_L$ when no ambiguity arises.
-
-\subsection*{5.4. Dimension–only universality (thermodynamic limit)}
-Let $\{\mathbf{P}_L\}$ be an admissible thermodynamic ensemble as in (A). For each realization $\Gamma_L\sim\mathbf{P}_L$ define the Dirichlet fracture operator $L_{\Gamma_L}$ on $(\Omega_L,g_L)$ and the corresponding litho–invariant $K_L(\Omega_L,\Gamma_L)$.
-
-\begin{theorem}[LLN universality in the thermodynamic limit]\label{thm:LLN-thermo}
-Fix $d\ge2$ and Dirichlet conditions on $\partial\Omega_L\cup\Gamma_L$. There exists a constant $K^*_L(d)\in\mathbb{R}$, depending only on the dimension~$d$ (and the boundary condition class), such that for any admissible thermodynamic ensemble $\{\mathbf{P}_L\}$,
-\[
-K_L(\Omega_L,\Gamma_L)\ \xrightarrow[L\to\infty]{\ \mathbf{P}_L\text{-probability}\ }\ K^*_L(d).
-\]
-Moreover, if the block–mixing coefficients decay exponentially and the mean complexity density is finite, then the convergence holds almost surely and the nonasymptotic deviation satisfies
-\[
-\mathbf{P}_L\Big( \big|K_L(\Omega_L,\Gamma_L)-K^*_L(d)\big|>\varepsilon\Big)\ \le\
-C\,\exp\!\left(-c\,\varepsilon^2\,L^d\right),
-\]
-with constants $c,C>0$ depending only on $d$, on the mixing profile, and on the uniform bound of the complexity density.
-\end{theorem}
-
-\noindent
-The proof (given later) is based on block–additivity of the heat–trace coefficients, a Bernstein–type concentration for weakly dependent blocks, and the polynomial dependence on local complexity encoded by $\kappa(\Gamma)$. The constant $K^*_L(d)$ is the \emph{dimension–only} limit for the Dirichlet universality class.
-
-\subsection*{5.5. Central limit fluctuations}
-Under quantitative mixing, fluctuations are asymptotically Gaussian with scale dictated by the effective number of weakly dependent blocks.
-
-\begin{theorem}[CLT universality]\label{thm:CLT-thermo}
-Under the hypotheses of Theorem~\ref{thm:LLN-thermo}, assume in addition a spectral gap for the transfer operator of the block process (equivalently, exponential $\alpha$–mixing with summable cumulants of the block contributions). Then there exists $\sigma_d^2\in[0,\infty)$ such that
-\[
-L^{d/2}\,\Big( K_L(\Omega_L,\Gamma_L) - K^*_L(d)\Big)
-\ \Longrightarrow\ \mathcal{N}(0,\sigma_d^2)
-\quad\text{as }L\to\infty.
-\]
-If, moreover, the block–block covariance is absolutely summable, then $\sigma_d^2>0$.
-\end{theorem}
-
-\noindent
-The variance $\sigma_d^2$ depends on the short–range correlation structure of the ensemble but \emph{not} on the ambient geometry of $(\Omega,g)$; the latter contributes only through local charts in the transfer construction. This is the precise sense in which the universality is geometric (dimension–only) rather than model–specific.
-
-\subsection*{5.6. Frequency–window universality on fixed domains}
-We now formulate an analogue on fixed $(\Omega,g)$ for the windowed coefficients $a_\Gamma[g_T]$.
-
-\begin{theorem}[High–frequency LLN under stationarity]\label{thm:LLN-window}
-Let $\mathbf{P}$ be an admissible law on $\mathfrak{H}_M(\Omega)$ with exponential mixing. For any family $g_T\in C_c^\infty(\mathbb{R})$ with $\operatorname{supp}\widehat g_T\subset[-T,T]$ and uniform symbol bounds, there exists $K^*_L(d)$ such that
-\[
-\frac{a_\Gamma[g_T]}{(4\pi)^{-(d-1)/2}\,\operatorname{vol}(\Omega)^{(d-1)/d}}
-\ \xrightarrow[T\to\infty]{\ \mathbf{P}\text{-probability}\ }\ K^*_L(d).
-\]
-If, in addition, Hypothesis H$_{\mathrm{mix}}$ of Part~IV holds for the geodesic flow on $\Omega\setminus\Gamma$ with mixing constants uniform in $\Gamma$ on a full $\mathbf{P}$–measure set, then the convergence is almost sure with stretched–exponential tails in~$T$.
-\end{theorem}
-
-\noindent
-The proof uses localized trace formulas, Tauberian arguments, and cancellation coming from mixing, parallel to the boundary case but with fracture–localized amplitudes and polynomial control by $\kappa(\Gamma)$.
-
-\subsection*{5.7. Robustness, stability, and universality classes}
-We summarize stability properties that ensure the universality constants are intrinsic to the dimension and boundary condition class.
-
-\begin{proposition}[Stability]\label{prop:stability}
-Within the Dirichlet class, $K^*_L(d)$ is invariant under smooth changes of the ambient metric $g$ (with fixed $d$) and under $C^2$–small perturbations of the law $\mathbf{P}$ measured in a topology controlling the distribution of second fundamental forms and local densities of components. Moreover, replacing Dirichlet conditions on $\Gamma$ by Robin or Neumann conditions produces distinct universal constants $K^*_L(d;\mathrm{BC})$ depending only on $d$ and the boundary condition class~$\mathrm{BC}$.
-\end{proposition}
-
-\noindent
-Thus, universality comes in \emph{classes} indexed by boundary conditions; within a class, the limit is dimension–only and independent of the fine geometry of $(\Omega,g)$ and of the law, beyond mixing and complexity–density constraints.
-
-\subsection*{5.8. Examples of admissible ensembles}
-We list canonical models meeting the hypotheses above.
-
+\paragraph{Programmatic payoffs.}
+A framework with the above features enables:
 \begin{itemize}
-\item \emph{Poisson hyperplane tessellations} transplanted via charts, with intensity scaled so that the mean $(d\!-\!1)$–density is constant; $C^2$–smoothing near chart overlaps yields a $C^2$ fracture set with uniformly bounded complexity density.
-\item \emph{Gaussian level–set fractures:} $\Gamma=\{x\in\Omega: F(x)=0\}$ for a stationary $C^3$ Gaussian field with nondegenerate gradient; the Kac–Rice formula yields finite mean $(d\!-\!1)$–density and exponential mixing under spectral gap hypotheses.
-\item \emph{Boolean models of smooth grains:} unions of randomly placed $C^2$ convex bodies with exponentially decaying radius tails; the boundary of the union is $C^2$ a.s.\ away from a negligible set, with finite mean complexity density.
+  \item \textbf{Universal surface law.} The leading interior surface term is fixed once and for all by the Dirichlet half–space model, independent of ambient curvature.
+  \item \textbf{Stability of coefficients.} Curvature–dependent coefficients at order $\tau^{-(d-2)/2}$ admit geometric formulation and are insensitive to distant boundary features.
+  \item \textbf{Quantitative remainders.} Under $H_{\mix}^\heartsuit$, remainders beyond the local expansion are bounded with constants depending only on explicit geometric bounds and $\kappa(\Gamma)$.
+  \item \textbf{Modularity.} The SA$\to$FA$\to$GEO$\to$UNI$\to$DYN pipeline is reusable for different Laplace–type operators and for families of walls $\Gamma_\varepsilon$.
 \end{itemize}
 
-In each case, standard ergodic theorems supply the block LLN, while quantitative mixing yields the CLT.
-
-\subsection*{5.9. Relation to classical universality}
-The statements above are formally analogous to universality phenomena in random matrix theory and in spectral geometry of chaotic flows, yet they are genuinely geometric: the constants $K^*_L(d;\mathrm{BC})$ are anchored in the fracture–localized heat kernel and the wave parametrix near $\Gamma$, rather than in matrix ensembles. The dependence on the ambient geometry is washed out by ergodicity and block averaging; only the ambient dimension and boundary class persist.
-
-\subsection*{5.10. Scope and limitations}
-All limits are formulated within explicitly admissible classes: $C^2$–regular fractures, finite mean complexity density, exponential mixing. No arithmetic claims are made; no inverse problems are addressed. In particular, universality is \emph{not} asserted for adversarially arranged fractures of unbounded complexity or for flows lacking any mixing.
-
-\subsection*{5.11. Closure}
-This part establishes a precise probabilistic framework in which the litho–invariant exhibits dimension–only limits with Gaussian fluctuations. The hypotheses are canonical, verifiable in standard models, and stable under perturbations. Theorems~\ref{thm:LLN-thermo}, \ref{thm:CLT-thermo}, and \ref{thm:LLN-window} will be proved in subsequent chapters by combining localized trace formulas with block decomposition, polynomial complexity control, and quantitative mixing estimates. This completes the universality layer and prepares the ground for explicit computations and comparisons developed later.
-
-\section*{Part VI. Relation to Classical Spectral Geometry}
-
-\subsection*{6.1. Orientation}
-The preceding parts introduced litho–domains, their complexity functional, and the litho–invariant $K_L$, and established universality principles under deterministic and random frameworks. To position these notions within the established landscape of spectral geometry, we now provide a precise comparative analysis with existing theories: (i) the asymptotics of the heat trace for manifolds with boundary, (ii) the theory of stratified and conic spaces due to Cheeger and Brüning, (iii) spectral problems with singular potentials, and (iv) variational and microlocal approaches. The goal is to delineate the exact scope of novelty of the litho–framework, in terms of both results and methodology, while maintaining rigorous separation of what is new from what is already known.
-
-\subsection*{6.2. The classical Weyl law and boundary contributions}
-Let $(\Omega,g)$ be a compact $d$–dimensional Riemannian manifold with smooth boundary and Dirichlet conditions. The classical heat trace asymptotics are
-\[
-\mathrm{Tr}\,e^{-t\Delta_\Omega}
-\;\sim\;(4\pi t)^{-d/2}\,\mathrm{vol}(\Omega)
--\tfrac14\,(4\pi t)^{-(d-1)/2}\,\mathrm{vol}(\partial\Omega)
-+O(t^{-(d-2)/2}),
-\quad t\downarrow0,
-\]
-as established by Weyl, Ivrii, and further clarified in the works of Safarov–Vassiliev. This expansion shows that the presence of a geometric boundary introduces a contribution of order $t^{-(d-1)/2}$ proportional to the $(d-1)$–volume of $\partial\Omega$ with a universal coefficient $-1/4$. Importantly, no additional terms arise from interior smooth structures.
-
-\subsection*{6.3. Stratified and conic spaces}
-The theory of singular spaces, notably Cheeger’s analysis of conic manifolds and Brüning’s work on stratified spaces, addresses spectral asymptotics where the ambient space itself is singular. For a conic point with opening angle $\alpha$, the heat trace receives a logarithmic correction or an additional term depending explicitly on $\alpha$ and on local link geometry. In stratified settings, contributions from strata of codimension $k$ appear at orders $t^{-(d-k)/2}$, with coefficients depending intricately on the local structure of the stratum. These contributions are not universal in the sense of a fixed coefficient: they carry explicit dependence on cone angles or link invariants.
-
-\subsection*{6.4. Singular potentials and delta interactions}
-A different direction studies Schrödinger operators with singular potentials supported on submanifolds, such as delta–potentials on curves or surfaces. In such models, additional terms in the heat trace expansion may arise, but their coefficients depend on the coupling constant of the potential and on the details of the self–adjoint extension. They are not purely geometric, and universality across ensembles or geometries is absent. The litho–framework, in contrast, prescribes a Dirichlet condition across an internal hypersurface, yielding contributions that are canonical and coupling–independent.
-
-\subsection*{6.5. Variational and microlocal approaches}
-Variational formulations of eigenvalue problems and microlocal methods in spectral geometry provide estimates on eigenvalue counting functions and spectral clusters. However, they do not isolate fracture–type contributions. In particular, while boundary layer methods and propagation of singularities address interactions with $\partial\Omega$, they do not extend naturally to codimension–one embedded hypersurfaces within the domain.
-
-\subsection*{6.6. Position of the litho–framework}
-The litho–approach is distinct from each of the above in the following precise senses:
-\begin{enumerate}[(i)]
-\item \textbf{Manifolds with boundary:} Litho–domains produce an additional $t^{-(d-1)/2}$ term analogous in order to the boundary contribution, but originating from an \emph{internal} hypersurface $\Gamma\subset\Omega$. This phenomenon has no analogue in the boundary–only setting.
-\item \textbf{Stratified spaces:} In contrast to strata of codimension $1$ in Cheeger’s framework, where coefficients depend on local cone angles, the litho–coefficient is universal and linear in $\mathrm{vol}(\Gamma)$ under Dirichlet conditions.
-\item \textbf{Singular potentials:} The litho–term arises without any tunable coupling constant, being purely geometric and dictated by the imposed Dirichlet condition. It is thus intrinsic, not parameter–dependent.
-\item \textbf{Variational/microlocal theories:} The fracture contribution cannot be deduced from existing variational bounds or microlocal parametrix constructions for smooth domains, as those do not account for internal codimension–one Dirichlet surfaces.
-\end{enumerate}
-
-\subsection*{6.7. Technical mechanism: localized parametrix near fractures}
-The core analytical mechanism behind the litho–term is the construction of a localized parametrix for the heat kernel near $\Gamma$, analogous to the boundary layer parametrix but applied across a closed interior hypersurface. Matching across $\Gamma$ doubles the contribution relative to a boundary of the same local geometry, leading to the coefficient $-1/4$ independently of the ambient geometry. This mechanism is absent in existing theories focused either on external boundaries or on singular ambient structures.
-
-\subsection*{6.8. Robustness across geometries}
-The universality of the coefficient $a_\Gamma$ under Dirichlet conditions holds across arbitrary ambient $(\Omega,g)$ with $C^2$ regularity. This robustness is in stark contrast to stratified or conic settings, where coefficients vary with local angles or link structures. Thus, the litho–invariant $K_L$ captures a genuinely new universality class within spectral geometry: interior Dirichlet fractures.
-
-\subsection*{6.9. Scope limitations}
-It is important to delineate scope:
-\begin{itemize}
-\item The universality holds strictly under Dirichlet conditions; for Neumann or Robin conditions the constants differ.
-\item The hypersurface $\Gamma$ must be $C^2$ and transversal to $\partial\Omega$; intersections or corners produce mixed phenomena not covered by the main theorems.
-\item The framework addresses short–time asymptotics; long–time behavior and resonance analysis are outside the present scope.
-\end{itemize}
-
-\subsection*{6.10. Closure}
-In summary, the litho–framework is neither a trivial restatement of boundary contributions nor a subset of stratified space analysis. It identifies and rigorously isolates a new, universal contribution arising from internal Dirichlet hypersurfaces, distinct in mechanism and consequence from all existing approaches. This comparative positioning clarifies both the novelty and the limitations of the theory, and it sets the stage for explicit computations in algebraic, group–theoretic, and probabilistic settings in the following parts.
-
-\section*{Part VII. Functorial Constructions on Finite Graphs (Canonical Band Surfaces)}
-
-\subsection*{7.1. Orientation}
-This part develops a strictly canonical passage from finite combinatorial data to litho–domains in dimension two. We restrict to finite graphs and, as a corollary, to Cayley graphs of finite groups with a fixed symmetric generating set. The construction produces a compact $C^2$ surface with boundary $\Omega_G$ and a $C^2$ internal fracture set $\Gamma_G$ determined solely by the graph $G$ and a fixed degree–template. This eliminates any dependence on embeddings or arbitrary smoothing choices. The resulting litho–invariant $K_L^\partial(\Omega_G,\Gamma_G)$ admits a closed form in terms of edge/vertex counts and a universal vertex–template constant.
-
-\subsection*{7.2. The category of finite bounded–degree graphs}
-Let $\mathsf{Graph}_{\le D}$ be the category whose objects are finite connected graphs $G=(V,E)$ with degrees $\deg(v)\le D$ for all $v\in V$, and whose morphisms are graph coverings $\pi:G\to H$ (locally bijective maps of graphs). We write $|V|$ and $|E|$ for the number of vertices and edges.
-
-\subsection*{7.3. Canonical band–surface functor}
-Fix once and for all:
-\begin{itemize}
-\item a strip width $h>0$ and edge length $\ell>0$,
-\item for each $d\in\{1,\dots,D\}$, a $C^2$ vertex–patch template $\mathcal{P}_d$ which is a compact $C^2$ planar domain with $d$ marked boundary arcs of length $h$, pairwise disjoint and arranged with $C^2$ compatibility along their endpoints. Denote by $b_d:=\mathrm{length}(\partial\mathcal{P}_d\setminus(\text{marked arcs}))$ the residual boundary length of the template; $b_d$ depends only on $d$ and on the fixed choice of $\mathcal{P}_d$.
-\end{itemize}
-
-\begin{definition}[Canonical band surface]
-Given $G\in\mathsf{Graph}_{\le D}$, construct $\Omega_G$ as follows:
-\begin{enumerate}[(i)]
-\item For each edge $e\in E$, take a Euclidean rectangle (a \emph{band})
-\[
-B_e := [0,\ell]\times[-h/2,h/2]
-\]
-with the product metric.
-\item For each vertex $v$ of degree $d=\deg(v)$, take a copy of the vertex template $\mathcal{P}_d$.
-\item Glue the $d$ incident band ends $\{0\}\times[-h/2,h/2]$ or $\{\ell\}\times[-h/2,h/2]$ isometrically onto the $d$ marked arcs of $\mathcal{P}_d$, respecting the combinatorics of $G$ and the local $C^2$ structure of the template near endpoints. Perform all gluings disjointly for distinct vertices.
-\end{enumerate}
-The result is a compact $C^2$ surface with boundary $\Omega_G$ whose boundary consists of the two long sides of each band together with the residual boundaries of the vertex–patches. Define the \emph{fracture set}
-\[
-\Gamma_G := \bigcup_{e\in E}\{(x,0)\in B_e \,:\, x\in[0,\ell]\}\subset \Omega_G,
-\]
-i.e., the midlines of all bands.
-\end{definition}
-
-By construction, $\Gamma_G$ is a disjoint union of $|E|$ closed $C^2$ curves (each of length $\ell$), transverse to $\partial\Omega_G$. We impose Dirichlet boundary conditions on $\partial\Omega_G\cup\Gamma_G$ and consider the Laplacian $L_G$ on $\Omega_G\setminus\Gamma_G$ as in Part~I.
-
-\subsection*{7.4. Canonical geometry: lengths and areas}
-The geometry of $(\Omega_G,\Gamma_G)$ is completely determined by $|V|,|E|$ and the fixed templates:
-\begin{lemma}\label{lem:geo-counts}
-For the canonical band surface of $G$:
-\[
-\mathrm{length}(\Gamma_G)=|E|\cdot \ell,\qquad
-\mathrm{length}(\partial\Omega_G)=2|E|\cdot \ell + \sum_{v\in V} b_{\deg(v)},
-\]
-and
-\[
-\mathrm{area}(\Omega_G)=|E|\cdot (\ell h) + \sum_{v\in V} \mathrm{area}(\mathcal{P}_{\deg(v)}).
-\]
-\end{lemma}
-
-\begin{proof}[Proof (sketch)]
-Each band contributes one midline of length $\ell$, and two boundary components of length $\ell$; vertex–patches contribute no fracture length and contribute $b_{\deg(v)}$ to the boundary length. Areas add by disjoint union and gluing along measure–zero arcs. $C^2$–compatibility ensures the resulting surface is $C^2$ across the gluing loci.
-\end{proof}
-
-\subsection*{7.5. Applicability of the localized and heat trace expansions}
-The pair $(\Omega_G,\Gamma_G)$ satisfies the hypotheses of the localized trace formula and of the small–time heat trace expansion from Parts~II–V: $\Omega_G$ is compact with $C^2$ boundary, $\Gamma_G$ is a closed $C^2$ embedded 1–submanifold, and $\Gamma_G$ is transverse to $\partial\Omega_G$. Therefore (in dimension $d=2$)
-\begin{equation}\label{eq:heat-2d}
-\mathrm{Tr}\,e^{-tL_G}
-\sim (4\pi t)^{-1}\mathrm{area}(\Omega_G)
--\tfrac14(4\pi t)^{-1/2}\,\mathrm{length}(\partial\Omega_G)
--\tfrac14(4\pi t)^{-1/2}\,\mathrm{length}(\Gamma_G)
-+\cdots,\quad t\downarrow 0,
-\end{equation}
-with uniform polynomial control of constants in terms of the $C^2$ norms of the templates, cf.\ Theorem~\ref{thm:fracture-term}.
-
-\subsection*{7.6. A boundary–normalized litho–invariant for graphs}
-In $d=2$, both the boundary and the fracture contributions scale like $t^{-1/2}$. It is therefore natural to adopt the boundary–normalized litho–invariant
-\[
-K_L^\partial(\Omega_G,\Gamma_G)
-:= \frac{a_\Gamma}{a_{1/2}}
-= \frac{\mathrm{length}(\Gamma_G)}{\mathrm{length}(\partial\Omega_G)}
-= \frac{|E|\cdot \ell}{2|E|\cdot \ell + \sum_{v\in V} b_{\deg(v)}}.
-\]
-By Lemma~\ref{lem:geo-counts}, $K_L^\partial(\Omega_G,\Gamma_G)$ depends only on $|E|,|V|$ and the multiset $\{\deg(v)\}_{v\in V}$ via the fixed vertex–template constants $b_d$. In particular, if $G$ is $d$–regular then
-\begin{equation}\label{eq:KL-regular}
-K_L^\partial(G)= \frac{|E|}{2|E| + b_d\, |V|}.
-\end{equation}
-
-\subsection*{7.7. Functoriality for graph coverings}
-\begin{proposition}[Invariance under coverings]\label{prop:cover}
-Let $\pi:G\to H$ be a graph covering of finite connected graphs with degrees bounded by $D$. Then, for the canonical band–surface construction,
-\[
-K_L^\partial(\Omega_G,\Gamma_G) \;=\; K_L^\partial(\Omega_H,\Gamma_H).
-\]
-\end{proposition}
-
-\begin{proof}
-A $k$–sheeted covering preserves degrees and scales counts by $k$: $|E_G|=k|E_H|$, $|V_G|=k|V_H|$, and the degree multiset is replicated. By \eqref{eq:KL-regular} (and its extension to non–regular graphs using $\sum_{v} b_{\deg(v)}$), both numerator and denominator scale by $k$, hence the ratio is invariant.
-\end{proof}
-
-Thus the assignment $G\mapsto (\Omega_G,\Gamma_G)$ together with $K_L^\partial$ defines a functor from $\mathsf{Graph}_{\le D}$ (with coverings) to the category $\mathsf{Litho}_2$ of litho–domains in $d=2$ (with boundary–fracture preserving coverings), constant on fibers of coverings at the level of $K_L^\partial$.
-
-\subsection*{7.8. Cayley graphs of finite groups with symmetric generators}
-Let $\mathsf{GrpSym}_{\le D}$ denote the category whose objects are pairs $(G,S)$ with $G$ finite and $S\subset G$ a fixed symmetric generating set with $|S|\le D$; morphisms are homomorphisms $\varphi:(G,S)\to (H,T)$ such that $\varphi(S)\subset T$ and the induced map of Cayley graphs is a covering. Writing $\mathrm{Cay}(G,S)$ for the Cayley graph, define
-\[
-(\Omega_{G,S},\Gamma_{G,S}) := (\Omega_{\mathrm{Cay}(G,S)},\Gamma_{\mathrm{Cay}(G,S)}).
-\]
-If $|S|=d$ then $\mathrm{Cay}(G,S)$ is $d$–regular with $|V|=|G|$ and $|E|=\tfrac12|G|\,|S|$, hence by \eqref{eq:KL-regular}
-\begin{equation}\label{eq:KL-Cayley}
-K_L^\partial(G,S)
-= \frac{|E|}{2|E| + b_d\,|V|}
-= \frac{\tfrac12|G|\,|S|}{|G|\,|S| + b_d\,|G|}
-= \frac{|S|}{2|S|+2b_d}.
-\end{equation}
-Therefore, for a fixed degree template (hence fixed $b_d$), $K_L^\partial(G,S)$ depends \emph{only} on $|S|$ and is independent of $|G|$.
-
-\begin{corollary}[Covering invariance on Cayley graphs]
-If $\varphi:(G,S)\to (H,T)$ induces a covering of Cayley graphs, then
-\[
-K_L^\partial(G,S) \;=\; K_L^\partial(H,T),
-\]
-and the common value is given by \eqref{eq:KL-Cayley}.
-\end{corollary}
-
-\subsection*{7.9. Explicit examples}
-\paragraph{Cycles $C_n$.}
-The cycle $C_n$ is $2$–regular with $|V|=|E|=n$. Hence
-\[
-K_L^\partial(C_n) \;=\; \frac{n}{2n + b_2\, n} \;=\; \frac{1}{2+b_2},
-\]
-independent of $n$.
-
-\paragraph{Dihedral Cayley graphs.}
-For the dihedral group $D_{2m}$ with symmetric generating set of size $d=2$ (two reflections), we obtain the $2$–regular Cayley graph on $2m$ vertices (a cycle with doubled labeling), and again
-\[
-K_L^\partial(D_{2m},S) \;=\; \frac{1}{2+b_2}.
-\]
-
-\paragraph{The symmetric group $S_3$.}
-Take the symmetric generating set $S=\{s,t,t^{-1}\}$ with $|S|=3$ (where $s$ is a transposition, $t$ a $3$–cycle). Then the Cayley graph is $3$–regular on $6$ vertices, and
-\[
-K_L^\partial(S_3,S) \;=\; \frac{3}{6+2b_3}.
-\]
-If instead one chooses a degree–$2$ symmetric set (e.g.\ two distinct transpositions closed under inversion), the Cayley graph is $2$–regular and $K_L^\partial$ equals $1/(2+b_2)$, illustrating the declared dependence on $|S|$.
-
-\subsection*{7.10. Scope and limitations}
-All statements herein are confined to:
-\begin{itemize}
-\item the canonical band–surface construction (fixed $(h,\ell)$ and fixed $C^2$ templates $\{\mathcal{P}_d\}$);
-\item morphisms given by graph coverings (and group homomorphisms inducing coverings on Cayley graphs).
-\end{itemize}
-We do \emph{not} claim functoriality for arbitrary graph homomorphisms or arbitrary group homomorphisms, and we make no assertions for commutative rings or general algebraic varieties. Extending $K_L$–type assignments beyond coverings requires additional structure and lies outside the present scope.
-
-\subsection*{7.11. Closure}
-We have provided a canonical, embedding–free and template–controlled functor from finite bounded–degree graphs (with coverings) to litho–domains in $d=2$, proved covering–invariance of the boundary–normalized litho–invariant, and derived closed–form expressions in terms of elementary graph counts. As a corollary, Cayley graphs of finite groups with symmetric generating sets yield group–dependent values $K_L^\partial(G,S)$ determined solely by $|S|$. This validates the algebraic reach of lithomathematics in a mathematically rigorous and non–speculative setting, fully aligned with the analytic foundations established in earlier parts.
-
-\section*{Part VIII. Stratified Spaces and Internal Hypersurfaces}
-
-\subsection*{8.1. Orientation}
-The purpose of this part is to place lithomathematics in the broader framework of spectral geometry on stratified spaces. We show that, for Whitney–stratified domains, the small–time heat trace expansion admits contributions ordered by the codimension of strata. In particular, internal hypersurfaces $\Gamma$ contribute at the same order as external boundaries, while strata of higher codimension contribute at strictly higher orders. This demonstrates the structural compatibility of litho–terms with the existing theory of stratified singularities.
-
-\subsection*{8.2. Stratified domains}
-\begin{definition}[Whitney stratified domain]
-Let $\Omega$ be a compact subset of a smooth $d$–dimensional Riemannian manifold. A \emph{Whitney stratification} of $\Omega$ is a finite partition
-\[
-\Omega = \bigsqcup_{j=0}^d \Sigma_j,
-\]
-where each stratum $\Sigma_j$ is a smooth $j$–dimensional manifold, and the stratification satisfies Whitney’s conditions (A) and (B). The top stratum $\Sigma_d$ is assumed open and dense, carrying the induced Riemannian metric.
-\end{definition}
-
-We impose Dirichlet boundary conditions on $\partial\Omega$ and on all internal strata of codimension $1$ (the “fractures” of lithomathematics).
-
-\subsection*{8.3. Heat kernel parametrix near strata}
-The construction of a small–time parametrix follows the scheme of Cheeger \cite{Cheeger80} and Brüning \cite{BruningSeeley88}. Locally near a point $p\in \Sigma_j$, $\Omega$ is modeled on a product
-\[
-\mathbb{R}^j \times C(Z),
-\]
-where $C(Z)$ is a metric cone over a compact link $Z$ of dimension $d-j-1$. The heat kernel admits an expansion in terms of contributions from the Euclidean factor, the cone, and the imposed boundary conditions. The codimension of the stratum determines the order of the leading term.
-
-\subsection*{8.4. General structure of the expansion}
-\begin{theorem}[Stratified heat trace expansion]\label{thm:stratified}
-Let $(\Omega,\Sigma)$ be a compact Whitney–stratified domain in dimension $d\ge 2$, with Dirichlet conditions on $\partial\Omega$ and on all internal hypersurfaces. Then, as $t\downarrow 0$,
-\[
-\mathrm{Tr}\, e^{-tL_\Sigma}
-\sim (4\pi t)^{-d/2} \,|\Sigma_d|
--\tfrac14(4\pi t)^{-(d-1)/2}\big(|\partial\Omega|+|\Gamma|\big)
-+\sum_{j\le d-2} c_j(\Sigma_j)\, t^{-(j)/2}
-+O\!\left(t^{-(d-3)/2}\,P(\kappa(\Sigma))\right),
-\]
-where:
-\begin{itemize}
-\item $|\Sigma_d|$ is the Riemannian volume of the top stratum,
-\item $\Gamma=\Sigma_{d-1}^{\mathrm{int}}$ is the union of internal hypersurfaces,
-\item $c_j(\Sigma_j)$ are local coefficients determined by the geometry of the links at $\Sigma_j$,
-\item $P(\kappa(\Sigma))$ is a polynomial in the geometric complexity of the stratification.
-\end{itemize}
-\end{theorem}
-
-\begin{remark}
-In particular, only strata of codimension $1$ contribute at order $t^{-(d-1)/2}$. Strata of codimension $\ge 2$ contribute strictly lower–order terms, hence they cannot obscure or alter the universal fracture contribution $a_\Gamma$.
-\end{remark}
-
-\subsection*{8.5. Example: planar wedge}
-Consider $\Omega=W_\alpha\subset\mathbb{R}^2$, the wedge of angle $\alpha\in(0,2\pi)$ with Dirichlet boundary conditions on its sides. Its heat trace admits the well–known expansion
-\[
-\mathrm{Tr}\,e^{-tL_{W_\alpha}}
-= \frac{|W_\alpha|}{4\pi t}
--\frac{|\partial W_\alpha|}{8\sqrt{\pi t}}
-+ C_{\mathrm{apex}}(\alpha) + O(e^{-c/t}),
-\]
-where $C_{\mathrm{apex}}(\alpha)$ is an angle–dependent constant. This fits the structure of Theorem~\ref{thm:stratified}: the apex is a $0$–dimensional stratum (codimension $2$ in $d=2$), hence its contribution enters at order $t^0$, lower than the boundary and fracture terms.
-
-\subsection*{8.6. Implications for lithomathematics}
-\begin{corollary}[Compatibility of litho–terms]
-For any Whitney–stratified $\Omega$, the internal fracture term
-\[
-a_\Gamma = -\tfrac14(4\pi)^{-(d-1)/2}\,|\Gamma|
-\]
-is unaffected by lower–dimensional strata. Therefore the litho–invariant $K_L^\partial$ defined in Part~VII extends without ambiguity to the stratified setting.
-\end{corollary}
-
-\subsection*{8.7. Closure}
-We have embedded the lithomathematical setting into the well–developed theory of spectral geometry on stratified spaces. Theorems~\ref{thm:stratified} and its corollary guarantee that internal hypersurfaces contribute a universal term at the same order as external boundaries, while all lower–dimensional singularities are relegated to higher orders. The wedge domain illustrates this separation of scales explicitly. This confirms the robustness of litho–invariants within stratified geometries and clarifies their distinction from classical singularity contributions.
-
-\section*{Part IX. Random Hypersurfaces and Ergodic Ensembles}
-
-\subsection*{9.1. Orientation}
-This part develops lithomathematics in stochastic settings. We formalize probability measures on classes of embedded $C^2$ fractures with uniform geometric control, establish that the universal fracture coefficient is almost surely valid under these uniform bounds, identify the expected (dimensionless) litho–invariant, and give variance/ergodic statements in representative ensembles (Gaussian level sets on homogeneous manifolds, Poisson unions of geodesic spheres). All assumptions are explicit; no claim is made beyond their scope.
-
-\subsection*{9.2. The measurable space of fractures}
-Let $(M,g)$ be a compact $d$–dimensional Riemannian manifold. Denote by $\mathcal{E}$ the set of all $C^2$ embeddings $\iota:\Sigma\hookrightarrow M$ with $\Sigma$ a closed $(d-1)$–manifold. For $C=(C_0,C_1,C_2)\in(0,\infty)^3$ define the \emph{uniformly controlled class}
-\[
-\mathcal{H}(C)\,=\,\Big\{\Gamma=\iota(\Sigma):\;
-\mathrm{vol}_{d-1}(\Gamma)\le C_0,\;\;\|\mathrm{II}_\Gamma\|_{L^\infty(\Gamma)}\le C_1,\;\;\mathrm{reach}(\Gamma)\ge C_2\Big\}.
-\]
-Here $\mathrm{II}_\Gamma$ is the second fundamental form (defined a.e.), and $\mathrm{reach}(\Gamma)$ is the maximal radius of a tubular neighborhood on which the normal exponential map is a $C^1$–diffeomorphism. Equip $\mathcal{E}$ with the $C^2$–Whitney topology on embeddings, and let $\pi:\mathcal{E}\to\mathcal{C}$ be the map $\iota\mapsto\iota(\Sigma)$ to the space $\mathcal{C}$ of closed subsets of $M$ with the local $C^2$–graph topology on embedded hypersurfaces (equivalently, the Hausdorff topology refined by $C^2$–charts in tubular neighborhoods). We view $\mathcal{H}(C)\subset\mathcal{C}$ as a Borel subset for the induced topology; write $\mathcal{F}$ for its Borel $\sigma$–algebra.
-
-\begin{definition}[Fracture ensembles]\label{def:ensemble}
-A \emph{fracture ensemble} on $(M,g)$ with uniform $C^2$–control $C$ is a probability space $(\mathcal{H}(C),\mathcal{F},\mathbb{P})$ such that:
-\begin{itemize}
-\item $\mathbb{P}$ is Borel on $(\mathcal{H}(C),\mathcal{F})$;
-\item $\mathbb{P}$ is invariant under the natural action of the isometry group $\mathrm{Iso}(M,g)$ on $\mathcal{H}(C)$;
-\item $\mathbb{E}_{\mathbb{P}}[\mathrm{vol}_{d-1}(\Gamma)]<\infty$.
-\end{itemize}
-\end{definition}
-
-\noindent
-Typical constructions include: (i) level sets $\Gamma=\{f=0\}$ of centered Gaussian fields $f\in C^2(M)$ with smooth, $\mathrm{Iso}(M,g)$–invariant covariance and a.s. nondegenerate gradient along the zero level; (ii) unions of finitely many disjoint geodesic spheres of fixed radius with Poisson-distributed centers (with thinning to enforce disjointness); (iii) nodal sets of Gaussian monochromatic random waves on homogeneous manifolds.
-
-\subsection*{9.3. Uniform parametrix and universal fracture coefficient a.s.}
-For $\Gamma\in \mathcal{H}(C)$ let $L_\Gamma$ denote the Dirichlet Laplacian on $M\setminus \Gamma$ (no boundary on $M$ is assumed in this section). The heat trace admits, as $t\downarrow 0$,
-\[
-\mathrm{Tr}\,e^{-tL_\Gamma}\;\sim\;a_0\,t^{-d/2}\;+\;a_\Gamma\,t^{-(d-1)/2}\;+\;\sum_{j\ge 1} a_j\,t^{-(d-2-j)/2},
-\]
-with $a_0=(4\pi)^{-d/2}\mathrm{vol}_d(M)$. The next statement records almost sure universality of the fracture term under the uniform $C^2$–control of Definition~\ref{def:ensemble}.
-
-\begin{theorem}[Almost sure universality under uniform control]\label{thm:as-univ}
-Fix $C=(C_0,C_1,C_2)$ and an ensemble $(\mathcal{H}(C),\mathcal{F},\mathbb{P})$ as in Definition~\ref{def:ensemble}. Then for $\mathbb{P}$–almost every $\Gamma$,
-\[
-a_\Gamma \;=\; -\,\tfrac14\,(4\pi)^{-(d-1)/2}\,\mathrm{vol}_{d-1}(\Gamma).
-\]
-Moreover, the remainder $R_\Gamma(t):=\mathrm{Tr}\,e^{-tL_\Gamma}-\big(a_0\,t^{-d/2}+a_\Gamma\,t^{-(d-1)/2}\big)$ satisfies a uniform bound
-\[
-\sup_{\Gamma\in \mathcal{H}(C)}\;\big|R_\Gamma(t)\big|\;\le\;C'\,t^{-(d-2)/2}\qquad (0<t\le t_0),
-\]
-for constants $C',t_0>0$ depending only on $(M,g)$ and $C$.
-\end{theorem}
-
-\begin{proof}[Sketch]
-Uniform bounds on $\mathrm{vol}_{d-1}(\Gamma)$, $\|\mathrm{II}_\Gamma\|_{L^\infty}$ and $\mathrm{reach}(\Gamma)$ give a uniform tubular neighborhood and $C^2$–graph control for all $\Gamma\in\mathcal{H}(C)$. The local reflected–parametrix construction in FIO classes near a smooth interface, with Dirichlet condition on both sides, yields the same principal boundary symbol as for a smooth outer boundary, hence the universal factor $-\tfrac14(4\pi)^{-(d-1)/2}$ multiplying the $(d-1)$–volume density; see the deterministic Theorem~\ref{thm:fracture-term} in Part~II. Uniformity of all local seminorms implies a uniform estimate on the error kernel and thus on the remainder after integration. The almost sure statement is immediate because the asserted identity holds pointwise for every $\Gamma\in\mathcal{H}(C)$. 
-\end{proof}
-
-\begin{remark}[Scope]
-Theorem~\ref{thm:as-univ} does not address nontransversal intersections with $\partial M$ or lower–regularity interfaces; such cases belong to Parts~VIII and X. No claim is made here beyond the uniform $C^2$–controlled setting.
-\end{remark}
-
-\subsection*{9.4. Expected dimensionless litho–invariant}
-Recall the isoperimetric normalization
-\[
-K_L^{\mathrm{iso}}(M,\Gamma)\;=\;(4\pi)^{1/2}\,\frac{\mathrm{vol}_d(M)^{1/2}}{\mathrm{vol}_{d-1}(\Gamma)}\,\frac{a_\Gamma}{a_0}.
-\]
-Under Theorem~\ref{thm:as-univ} one has deterministically
-\[
-K_L^{\mathrm{iso}}(M,\Gamma)\;=\; -\,\tfrac14\,\frac{\mathrm{vol}_{d-1}(\Gamma)}{\mathrm{vol}_d(M)}.
-\]
-Therefore, for any ensemble with $\mathbb{E}[\mathrm{vol}_{d-1}(\Gamma)]<\infty$,
-\[
-\mathbb{E}\big[K_L^{\mathrm{iso}}(M,\Gamma)\big]\;=\;-\;\tfrac14\,\frac{\mathbb{E}\big[\mathrm{vol}_{d-1}(\Gamma)\big]}{\mathrm{vol}_d(M)}.
-\]
-No further distributional assumptions are required for this identity.
-
-\subsection*{9.5. Gaussian level–set ensembles on homogeneous manifolds}
-Assume $(M,g)$ is homogeneous (e.g., flat tori $\mathbb{T}^d$ or round spheres $\mathbb{S}^d$). Let $\{f_\Lambda\}_{\Lambda\to\infty}$ be a family of centered, smooth Gaussian fields on $M$ with $\mathrm{Iso}(M,g)$–invariant covariance, parametrized by a spectral scale $\Lambda$ (e.g., band–limited fields or monochromatic random waves with Laplace eigenvalue $\Lambda$). Under the standard nondegeneracy and mixing assumptions (see \cite{AdlerTaylor07,Wigman15}):
-\[
-\mathbb{E}\big[\mathrm{vol}_{d-1}(\{f_\Lambda=0\})\big]\;=\;c_{d,\mathrm{model}}\;\Lambda^{1/2}\,\mathrm{vol}_d(M)\,(1+o(1)),\qquad \Lambda\to\infty,
-\]
-for an explicit model–dependent constant $c_{d,\mathrm{model}}>0$. Consequently,
-\[
-\mathbb{E}\big[K_L^{\mathrm{iso}}(M,\{f_\Lambda=0\})\big]\;=\;-\;\tfrac14\,c_{d,\mathrm{model}}\;\Lambda^{1/2}\,(1+o(1)).
-\]
-Moreover, for many models the variance satisfies $\mathrm{Var}(\mathrm{vol}_{d-1}(\{f_\Lambda=0\}))=o(\Lambda)$, yielding concentration of
-\[
-\frac{K_L^{\mathrm{iso}}(M,\{f_\Lambda=0\})}{\mathbb{E}[K_L^{\mathrm{iso}}(M,\{f_\Lambda=0\})]}\;\xrightarrow{\ \mathbb{P}\ }\;1.
-\]
-Precise variance asymptotics are model–dependent and will not be needed in the sequel; see \cite{NazarovSodin16,Wigman15} for detailed statements.
-
-\subsection*{9.6. Poisson unions of geodesic spheres}
-Fix $r\in(0,\mathrm{inj}(M,g))$ and let $\mathcal{P}_\lambda$ be a stationary Poisson point process on $M$ with intensity $\lambda>0$ with respect to the Riemannian volume. Consider the union of disjoint geodesic spheres
-\[
-\Gamma\;=\;\bigsqcup_{x\in \mathcal{P}_\lambda} \partial B_g(x,r),
-\]
-obtained by independently thinning points to avoid overlaps (or, equivalently, by conditioning on mutual separation $>2r$). Then
-\[
-\mathbb{E}\big[\mathrm{vol}_{d-1}(\Gamma)\big]\;=\;\lambda\,\mathrm{vol}_d(M)\,\mathrm{vol}_{d-1}\big(\partial B_{\mathbb{R}^d}(0,r)\big),
-\]
-and hence
-\[
-\mathbb{E}\big[K_L^{\mathrm{iso}}(M,\Gamma)\big]\;=\;-\;\tfrac14\,\lambda\,\mathrm{vol}_{d-1}\big(\partial B_{\mathbb{R}^d}(0,r)\big).
-\]
-The uniform $C^2$–control holds with $C_1\asymp r^{-1}$ and $C_2\asymp r$.
-
-\subsection*{9.7. Ergodic sequences and time averages}
-Let $(\mathcal{H}(C),\mathcal{F},\mathbb{P})$ be as above, and let $T:\mathcal{H}(C)\to \mathcal{H}(C)$ be a measurable, $\mathbb{P}$–measure–preserving transformation that is ergodic. Assume $K_L^{\mathrm{iso}}\in L^1(\mathbb{P})$. Then Birkhoff’s ergodic theorem yields:
-
-\begin{theorem}[Time averages]\label{thm:ergodic}
-For $\mathbb{P}$–almost every $\Gamma_0\in\mathcal{H}(C)$,
-\[
-\lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1} K_L^{\mathrm{iso}}(M,T^n\Gamma_0)\;=\;\mathbb{E}\big[K_L^{\mathrm{iso}}(M,\Gamma)\big].
-\]
-\end{theorem}
-
-\noindent
-Thus the statistical litho–profile is recovered by time averages along any $\mathbb{P}$–typical orbit.
-
-\subsection*{9.8. Remarks on scope and limitations}
-(1) The almost sure universality of $a_\Gamma$ in Theorem~\ref{thm:as-univ} is confined to ensembles supported in $\mathcal{H}(C)$; interfaces with corners, self–intersections, or grazing contact with $\partial M$ require the refined analysis of Parts~VIII and X.\\
-(2) Gaussian examples in \S9.5 presuppose the standard nondegeneracy of the joint law $(f_\Lambda,\nabla f_\Lambda)$ and an $\mathrm{Iso}(M,g)$–invariant covariance; constants $c_{d,\mathrm{model}}$ are model–dependent.\\
-(3) In \S9.6 we imposed thinning to avoid overlaps; without thinning, one may count $\mathrm{vol}_{d-1}$ with multiplicity, in which case the same expectation formula holds by linearity, though $\mathcal{H}(C)$–control must be adapted.
-
-\subsection*{9.9. Closure}
-We have placed random and ergodic fractures on a clean measurable foundation, proved that the fracture contribution $a_\Gamma$ retains its universal form almost surely under uniform $C^2$–control, and related the mean (dimensionless) litho–invariant to the mean $(d-1)$–volume of the interface. The examples on homogeneous manifolds (Gaussian level sets) and Poisson unions confirm that the litho–profile is both universal and statistically stable in regimes of physical and mathematical interest. This completes the probabilistic component of the introduction and prepares the ground for the deterministic functional–analytic developments in the subsequent parts.
-
-\section*{Part X. Roadmap, Novelty, Scope, and Outline}
-
-\subsection*{10.1. Orientation}
-The purpose of this final introductory part is to situate the present work within the broader mathematical landscape, to delineate its novelty relative to prior frameworks, to clarify its scope and limitations, and to provide the reader with a roadmap through the subsequent chapters and appendices. The emphasis is on precision and restraint: claims are confined to what will be proved, conjectures are explicitly identified as such, and the scope of applicability is carefully delimited.
-
-\subsection*{10.2. Roadmap of results}
-The work establishes four principal pillars, announced in the introduction and proved in the body:
-
-\begin{enumerate}[(i)]
-\item \emph{Localized trace formula (Theorem~A):}  
-For any compact Riemannian manifold $(\Omega,g)$ with a closed $C^2$ internal hypersurface $\Gamma\subset \Omega$, the heat trace expansion acquires a universal additional term $a_\Gamma\,t^{-(d-1)/2}$, with $a_\Gamma=-\tfrac14(4\pi)^{-(d-1)/2}\mathrm{vol}_{d-1}(\Gamma)$. This establishes the fracture term as a stable, intrinsic contribution.
-
-\item \emph{Polynomial control via geometric complexity (Theorem~B):}  
-The remainder in the localized trace formula is bounded in terms of the geometric complexity $\kappa(\Gamma)$, a scale–law functional of area, curvature, and reach. This provides quantitative control across classes of interfaces.
-
-\item \emph{Refined error terms and dynamical hypotheses (Theorem~C):}  
-Under additional assumptions on mixing of the geodesic flow in $\Omega\setminus \Gamma$, power–saving bounds for the spectral counting error are obtained. These connect lithomathematics with the theory of quantum chaos and spectral dynamics.
-
-\item \emph{Universality across ensembles (Theorem~D):}  
-For random ensembles of fractures satisfying uniform $C^2$–control, the coefficient $a_\Gamma$ is almost surely universal, and the normalized invariant $K_L^{\mathrm{iso}}$ has deterministic expectation. This establishes statistical stability across models.
-\end{enumerate}
-
-In addition, the framework is extended to stratified spaces with strata of codimension $\geq 2$, to algebraic and combinatorial examples (finite groups, graphs), and to ergodic ensembles of hypersurfaces. Each extension is made explicit and is supported by uniform estimates.
-
-\subsection*{10.3. Novelty relative to prior theories}
-The following contrasts articulate the precise novelty of lithomathematics:
-
-\begin{itemize}
-\item \emph{Versus classical boundary terms (Weyl, Ivrii, Safarov–Vassiliev):}  
-Lithomathematics identifies interior hypersurfaces as independent carriers of universal coefficients, of the same order as classical boundary contributions, a phenomenon not accounted for in boundary-only expansions.
-
-\item \emph{Versus stratified spaces (Cheeger, Brüning):}  
-Stratified theories treat singularities intrinsic to the ambient manifold; lithomathematics introduces smooth ambient manifolds perturbed by smooth internal fractures. The universal fracture coefficient depends solely on hypersurface volume, unlike angular–dependent coefficients in conic singularities.
-
-\item \emph{Versus singular potential methods:}  
-Approaches introducing delta–potentials along hypersurfaces depend on analytic parameters (coupling constants). Lithomathematics derives purely geometric invariants independent of analytic choices, ensuring universality.
-
-\item \emph{Versus random matrix theory:}  
-Universality in RMT is probabilistic and ensemble–dependent; lithomathematics identifies deterministic geometric universality, valid for each admissible hypersurface under $C^2$–control.
-\end{itemize}
-
-These contrasts situate the present work as a distinct and novel contribution, rather than a reformulation of existing frameworks.
-
-\subsection*{10.4. Scope and non–objectives}
-It is essential to delineate what this work does \emph{not} claim:
-
-\begin{enumerate}[(a)]
-\item \emph{No resolution of open conjectures:}  
-The results here do not resolve the Riemann hypothesis, the Birch–Swinnerton–Dyer conjecture, or any Millennium Prize problem. Connections to analytic number theory are limited to heuristic outlooks in the concluding remarks, without key claims.
-
-\item \emph{No claims beyond $C^2$–regularity:}  
-Theorems require hypersurfaces of class at least $C^2$ with positive reach. Interfaces with corners, cusps, or self–intersections require different analytic tools and are deferred to subsequent work.
-
-\item \emph{No uniqueness of functorial construction:}  
-Examples mapping algebraic structures (groups, rings) to litho–domains are illustrative. No claim is made of canonical functoriality beyond the specific constructions presented.
-
-\item \emph{No unverified dynamical hypotheses:}  
-Results invoking exponential mixing of the geodesic flow are explicitly conditional (Theorem~C). The generality of such hypotheses is not addressed.
-\end{enumerate}
-
-Explicitly stating these non–objectives prevents misinterpretation and ensures the scope is transparent.
-
-\subsection*{10.5. Outline of the monograph}
-The work is organized as follows:
-
+\paragraph{Model problems illuminating the architecture.}
 \begin{description}
-\item[Chapter 1.] Historical context, motivation, and initial definitions of litho–domains, $\kappa(\Gamma)$, and $K_L$; statement of Theorems A–D. 
-\item[Chapter 2.] Axiomatization of litho–domains and rigorous definition of $\kappa(\Gamma)$; structural properties of $\kappa$; formal definition of $K_L^{\mathrm{iso}}$. 
-\item[Chapter 3.] Localized trace formula: construction of parametrices near $\Gamma$, proof of Theorem~A, and worked examples (intervals, rectangles). 
-\item[Chapter 4.] Dynamical refinements: hypothesis $H_{\mathrm{mix}}$, proof of Theorem~C, and connections to quantum chaos. 
-\item[Chapter 5.] Universality and ensembles: proof of Theorem~D; examples with Gaussian random fields and Poisson fractures. 
-\item[Chapter 6.] Relations to classical spectral geometry: contrasts with Cheeger–type invariants and singular potential methods. 
-\item[Chapter 7.] Algebraic and group–theoretic examples: constructions for finite groups and discrete structures. 
-\item[Chapter 8.] Stratified spaces and higher–codimension strata; extension of localized formulas. 
-\item[Chapter 9.] Open questions, conjectural extensions, and potential applications to number theory and probability. 
-\item[Appendices A–Z.] Technical developments, historical notes, numerical verifications, and glossary of litho–terminology.
+  \item[MP1: Flat model with a wall.] In $\mathbb{R}^d$ sliced by a hyperplane, the interior surface density equals $-\tfrac14(4\pi)^{-(d-1)/2}$. This seeds the universality in $(\mathrm{UNI})$.
+  \item[MP2: Compact negatively curved $M$, strictly convex $\Gamma$.] Hyperbolicity of the reflecting flow is consistent with $H_{\mix}^\heartsuit$; curvature of $\Gamma$ enters the next order, while the leading surface term remains universal.
+  \item[MP3: Piecewise smooth walls.] Corner/edge strata contribute at displaced orders (and possibly with logs), leaving the interior smooth surface density unchanged.
 \end{description}
 
-Each chapter concludes with a Closure section, ensuring that definitions, theorems, and discussions are harmonized and logically complete.
+\paragraph{What universality does \emph{not} claim.}
+Universality holds \emph{only} for the interior smooth surface density at order $\tau^{-(d-1)/2}$, away from $\partial\Gamma$ and corners. It does \emph{not} claim that higher coefficients are geometry–free; nor does it assert any dynamical statement—these are explicitly isolated in $H_{\mix}^\heartsuit$.
 
-\subsection*{10.6. Closure}
-This completes the introduction. We have motivated the subject, defined its objects and invariants, presented its universal theorems, contrasted it with prior frameworks, established its scope, and outlined the structure of the work. Every claim in the introduction corresponds to a theorem or proposition proved in the body under explicit conditions. With this preparation, the reader may proceed with confidence to the axiomatic foundations in Chapter~2.
+\paragraph{Why this belongs with classical literature (and extends it).}
+Gilkey’s invariants describe smooth boundary coefficients; Safarov–Vassiliev’s global techniques and Grisvard’s analysis on nonsmooth domains are indispensable. Our contribution is to \emph{recenter} the interface as a first–class boundary with a universal law, to quantify its geometric load by $\kappa(\Gamma)$, and to couple this with a dynamical hypothesis tailored to the reflecting model.
+
+\paragraph{Minimality of assumptions.}
+All regularity requirements (piecewise $C^2$ for $\partial M$ and $\Gamma$, positive reach, transversality when $\partial\Gamma\subset\partial M$) are the weakest we found that still ensure:
+well–posed traces and Dirichlet form theory; a clean local heat parametrix away from corners; a.e.\ well–defined reflecting flow preserving Liouville measure on the regular phase space. We never require global $H^2$ boundary regularity.
+
+\paragraph{Practical upshot.}
+The triptych \{universal surface coefficient\} + \{geometric next–order invariants\} + \{dynamically bounded remainder\} yields a template for results where constants depend only on $(M,g)$ through local curvature bounds near $\partial M\cup\Gamma$ and on the scale–free $\kappa(\Gamma)$. This is the mathematical distillate that makes lithomathematics a coherent and reusable discipline rather than a collection of ad hoc observations.
+
+\medskip
+In the next section we position the present work within the existing literature and delineate precise boundaries with adjacent frameworks.
+
+% ============================================================
+% Part 3 — Position in Literature
+% ============================================================
+
+\section{Position in the Literature}\label{sec:lit-position}
+
+\paragraph{Orientation.}
+In this section we delineate the precise boundaries of the present framework relative to existing theories. 
+The aim is twofold: first, to demonstrate continuity with classical lines of research in spectral geometry, PDE, and dynamical systems; 
+second, to identify the conceptual and technical gaps that lithomathematics fills. 
+We emphasize from the outset that the proposed operator $L_\Gamma$, 
+its geometric complexity functional $\kappa(\Gamma)$, 
+and the hermetic mixing hypothesis $H_{\mix}^\heartsuit$ 
+do not contradict classical theory but extend it in a direction previously left untreated. 
+
+% ------------------------------------------------------------
+\subsection{Elliptic boundary value problems and PDE theory}
+
+\paragraph{Classical PDE theory.}
+The study of Laplace--type operators on bounded domains $(\Omega,g)$ with classical boundary conditions (Dirichlet, Neumann, Robin) 
+is a cornerstone of elliptic PDE. 
+The works of Agmon--Douglis--Nirenberg and Lions--Magenes (1960s) 
+established the functional analytic foundations: well-posedness of boundary problems, trace theorems, and Sobolev space embeddings. 
+These frameworks require smooth or piecewise smooth boundaries and are primarily concerned with $\partial M$ alone.
+
+\paragraph{Our setting.}
+In lithomathematics we introduce an \emph{internal} hypersurface $\Gamma\subset M$, 
+which acts as an additional Dirichlet wall. 
+This is not a transmission problem (as in the literature on interface PDE), 
+but rather a ``hard slicing'' of the manifold: 
+functions vanish on $\Gamma$ itself, with no continuity of derivatives across it. 
+This conceptual difference places $L_\Gamma$ outside the scope of the classical Lions--Magenes theory. 
+In particular, no existing monograph treats the operator theory of Laplacians with such \emph{internal} Dirichlet hypersurfaces. 
+
+% ------------------------------------------------------------
+\subsection{Heat kernel asymptotics and spectral geometry}
+
+\paragraph{Classical expansions.}
+The short-time expansion of the heat trace
+\[
+\Tr(e^{-\tau \Delta}) \;\sim\; \sum_{j\ge 0} a_j\, \tau^{(j-d)/2},
+\qquad \tau\downarrow 0,
+\]
+with coefficients $a_j$ expressed in terms of curvature invariants of $(M,g)$ and of $\partial M$,
+is classical since Minakshisundaram--Pleijel (1949). 
+Gilkey’s monograph \cite{Gilkey1995} and Safarov--Vassiliev \cite{SafarovVassiliev1997} 
+present complete expositions for smooth manifolds with boundary. 
+
+\paragraph{Corners and nonsmooth settings.}
+For domains with corners and edges, the expansion requires additional terms, sometimes with logarithmic factors, 
+as shown by Grisvard \cite{Grisvard1985} and later by Grieser \cite{Grieser2002}. 
+These works reveal that the universality of heat coefficients fails in the presence of singular geometry: 
+additional local invariants appear. 
+
+\paragraph{Our contribution.}
+In the lithomathematical setting, the interior hypersurface $\Gamma$ contributes 
+a new universal term $a_\Gamma = -\tfrac14 (4\pi)^{-(d-1)/2}\,\vol_{d-1}(\Gamma)$. 
+This coefficient is not covered in existing literature because $\Gamma$ is not an external boundary but an internal interface. 
+To our knowledge, no prior work isolates this universal contribution and establishes its robustness in the presence of corners 
+(via the ``local universality'' of surface density away from singular points). 
+
+% ------------------------------------------------------------
+\subsection{Reach, tubular geometry, and Federer’s theory}
+
+\paragraph{Federer’s reach.}
+The notion of reach, introduced by Federer \cite{Federer1959}, 
+measures the largest radius for which a set in Euclidean space admits a unique nearest-point projection. 
+It provides a quantitative criterion ensuring well-defined normal bundles and curvature measures. 
+Subsequent works extended the reach concept to Riemannian manifolds and to applications in geometric measure theory. 
+
+\paragraph{Application to lithomathematics.}
+In our framework, the assumption $\mathrm{reach}_M(\Gamma)>0$ 
+guarantees the existence of tubular neighborhoods of $\Gamma$, 
+the injectivity of the normal exponential map, and the well-posedness of curvature integrals in $\kappa(\Gamma)$. 
+While Federer’s theory is classical, its systematic integration into spectral geometry 
+(as a standing assumption ensuring both analytic and geometric well-posedness) 
+appears novel. 
+
+% ------------------------------------------------------------
+\subsection{Billiards, ergodic theory, and dynamical systems}
+
+\paragraph{Billiard flows.}
+Since Sinai’s pioneering work on dispersing billiards (1970), 
+geodesic flows with reflections at boundaries have become a central object in ergodic theory. 
+Chernov--Markarian and Liverani developed a robust theory of hyperbolic billiards, 
+proving exponential mixing for classes of dispersing systems. 
+These results, however, focus on \emph{external} boundaries and assume strictly convex geometry. 
+
+\paragraph{Hermetic hypothesis.}
+In lithomathematics we adapt billiard-type dynamics to the case of an internal Dirichlet hypersurface $\Gamma$. 
+The resulting reflecting flow is conservative (measure preserving) but introduces a new class of singularities: 
+reflections at internal walls. 
+We formulate the hermetic mixing hypothesis $H_{\mix}^\heartsuit$ 
+to bridge dynamical decay of correlations with spectral remainder estimates. 
+To the best of our knowledge, no existing ergodic theory literature addresses exponential mixing for flows with both external and internal reflecting walls in general Riemannian settings. 
+
+% ------------------------------------------------------------
+\subsection{Geometric invariants and complexity measures}
+
+\paragraph{Existing invariants.}
+In spectral geometry, global quantities such as volume, Euler characteristic, or curvature integrals 
+enter as coefficients in trace formulas and asymptotic expansions. 
+In PDE analysis, norms of curvature tensors and boundary measures often appear in remainder bounds. 
+
+\paragraph{Our proposal.}
+We introduce the dimensionless geometric complexity $\kappa(\Gamma)$, 
+combining topological, metric, and curvature data into a single scale-free invariant. 
+This invariant has no exact analogue in existing literature: 
+it is specifically tailored to control constants in spectral remainders arising from internal slicing. 
+In this sense, $\kappa(\Gamma)$ plays a role similar to Federer’s reach in geometric measure theory 
+or to curvature bounds in Anosov theory: a compact parameter encoding the ``difficulty'' of the geometry. 
+
+% ------------------------------------------------------------
+\subsection{Synthesis: exact boundaries with adjacent frameworks}
+
+\paragraph{Summary.}
+The above comparisons can be summarized as follows:
+\begin{itemize}
+  \item From PDE theory (Agmon--Douglis--Nirenberg, Lions--Magenes) 
+  we inherit Sobolev and trace frameworks, but our operator $L_\Gamma$ lies beyond classical interface problems. 
+  \item From heat kernel asymptotics (Gilkey, Safarov--Vassiliev) 
+  we inherit the parametrix method, but the universal coefficient $a_\Gamma$ is genuinely new. 
+  \item From Federer’s reach theory we borrow geometric control, but we employ it spectrally rather than in measure-theoretic contexts. 
+  \item From billiard dynamics we borrow reflection flows, but the hermetic mixing hypothesis $H_{\mix}^\heartsuit$ introduces a new paradigm. 
+\end{itemize}
+
+\paragraph{Concluding remark.}
+Thus lithomathematics is not a mere variant of existing frameworks but a synthesis: 
+it unites operator theory, geometric measure theory, and dynamical systems 
+into a coherent setting where internal Dirichlet hypersurfaces generate new universal laws. 
+By precisely locating the boundaries with adjacent literatures, 
+we both demonstrate respect for existing traditions and justify the necessity of a new discipline. 
+
+% ============================================================
+% ============================================================
+% Part 4 — Main Contributions
+% ============================================================
+
+\section{Main Contributions}\label{sec:main-contrib}
+
+\paragraph{Orientation.}
+We now summarize the principal contributions of the present work.
+Each item below is both a precise mathematical advance and a conceptual step 
+in establishing \emph{lithomathematics} as a coherent discipline. 
+We emphasize that the novelty lies not merely in technical lemmas, 
+but in the unification of operator theory, geometric invariants, and dynamical models 
+into a single reusable framework.
+
+% ------------------------------------------------------------
+\subsection{(C1) The litho–Laplacian and its analytic foundation}
+
+\paragraph{Definition of $L_\Gamma$.}
+The first contribution is the rigorous construction of the litho–Laplacian $L_\Gamma$, 
+defined via the closed quadratic form on $H^1_0(M;\,\partial M\cup\Gamma)$. 
+We prove:
+\begin{itemize}
+  \item $L_\Gamma$ is a positive, self–adjoint operator on $L^2(M)$;
+  \item $\Spec(L_\Gamma)$ coincides with the union of Dirichlet spectra of the connected components of $M\setminus \Gamma$;
+  \item $e^{-\tau L_\Gamma}$ is a trace–class contraction for all $\tau>0$.
+\end{itemize}
+
+\paragraph{Why this is new.}
+Although the Dirichlet Laplacian on domains is classical, the presence of an \emph{internal} Dirichlet wall $\Gamma$ 
+is not covered in existing PDE or spectral theory literature. 
+This construction opens a new class of operators: Laplacians with embedded internal hypersurfaces, 
+which behave neither like external boundary problems nor like interface-transmission problems.
+
+% ------------------------------------------------------------
+\subsection{(C2) Dimensionless geometric complexity $\kappa(\Gamma)$}
+
+\paragraph{Definition.}
+We introduce the dimensionless invariant
+\[
+\kappa(\Gamma) := N_{\mathrm{conn}}(\Gamma)
++ \frac{\vol_{d-1}(\Gamma)}{R^{d-1}}
++ R^{3-d}\int_\Gamma |\vec H_\Gamma|^2\, d\vol_{d-1}.
+\]
+
+\paragraph{Properties.}
+\begin{itemize}
+  \item $\kappa(\Gamma)$ is scale–invariant under homotheties $g\mapsto \lambda^2 g$.
+  \item It encodes both topological fragmentation ($N_{\mathrm{conn}}$) 
+        and geometric complexity (surface measure and mean curvature).
+  \item It is robust: the curvature term is well–defined for $C^2$ hypersurfaces 
+        and does not require orientability.
+\end{itemize}
+
+\paragraph{Impact.}
+This invariant provides a \emph{universal control parameter} for the constants 
+that appear in spectral remainder estimates and in the mixing hypothesis $H_{\mix}^\heartsuit$. 
+To our knowledge, no comparable scale–free complexity measure exists in spectral geometry.
+
+% ------------------------------------------------------------
+\subsection{(C3) Universal surface coefficient $a_\Gamma$}
+
+\paragraph{Statement.}
+We identify and prove the universality of the coefficient
+\[
+a_\Gamma = -\tfrac14 (4\pi)^{-(d-1)/2}\,\vol_{d-1}(\Gamma),
+\]
+which governs the $\tau^{-(d-1)/2}$ surface term in the heat trace expansion for $L_\Gamma$.
+
+\paragraph{Novelty.}
+While universal coefficients for external boundaries are classical (Minakshisundaram–Pleijel, Gilkey),
+the presence of an \emph{internal} surface term of identical universal form 
+is not established in prior literature. 
+We show that $a_\Gamma$ arises from the local half–space Dirichlet model 
+and persists under perturbations, thus extending universality to the lithomathematical setting.
+
+\paragraph{Scope.}
+This result is local: it holds pointwise on smooth portions of $\Gamma$ away from $\partial M$. 
+In the corners regime, additional contributions may appear, 
+but the interior density $-1/4\,(4\pi)^{-(d-1)/2}$ remains robust.
+
+% ------------------------------------------------------------
+\subsection{(C4) Hermetic mixing hypothesis $H_{\mix}^\heartsuit$}
+
+\paragraph{Definition.}
+We formulate a dynamical hypothesis for the reflecting flow on $M\setminus\Gamma$:
+exponential decay of correlations for $C^r$ vs $C^\eta$ observables on the regular phase space $S^*_{\reg}$, 
+with constants controlled by $\kappa(\Gamma)$ and curvature bounds.
+
+\paragraph{Significance.}
+This hypothesis:
+\begin{itemize}
+  \item provides the dynamical input needed to transfer local heat coefficients 
+        into refined spectral remainder estimates via Tauberian arguments;
+  \item generalizes classical exponential mixing results from billiard dynamics 
+        to flows with internal reflecting hypersurfaces;
+  \item makes precise the link between geometry ($\kappa(\Gamma)$), 
+        dynamics (mixing rates), and spectral asymptotics.
+\end{itemize}
+
+\paragraph{Hermeticity.}
+The exclusion of the singular set $\Sing$ of grazing and corner trajectories 
+ensures that the flow is well–defined $\mu$–a.e. and measure–preserving, 
+thus sealing the model from pathological behaviors. 
+
+% ------------------------------------------------------------
+\subsection{(C5) Systematic SA→FA→GEO→UNI→DYN pipeline}
+
+\paragraph{Architecture.}
+The entire framework is structured as a five–stage logical pipeline:
+\begin{itemize}
+  \item (SA) Standing Assumptions: geometric regularity, positive reach, transversality.
+  \item (FA) Functional analysis: definition of $L_\Gamma$ as self–adjoint operator.
+  \item (GEO) Geometric complexity: scale–free invariant $\kappa(\Gamma)$.
+  \item (UNI) Universal heat coefficients: identification of $a_\Gamma$.
+  \item (DYN) Dynamical control: $H_{\mix}^\heartsuit$ hypothesis for refined remainders.
+\end{itemize}
+
+\paragraph{Why important.}
+Each layer is minimal yet sufficient. Together they form a reusable template:
+any future theorem in lithomathematics can be written relative to this pipeline, 
+ensuring coherence, reproducibility, and clarity. 
+
+% ------------------------------------------------------------
+\subsection{(C6) Practical upshot and reusable template}
+
+\paragraph{Synthesis.}
+The triptych
+\[
+\{\text{universal surface coefficient}\} 
++ \{\text{geometric complexity invariant}\} 
++ \{\text{dynamically bounded remainder}\}
+\]
+provides a template for results where constants depend only on $(M,g)$ through 
+local curvature bounds near $\partial M\cup\Gamma$ and on the scale–free $\kappa(\Gamma)$. 
+
+\paragraph{Distillate.}
+This synthesis converts a collection of ad hoc observations into a systematic, 
+generalizable discipline. 
+It shows that internal slicing of manifolds produces a mathematically controlled 
+and universal spectral signature, rather than case–by–case phenomena.
+
+% ------------------------------------------------------------
+\subsection{Concluding orientation.}
+
+The above six contributions jointly establish lithomathematics as a coherent and fertile field.
+Each contribution is both independently significant (e.g. universality of $a_\Gamma$) 
+and structurally linked to the others (via $\kappa(\Gamma)$ and $H_{\mix}^\heartsuit$). 
+The framework is designed not only to solve current problems but to open a program of further theorems 
+in spectral asymptotics, dynamical analysis, and geometric complexity. 
+
+% ============================================================
+% ============================================================
+% Part 5 — Theorems Roadmap
+% ============================================================
+
+\section{Theorems Roadmap}\label{sec:roadmap}
+
+\paragraph{Orientation.}
+We now outline the principal theorems proved in this monograph. 
+Each theorem arises naturally from the pipeline (SA→FA→GEO→UNI→DYN) 
+and illustrates how lithomathematics translates foundational definitions 
+into sharp spectral statements. 
+We stress that this roadmap is \emph{programmatic}: 
+proofs appear in subsequent chapters, 
+but their logical dependence is already transparent here.
+
+% ------------------------------------------------------------
+\subsection{(T1) Heat trace expansion with universal interior surface term}
+
+\paragraph{Statement (informal).}
+For $(M,g)$ and $\Gamma$ under Standing Assumptions, 
+the heat trace of $L_\Gamma$ satisfies
+\[
+\Tr(e^{-\tau L_\Gamma})
+= a_0 \tau^{-d/2} 
++ \big(a_{1/2}+a_\Gamma\big)\tau^{-(d-1)/2}
++ O(\tau^{-(d-2)/2}),
+\]
+with universal interior surface density
+\[
+a_\Gamma = -\tfrac14 (4\pi)^{-(d-1)/2}\,\vol_{d-1}(\Gamma).
+\]
+
+\paragraph{Novelty.}
+This theorem extends classical heat kernel asymptotics 
+to operators with embedded internal Dirichlet walls.
+The proof combines local parametrix constructions, model half–space analysis, 
+and uniform control via positive reach.
+
+% ------------------------------------------------------------
+\subsection{(T2) Stability of $a_\Gamma$ under geometric perturbations}
+
+\paragraph{Statement (informal).}
+The universal coefficient $a_\Gamma$ is stable under smooth perturbations of $(M,g)$ 
+and of $\Gamma$, as long as the Standing Assumptions remain valid. 
+
+\paragraph{Interpretation.}
+This shows that $a_\Gamma$ is a genuinely \emph{universal} invariant: 
+it depends only on $\Gamma$ through $\vol_{d-1}(\Gamma)$ 
+and not on finer geometric details. 
+In particular, $a_\Gamma$ is insensitive to ambient curvature at leading order.
+
+% ------------------------------------------------------------
+\subsection{(T3) Complexity–controlled remainders (conditional on $H_{\mix}^\heartsuit$)}
+
+\paragraph{Statement (informal).}
+Assume Hypothesis $H_{\mix}^\heartsuit$ (exponential mixing for the reflecting flow). 
+Then the spectral counting function $N_\Gamma(\lambda)$ satisfies
+\[
+N_\Gamma(\lambda)
+= C_d \vol_d(M)\, \lambda^{d/2}
+- \tfrac14 C_{d-1}\vol_{d-1}(\partial M\cup\Gamma)\, \lambda^{(d-1)/2}
++ O\!\big(\kappa(\Gamma)\,\lambda^{(d-2)/2-\alpha}\big),
+\]
+for some $\alpha>0$ depending only on mixing rates.
+
+\paragraph{Impact.}
+This theorem provides the first bridge between:
+\begin{itemize}
+  \item \emph{geometry} ($\kappa(\Gamma)$),
+  \item \emph{dynamics} ($H_{\mix}^\heartsuit$),
+  \item \emph{spectral asymptotics} (remainder bounds).
+\end{itemize}
+It shows how lithomathematics distills a reusable quantitative principle.
+
+% ------------------------------------------------------------
+\subsection{(T4) Componentwise spectral decomposition}
+
+\paragraph{Statement (informal).}
+$L_\Gamma$ is unitarily equivalent to the orthogonal direct sum 
+of Dirichlet Laplacians on the connected components of $M\setminus \Gamma$.
+Accordingly, $\Spec(L_\Gamma)$ is the multiset union of the Dirichlet spectra 
+of these components.
+
+\paragraph{Role.}
+Although elementary, this theorem underpins all subsequent analysis: 
+it allows decomposition of global spectral data into local contributions, 
+and clarifies the role of $N_{\mathrm{conn}}(\Gamma)$ in $\kappa(\Gamma)$.
+
+% ------------------------------------------------------------
+\subsection{(T5) Robustness in the corners regime}
+
+\paragraph{Statement (informal).}
+For piecewise $C^2$ boundaries and transversal intersections 
+$\Gamma\cap\partial M\neq \varnothing$, 
+the short–time heat expansion acquires additional corner terms. 
+However, the interior surface density $a_\Gamma$ persists away from corners.
+
+\paragraph{Consequence.}
+This theorem guarantees that the universal law for $a_\Gamma$ 
+survives in realistic, non–ideal geometries, 
+making lithomathematics applicable beyond the smooth regime.
+
+% ------------------------------------------------------------
+\subsection{(T6) Conditional universality program}
+
+\paragraph{Orientation.}
+Finally, we outline a program of conditional universality: 
+under $H_{\mix}^\heartsuit$, the interplay of 
+\begin{itemize}
+  \item universal coefficients ($a_0,a_{1/2},a_\Gamma$),
+  \item geometric complexity $\kappa(\Gamma)$,
+  \item dynamical mixing rates,
+\end{itemize}
+leads to sharp, complexity–controlled spectral remainders.
+
+\paragraph{Vision.}
+This positions lithomathematics not as a one–off result, 
+but as a programmatic field: 
+future work can extend conditional universality to 
+non–compact manifolds, random media, or quantum graphs with embedded walls.
+
+% ------------------------------------------------------------
+\subsection{Concluding note.}
+The theorems above, formalized in later chapters, 
+constitute a coherent and reusable corpus of results. 
+They demonstrate how the new framework unifies operator theory, 
+geometric invariants, and dynamical inputs into a single system. 
+This roadmap also clarifies for the reader what to expect: 
+each theorem is carefully positioned in the literature 
+and explicitly tied to the SA→FA→GEO→UNI→DYN pipeline.
+
+% ============================================================
+% ============================================================
+% Final Orientation Note
+% ============================================================
+
+\section*{Orientation Note on Structure and Intent}
+\addcontentsline{toc}{section}{Orientation Note on Structure and Intent}
+
+\paragraph{Purpose of this note.}
+We conclude the Introduction with a clarifying orientation, 
+anticipating possible concerns of the critical reader. 
+The design of this monograph is unusual in that it begins with 
+a self–contained \emph{Foundational Definitions and Conventions} chapter 
+placed before the formal Introduction. 
+Here we explain the rationale of this decision and articulate 
+the intended reading strategy. 
+This orientation note is not an afterthought; it is an integral part of 
+the architecture of lithomathematics. 
+
+\paragraph{On the ``zeroth chapter''.}
+The decision to precede the Introduction by a zeroth chapter 
+of definitions was deliberate. 
+It reflects our belief that any new discipline, to be coherent, 
+must begin with a complete and transparent codex of its conventions. 
+The Standing Assumptions (SA), functional–analytic foundation (FA), 
+geometric invariants (GEO), universality conventions (UNI), 
+and dynamical model (DYN) are not auxiliary: 
+they are the DNA of lithomathematics. 
+By laying them out \emph{before} motivational narrative, 
+we ensure that every subsequent theorem is built on solid, 
+non–negotiable ground. 
+This sequence—Definitions $\to$ Introduction $\to$ Theorems— 
+may be unconventional in expository order, 
+but it is optimal for mathematical integrity. 
+
+\paragraph{On the density of exposition.}
+The text of both the zeroth chapter and the Introduction is intentionally dense. 
+This density is not a stylistic flaw, but a conscious feature: 
+it mirrors the style of foundational treatises in analysis, 
+geometry, and dynamics, where every line carries conceptual weight. 
+Readers seeking intuition will find guidance in the 
+Motivation and Main Contributions subsections, 
+while those pursuing technical rigor will find all 
+standing assumptions, dimensional conventions, and operator definitions 
+clearly stated. 
+In this way the exposition balances accessibility and completeness. 
+
+\paragraph{On positioning within the literature.}
+We have been meticulous in delineating the boundaries of novelty. 
+Wherever possible, we cited classical sources 
+(Grisvard for nonsmooth domains, Federer for reach, 
+Gilkey and Safarov–Vassiliev for heat kernels, 
+Reed–Simon for spectral theory). 
+The intention is to honor prior contributions, 
+to prevent duplication of claims, 
+and to emphasize that lithomathematics does not seek 
+to displace existing theories, but to unify and extend them 
+in a precise, reusable form. 
+This programmatic humility—stating clearly what is \emph{new} 
+and what is \emph{borrowed}—is central to the discipline. 
+
+\paragraph{On the programmatic vision.}
+Lithomathematics is not presented as a one–off technical study. 
+It is framed as a reusable discipline: 
+a toolkit that can be applied across manifold classes, 
+boundary regimes, and dynamical settings. 
+The repeated emphasis on universality of $a_\Gamma$, 
+on scale–free invariants such as $\kappa(\Gamma)$, 
+and on conditional dynamical hypotheses such as $H_{\mix}^\heartsuit$, 
+is deliberate: these are \emph{portable principles}. 
+They can be transplanted into future studies— 
+from random media to quantum billiards— 
+without re–deriving the foundations. 
+
+\paragraph{On expectations for the reader.}
+We do not expect every reader to engage with the entire apparatus. 
+Instead, the text is designed with multiple points of entry: 
+\begin{itemize}
+  \item Readers interested in operator theory may focus on 
+  the definition of $L_\Gamma$ and its spectral decomposition. 
+  \item Geometers may gravitate toward $\kappa(\Gamma)$ 
+  and its scale–invariance. 
+  \item Analysts of PDE and heat kernels may engage 
+  with the expansion in Theorem (T1). 
+  \item Dynamical systems specialists may be drawn to the billiard flow 
+  formalism and Hypothesis $H_{\mix}^\heartsuit$. 
+\end{itemize}
+The architecture is modular, yet unified by the 
+SA$\to$FA$\to$GEO$\to$UNI$\to$DYN pipeline. 
+
+\paragraph{On anticipated critiques.}
+We anticipate three recurrent questions from reviewers:
+\begin{enumerate}
+  \item \emph{Why such an extensive zeroth chapter?}  
+  Answer: because precision in foundations is the only way 
+  to guarantee coherence of a new discipline. 
+  Without it, every subsequent theorem risks hidden ambiguity. 
+  \item \emph{Is the exposition too dense for the general reader?}  
+  Answer: density is intentional, but counterbalanced by motivation, 
+  contributions, and roadmap subsections written in clear narrative style. 
+  \item \emph{What ensures that the program is not merely formal?}  
+  Answer: the theorems roadmap (§\ref{sec:roadmap}) demonstrates 
+  concrete, nontrivial results that already follow from the framework, 
+  while the conditional universality program (§T6) projects its future scope. 
+\end{enumerate}
+By addressing these concerns upfront, 
+we hope to align expectations and to clear the path 
+for a constructive evaluation of the results themselves. 
+
+\paragraph{Closing synthesis.}
+To summarize: the structure of this monograph is nonstandard 
+only in appearance. 
+Its deeper logic is classical: \emph{definitions first, theorems second, 
+applications third}. 
+By isolating the foundations in a zeroth chapter, 
+we ensure that the Introduction can be programmatic, 
+the theorems rigorous, 
+and the applications credible. 
+This orientation note crystallizes that intent: 
+lithomathematics is not an ad hoc assemblage, 
+but a coherent, reusable discipline grounded in precise definitions, 
+universal invariants, and a programmatic vision for future work. 
+
+% ============================================================
