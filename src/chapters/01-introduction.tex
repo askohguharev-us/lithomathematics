@@ -537,3 +537,134 @@ Lithomathematics elevates internal Dirichlet walls from neglected constraints to
 % ------------------------------------------------------------
 % End of Chapter 1
 % ------------------------------------------------------------
+
+% ============================================================
+% Additional Introductory Sections (Diamond 20/10 Enhancement)
+% Cross-linked to Chapter 0 (Foundational Definitions and Conventions)
+% ============================================================
+
+\section{Bibliographic Essay (Selected Landmarks)}\label{sec:biblio-essay}
+
+\noindent\textbf{Boundary heat asymptotics.}
+Seeley (1969), McKean–Singer (1967), Greiner (1971), Gilkey (1995): exterior boundary calculus and the universal boundary coefficient $a_{1/2}(\partial M)$ in the short-time heat trace.
+\emph{Limitation:} one-sided boundary collars exclude two-sided interior walls $\Gamma$ (cf.\ the interior setting of \S\ref{def:heat-expansion}).
+
+\noindent\textbf{Stratified geometries.}
+Cheeger (1983), Mazzeo (1991), Melrose (1993): analysis on cones, edges, and cusps.
+\emph{Limitation:} these are \emph{metric} singularities; interior Dirichlet walls are geometrically smooth but \emph{functionally} singular (no transmission across $\Gamma$), hence outside the standard conic/edge taxonomies.
+
+\noindent\textbf{Transmission interfaces.}
+Lions–Magenes (1972), Grisvard (1985), and subsequent interface PDE theory: jump/continuity conditions with model- and parameter-dependent leading terms.
+\emph{Limitation:} the leading surface coefficient depends on interface parameters, so there is no parameter-free universality (contrast with $a_\Gamma$ in \S\ref{def:heat-expansion}).
+
+\noindent\textbf{Spectral–dynamical bridge.}
+Safarov–Vassiliev (1997); Chernov–Markarian (2006): refined spectral remainders via billiard dynamics and decay of correlations.
+\emph{Addition here:} dynamics sharpen \emph{remainders} but do not create the missing \emph{interior} surface coefficient; cf.\ the optional (DYN) layer linked to \S\ref{hyp:mixing}.
+
+\noindent\textbf{Geometric measure theory (reach).}
+Federer (1959): reach geometry, tubular neighborhoods, curvature bounds — the geometric backbone ensuring uniform Fermi charts and reflection parametrices near $\Gamma$ (cf.\ \S\ref{rem:reach-ref}).
+
+\medskip
+
+\section{Glossary (Quick Orientation)}\label{sec:glossary}
+\begin{description}
+  \item[Hard wall] Internal Dirichlet constraint $u|_{\Gamma}=0$; no transmission across $\Gamma$ (cf.\ \S\ref{def:litho-Laplacian}).
+  \item[Litho–Laplacian $L_\Gamma$] Friedrichs realization of $-\Delta_g$ on $H^1_0(M;\partial M\cup\Gamma)$, acting componentwise on $M\setminus\Gamma$; see \S\ref{def:litho-Laplacian} and \S\ref{rem:components}.
+  \item[Universal interior law $a_\Gamma$] Leading interior surface density
+  $-\tfrac14(4\pi)^{-(d-1)/2}\vol_{d-1}(\Gamma)$ at order $\tau^{-(d-1)/2}$; see \S\ref{def:heat-expansion} and \S\ref{conv:universality}.
+  \item[Reach] Positive tubular radius guaranteeing unique nearest-point projection and uniform Fermi coordinates; cf.\ \S\ref{rem:relative-reach}–\S\ref{rem:reach-ref}.
+  \item[$\kappa(\Gamma)$] Dimensionless geometric complexity invariant (fragmentation, area, bending) controlling constants beyond universality; cf.\ \S\ref{def:complexity}.
+  \item[$H_{\mix}^{\heartsuit}$] Exponential mixing hypothesis for the reflecting flow, used Tauberi\-anly to sharpen remainders; cf.\ \S\ref{hyp:mixing} and \S\ref{hyp:mixing-hermetic}.
+  \item[No cross-talk] Absence of singularity transmission across $\Gamma$ (pure specular reflection of wavefronts); see the microlocal discussion in the Introduction and Green identities in \S\ref{rem:green}.
+  \item[SA] \emph{Standing Assumptions}: piecewise $C^2$, positive reach, transversality (cf.\ \S\ref{sec:definitions}).
+  \item[FA] \emph{Functional–Analytic layer}: $L_\Gamma$ via the Friedrichs form, trace continuity, spectral splitting (cf.\ \S\ref{def:litho-Laplacian}, \S\ref{rem:trace-continuity}, \S\ref{rem:components}).
+  \item[GEO] \emph{Geometric layer}: invariants at $\tau^{-(d-2)/2}$, complexity control by $\kappa(\Gamma)$ (cf.\ \S\ref{def:complexity}, \S\ref{rem:seeley-dewitt}).
+  \item[UNI] \emph{Universal layer}: curvature-free interior surface law $a_\Gamma$ (cf.\ \S\ref{def:heat-expansion}, \S\ref{conv:universality}).
+  \item[DYN] \emph{Dynamical layer}: reflecting flow, $H_{\mix}^{\heartsuit}$, Tauberian transfer to global remainders (cf.\ \S\ref{hyp:mixing}–\S\ref{hyp:mixing-hermetic}).
+\end{description}
+
+\medskip
+
+\section{Research Hypotheses}\label{sec:hypotheses}
+% We index hypotheses H1–H4 for internal cross-referencing.
+\begin{description}
+  \item[\textbf{H1}]\label{hyp:H1} \textit{(Minimal geometry).}
+  Under $C^{1,1}$ regularity and positive reach, the interior density $a_\Gamma$ remains universal and curvature-independent at order $\tau^{-(d-1)/2}$ (cf.\ locality in \S\ref{rem:local-universal-density}).
+  \item[\textbf{H2}]\label{hyp:H2} \textit{(Multiplicity).}
+  For finitely many disjoint $C^2$ walls,
+  \[
+  a_{\cup_i\Gamma_i}=\sum_i a_{\Gamma_i}+O(\tau^{-(d-2)/2}),
+  \]
+  i.e.\ additivity holds modulo lower-order corrections, with the $O(\cdot)$-term controlled by pairwise separations and $\kappa(\cup_i\Gamma_i)$.
+  \item[\textbf{H3}]\label{hyp:H3} \textit{(Tauberian remainder).}
+  Under $H_{\mix}^{\heartsuit}$ and controlled $\kappa(\Gamma)$,
+  \[
+  R(\lambda)=O\!\big(\kappa(\Gamma)\,\lambda^{(d-2)/2-\alpha}\big),\qquad \alpha\in(0,1/2],
+  \]
+  where $\alpha$ is determined by dynamical invariants (e.g.\ spectral gaps of the transfer operator) of the reflecting flow (cf.\ \S\ref{hyp:mixing-hermetic}).
+  \item[\textbf{H4}]\label{hyp:H4} \textit{(Schr\"odinger stability).}
+  For $-\Delta+V$ with bounded $V$ satisfying $\|V\|_\infty < C(\kappa(\Gamma))$, the coefficient $a_\Gamma$ is unchanged at order $\tau^{-(d-1)/2}$; higher-order coefficients may depend on $V$ (cf.\ robustness in \S\ref{rem:robust-coeff}).
+\end{description}
+
+\medskip
+
+\section{Methodological Innovations}\label{sec:methods-innovation}
+\begin{enumerate}
+  \item \textbf{Interior parametrix with reach control.}
+  Fermi coordinates and reflection yield a two-sided Dirichlet parametrix with uniform error bounds on a tubular collar controlled by the reach (cf.\ \S\ref{rem:relative-reach}–\S\ref{rem:reach-ref}); implemented in detail in Ch.~2 (Parametrix) and used to derive the density in Ch.~3 (Universal Law).
+  \item \textbf{SA$\to$FA$\to$GEO$\to$UNI modularity.}
+  A transferable pipeline that isolates the universal law from geometric/functional hypotheses (Ch.~0 $\to$ Ch.~2–3), and cleanly separates the first curvature-dependent layer (Ch.~4–5 via \S\ref{rem:seeley-dewitt}).
+  \item \textbf{Tauberian bridge (Safarov–Vassiliev style).}
+  Heat–wave correspondence, treatment of grazing sets, and specular reflections in oscillatory integrals to convert $t$–mixing into $\lambda$–remainders (Ch.~6–7; cf.\ \S\ref{hyp:mixing}–\S\ref{hyp:mixing-hermetic}).
+  \item \textbf{Complexity orchestration via $\kappa(\Gamma)$.}
+  The scale-free invariant of \S\ref{def:complexity} organizes constants in non-universal coefficients and remainder estimates (Ch.~4–5 for coefficients; Ch.~6–7 for remainders).
+\end{enumerate}
+
+\medskip
+
+\section{Canonical Models and Counterexamples}\label{sec:models-counter}
+
+\paragraph{Flat wall in $\mathbb{R}^d$.}
+Method of images on the Dirichlet half-space yields the exact density $-\frac14(4\pi)^{-(d-1)/2}$ per unit $(d\!-\!1)$–area, validating the local coefficient in \S\ref{def:heat-expansion} (see also the sanity check in the Introduction).
+
+\paragraph{Corners/edges at $\partial\Gamma$.}
+The leading \emph{interior} density is unchanged away from corner sets, but next orders may include displaced and logarithmic contributions (cf.\ \S\ref{rem:corners}); quantitative bounds are treated in Ch.~4–5.
+
+\paragraph{Partial transmission (Robin/impedance).}
+Introducing $[u]=0$ and $[\partial_\nu u]=\kappa u$ destroys parameter-free universality at the leading surface order, contrasting sharply with lithomathematics (cf.\ the comparative tables in the Introduction).
+
+\paragraph{Highly oscillatory wall.}
+If $\Gamma$ oscillates at frequency $\to\infty$ so that $\mathrm{reach}_M(\Gamma)\to 0$, the uniform parametrix breaks down; this probes the sharpness of \textbf{H1} and the necessity of reach (cf.\ \S\ref{rem:relative-reach}).
+
+\paragraph{Nearly touching walls.}
+As disjoint walls approach with gap $\to 0$, interaction terms can violate additivity at scales commensurate with the gap; this delimits \textbf{H2} and is analyzed by barrier-interaction models in Ch.~3/Appendix.
+
+\paragraph{Fractal walls.}
+If $\Gamma$ has Hausdorff dimension $>d-1$, the $(d\!-\!1)$–area law no longer governs the coefficient; this motivates a generalized framework beyond \S\ref{def:heat-expansion} (open program outlined in Ch.~5/§Open Problems).
+
+\medskip
+
+\section{Annotated Table of Contents (Per Chapter)}\label{sec:annotated-toc}
+
+\noindent\textbf{Chapter 0 (Foundations).}
+Standing assumptions (SA), litho–Laplacian $L_\Gamma$ (FA), geometric complexity $\kappa(\Gamma)$ (GEO), heat expansion and universality convention (UNI), dynamical hypothesis $H_{\mix}^{\heartsuit}$ (DYN).
+Key references: \S\ref{sec:definitions}, \S\ref{def:litho-Laplacian}, \S\ref{def:complexity}, \S\ref{def:heat-expansion}, \S\ref{hyp:mixing}–\S\ref{hyp:mixing-hermetic}.
+
+\noindent\textbf{Chapter 2 (Parametrix).}
+Interior Dirichlet construction in Fermi charts with reach control; proof of the local interior density at the kernel level; management of error terms away from $\partial\Gamma$ (links: \S\ref{rem:relative-reach}–\S\ref{rem:reach-ref}).
+
+\noindent\textbf{Chapter 3 (Universal Law).}
+Global heat trace asymptotics; extraction and stability of $a_\Gamma$; wall–toggle computations and separation from $a_{1/2}(\partial M)$.
+
+\noindent\textbf{Chapters 4–5 (Geometric Corrections).}
+Seeley–DeWitt invariants at order $\tau^{-(d-2)/2}$; curvature contributions on $\partial M$ and $\Gamma$; organization of constants via $\kappa(\Gamma)$ and comparison principles (cf.\ \S\ref{rem:seeley-dewitt}).
+
+\noindent\textbf{Chapters 6–7 (Dynamics).}
+Reflecting flow, $H_{\mix}^{\heartsuit}$, and Tauberian transfer to remainder bounds; explicit handling of grazing sets and singular strata on a $\mu$–null set (cf.\ \S\ref{def:regular-phase}–\S\ref{lem:liouville}).
+
+\noindent\textbf{Appendices.}
+Model computations (flat and curved collars), numerical verification (extraction of $a_\Gamma$ via short-time fitting), robustness checks for \textbf{H1}–\textbf{H4} and interaction/corner models.
+
+% ------------------------------------------------------------
+% End of Additional Introductory Sections (Diamond 20/10)
+% ------------------------------------------------------------
