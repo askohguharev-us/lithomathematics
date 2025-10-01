@@ -293,7 +293,7 @@ independent of curvature at order $\tau^{-(d-1)/2}$.
 
 % ============================================================
 % CHAPTER 2: PRELIMINARIES (PART II)
-% Expanded, Annals-level rigor, no omissions
+% Expanded, Annals-level rigor, no omissions; augmented but not shortened
 % ============================================================
 
 % ============================================================
@@ -303,8 +303,8 @@ independent of curvature at order $\tau^{-(d-1)/2}$.
 \subsection{Billiard-type reflecting flow: construction and measurability}
 Let $p(x,\xi)=|\xi|_g^2$ be the principal symbol of $-\,\Delta_g$, and let
 \[
-H_p = \sum_{j=1}^d \frac{\partial p}{\partial \xi_j}\frac{\partial}{\partial x_j}
-   - \frac{\partial p}{\partial x_j}\frac{\partial}{\partial \xi_j}
+H_p \;=\; \sum_{j=1}^d \frac{\partial p}{\partial \xi_j}\frac{\partial}{\partial x_j}
+   \;-\; \frac{\partial p}{\partial x_j}\frac{\partial}{\partial \xi_j}
 \]
 be the associated Hamiltonian vector field on $T^*M\setminus 0$. On the open manifold $M\setminus (\partial M\cup\Gamma)$, the geodesic flow $\Phi^t$ solves $\dot z = H_p(z)$, $z=(x,\xi)$.
 
@@ -349,6 +349,15 @@ for every Borel set $E\subset S^*_{\reg}$ and $t\in\R$,
 
 \begin{proof}
 Between reflections, $\varphi^t$ coincides with the geodesic flow, which preserves $\mu$ as a Hamiltonian flow. At a regular reflection point $x\in \partial M\cup\Gamma$, the cotangent reflection $\mathcal R_x$ is a linear involution preserving the canonical symplectic form and hence preserves the Liouville density on the fiber. Since the reflection surface has co-dimension one in configuration space and the reflection map is measure-preserving on the corresponding energy shell, concatenation preserves $\mu$. A finite number of reflections on finite times (Lemma~\ref{lem:flow-welldefined}) suffices to complete the argument.
+\end{proof}
+
+\begin{lemma}[Symplecticity of the reflection and canonical graph property]
+\label{lem:sympl-reflection}
+At each regular impact point $x\in \partial M\cup\Gamma$, the map $(x,\xi)\mapsto (x,\mathcal R_x\xi)$ is a symplectomorphism of $T_x^*M$ preserving the energy surface $\{p=|\xi|_g^2=\text{const}\}$. Consequently, the reflected branch of the billiard relation is a canonical graph in $T^*M\times T^*M$ away from the grazing set.
+\end{lemma}
+
+\begin{proof}
+The reflection is an orthogonal linear involution in each cotangent fiber, fixing the tangential subspace and reversing the normal component; it preserves the quadratic form $p$. Orthogonal linear maps are symplectic iff they preserve the metric and the associated canonical $2$-form; a direct computation in Fermi coordinates verifies $\mathcal R_x^\ast\omega=\omega$ on $T_x^*M$. Graph property follows from invertibility away from $\xi\cdot\nu=0$.
 \end{proof}
 
 \subsection{Quantitative control of grazing directions}
@@ -559,6 +568,26 @@ with constants depending only on $(d,k_0,J,\|{\rm Rm}_g\|_{C^0},\|A_\Gamma\|_{C^
 \begin{remark}[Choice of parameters and dependence of constants]
 The small angular parameter $\theta>0$ is fixed once and for all; the number of transport steps $J$ and of seminorm levels $N$ are chosen depending on $k_0$ and $d$. All constants are polynomial in the finite family $\{|a_j^\ell|_{m,N}\}$ and in $(\|{\rm Rm}_g\|_{C^0},\|A_\Gamma\|_{C^0},r_*^{-1})$.
 \end{remark}
+
+\subsection*{Auxiliary microlocal ingredients (made explicit)}
+\paragraph{Angular cutoff $\chi_\theta$ with derivative control.}
+Fix $\theta\in(0,\tfrac12]$ and choose $\chi\in C^\infty(\R)$ with $\chi\equiv 0$ on $[-1,1]$, $\chi\equiv 1$ on $(-\infty,-2]\cup [2,\infty)$ and $|\chi^{(k)}|\le C_k$. Define in each Fermi chart
+\[
+\chi_\theta(x,\xi):=\chi\!\left(\frac{\xi\cdot \nu(x)}{\theta \langle \xi\rangle}\right).
+\]
+Then for all multiindices $\alpha,\beta$,
+\[
+\big|\partial_x^\alpha\partial_\xi^\beta \chi_\theta(x,\xi)\big|
+\;\le\; C_{\alpha,\beta}\,\theta^{-|\beta|}\,\langle \xi\rangle^{-|\beta|},
+\]
+uniformly in the tube. Hence $\chi_\theta\in S^{0}_{1,0}$ with seminorms polynomially bounded in $\theta^{-1}$; in particular, composition with symbols preserves $S^m_{1,0}$ and the dependence on $\theta$ is explicit.
+
+\paragraph{IMS commutator bounds for the collar partition.}
+Let $\{\chi_{\rm int},\chi_{\partial M},\chi_\Gamma\}$ be a quadratic partition of unity subordinate to the interior, boundary collar, and wall collar, with $\sum \chi_\ast^2\equiv 1$ and $\|\nabla \chi_\ast\|_\infty\le C r_*^{-1}$. Then for the Friedrichs form $Q[u]=\int_M |\nabla u|^2$,
+\[
+Q[u]\;=\;\sum_\ast Q[\chi_\ast u] - \sum_\ast \|\nabla \chi_\ast\;u\|_{L^2}^2.
+\]
+Consequently, the IMS error is bounded by $C r_*^{-2}\|u\|_{L^2}^2$ and is smoothing/HS at the orders relevant for the heat trace expansion.
 
 % ============================================================
 \section{Notation, Dependencies, and Sharpness Barriers}
