@@ -140,7 +140,7 @@ Whenever a constant is declared ``uniform'' in this chapter, it depends only on 
 \subsection*{Mini–audit (Traces)}
 \begin{itemize}
   \item Trace continuity stated and used; no extra geometric hypotheses needed.
-  \item Dirichlet space fixed; all later variational identities are taken componentwise on $M\setminus\Gamma$.
+  ̇\item Dirichlet space fixed; all later variational identities are taken componentwise on $M\setminus\Gamma$.
 \end{itemize}
 
 % ============================================================
@@ -237,6 +237,14 @@ All seminorms we use on symbols and amplitudes are taken in a finite atlas adapt
 We use \emph{grazing set} synonymously with \emph{glancing set} (covectors tangent to $\partial M\cup\Gamma$ at first contact).
 \end{remark}
 
+\subsubsection*{Symbol classes and grazing cutoffs (working convention)}
+We fix the standard symbol classes $S^{m}_{1,0}(T^*M)$: $a\in S^{m}_{1,0}$ if for every chart and all multiindices $\alpha,\beta$
+\[
+|\partial_x^\alpha\partial_\xi^\beta a(x,\xi)|\le C_{\alpha\beta}\,\langle\xi\rangle^{m-|\beta|},\qquad \langle\xi\rangle=(1+|\xi|^2)^{1/2}.
+\]
+Microlocalizations near $\Gamma$ are always taken with an angular cutoff eliminating glancing directions: for a unit normal $\nu$ (in a Fermi chart) we insert a smooth $\chi_\theta(\xi\cdot\nu)$ with $\chi_\theta=0$ on $|\xi\cdot\nu|\le \theta |\xi|$ and $\chi_\theta=1$ on $|\xi\cdot\nu|\ge 2\theta |\xi|$, for some fixed small $\theta>0$.
+This convention keeps $\Psi$DO amplitudes uniformly controlled in the tube and avoids degeneracy of the reflected canonical relation at the grazing set; cf.\ \cite{HormanderI,HormanderIII}.
+
 \subsection*{Addendum: references and functional setting for $\Psi$DOs}
 We recall the standard $S^{m}_{1,0}$ symbol classes and $\Psi^m$-calculus on manifolds with piecewise $C^2$ boundary (charts adapted to collars of $\partial M\cup\Gamma$); see H{\"o}rmander~\cite{HormanderI, HormanderIII} for symbol classes and calculus, and Duistermaat–H{\"o}rmander~\cite{DuistermaatHormander} for propagation at real principal type. Boundary-compatible localizations follow the collar reduction; near corner strata we only microlocalize away from those sets.
 
@@ -273,6 +281,20 @@ H_\Gamma(x,x';\tau)=H^{\rm Dir}_{\mathrm{flat}}(x,x';\tau)+E(x,x';\tau),
 \]
 where $E$ is a smooth remainder enjoying Gaussian off–diagonal decay and uniform bounds as $\tau\downarrow 0$, with constants controlled by curvature bounds and the second fundamental form in the tube.
 
+\begin{proposition}[Uniform remainder bounds in the tube]\label{prop:uniform-E}
+Fix $\varepsilon\in(0,r_*/4]$. For all multi-indices $\alpha,\beta$ with $|\alpha|+|\beta|\le k_0$ there exist $C_{\alpha,\beta},c>0$ (depending only on $d$, $k_0$, $\|{\rm Rm}_g\|_{C^0}$, $\|A_\Gamma\|_{C^0}$, and $r_*^{-1}$) such that for $x,x'\in \mathcal{T}_\varepsilon(\Gamma)$ and $0<\tau\le 1$,
+\[
+\big|\partial_x^\alpha \partial_{x'}^\beta E(x,x';\tau)\big|
+\;\le\; C_{\alpha,\beta}\,\tau^{-\frac{d-2+|\alpha|+|\beta|}{2}}
+\,\exp\!\Big(-\,c\,\frac{d_g(x,x')^2}{\tau}\Big).
+\]
+The same bound holds with $d_g$ replaced by the Fermi-distance $(|y-y'|^2+|s-s'|^2)^{1/2}$ up to uniform equivalence of metrics in the tube.
+\end{proposition}
+
+\begin{proof}[Sketch]
+Apply the Levi construction with coefficients frozen along normal geodesics and patch with a $\Psi$DO cutoff that removes glancing directions (the $\chi_\theta$ described above). Standard parametrix iteration yields a Neumann-series remainder with Gaussian kernel bounds; differentiation under the integral is controlled by symbol seminorms in $S^{m}_{1,0}$ and the tube-uniform equivalence of charts.
+\end{proof}
+
 \begin{remark}[Model provenance and literature anchors]
 The interior Dirichlet parametrix is a two–sided variant of the half–space method of images combined with a Levi patching procedure; compare the boundary case in \cite[§1.5]{Gilkey1995} and the global assembly of local parametrices in \cite[Ch.~5]{SafarovVassiliev1997}. Corner/edge modifications follow the spirit of \cite{Grieser2002}; we use only smooth interior points here.
 \end{remark}
@@ -283,6 +305,10 @@ Integrating the pointwise deficit against $1$ in a symmetric collar and using th
 -\tfrac14(4\pi)^{-(d-1)/2}\, \vol_{d-1}(\Gamma),
 \]
 independent of curvature at this order; curvature enters at the next order via the Jacobian and symbol corrections.
+
+\begin{corollary}[Curvature enters one order later]
+Under the standing assumptions, all curvature contributions to $\Tr e^{-\tau L_\Gamma}$ from the collar $\mathcal T_{r_*}(\Gamma)$ appear first at order $\tau^{-(d-2)/2}$; the $\tau^{-(d-1)/2}$ surface density is curvature-free and equals $-\tfrac14(4\pi)^{-(d-1)/2}\vol_{d-1}(\Gamma)$.
+\end{corollary}
 
 \subsection*{Mini–audit (Parametrix)}
 \begin{itemize}
@@ -336,6 +362,9 @@ The \emph{interior} surface density at $\tau^{-(d-1)/2}$ equals $-\frac14(4\pi)^
 \begin{remark}[What we \emph{do not} need]
 We never require global wave parametrics at glancing or exact diffraction analysis at corners for the leading interior term; those phenomena contribute at orders $\le \tau^{-(d-2)/2}$ and are addressed separately in Ch.~3.
 \end{remark}
+
+\paragraph{Forward hooks into Chapters 3 and 6–7.}
+The collar assembly above feeds directly into: (i) the proof of the universal interior coefficient in Chapter~3 (main theorem on the $\tau^{-(d-1)/2}$ density), where Proposition~\ref{prop:uniform-E} provides the error control needed for stationary phase in the tube; and (ii) the localized wave/trace formulae of \S\ref{sec:localized-trace}, used for Abelian/Tauberian transfer in the dynamical remainder analysis of Chapters~6–7.
 
 \subsection*{Mini–audit (Heat)}
 \begin{itemize}
@@ -432,7 +461,7 @@ Transmission thus serves only as a \emph{counterfactual baseline}: it explains w
 \section*{Original Contributions of This Chapter}
 \addcontentsline{toc}{section}{Original Contributions of This Chapter}
 \begin{itemize}
-  \item A two–sided Dirichlet parametrix in a \emph{reach–uniform} Fermi tube with explicit control of the error kernel, tailored to internal walls.
+  \item A two–sided Dirichlet parametrix in a \emph{reach–uniform} Fermi tube with explicit control of the error kernel (Proposition~\ref{prop:uniform-E}), tailored to internal walls.
   \item A collar coarea framework \emph{restricted to the reach tube} that isolates even/odd cancellations, making curvature enter only at order $\tau^{-(d-2)/2}$.
   \item A clean orthogonal decomposition across $M\setminus\Gamma$ tied to the form domain, ensuring trace identities are applied componentwise without hidden regularity.
 \end{itemize}
