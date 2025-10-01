@@ -1,832 +1,472 @@
-\chapter{Preliminaries: Geometry, Function Spaces, and Operators on Fractured Domains}
+\chapter{Preliminaries: Geometry, Traces, Parametrices, and Spectral Tools on Manifolds with Internal Dirichlet Walls}
+\label{ch:preliminaries}
 
-\section{Geometric Setting, Notation, and Measures}
+% ============================================================
+% Orientation (aligned with Chapter 0 and the Introduction)
+% ============================================================
 
-\subsection*{Orientation}
-This first block of preliminaries sets the geometric and analytic foundation for the entire monograph.  
-The central objects of lithomathematics — fractured domains, rectifiable sets, and hybrid measures — require a carefully defined framework to ensure that all subsequent results are mathematically rigorous.  
-We therefore begin by fixing the admissible class of domains, metrics, and measures, together with precise notational conventions.  
+\section*{Orientation}
+This chapter fixes the working geometric, functional, and microlocal framework for the entire monograph.
+It is \emph{fully aligned} with Chapter~0:
+we work on a compact Riemannian manifold $(M,g)$ with piecewise $C^2$ boundary $\partial M$ and a compact internal $C^2$ hypersurface $\Gamma\subset M$ of positive relative reach, on which a \emph{Dirichlet} constraint is imposed.
+All operators are defined by closed Dirichlet forms on $H^1_0(M;\partial M\cup\Gamma)$ (no hidden $H^2$ assumptions).
+Local parametrix constructions near $\Gamma$ use Fermi coordinates in a uniform tubular neighborhood (guaranteed by reach), together with a two–sided reflection scheme.
+Propagation of singularities is specular at smooth points of $\partial M$ and $\Gamma$, and diffraction is confined to edge/corner strata; this does \emph{not} affect the leading interior surface density at order $\tau^{-(d-1)/2}$.
 
-\subsection*{Goals}
-\begin{itemize}
-  \item G1. Define admissible domains $(\Omega,g)$ with sufficient regularity and metric control.
-  \item G2. Establish standard measures: Lebesgue, Hausdorff, and Minkowski content for fractured sets.
-  \item G3. Record conventions for tubular neighborhoods and the coarea formula.
-  \item G4. Fix notation used consistently across all chapters.
-  \item G5. State the geometric barriers where assumptions may fail.
-\end{itemize}
-
-\subsection*{Admissible Domains}
-\begin{definition}[Admissible Domain]
-An \emph{admissible domain} is a pair $(\Omega,g)$ satisfying:
-\begin{enumerate}[label=(\roman*)]
-  \item $\Omega \subset \mathbb{R}^d$ is bounded, connected, with piecewise $C^{2,\alpha}$ boundary, $0<\alpha<1$.
-  \item $g=(g_{ij})$ is a Riemannian metric on $\overline{\Omega}$, uniformly elliptic:
-  \[
-  c_1 \delta_{ij} \leq g_{ij}(x) \leq c_2 \delta_{ij}, \quad \forall x\in\overline{\Omega},
-  \]
-  for constants $0<c_1\leq c_2<\infty$.
-\end{enumerate}
-\end{definition}
-
-\begin{remark}
-The boundary regularity ensures trace theorems and Green’s formulas are applicable; uniform ellipticity guarantees equivalence of norms between $(\Omega,g)$ and Euclidean $\Omega$.
-\end{remark}
-
-\subsection*{Measures}
-\paragraph{Volume measure.} The Riemannian volume element is
-\[
-d\mathrm{vol}_g(x) = \sqrt{\det g(x)}\, dx.
-\]
-
-\paragraph{Hausdorff measure.} For $E\subset\mathbb{R}^d$ and $k\in\{0,\dots,d\}$,
-\[
-\mathcal{H}^k(E) = \lim_{\delta\to 0}\ \inf\Big\{ \sum_i (\mathrm{diam}\,U_i)^k : E\subset \bigcup_i U_i, \ \mathrm{diam}\,U_i < \delta \Big\}.
-\]
-
-\paragraph{Minkowski content.} For $\Gamma\subset \mathbb{R}^d$,
-\[
-\mathcal{M}^{d-1}(\Gamma) = \lim_{\varepsilon\to 0} \frac{\mathrm{Vol}(N_\varepsilon(\Gamma))}{2\varepsilon},
-\]
-where $N_\varepsilon(\Gamma)$ is the $\varepsilon$-tubular neighborhood.
-
-\subsection*{Fracture Sets}
-\begin{definition}[Rectifiable Fracture Set]
-A set $\Gamma\subset \overline{\Omega}$ is a \emph{fracture set} if:
-\[
-\Gamma \subset \bigcup_{i=1}^\infty f_i(\mathbb{R}^{d-1}), \qquad f_i\in C^1(\mathbb{R}^{d-1};\mathbb{R}^d),
-\]
-and $\mathcal{H}^{d-1}\big(\Gamma \setminus \bigcup_i f_i(\mathbb{R}^{d-1})\big)=0$.
-\end{definition}
-
-\begin{example}
-In $\mathbb{R}^2$, a line segment, polygonal curve, or $C^1$ arc are all rectifiable fracture sets.
-\end{example}
-
-\subsection*{Tubular Neighborhoods and Coarea}
-For rectifiable $\Gamma\subset \Omega$, define:
-\[
-N_\varepsilon(\Gamma) := \{ x\in \Omega : \mathrm{dist}(x,\Gamma)<\varepsilon\}.
-\]
-The coarea formula yields:
-\[
-\int_{N_\varepsilon(\Gamma)} f(x)\, dx = \int_0^\varepsilon \int_{\{d(x,\Gamma)=t\}} f(x)\, d\mathcal{H}^{d-1}(x)\, dt.
-\]
-
-\subsection*{Curvature and Injectivity Bounds}
-We assume throughout:
-\[
-|\mathrm{Sec}_g|\leq K, \quad \mathrm{inj}(\Omega,g)\geq \iota_0 > 0.
-\]
-These bounds guarantee control over geodesics and enable microlocal parametrix constructions in Chapter~4.
-
-\subsection*{Notation Table}
-\begin{itemize}
-  \item $\mathcal{L}^d$ — Lebesgue measure.
-  \item $\mathcal{H}^k$ — $k$-dimensional Hausdorff measure.
-  \item $\mathcal{M}^{d-1}(\Gamma)$ — Minkowski content of $\Gamma$.
-  \item $d(x,y)$ — geodesic distance in $(\Omega,g)$.
-  \item $\nabla_g$, $\Delta_g$ — gradient and Laplace–Beltrami operator.
-  \item $BV$, $SBV$, $GSBD$ — to be introduced in Section~2.2.
-\end{itemize}
-
-\subsection*{Mini-Audit (Block 1)}
-\begin{enumerate}[label=(A\arabic*)]
-  \item Domain class fixed with boundary regularity and ellipticity constants.
-  \item Measures $\mathcal{L}^d$, $\mathcal{H}^k$, $\mathcal{M}^{d-1}$ defined.
-  \item Fracture sets formalized as rectifiable subsets.
-  \item Tubular neighborhoods and coarea identity explicitly recorded.
-  \item Notation table complete; no ambiguity remains.
+\paragraph{Structure of the chapter.}
+\begin{enumerate}
+  \item \S\ref{sec:geom-setting}: geometric setting, reach, tubular coordinates, measures.
+  \item \S\ref{sec:traces}: trace operators and the Dirichlet space $H^1_0(M;\partial M\cup\Gamma)$.
+  \item \S\ref{sec:litho-laplacian-prelim}: the litho–Laplacian via the Friedrichs form; spectral discreteness; componentwise splitting.
+  \item \S\ref{sec:tubular-coarea}: coarea in the reach–tube; collar integrals used later for local heat coefficients.
+  \item \S\ref{sec:microlocal-core}: minimal microlocal toolbox (WF, $\Psi$DOs, elliptic parametrices) adapted to an internal Dirichlet wall.
+  \item \S\ref{sec:parametrix-gamma}: local Dirichlet parametrix near $\Gamma$ (two–sided reflection); error control uniform in the tube.
+  \item \S\ref{sec:propagation}: specular reflection and propagation; grazing and singular sets; what diffracts and what does not.
+  \item \S\ref{sec:heat-trace-prep}: heat kernel and trace-class bounds; local–to–global assembly; what is needed for Ch.~3.
+  \item \S\ref{sec:localized-trace}: localized wave/trace expressions for Tauberian arguments (hooks to DYN in Ch.~6–7).
+  \item \S\ref{sec:notation-audit}: consolidated notation, dependency map, and sharpness barriers.
 \end{enumerate}
 
-\subsection*{Sharpness Barriers}
+% ============================================================
+\section{Geometric Setting, Measures, and Reach}\label{sec:geom-setting}
+
+\subsection{Ambient manifold, boundary, and internal wall}
+We adopt the Standing Assumptions (SA) of Chapter~0. For convenience we recall the core parts we \emph{use} here:
 \begin{itemize}
-  \item If $\partial\Omega$ is only Lipschitz, elliptic regularity is weaker, trace estimates need adjustment.
-  \item If $\Gamma$ is not rectifiable, Minkowski content may diverge; compactness fails.
-  \item If $\mathrm{inj}(\Omega,g)=0$, microlocal analysis (Chapter~4) does not extend globally.
+  \item $(M,g)$ compact, connected, $\dim M=d\ge 2$, $\partial M$ of class piecewise $C^2$ with finitely many Lipschitz edges/corners.
+  \item $\Gamma\subset M$ a compact embedded $C^2$ hypersurface (possibly with boundary), with $\partial\Gamma\subset\partial M$ and transverse intersection $T_p\Gamma+T_p(\partial M)=T_pM$ for $p\in\partial\Gamma$.
+  \item \emph{Relative reach} $\mathrm{reach}_M(\Gamma)>0$ (see Ch.~0, Remark~\ref{rem:relative-reach}): the normal exponential map $\exp^\perp$ is injective on a uniform radius $r_*>0$.
 \end{itemize}
 
-\section{Function Spaces and Variational Framework}
-
-\subsection*{Orientation}
-This section develops the functional analytic tools used throughout the monograph.  
-Fractured domains require spaces capable of encoding discontinuities, jumps, and energy concentrations.  
-Standard Sobolev spaces are insufficient; instead, we employ the frameworks of bounded variation (BV), special bounded variation (SBV), and generalized special functions of bounded deformation (GSBD).  
-These spaces capture both smooth variations and singular sets in a unified variational structure.
-
-\subsection*{Goals}
-\begin{itemize}
-  \item G1. Define the spaces $BV(\Omega)$, $SBV(\Omega)$, and $GSBD(\Omega)$ rigorously.
-  \item G2. Establish compactness, lower semicontinuity, and $\Gamma$-convergence properties.
-  \item G3. Introduce Griffith-type fracture functionals within these spaces.
-  \item G4. Fix notation for energy decomposition: bulk vs fracture.
-  \item G5. Identify sharpness barriers where these spaces fail to capture relevant phenomena.
-\end{itemize}
-
-\subsection*{Functions of Bounded Variation}
-\begin{definition}[Functions of Bounded Variation]
-Let $\Omega\subset\mathbb{R}^d$ be open. A function $u\in L^1(\Omega)$ is in $BV(\Omega)$ if its distributional derivative $Du$ is a finite Radon measure:
-\[
-BV(\Omega) := \{ u\in L^1(\Omega) : |Du|(\Omega) < \infty \}.
-\]
-\end{definition}
-
-\paragraph{Decomposition.} For $u\in BV(\Omega)$,
-\[
-Du = \nabla u \,\mathcal{L}^d + D^s u,
-\]
-where $\nabla u$ is the approximate gradient, and $D^s u$ the singular part.
-
-\subsection*{Special Functions of Bounded Variation}
-\begin{definition}[SBV]
-A function $u\in BV(\Omega)$ belongs to $SBV(\Omega)$ if the Cantor part of $Du$ vanishes. Equivalently,
-\[
-Du = \nabla u\,\mathcal{L}^d + (u^+ - u^-)\nu_u \,\mathcal{H}^{d-1}\llcorner J_u,
-\]
-where $J_u$ is the jump set, $u^\pm$ the traces, and $\nu_u$ the normal.
-\end{definition}
-
-\begin{remark}
-SBV functions allow clean separation of bulk and surface energies. This makes them the canonical space for fracture mechanics in the sense of Ambrosio–Tortorelli and Francfort–Marigo.
+\begin{remark}[Choice of global scale and invariance]
+Whenever a global length $R$ is used (e.g.\ in $\kappa(\Gamma)$ of Ch.~0), it is taken to be $R:=\mathrm{diam}_g(M)$; any scale equivalent under homotheties (e.g.\ $\vol_d(M)^{1/d}$) would yield an equivalent normalization. Constants declared ``uniform in the tube'' are invariant under $g\mapsto \lambda^2 g$ after $t\mapsto \lambda t$ rescaling.
 \end{remark}
 
-\subsection*{Generalized Special Functions of Bounded Deformation}
-\begin{definition}[GSBD]
-Let $u:\Omega\to \mathbb{R}^d$. The symmetrized gradient is
+\subsection{Measures and dimensional bookkeeping}
+We write $\vol_d(\cdot)$ for the Riemannian $d$–volume and $\vol_{d-1}(\cdot)$ for the $(d-1)$–dimensional Hausdorff measure induced by $g$ on smooth hypersurfaces.
+Dimensional units (cf.\ Ch.~0, \emph{Dimensional Convention}): $[\Delta]=L^{-2}$, $[\tau]=L^2$ (heat time), and $[t]=L$ (geometric time).
+The domain scale $R:=\mathrm{diam}_g(M)$ will normalize certain dimensionless quantities (e.g.\ $\kappa(\Gamma)$ in Ch.~0).
+
+\subsection{Tubular coordinates and Fermi charts}\label{subsec:fermi}
+By $\mathrm{reach}_M(\Gamma)>0$ there exists $r_*\in(0,1]$ (rescaled to $R=1$ if needed) such that the normal exponential map
 \[
-e(u) := \tfrac{1}{2}(\nabla u + \nabla u^T).
+\exp^\perp:\{(p,\nu)\in N\Gamma: |\nu|<r_*\}\longrightarrow \mathcal{T}_{r_*}(\Gamma):=\{x\in M: \mathrm{dist}_g(x,\Gamma)<r_*\}
 \]
-We say $u\in GSBD(\Omega)$ if $e(u)\in L^2(\Omega)$ and the jump set $J_u$ is $\mathcal{H}^{d-1}$-rectifiable with finite measure.
-\end{definition}
-
-\begin{theorem}[Compactness in GSBD, Chambolle–Conti–Francfort]
-Let $\{u_n\}$ be uniformly bounded in energy
+is a $C^{1,1}$-diffeomorphism.
+In $\mathcal{T}_{r_*}(\Gamma)$ we use Fermi coordinates $(y,s)$, $y\in\Gamma$, $s\in(-r_*,r_*)$, where $s$ is the signed distance along the unit normal $\nu$ and $y$ are local coordinates on $\Gamma$.
+The metric admits the standard expansion
 \[
-\int_\Omega |e(u_n)|^2\,dx + \mathcal{H}^{d-1}(J_{u_n}) \leq C.
+g(y,s)= g_\Gamma(y) \oplus \big(1-\mathcal{S}_y s\big)^2\,ds^2 + O(s^2),
 \]
-Then there exists $u\in GSBD(\Omega)$ and a subsequence $u_{n_k}\to u$ in measure.
-\end{theorem}
+with $\mathcal{S}_y$ the shape operator at $y$; all estimates below are uniform for $|s|<r_*/2$.
 
-\subsection*{Energy Functionals}
-We model competing processes by two energy contributions:
+\begin{lemma}[Jacobian in the reach–tube: uniform bounds]\label{lem:tube-jac}
+In Fermi coordinates the volume element satisfies
 \[
-\mathcal{E}_{\mathrm{bulk}}(u) = \int_\Omega W(e(u))\,dx, \quad 
-\mathcal{E}_{\mathrm{fracture}}(u) = \int_{J_u} \kappa\, d\mathcal{H}^{d-1},
+d\vol_d = J(y,s)\, d\vol_{d-1}(y)\, ds,\qquad
+J(y,s)=1-s\,H_\Gamma(y)+O(s^2),
 \]
-with $W$ a coercive quadratic form and $\kappa>0$ the fracture toughness.
-
-\begin{definition}[Total Energy]
-For $u\in GSBD(\Omega)$,
-\[
-\mathcal{E}_{\mathrm{total}}(u) = \mathcal{E}_{\mathrm{bulk}}(u) + \mathcal{E}_{\mathrm{fracture}}(u).
-\]
-\end{definition}
-
-\subsection*{Gamma-Convergence Framework}
-\begin{theorem}[Ambrosio–Tortorelli Approximation]
-The functionals
-\[
-\mathcal{E}_\varepsilon(u,v) = \int_\Omega \big( v^2|\nabla u|^2 + \varepsilon |\nabla v|^2 + \tfrac{1}{\varepsilon}(1-v)^2\big)\, dx
-\]
-$\Gamma$-converge to $\mathcal{E}_{\mathrm{total}}$ in $L^1$ as $\varepsilon\to 0$.
-\end{theorem}
-
-\subsection*{Notational Conventions}
-\begin{itemize}
-  \item $BV$, $SBV$, $GSBD$ always relative to $\Omega$ unless noted.
-  \item $J_u$ denotes the jump set of $u$.
-  \item $e(u)$ symmetrized gradient.
-  \item $\mathcal{E}_{\mathrm{bulk}}$, $\mathcal{E}_{\mathrm{fracture}}$, $\mathcal{E}_{\mathrm{total}}$ energy components.
-\end{itemize}
-
-\subsection*{Mini-Audit (Block 2)}
-\begin{enumerate}[label=(A\arabic*)]
-  \item BV, SBV, GSBD spaces defined rigorously.
-  \item Compactness theorem stated with reference to literature.
-  \item Griffith-type functional structure fixed.
-  \item $\Gamma$-convergence connection to Ambrosio–Tortorelli recorded.
-  \item Notation clarified for subsequent chapters.
-\end{enumerate}
-
-\subsection*{Sharpness Barriers}
-\begin{itemize}
-  \item If $u\notin GSBD$, fracture energy may not be finite.
-  \item If $\kappa=0$, fracture degenerates to brittle collapse; theory changes.
-  \item Ambrosio–Tortorelli $\Gamma$-limit requires $W$ quadratic; extension to nonlinear $W$ remains delicate.
-\end{itemize}
-
-\section{Spectral Preliminaries: Operators, Domains, and Trace Class}
-
-\subsection*{Orientation}
-This section introduces the spectral analytic framework underpinning lithomathematics.  
-The interaction between bulk and fracture energies requires operators defined on irregular domains with singular boundaries.  
-We therefore recall the essentials of self-adjoint operators, domain specification, spectral decomposition, and trace-class operators.
-
-\subsection*{Goals}
-\begin{itemize}
-  \item G1. Define the relevant differential operators (Laplace, elasticity, Dirac-type).
-  \item G2. Specify domain choices under fractured geometry.
-  \item G3. Establish self-adjointness and compact resolvent properties.
-  \item G4. Introduce trace-class and Hilbert–Schmidt operators for spectral formulas.
-  \item G5. Fix notation for eigenvalues, eigenfunctions, and spectral measures.
-\end{itemize}
-
-\subsection*{Differential Operators}
-\paragraph{Laplace Operator.} On $\Omega\subset\mathbb{R}^d$, define
-\[
--\Delta u = -\sum_{i=1}^d \partial_{ii} u,
-\]
-with boundary conditions determined by fractured geometry (Dirichlet, Neumann, mixed).
-
-\paragraph{Elasticity Operator.} For displacement $u:\Omega\to\mathbb{R}^d$,
-\[
-\mathcal{L}u = -\mathrm{div}\, (C e(u)),
-\]
-where $C$ is the elasticity tensor.
-
-\paragraph{Dirac-Type Operators.} In fractured domains, Dirac-type operators
-\[
-D = -i \sum_{j=1}^d \alpha_j \partial_j + \beta m
-\]
-capture localized spectral singularities, where $\alpha_j,\beta$ are Dirac matrices.
-
-\subsection*{Domains and Boundary Conditions}
-\begin{definition}[Fractured Domain]
-Let $\Omega\subset\mathbb{R}^d$ with Lipschitz boundary $\partial\Omega$.  
-A fractured domain is $(\Omega,\Gamma)$, where $\Gamma\subset \Omega$ is a rectifiable set of codimension one, modeling cracks.
-\end{definition}
-
-\begin{remark}
-Operators act on $\Omega\setminus\Gamma$ with transmission conditions across $\Gamma$:
-\[
-[u]_\Gamma = u^+ - u^- , \quad 
-\left[\tfrac{\partial u}{\partial \nu}\right]_\Gamma = f_\Gamma,
-\]
-where jumps and fluxes encode fracture effects.
-\end{remark}
-
-\subsection*{Self-Adjointness}
-\begin{theorem}[Self-Adjoint Realizations]
-Let $A=-\Delta$ on $L^2(\Omega\setminus\Gamma)$ with Dirichlet or mixed conditions.  
-Then $A$ is self-adjoint with domain
-\[
-D(A) = H^2(\Omega\setminus\Gamma)\cap H^1_0(\Omega\setminus\Gamma),
-\]
-and has compact resolvent provided $\Omega$ is bounded.
-\end{theorem}
-
-\begin{corollary}[Spectral Discreteness]
-The spectrum of $A$ consists of a discrete sequence
-\[
-0 < \lambda_1 \leq \lambda_2 \leq \dots \to \infty,
-\]
-with orthonormal eigenfunctions $\{\phi_j\}$ forming a basis of $L^2(\Omega\setminus\Gamma)$.
-\end{corollary}
-
-\subsection*{Trace Class and Hilbert–Schmidt Operators}
-\begin{definition}[Trace Class Operator]
-Let $H$ be a Hilbert space. An operator $T:H\to H$ is trace class if
-\[
-\|T\|_1 = \sum_j \langle (T^*T)^{1/2}e_j,e_j\rangle < \infty
-\]
-for some orthonormal basis $\{e_j\}$. Its trace is
-\[
-\mathrm{Tr}(T) = \sum_j \langle Te_j,e_j\rangle.
-\]
-\end{definition}
-
-\begin{definition}[Hilbert–Schmidt Operator]
-$T$ is Hilbert–Schmidt if
-\[
-\|T\|_{HS}^2 = \sum_j \|Te_j\|^2 < \infty.
-\]
-\end{definition}
-
-\begin{lemma}
-If $T$ is Hilbert–Schmidt and $S$ bounded, then $ST$ and $TS$ are Hilbert–Schmidt.  
-If $T$ is trace class, then $ST$ and $TS$ are trace class with
-\[
-\mathrm{Tr}(ST)=\mathrm{Tr}(TS).
-\]
+with the $O(s^2)$ uniform for $|s|<r_*/2$.
+The error constant depends only on $\|A_\Gamma\|_{C^0}$ in the tube and curvature bounds of $g$ therein.
 \end{lemma}
-
-\subsection*{Spectral Measures}
-\begin{definition}[Spectral Measure]
-For a self-adjoint operator $A$, there exists a projection-valued measure $E(\lambda)$ such that
-\[
-A = \int_\mathbb{R} \lambda \, dE(\lambda).
-\]
-\end{definition}
-
-\paragraph{Spectral Resolution.} For $f\in H$,
-\[
-\langle f, Af\rangle = \int_\mathbb{R} \lambda \, d\mu_f(\lambda),
-\]
-where $\mu_f$ is the spectral measure associated with $f$.
-
-\subsection*{Mini-Audit (Block 3)}
-\begin{enumerate}[label=(A\arabic*)]
-  \item Differential operators (Laplace, elasticity, Dirac) defined.
-  \item Fractured domain $(\Omega,\Gamma)$ formalized.
-  \item Self-adjointness theorem stated with domain specification.
-  \item Compact resolvent property established $\Rightarrow$ discrete spectrum.
-  \item Trace-class and Hilbert–Schmidt operators defined rigorously.
-  \item Spectral measure and resolution recorded.
-\end{enumerate}
-
-\subsection*{Sharpness Barriers}
-\begin{itemize}
-  \item On unbounded $\Omega$, spectrum may include continuous parts.
-  \item If $\Gamma$ accumulates, self-adjointness may fail without regularization.
-  \item Trace-class operators require compact embedding; fails in high dimensions without weight.
-\end{itemize}
-
-\section{Microlocal Preliminaries: Wavefront Sets, Parametrices, and Singularities}
-
-\subsection*{Orientation}
-The fracture-induced singularities in lithomathematics demand refined tools of microlocal analysis.  
-Standard Sobolev and spectral frameworks are insufficient to capture the propagation of singularities across crack surfaces $\Gamma$.  
-This section introduces the fundamental machinery: wavefront sets, pseudo\-differential operators, parametrices, and microlocal energy estimates.
-
-\subsection*{Goals}
-\begin{enumerate}[label=G\arabic*]
-  \item Define the wavefront set $\mathrm{WF}(u)$ and recall its properties.
-  \item Introduce pseudo\-differential operators (ΨDOs) and their symbolic calculus.
-  \item Construct parametrices for elliptic operators in fractured domains.
-  \item Formulate propagation of singularities results adapted to fracture geometry.
-  \item Prepare the technical base for spectral asymptotics in Chapters~4--5.
-\end{enumerate}
-
-\subsection*{Wavefront Sets}
-\begin{definition}[Wavefront Set]
-Let $u\in \mathcal{D}'(\Omega)$ be a distribution.  
-The wavefront set $\mathrm{WF}(u)\subset T^*(\Omega)\setminus\{0\}$ is the set of points $(x,\xi)$ such that $u$ is not microlocally smooth at $(x,\xi)$:
-\[
-(x,\xi)\notin \mathrm{WF}(u) \iff \exists \varphi\in C_c^\infty(\Omega), \varphi(x)\neq 0, \; \exists \text{ conic nbhd } V\ni \xi: \; \widehat{\varphi u}(\eta) \in \mathcal{S}(V).
-\]
-\end{definition}
-
-\begin{remark}
-$\mathrm{WF}(u)$ refines the singular support: $\mathrm{sing\,supp}(u) = \{x: \exists\xi, (x,\xi)\in \mathrm{WF}(u)\}$.
-\end{remark}
-
-\begin{example}
-For the Heaviside function $H(x)$ on $\mathbb{R}$,  
-\[
-\mathrm{WF}(H) = \{(0,\xi): \xi \ge 0\}.
-\]
-\end{example}
-
-\subsection*{Pseudo\-Differential Operators}
-\begin{definition}[ΨDO]
-Let $a(x,\xi)\in S^m_{1,0}(\mathbb{R}^d)$ be a symbol.  
-The associated operator $A=\mathrm{Op}(a)$ acts as
-\[
-Au(x) = \int_{\mathbb{R}^d} e^{ix\cdot\xi} a(x,\xi) \hat{u}(\xi)\, d\xi.
-\]
-\end{definition}
-
-\paragraph{Symbolic Calculus.} If $A=\mathrm{Op}(a)$, $B=\mathrm{Op}(b)$, then
-\[
-AB = \mathrm{Op}(a\# b), \quad a\# b \sim \sum_{\alpha}\frac{1}{\alpha!} \partial_\xi^\alpha a(x,\xi) D_x^\alpha b(x,\xi).
-\]
-
-\subsection*{Elliptic Regularity and Parametrices}
-\begin{theorem}[Elliptic Parametrix]
-Let $A=\mathrm{Op}(a)$ be elliptic of order $m$:  
-$|a(x,\xi)| \ge C\langle \xi \rangle^m$ for $|\xi|\gg 1$.  
-Then there exists $B=\mathrm{Op}(b)$ such that
-\[
-BA = I - R, \quad AB = I - R',
-\]
-where $R,R'$ are smoothing operators ($C^\infty$ kernels).
-\end{theorem}
-
-\begin{corollary}[Microlocal Regularity]
-If $Au=f$ with $f\in C^\infty$, then $u$ is microlocally smooth outside $\mathrm{Char}(A) = \{a=0\}$.
-\end{corollary}
-
-\subsection*{Propagation of Singularities}
-\begin{theorem}[Duistermaat–Hörmander]
-Let $P$ be a real principal type operator.  
-Then $\mathrm{WF}(u)$ for $Pu=f$ with smooth $f$ propagates along bicharacteristics of the Hamiltonian flow $H_p$ on $T^*\Omega$.
-\end{theorem}
-
-\begin{remark}
-For fracture surfaces $\Gamma$, bicharacteristics undergo reflection/refraction, requiring adapted transmission conditions.
-\end{remark}
-
-\begin{example}[Wave Equation with Crack]
-For $\partial_{tt} u - \Delta u = 0$ in $\Omega\setminus\Gamma$ with transmission across $\Gamma$, singularities propagate along reflected rays with coefficients depending on jump conditions.
-\end{example}
-
-\subsection*{Microlocal Energy Estimates}
-\begin{lemma}[Microlocal Energy Decay]
-Let $u$ solve $(\partial_t^2 - \Delta)u=0$ in fractured $\Omega$.  
-Then for $\chi\in C_c^\infty(T^*\Omega)$ supported away from trapped rays,
-\[
-\| \chi(x,D) u(t)\|_{L^2} \le C e^{-\alpha t} \|u(0)\|_{H^1},
-\]
-where $\chi(x,D)$ is a ΨDO microlocal cutoff.
-\end{lemma}
-
-\subsection*{Mini-Audit (Block 4)}
-\begin{enumerate}[label=(A\arabic*)]
-  \item $\mathrm{WF}(u)$ defined, examples provided.
-  \item ΨDO calculus established with composition rule.
-  \item Elliptic parametrix theorem stated.
-  \item Propagation of singularities recorded.
-  \item Microlocal energy decay lemma proved.
-\end{enumerate}
-
-\subsection*{Sharpness Barriers}
-\begin{itemize}
-  \item ΨDO calculus requires smooth coefficients; rough coefficients break symbolic expansions.
-  \item Propagation theorem holds only for real principal type; multiple characteristics complicate flow.
-  \item On domains with dense fractures, parametrix construction may fail.
-\end{itemize}
-
-\section{Γ-Convergence and the GSBD Framework}
-
-\subsection*{Orientation}
-The variational structure of lithomathematics rests on rigorous compactness
-and convergence tools for functionals modeling fracture and ordering.
-Γ-convergence provides the natural mathematical framework to pass from
-microscopic to macroscopic descriptions. The Generalized Special Functions
-of Bounded Deformation (GSBD) space encodes displacement fields with jump
-sets of finite Hausdorff measure, capturing the essence of cracks.
-
-\subsection*{Goals}
-\begin{enumerate}[label=G\arabic*]
-  \item Define Γ-convergence and establish its key properties.
-  \item Introduce GSBD spaces and compactness theorems.
-  \item State fundamental Γ-convergence results for fracture energies.
-  \item Highlight stability of the litho-ratio $K_L$ under Γ-limits.
-  \item Prepare for homogenization and dynamic fracture analysis in Chapter~7.
-\end{enumerate}
-
-\subsection*{Γ-Convergence Basics}
-\begin{definition}[Γ-convergence]
-Let $(X,d)$ be a metric space and $F_\varepsilon : X \to \mathbb{R}\cup\{+\infty\}$.
-We say $F_\varepsilon \xrightarrow{\Gamma} F$ if for all $u\in X$:
-\begin{enumerate}[label=(\roman*)]
-  \item (\emph{Liminf inequality}) For every $u_\varepsilon \to u$ in $d$,
-  \[
-  F(u) \le \liminf_{\varepsilon\to 0} F_\varepsilon(u_\varepsilon).
-  \]
-  \item (\emph{Recovery sequence}) There exists $u_\varepsilon \to u$ with
-  \[
-  F(u) \ge \limsup_{\varepsilon\to 0} F_\varepsilon(u_\varepsilon).
-  \]
-\end{enumerate}
-\end{definition}
-
-\begin{theorem}[Fundamental Theorem of Γ-convergence]
-If $F_\varepsilon \xrightarrow{\Gamma} F$ and $\{u_\varepsilon\}$ are minimizers of $F_\varepsilon$, then any cluster point of $\{u_\varepsilon\}$ is a minimizer of $F$.
-\end{theorem}
-
-\subsection*{GSBD Spaces}
-\begin{definition}[GSBD]
-Let $\Omega \subset \mathbb{R}^d$ be open.  
-$u\in GSBD(\Omega)$ if
-\begin{itemize}
-  \item $u\in L^1(\Omega;\mathbb{R}^d)$,
-  \item the symmetric gradient $e(u) = (\nabla u + \nabla u^T)/2$ is a bounded measure,
-  \item the jump set $J_u$ has finite $(d-1)$-dimensional Hausdorff measure.
-\end{itemize}
-\end{definition}
-
-\begin{theorem}[Compactness in GSBD, Dal Maso--Chambolle]
-Let $\{u_k\}\subset GSBD(\Omega)$ with uniformly bounded energies
-\[
-\int_\Omega |e(u_k)|\,dx + \mathcal{H}^{d-1}(J_{u_k}) \le C.
-\]
-Then there exists $u\in GSBD(\Omega)$ and a subsequence $u_{k_j}\to u$ in $L^1$.
-\end{theorem}
-
-\subsection*{Fracture Energies and Γ-Convergence}
-\begin{theorem}[Ambrosio--Tortorelli Approximation]
-Let $\Omega\subset \mathbb{R}^d$, and consider
-\[
-F_\varepsilon(u,v) = \int_\Omega \big( v^2 |e(u)|^2 + \varepsilon |\nabla v|^2 + (1-v)^2/\varepsilon \big)\,dx.
-\]
-Then as $\varepsilon\to 0$, $F_\varepsilon$ Γ-converges to
-\[
-F(u) = \int_\Omega |e(u)|^2\,dx + \mathcal{H}^{d-1}(J_u).
-\]
-\end{theorem}
-
-\begin{remark}
-This result shows how diffuse interface models approximate sharp cracks in the GSBD framework.
-\end{remark}
-
-\begin{corollary}[Stability of Litho-Ratio]
-If $\mathcal{E}_\varepsilon \xrightarrow{\Gamma} \mathcal{E}_0$ in GSBD and both ordering and breaking energies are Γ-stable, then the litho-ratio invariant
-\[
-K_L^* = \lim_{T\to\infty}\frac{1}{T}\int_0^T \frac{\mathcal{P}_{\mathrm{ord}}(t)}{\mathcal{P}_{\mathrm{br}}(t)}\,dt
-\]
-is preserved under homogenization limits.
-\end{corollary}
-
-\subsection*{Key Lemmas}
-\begin{lemma}[Lower Semicontinuity]
-In GSBD, the functional
-\[
-F(u) = \int_\Omega f(e(u))\,dx + g\,\mathcal{H}^{d-1}(J_u)
-\]
-is lower semicontinuous if $f$ is convex and $g>0$.
-\end{lemma}
-
-\begin{lemma}[Jump Set Control]
-If $u_k \to u$ in $L^1$ and $e(u_k)\rightharpoonup e(u)$ as measures, then
-\[
-\mathcal{H}^{d-1}(J_u) \le \liminf_{k\to\infty} \mathcal{H}^{d-1}(J_{u_k}).
-\]
-\end{lemma}
-
-\subsection*{Mini-Audit (Block 5)}
-\begin{enumerate}[label=(A\arabic*)]
-  \item Γ-convergence defined with liminf and recovery conditions.
-  \item Fundamental theorem stated and linked to minimizers.
-  \item GSBD spaces introduced with compactness theorem.
-  \item Ambrosio--Tortorelli approximation provided.
-  \item Stability of $K_L$ under Γ-limits established.
-\end{enumerate}
-
-\subsection*{Sharpness Barriers}
-\begin{itemize}
-  \item Compactness in GSBD requires uniform energy bounds.
-  \item Γ-convergence results depend on convexity assumptions; nonconvex functionals require extra care.
-  \item Stability of $K_L$ may fail under non-ergodic dynamics or oscillatory energy landscapes.
-\end{itemize}
-
-\section{Ergodic and Mixing Hypotheses}
-
-\subsection*{Orientation}
-The ergodic and mixing assumptions provide the dynamical foundation for
-the convergence of the litho-ratio invariant $K_L$. They guarantee that
-time averages converge to space averages and that fluctuations around the
-limit are quantitatively controlled. Without these hypotheses, the ergodic
-theorem cannot be applied, and the invariant $K_L^*$ may fail to exist.
-
-\subsection*{Goals}
-\begin{enumerate}[label=G\arabic*]
-  \item Formalize the ergodic hypothesis (H4) and mixing condition (H5).
-  \item State quantitative versions with exponential and polynomial decay.
-  \item Show how these hypotheses enter the proof of Theorem~\ref{thm:ergodic}.
-  \item Clarify differences between ergodic, weakly mixing, and strongly mixing systems.
-  \item Provide counterexamples to demonstrate the sharpness of assumptions.
-\end{enumerate}
-
-\subsection*{Ergodic Hypothesis (H4)}
-\begin{assumption}[Ergodicity]
-\label{ass:ergodic}
-Let $(X,\mu,S(t))$ be a measure-preserving dynamical system with invariant
-probability measure $\mu$. We assume:
-\[
-\lim_{T\to\infty} \frac{1}{T}\int_0^T f(S(t)x)\,dt = \int_X f\,d\mu
-\quad \text{for $\mu$-a.e.\ $x\in X$ and all $f\in L^1(\mu)$.}
-\]
-\end{assumption}
-
-\subsection*{Mixing Hypothesis (H5)}
-\begin{assumption}[Mixing]
-\label{ass:mixing}
-There exists $\alpha>0$ such that for all $\phi,\psi\in L^2(\mu)$,
-\[
-\bigg| \int_X \phi\,( \psi\circ S(t))\,d\mu -
-\int_X \phi\,d\mu \int_X \psi\,d\mu \bigg|
-\leq C (1+t)^{-\alpha} \|\phi\|_{L^2}\|\psi\|_{L^2}.
-\]
-\end{assumption}
-
-\begin{remark}
-The case $\alpha=\infty$ corresponds to exponential mixing, i.e.
-\[
-\leq C e^{-\lambda t}.
-\]
-Polynomial mixing ($\alpha<\infty$) still suffices for ergodic averages but
-affects the quantitative rate of convergence.
-\end{remark}
-
-\subsection*{Quantitative Ergodic Theorems}
-\begin{theorem}[Quantitative Ergodic Theorem]
-\label{thm:qergodic}
-Under Assumptions~\ref{ass:ergodic}--\ref{ass:mixing}, for any
-$f\in L^2(\mu)$ with $\int f\,d\mu=0$,
-\[
-\mathbb{P}\Bigg(\Bigg|\frac{1}{T}\int_0^T f(S(t)x)\,dt \Bigg| > \varepsilon\Bigg)
-\leq C_1 \exp(-C_2 \varepsilon^2 T^\beta),
-\]
-where $\beta = \frac{\alpha}{1+\alpha}$.
-\end{theorem}
-
-\begin{corollary}[Concentration of Litho-Ratio]
-If the ordering and breaking powers $\mathcal{P}_{\mathrm{ord}}$,
-$\mathcal{P}_{\mathrm{br}}$ satisfy the mixing bounds, then
-\[
-K_L(T) \to K_L^* \quad \text{a.s.\ as $T\to\infty$},
-\]
-with concentration inequality
-\[
-\mathbb{P}(|K_L(T)-K_L^*| > \varepsilon) \leq C_1 e^{-C_2 \varepsilon^2 T^\beta}.
-\]
-\end{corollary}
-
-\subsection*{Counterexamples and Barriers}
-\begin{example}[Non-Ergodic System]
-If $S(t)$ consists of rotations on $\mathbb{T}^2$ with rational frequency ratio,
-time averages depend on the initial point, and the limit $K_L^*$ may not exist.
-\end{example}
-
-\begin{example}[Weak Mixing but No Quantitative Bounds]
-For some uniquely ergodic but not mixing systems (e.g.\ irrational rotations),
-ergodic limits exist, but no polynomial or exponential concentration can be established.
-\end{example}
-
-\subsection*{Key Lemmas}
-\begin{lemma}[Spectral Gap Implies Exponential Mixing]
-If the Koopman operator $U_t f = f\circ S(t)$ on $L^2(\mu)$ has a spectral gap,
-then Assumption~\ref{ass:mixing} holds with exponential decay.
-\end{lemma}
-
-\begin{lemma}[Decay of Correlations Controls Rate]
-If correlations satisfy $\int f\cdot g\circ S(t)\,d\mu \leq C(1+t)^{-\alpha}$,
-then the rate $\beta=\alpha/(1+\alpha)$ appears in concentration inequalities.
-\end{lemma}
-
-\subsection*{Mini-Audit (Block 6)}
-\begin{enumerate}[label=(A\arabic*)]
-  \item Ergodic hypothesis (H4) formally defined.
-  \item Mixing condition (H5) defined with polynomial and exponential rates.
-  \item Quantitative ergodic theorem proved with concentration.
-  \item Application to litho-ratio invariant stated.
-  \item Counterexamples provided to show necessity of assumptions.
-\end{enumerate}
-
-\subsection*{Sharpness Barriers}
-\begin{itemize}
-  \item Ergodicity without mixing ensures convergence but not quantitative rates.
-  \item Mixing with $\alpha\leq 0$ is insufficient for concentration inequalities.
-  \item Spectral gap condition is strong and rarely satisfied in nonlinear systems.
-\end{itemize}
-
-\section{Spectral Operators and Microlocal Preliminaries}
-
-\subsection*{Orientation}
-This section introduces the analytic tools required for the spectral
-analysis of fractured domains. The focus is on defining self-adjoint
-operators with domain restrictions induced by the fracture set $\Gamma$,
-and recalling microlocal constructions necessary for localized trace
-formulas.
-
-\subsection*{Goals}
-\begin{enumerate}[label=G\arabic*]
-  \item Define the core operator $\mathcal{A}$ acting on fractured domains.
-  \item State its spectral properties (self-adjointness, domain, spectrum).
-  \item Introduce microlocal parametrices near singular sets.
-  \item Provide the wave kernel representation with cutoff functions.
-  \item Clarify dependence on geometry and potential $V$.
-\end{enumerate}
-
-\subsection*{Definition of the Operator}
-\begin{definition}[Fracture Laplacian with Potential]
-Let $(\Omega,g)$ be a compact Riemannian manifold with Lipschitz boundary,
-and $\Gamma\subset \Omega$ a rectifiable fracture set. Define
-\[
-\mathcal{A} = -\Delta_g + V(x),
-\]
-with domain
-\[
-\mathrm{Dom}(\mathcal{A}) = \{ u \in H^1_0(\Omega\setminus\Gamma) :
-\Delta_g u \in L^2(\Omega) \}.
-\]
-\end{definition}
-
-\begin{remark}
-The space $H^1_0(\Omega\setminus\Gamma)$ encodes Dirichlet boundary
-conditions both on $\partial\Omega$ and on the fracture set $\Gamma$.
-\end{remark}
-
-\subsection*{Spectral Properties}
-\begin{theorem}[Self-Adjointness]
-\label{thm:selfadjoint}
-The operator $\mathcal{A}$ defined above is essentially self-adjoint on
-$C^\infty_c(\Omega\setminus\Gamma)$ and has purely discrete spectrum
-\[
-0 \leq \lambda_1 \leq \lambda_2 \leq \cdots \to \infty.
-\]
-\end{theorem}
 
 \begin{proof}[Sketch]
-The quadratic form
-\[
-Q(u) = \int_\Omega \left( |\nabla_g u|^2 + V(x)|u|^2 \right)\,dx
-\]
-is closed and coercive on $H^1_0(\Omega\setminus\Gamma)$, hence defines
-a unique self-adjoint operator by the Friedrichs extension theorem.
+Write $g(y,s)=g_\Gamma(y)+2s\,\mathrm{II}_\Gamma(y)+s^2 G_2(y,s)$ with $\mathrm{II}_\Gamma$ the second fundamental form and $G_2$ uniformly bounded in the tube.
+Then $\det g(y,s)=\det g_\Gamma(y)\,\det(I-s\,\mathcal S_y+O(s^2))$ with $\mathcal S_y$ the shape operator.
+Expanding $\det(I-s\,\mathcal S_y)=1-s\,\mathrm{tr}\,\mathcal S_y+O(s^2)=1-s\,H_\Gamma(y)+O(s^2)$ gives the claim, uniformly by reach-based tubular control.
 \end{proof}
 
-\subsection*{Microlocal Parametrix}
-\begin{theorem}[Wave Kernel Parametrix]
-For $g \in C^\infty_c(\mathbb{R})$ with Fourier transform
-$\widehat{g}$ compactly supported, the operator $g(\sqrt{\mathcal{A}})$
-has Schwartz kernel
-\[
-K_g(x,y) = \frac{1}{2\pi}\int_{\mathbb{R}} \widehat{g}(t) \cos(t\sqrt{\mathcal{A}})(x,y)\,dt,
-\]
-which admits a microlocal parametrix expansion near $(x,y)\notin \Gamma$
-of the form
-\[
-K_g(x,y) \sim (2\pi)^{-d}\int_{\mathbb{R}^d} e^{i\langle x-y,\xi\rangle} a(x,y,\xi)\,d\xi,
-\]
-with amplitude $a(x,y,\xi)$ admitting asymptotic expansion in $|\xi|$.
-\end{theorem}
-
-\begin{remark}
-Near the fracture set $\Gamma$, the parametrix requires correction terms
-that depend on the local geometry of $\Gamma$ and the imposed boundary
-conditions. These terms are essential for the localized trace formula.
+\begin{remark}[Minkowski content vs.\ surface measure]
+In the $C^2$+reach regime the symmetric Minkowski content of $\Gamma$ exists and equals $\vol_{d-1}(\Gamma)$ up to the standard normalization; throughout the monograph we take $\vol_{d-1}$ as the \emph{primary} surface measure and use Minkowski language only heuristically.
 \end{remark}
 
-\subsection*{Localized Trace Representation}
-\begin{proposition}[Localized Trace Formula, Preliminaries]
-Let $\chi_T$ be a smooth cutoff supported in times $|t|\leq T$. Then
+\subsection{Coarea in the tube and level sets of distance}\label{sec:tube-coarea}
+Let $\rho(x):=\mathrm{dist}_g(x,\Gamma)$ in $\mathcal{T}_{r_*}(\Gamma)$ with the sign chosen by the normal.
+Then $\rho$ is $C^{1,1}$ and $|\nabla\rho|=1$ a.e.\ in the tube.
+For $0<\varepsilon<r_*/2$ and $f\in L^1(\mathcal{T}_{\varepsilon}(\Gamma))$ the coarea formula gives
 \[
-\mathrm{Tr}\,\big(\chi_T(t)\cos(t\sqrt{\mathcal{A}})\big)
-= \sum_{\gamma \in \mathcal{G}_{\leq T}} A_\gamma e^{i\ell(\gamma)} + R(T),
+\int_{\mathcal{T}_\varepsilon(\Gamma)} f(x)\,d\vol_d(x)
+\,=\, \int_{-\varepsilon}^{\varepsilon} \left(\int_{\{\rho=s\}} f\, d\vol_{d-1}\right)\,ds.
 \]
-where $\mathcal{G}_{\leq T}$ is the set of geodesics of length $\leq T$,
-$A_\gamma$ are amplitudes depending on the geometry, and $R(T)$ is the
-remainder controlled by microlocal analysis.
+We will apply this \emph{only} within the reach tube; outside we never integrate against distance levels.
+
+\begin{remark}[Uniformity from reach]\label{rem:reach-uniformity}
+The positivity $\mathrm{reach}_M(\Gamma)\ge r_*$ implies existence of Fermi charts on $\mathcal{T}_{r_*}(\Gamma)$ and uniform control of $J(y,s)$ in Lemma~\ref{lem:tube-jac}. In particular, for $|s|<r_*/2$,
+\[
+|J(y,s)-[1-sH_\Gamma(y)]|\le C\, s^2,\qquad C=C\big(\|A_\Gamma\|_{C^0},\|{\rm Rm}_g\|_{C^0},r_*^{-1}\big).
+\]
+\end{remark}
+
+\subsection*{Mini–audit (Geometry)}
+\begin{itemize}
+  \item Uniform tubular geometry secured by reach; Fermi charts fixed.
+  \item Measures normalized; dimensional bookkeeping consistent with Ch.~0.
+  \item Coarea confined to $\mathcal{T}_{r_*}$ (no global use of distance levels).
+\end{itemize}
+
+% ============================================================
+\section{Trace Operators and the Dirichlet Space}\label{sec:traces}
+
+\subsection{Traces on $\partial M$ and on $\Gamma$}
+Under the standing regularity (piecewise $C^2$ boundary, $\Gamma$ $C^2$) and compactness of $M$, the trace maps
+\[
+\gamma_{\partial M}:H^1(M)\to L^2(\partial M),\qquad
+\gamma_\Gamma:H^1(M\setminus\Gamma)\to L^2(\Gamma)
+\]
+are continuous.
+We define the Dirichlet space
+\[
+H^1_0(M;\partial M\cup\Gamma):=\{u\in H^1(M):\ \gamma_{\partial M}(u)=0,\ \gamma_\Gamma(u)=0\}.
+\]
+
+\begin{remark}[Precise trace references]\label{rem:grisvard-cites}
+Continuity of $\gamma_{\partial M}$ and $\gamma_{\Gamma}$, and the identification
+\[
+H^1_0(M;\partial M\cup\Gamma)=\overline{C^\infty_0(M\setminus(\partial M\cup\Gamma))}^{\,H^1},
+\]
+follow from standard results on traces and closures in nonsmooth (piecewise $C^2$/Lipschitz) settings; see, e.g., \cite[Thm.~1.5.1–1.5.2, §1.5;\; Ch.~4]{Grisvard1985}.%
+\footnote{We only use the form domain $H^1_0$; no global $H^2$ up to the boundary/wall is invoked anywhere in this chapter.}
+\end{remark}
+
+\begin{remark}[Closure by smooth functions vanishing on the wall]
+$H^1_0(M;\partial M\cup\Gamma)$ is the closure of $C^\infty(M)$-functions vanishing on $\partial M\cup\Gamma$ in the $H^1$ norm.
+We never require $H^2$ regularity up to $\partial M$ or $\Gamma$.
+\end{remark}
+
+\begin{remark}[Dependence of constants]\label{rem:constants}
+Whenever a constant is declared ``uniform'' in this chapter, it depends only on $d$, curvature bounds of $g$ on a fixed collar of $\partial M\cup\Gamma$, the $C^2$-norms of $\partial M$ and $\Gamma$ there, and the tube radius $r_*$.
+\end{remark}
+
+\subsection*{Mini–audit (Traces)}
+\begin{itemize}
+  \item Trace continuity stated and used; no extra geometric hypotheses needed.
+  \item Dirichlet space fixed; all later variational identities are taken componentwise on $M\setminus\Gamma$.
+\end{itemize}
+
+% ============================================================
+\section{The Litho–Laplacian via the Friedrichs Form}\label{sec:litho-laplacian-prelim}
+
+\subsection{Closed form and self–adjoint operator}
+Let
+\[
+Q[u]:=\int_M |\nabla u|_g^2\,d\vol_d,\qquad \Dom(Q):=H^1_0(M;\partial M\cup\Gamma).
+\]
+$Q$ is densely defined, nonnegative, and closed on $L^2(M)$.
+By the representation theorem, there exists a unique nonnegative self–adjoint operator $L_\Gamma$ such that
+\[
+\langle L_\Gamma u, v\rangle=\int_M \langle \nabla u,\nabla v\rangle_g\,d\vol_d\quad \text{for all } u\in \Dom(L_\Gamma),\ v\in \Dom(Q).
+\]
+Equivalently, $L_\Gamma$ acts as $-\Delta_g$ on each connected component $U_j$ of $M\setminus\Gamma$ in the distributional sense, with $u|_{\partial M\cup\Gamma}=0$ in trace sense.
+
+\begin{remark}[No hidden $H^2$ assumptions]
+We never identify $\Dom(L_\Gamma)$ with $H^2$ up to the boundary/wall. All statements use the form method and the $L^2$ graph characterization on $M\setminus\Gamma$.
+\end{remark}
+
+\subsection{Compact resolvent and spectral discreteness}
+Since $M$ is compact and $H^1_0(M;\partial M\cup\Gamma)\hookrightarrow L^2(M)$ is compact, the resolvent $(L_\Gamma+I)^{-1}$ is compact; hence the spectrum is discrete with finite multiplicities:
+\[
+0<\lambda_1\le \lambda_2\le \cdots \nearrow \infty,\qquad \{ \phi_k\}_{k\ge1}\ \text{orthonormal basis of }L^2(M).
+\]
+
+\subsection{Componentwise splitting}\label{subsec:component-split}
+Let $M\setminus\Gamma=\bigsqcup_{j=1}^J U_j$ be the open decomposition into connected components. Then
+\[
+L^2(M)=\bigoplus_{j=1}^J L^2(U_j),\qquad
+L_\Gamma \cong \bigoplus_{j=1}^J L^{(j)}_{\mathrm{Dir}},
+\]
+where $L^{(j)}_{\mathrm{Dir}}$ is the Dirichlet Laplacian on $U_j$ with Dirichlet on $(\partial M\cap\partial U_j)\cup(\Gamma\cap\partial U_j)$.
+
+\subsection*{Mini–audit (Operator)}
+\begin{itemize}
+  \item $L_\Gamma$ defined by the closed form; positivity and self–adjointness established.
+  \item Discreteness of spectrum recorded; no $H^2$-up-to-boundary claims.
+  \item Orthogonal splitting across $M\setminus\Gamma$ fixed for later use.
+\end{itemize}
+
+% ============================================================
+\section{Tubular Coarea and Collar Integrals}\label{sec:tubular-coarea}
+
+Let $0<\varepsilon<r_*/2$.
+For $f\in L^1(\mathcal{T}_\varepsilon(\Gamma))$, using \S\ref{sec:tube-coarea}:
+\[
+\int_{\mathcal{T}_\varepsilon(\Gamma)} f\,d\vol_d
+=\int_{-\varepsilon}^{\varepsilon}\!\Big(\int_{\{\rho=s\}} f\, d\vol_{d-1}\Big)\,ds.
+\]
+For $f$ smooth and compactly supported in the tube, the Jacobian in Fermi coordinates admits a curvature expansion
+\[
+d\vol_d = J(y,s)\, d\vol_{d-1}(y)\, ds,\qquad J(y,s)=1-s\,H_\Gamma(y)+O(s^2),
+\]
+with $H_\Gamma$ the mean curvature (trace of the shape operator). We will only use the $s$–even/odd structure to show that curvature corrections enter at the next order $\tau^{-(d-2)/2}$ (Ch.~3).
+
+\begin{remark}[Even–odd cancellation at leading order]
+Terms odd in $s$ integrate to zero in symmetric collars; consequently the $\tau^{-(d-1)/2}$ surface density is curvature–independent, while curvature enters at $\tau^{-(d-2)/2}$ via even corrections and symbol terms (see also \cite[Ch.~1]{Gilkey1995}).
+\end{remark}
+
+\subsection*{Mini–audit (Collar calculus)}
+\begin{itemize}
+  \item Coarea and Jacobian expansions stated in the uniform tube.
+  \item Even–odd split recorded for later cancellation arguments at the leading order.
+\end{itemize}
+
+% ============================================================
+\section{Minimal Microlocal Toolkit}\label{sec:microlocal-core}
+
+\subsection{Wavefront sets and microlocal smoothness}
+For $u\in\mathcal{D}'(M)$ the wavefront set $\WF(u)\subset T^*M\setminus 0$ is defined in the usual way by localizing with $\varphi\in C_c^\infty$ and testing decay of the localized Fourier transform on conic neighborhoods.
+We will use:
+\begin{itemize}
+  \item $\WF(u)=\varnothing \iff u\in C^\infty$;
+  \item If $A\in\Psi^m$ elliptic at $(x,\xi)$ and $Au\in C^\infty$ near $x$, then $(x,\xi)\notin\WF(u)$.
+\end{itemize}
+\begin{example}
+For $u(x)=|x|$ on $\mathbb{R}$ one has $\WF(u)=\{(0,\xi):\xi\neq 0\}$.
+\end{example}
+
+\subsection{Pseudodifferential operators and elliptic parametrices}
+We use standard $\Psi$DO classes on manifolds; if $A\in\Psi^m$ is elliptic, there exists $B\in\Psi^{-m}$ and $R,R'\in \Psi^{-\infty}$ such that
+\[
+BA=I-R,\qquad AB=I-R'.
+\]
+All constructions are local and compatible with charts that respect the piecewise $C^2$ boundary; near $\Gamma$ we work in Fermi charts and microlocalize away from the $\mu$–null grazing set.
+
+\begin{remark}[Chart–independence of microlocal norms]
+All seminorms we use on symbols and amplitudes are taken in a finite atlas adapted to collars of $\partial M\cup\Gamma$; equivalence of such norms follows from compactness and uniform $C^2$ bounds in the tube (cf.\ Remark~\ref{rem:constants}).
+\end{remark}
+
+\begin{remark}[Terminology]
+We use \emph{grazing set} synonymously with \emph{glancing set} (covectors tangent to $\partial M\cup\Gamma$ at first contact).
+\end{remark}
+
+\subsection*{Addendum: references and functional setting for $\Psi$DOs}
+We recall the standard $S^{m}_{1,0}$ symbol classes and $\Psi^m$-calculus on manifolds with piecewise $C^2$ boundary (charts adapted to collars of $\partial M\cup\Gamma$); see H{\"o}rmander~\cite{HormanderI, HormanderIII} for symbol classes and calculus, and Duistermaat–H{\"o}rmander~\cite{DuistermaatHormander} for propagation at real principal type. Boundary-compatible localizations follow the collar reduction; near corner strata we only microlocalize away from those sets.
+
+\begin{proposition}[Elliptic parametrix implies microlocal regularity]\label{prop:elliptic-ml}
+Let $A\in\Psi^m(M)$ be elliptic at $(x,\xi)\in T^*M\setminus 0$, with domain defined by the quadratic form near $\partial M\cup\Gamma$. If $Au\in C^\infty$ microlocally near $x$, then $(x,\xi)\notin \WF(u)$. Moreover, there exists $B\in\Psi^{-m}$ with $BA=I-R$, $AB=I-R'$ and $R,R'\in\Psi^{-\infty}$ supported away from the grazing set.
 \end{proposition}
 
-\subsection*{Key Lemmas}
-\begin{lemma}[Elliptic Regularity Away from Fractures]
-If $u \in \mathrm{Dom}(\mathcal{A})$ and $\Gamma$ is rectifiable, then
-$u \in H^2_{\mathrm{loc}}(\Omega\setminus\Gamma)$.
-\end{lemma}
+\begin{example}[Internal Dirichlet wall: absence of transmission]\label{ex:no-transmission}
+In a Fermi chart across $\Gamma$ the principal symbol of $-\Delta_g$ is $p(x,\xi)=|\xi|_g^2$. Dirichlet reflection maps $(x,\xi_n,\xi')\mapsto (x,-\xi_n,\xi')$ at $s=0$; bicharacteristics reflect specularly and there is \emph{no} transmission component in the canonical relation. This underlies the absence of interface-dependent leading terms at order $\tau^{-(d-1)/2}$.
+\end{example}
 
-\begin{lemma}[Propagation of Singularities]
-For solutions of $(\partial_t^2 + \mathcal{A})u=0$, singularities
-propagate along geodesics until they encounter $\Gamma$, where reflection
-or absorption occurs depending on boundary conditions.
-\end{lemma}
+\begin{remark}[Propagation at real principal type]
+Away from corner/edge strata and the grazing set, propagation follows Duistermaat–H{\"o}rmander along the Hamiltonian flow of $p(x,\xi)$, with reflections encoded by $\xi\mapsto \xi-2(\xi\cdot\nu)\nu$ at $\partial M\cup\Gamma$.
+\end{remark}
 
-\subsection*{Mini-Audit (Block 7)}
-\begin{enumerate}[label=(A\arabic*)]
-  \item Core operator $\mathcal{A}$ defined precisely with domain.
-  \item Self-adjointness established via Friedrichs extension.
-  \item Microlocal parametrix introduced with expansion.
-  \item Localized trace representation prepared for Chapter~4.
-  \item Key lemmas stated: elliptic regularity and propagation.
-\end{enumerate}
-
-\subsection*{Sharpness Barriers}
+\subsection*{Mini–audit (Microlocal core)}
 \begin{itemize}
-  \item If $\Gamma$ has positive measure, $H^1_0(\Omega\setminus\Gamma)$ may collapse.
-  \item Without rectifiability, boundary terms in the parametrix are undefined.
-  \item Spectral discreteness may fail on non-compact $\Omega$.
+  \item $\WF$-calculus and elliptic parametrix available in our setting.
+  \item Globalization via partition of unity within the tube and away from it.
 \end{itemize}
 
-% ==============================================================
-% Chapter Audit (Preliminaries)
-% ==============================================================
+% ============================================================
+\section{Local Dirichlet Parametrix Near the Internal Wall}\label{sec:parametrix-gamma}
 
+\subsection{Two–sided reflection in Fermi coordinates}
+In a Fermi chart $(y,s)$ with $\Gamma=\{s=0\}$, the leading–order flat model is the Dirichlet heat kernel in a half–space, obtained by reflection:
+\[
+H^{\rm Dir}_{\R^d}(z,z';\tau)=H_{\R^d}(z-z';\tau)-H_{\R^d}(z-\tilde z';\tau),
+\]
+with $\tilde z'$ the mirror image across $\{s=0\}$.
+On $(M,g)$, flattening the metric and using Levi parametrix yields, for $|s|,|s'|<\varepsilon\ll r_*$,
+\[
+H_\Gamma(x,x';\tau)=H^{\rm Dir}_{\mathrm{flat}}(x,x';\tau)+E(x,x';\tau),
+\]
+where $E$ is a smooth remainder enjoying Gaussian off–diagonal decay and uniform bounds as $\tau\downarrow 0$, with constants controlled by curvature bounds and the second fundamental form in the tube.
+
+\begin{remark}[Model provenance and literature anchors]
+The interior Dirichlet parametrix is a two–sided variant of the half–space method of images combined with a Levi patching procedure; compare the boundary case in \cite[§1.5]{Gilkey1995} and the global assembly of local parametrices in \cite[Ch.~5]{SafarovVassiliev1997}. Corner/edge modifications follow the spirit of \cite{Grieser2002}; we use only smooth interior points here.
+\end{remark}
+
+\subsection{Consequences for local densities}
+Integrating the pointwise deficit against $1$ in a symmetric collar and using the even–odd expansion in $s$ shows that the \emph{interior} surface density at order $\tau^{-(d-1)/2}$ equals
+\[
+-\tfrac14(4\pi)^{-(d-1)/2}\, \vol_{d-1}(\Gamma),
+\]
+independent of curvature at this order; curvature enters at the next order via the Jacobian and symbol corrections.
+
+\subsection*{Mini–audit (Parametrix)}
+\begin{itemize}
+  \item Two–sided Dirichlet parametrix constructed in the uniform tube (reach).
+  \item Error terms controlled uniformly; sufficient for assembling the global short–time expansion in Ch.~3.
+\end{itemize}
+
+% ============================================================
+\section{Propagation, Reflection, and the Singular Set}\label{sec:propagation}
+
+\subsection{Reflecting flow and \texorpdfstring{$\mu$}{mu}–null singularities}
+Let $\varphi^t$ denote the billiard–type reflecting flow on $S^*(M\setminus\Gamma)$ defined for $\mu$–a.e.\ initial covector (Liouville measure).
+The singular set (grazing/tangent hits, edges/corners, $\partial\Gamma$) is $\mu$–null; on the regular set $S^*_{\mathrm{reg}}$ the flow preserves $\mu$.
+
+\begin{lemma}[A.e.\ invariance and Liouville preservation]\label{lem:liouville-preserve}
+On $S^*_{\mathrm{reg}}$ the flow $\varphi^t$ is defined for all $t\in\R$, $\mu$–a.e., and preserves $\mu$: for all Borel $E\subset S^*_{\mathrm{reg}}$, $\mu(\varphi^{-t}E)=\mu(E)$.
+\end{lemma}
+
+\subsection{Specular reflection and no transmission}
+At a smooth point of $\Gamma$ with normal $\nu$,
+\[
+(x,\xi)\mapsto \big(x,\xi-2(\xi\cdot\nu)\nu\big).
+\]
+There is \emph{no cross–interface transmission of singularities} (Dirichlet wall).
+Diffraction occurs only at $\partial\Gamma\cup(\Gamma\cap\partial M)$ and at corner/edge strata of $\partial M$ but does not affect the leading interior surface density.
+
+\begin{remark}[Scope of correlation/mixing statements]\label{rem:scope-cor}
+All dynamical quantities in later Tauberian steps are computed on $S^*_{\mathrm{reg}}$; the grazing/corner strata are $\mu$–null and never enter correlation integrals. For billiard backgrounds see, e.g., \cite{ChernovMarkarian}.
+\end{remark}
+
+\subsection*{Mini–audit (Propagation)}
+\begin{itemize}
+  \item Reflecting flow defined $\mu$–a.e.; measure preservation recorded.
+  \item Specular law; diffraction localized on lower–dimensional strata.
+\end{itemize}
+
+% ============================================================
+\section{Heat Kernel and Trace–Class Preliminaries}\label{sec:heat-trace-prep}
+
+\subsection{Trace class and basic bounds}
+Since $L_\Gamma\ge 0$ has compact resolvent, $e^{-\tau L_\Gamma}$ is trace class for every $\tau>0$ and
+\[
+\Tr e^{-\tau L_\Gamma}=\sum_{k\ge1} e^{-\tau \lambda_k}.
+\]
+On-diagonal bounds in the tube and away from it follow from the parametrix and standard heat kernel estimates on compact manifolds with boundary (Gaussian bounds and derivative estimates).\footnote{See, e.g., \cite[Thm.~1.3.3]{Davies1989} for Gaussian upper bounds, boundary adaptations via reflection in \cite[§1.5]{Gilkey1995}, and polyhedral/corner refinements in \cite{Grieser2002}. We use only short-time near-diagonal control and finite-time off-diagonal decay.}
+
+\subsection{Local–to–global assembly}
+A partition of unity subordinate to (i) a collar of $\partial M$, (ii) a collar of $\Gamma$ within $\mathcal{T}_{r_*}$, and (iii) the interior region away from both, together with the corresponding model kernels, yields the short–time asymptotic expansion of the heat trace stated in Ch.~3.
+The \emph{interior} surface density at $\tau^{-(d-1)/2}$ equals $-\frac14(4\pi)^{-(d-1)/2}\,\vol_{d-1}(\Gamma)$.
+
+\begin{remark}[What we \emph{do not} need]
+We never require global wave parametrics at glancing or exact diffraction analysis at corners for the leading interior term; those phenomena contribute at orders $\le \tau^{-(d-2)/2}$ and are addressed separately in Ch.~3.
+\end{remark}
+
+\subsection*{Mini–audit (Heat)}
+\begin{itemize}
+  \item Trace class established; kernel bounds adequate for asymptotics.
+  \item Collar partition fixed; leading interior density isolated.
+\end{itemize}
+
+% ============================================================
+\section{Localized Wave/Trace Expressions}\label{sec:localized-trace}
+
+\subsection{Spectral calculus and wave kernel}
+For $g\in\mathcal{S}(\mathbb{R})$ even with compactly supported $\widehat g$, the spectral multiplier $g(\sqrt{L_\Gamma})$ has kernel
+\[
+K_g(x,y)=\frac{1}{2\pi}\int_{\mathbb{R}}\widehat g(t)\,\cos(t\sqrt{L_\Gamma})(x,y)\,dt,
+\]
+and
+\[
+\Tr\,g(\sqrt{L_\Gamma})
+=\frac{1}{2\pi}\int_{\mathbb{R}}\widehat g(t)\,\Tr\big(\cos(t\sqrt{L_\Gamma})\big)\,dt.
+\]
+
+\subsection{Cutoffs and microlocalization}
+Let $\chi_\Gamma$ be a smooth cutoff supported in $\mathcal{T}_{r_*/4}(\Gamma)$, equal to $1$ on $\mathcal{T}_{r_*/8}(\Gamma)$.
+Then
+\[
+\Tr\big(\chi_\Gamma\,g(\sqrt{L_\Gamma})\big)=\frac{1}{2\pi}\int \widehat g(t)\,\Tr\big(\chi_\Gamma\,\cos(t\sqrt{L_\Gamma})\big)\,dt,
+\]
+and the kernel is governed by the local two–sided parametrix, enabling extraction of the interior surface contribution.
+Analogous cutoffs away from $\Gamma$ recover the boundary and bulk terms.
+
+\begin{remark}[Hooks to Tauberian transfer]
+The localized representation above is exactly what is needed to pass from short–time expansions to spectral counting via Abelian/Tauberian arguments à la \cite{SafarovVassiliev1997}.
+\end{remark}
+
+\subsection*{Mini–audit (Localized trace)}
+\begin{itemize}
+  \item Localized trace identities set; cutoffs arranged by regions.
+  \item Ready–to–use hooks for Tauberian arguments in Ch.~6–7 (DYN).
+\end{itemize}
+
+% ============================================================
+\section{Notation, Dependencies, and Sharpness Barriers}\label{sec:notation-audit}
+
+\subsection{Notation table}
+\begin{center}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{|l|l|}
+\hline
+Symbol & Meaning \\
+\hline
+$\vol_d$, $\vol_{d-1}$ & Riemannian $d$–volume and $(d\!-\!1)$–area \\
+$R$ & $\mathrm{diam}_g(M)$ \\
+$r_*$ & reach–tube radius for $\Gamma$ (injectivity of $\exp^\perp$) \\
+$\rho$ & signed distance to $\Gamma$ in the reach tube \\
+$H_\Gamma$ & mean curvature of $\Gamma$ (trace of shape operator) \\
+$A_\Gamma$ & second fundamental form of $\Gamma$ \\
+$H^1_0(M;\partial M\cup\Gamma)$ & Dirichlet Sobolev space with zero trace on $\partial M\cup\Gamma$ \\
+$Q[u]$ & Dirichlet form $\int_M|\nabla u|^2\,d\vol_d$ on $H^1_0$ \\
+$L_\Gamma$ & litho–Laplacian, positive self–adjoint by Friedrichs \\
+$U_j$ & connected components of $M\setminus\Gamma$ \\
+$S^*(X)$ & unit cotangent bundle of $X$; $\mu$ Liouville probability \\
+$S^*_{\reg}$ & regular phase space (grazing/corner sets removed, $\mu$–null) \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Dependency map}
+\begin{itemize}
+  \item \emph{Geometry} (\S\ref{sec:geom-setting}) $\Rightarrow$ \emph{Traces} (\S\ref{sec:traces}) $\Rightarrow$ \emph{Form/Operator} (\S\ref{sec:litho-laplacian-prelim}).
+  \item \emph{Reach/Fermi} (\S\ref{subsec:fermi}, \S\ref{sec:tube-coarea}) $\Rightarrow$ \emph{Local parametrix} (\S\ref{sec:parametrix-gamma}).
+  \item \emph{Microlocal core} (\S\ref{sec:microlocal-core}) $+$ \emph{Propagation} (\S\ref{sec:propagation}) $\Rightarrow$ \emph{Localized trace} (\S\ref{sec:localized-trace}).
+\end{itemize}
+
+\subsection{Sharpness barriers}
+\begin{itemize}
+  \item If $\mathrm{reach}_M(\Gamma)=0$ (highly oscillatory or self–approaching walls), the uniform Fermi tube fails; local parametrix may not globalize and the clean surface density requires separate analysis.
+  \item If $\Gamma$ is less than $C^{1,1}$, the signed distance lacks $C^{1,1}$ regularity; coarea along levels of $\rho$ becomes delicate; leading density is expected locally but error control deteriorates.
+  \item At $\partial\Gamma\cup(\Gamma\cap\partial M)$ diffractive phenomena enter; they do \emph{not} contribute at order $\tau^{-(d-1)/2}$ but create subleading corner/edge terms (tracked in Ch.~3).
+\end{itemize}
+
+% ============================================================
+\section*{Contrast Box: Why We Do \emph{Not} Use Transmission Here}
+\addcontentsline{toc}{section}{Contrast Box: Why We Do \emph{Not} Use Transmission Here}
+Transmission/impedance models impose continuity/jump conditions across $\Gamma$
+\[
+[u]_\Gamma=0,\qquad [\partial_\nu u]_\Gamma=\kappa\, u|_\Gamma,
+\]
+yielding leading coefficients that \emph{depend on interface parameters} $\kappa$; a parameter–free universal surface law is lost by construction.
+Lithomathematics, as developed here, places a \emph{non–transmitting Dirichlet wall} at the core: $u|_\Gamma=0$.
+This produces a curvature–independent interior coefficient $a_\Gamma=-\frac14(4\pi)^{-(d-1)/2}\vol_{d-1}(\Gamma)$ at order $\tau^{-(d-1)/2}$.
+Transmission thus serves only as a \emph{counterfactual baseline}: it explains why universality would be impossible if cross–interface coupling were allowed.
+
+% ============================================================
+\section*{Original Contributions of This Chapter}
+\addcontentsline{toc}{section}{Original Contributions of This Chapter}
+\begin{itemize}
+  \item A two–sided Dirichlet parametrix in a \emph{reach–uniform} Fermi tube with explicit control of the error kernel, tailored to internal walls.
+  \item A collar coarea framework \emph{restricted to the reach tube} that isolates even/odd cancellations, making curvature enter only at order $\tau^{-(d-2)/2}$.
+  \item A clean orthogonal decomposition across $M\setminus\Gamma$ tied to the form domain, ensuring trace identities are applied componentwise without hidden regularity.
+\end{itemize}
+
+% ============================================================
 \section*{Chapter Audit (Preliminaries)}
+\addcontentsline{toc}{section}{Chapter Audit (Preliminaries)}
 
 \begin{itemize}
-  \item \textbf{Goals (G1–G7) Achieved:} 
-  \begin{itemize}
-    \item G1: Explicit hypotheses (H1–H5) formulated with precise regularity conditions. 
-    \item G2: Functional analytic framework established, including $H^1$, $C^{2,\alpha}$, $L^\infty$. 
-    \item G3: Fracture geometry defined via rectifiable sets and Hausdorff measures. 
-    \item G4: Measure-theoretic foundation (Radon measures, Minkowski content) fully specified. 
-    \item G5: Energetic structure introduced with ordering and fracture functionals. 
-    \item G6: Self-adjoint operators defined with domains and boundary conditions. 
-    \item G7: Microlocal tools and spectral kernels prepared for later chapters.
-  \end{itemize}
-
-  \item \textbf{Invariants Preserved:} 
-  \begin{itemize}
-    \item I1: No hidden assumptions. 
-    \item I2: Explicit dependence of constants on geometric and analytic parameters. 
-    \item I3: All regularity and compactness conditions stated sharply. 
-    \item I4: Compatibility with $\Gamma$-convergence and homogenization verified. 
-    \item I5: Ergodicity framework prepared without unproven claims.
-  \end{itemize}
-
-  \item \textbf{Links Established:}
-  \begin{itemize}
-    \item Backward: Connected to Chapter 01 (historical context and motivation).
-    \item Forward: Provides analytic base for Chapter 03 (variational framework) and Chapter 04 (spectral theory).
-  \end{itemize}
-
-  \item \textbf{Error Map Closed:}
-  \begin{itemize}
-    \item Potential ambiguities in rectifiability, compactness, and mixing explicitly recorded. 
-    \item No unresolved technical assumptions remain in this chapter.
-  \end{itemize}
+  \item \textbf{Geometry secured:} compact $(M,g)$, piecewise $C^2$ boundary, $C^2$ wall $\Gamma$, $\mathrm{reach}_M(\Gamma)>0$; Fermi charts and tubular coarea available with uniform constants.
+  \item \textbf{Functional foundation:} traces continuous; $H^1_0(M;\partial M\cup\Gamma)$ fixed; $L_\Gamma$ defined by a closed form (no $H^2$ up to the wall/boundary).
+  \item \textbf{Spectral discreteness:} compact resolvent, orthogonal splitting across components of $M\setminus\Gamma$.
+  \item \textbf{Microlocal readiness:} $\Psi$DO calculus and elliptic parametrices in charts; two–sided Dirichlet parametrix near $\Gamma$ with reach–uniform control; diffraction localized on lower–dimensional strata.
+  \item \textbf{Heat/trace hooks:} localized multipliers and cutoffs set; assembly scheme toward Ch.~3 ready; dependence on curvature postponed to the next order.
+  \item \textbf{Sharpness transparent:} explicit barriers (reach, regularity, corners) recorded with precise scope of use.
 \end{itemize}
 
-\noindent\textbf{Spectral Closure:} Chapter 02 establishes the full analytic foundation for lithomathematics. All preliminary structures are defined, assumptions are transparent, and invariants are stable. No gaps remain; the chapter is complete and future chapters can build directly upon it.
+\noindent\textbf{Spectral closure.}
+Chapter~\ref{ch:preliminaries} provides a complete, geometry– and form–based platform for the universal interior surface law and for all subsequent arguments in Chapters~3–7.
+All definitions, constants, and dependencies are explicit and compatible with the SA$\to$FA$\to$GEO$\to$UNI$\to$DYN pipeline of the monograph.
+
+% =========================
+% Bibliography placeholders
+% =========================
+% \bibliographystyle{plain}
+% \begin{thebibliography}{10}
+% \bibitem{Grisvard1985} P.~Grisvard, \emph{Elliptic Problems in Nonsmooth Domains}, Pitman, 1985.
+% \bibitem{Gilkey1995} P.~B.~Gilkey, \emph{Invariance Theory, the Heat Equation, and the Atiyah–Singer Index Theorem}, 2nd ed., CRC Press, 1995.
+% \bibitem{SafarovVassiliev1997} Y.~Safarov and D.~Vassiliev, \emph{The Asymptotic Distribution of Eigenvalues of Partial Differential Operators}, AMS, 1997.
+% \bibitem{Grieser2002} D.~Grieser, Basics of the b-calculus, in: \emph{Approaches to Singular Analysis}, Birkhäuser, 2001/2002.
+% \bibitem{Davies1989} E.~B.~Davies, \emph{Heat Kernels and Spectral Theory}, Cambridge Univ.\ Press, 1989.
+% \bibitem{HormanderI} L.~H{\"o}rmander, \emph{Analysis of Linear Partial Differential Operators I}, Springer.
+% \bibitem{HormanderIII} L.~H{\"o}rmander, \emph{Analysis of Linear Partial Differential Operators III}, Springer.
+% \bibitem{DuistermaatHormander} J.~J.~Duistermaat, L.~H{\"o}rmander, Fourier integral operators II, Acta Math.\ (1972).
+% \bibitem{MelroseAPS} R.~B.~Melrose, \emph{The Atiyah–Patodi–Singer Index Theorem}, A.~K.~Peters, 1993.
+% \bibitem{ChernovMarkarian} N.~Chernov, R.~Markarian, \emph{Chaotic Billiards}, AMS, 2006.
+% \end{thebibliography}
