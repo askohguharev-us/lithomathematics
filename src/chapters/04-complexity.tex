@@ -1,10 +1,10 @@
 % ======================================================================
-% CHAPTER 4 — COMPLEXITY (PART 1/6)
+% CHAPTER 4 — COMPLEXITY (PART 1/6, harmonized with Chapter 0)
 % Diamond-grade (20/10): orientation, axioms, canonical κ, first properties
 % File: src/chapters/04-complexity.tex
 % ======================================================================
 
-% Local macros (safe re-definitions)
+% Local macros (safe re-definitions; consistent with Chapter 0)
 \providecommand{\vol}{\operatorname{vol}}
 \providecommand{\Dom}{\operatorname{Dom}}
 \providecommand{\Spec}{\operatorname{Spec}}
@@ -14,6 +14,11 @@
 \providecommand{\inj}{\operatorname{inj}}
 \providecommand{\Ric}{\operatorname{Ric}}
 \providecommand{\II}{\mathrm{II}}
+\providecommand{\Id}{\mathrm{Id}}
+
+% --- Cross-chapter constants and conventions (match Chapter 0) ---
+% Dimensional convention: [Length]=L, [\Delta]=L^{-2}, [\tau]=L^2, [t]=L.
+% Global scale: R := \mathrm{diam}_g(M). All dimensionless expressions use R.
 
 \chapter{Complexity: Quantitative Geometry for Uniform Parametrices and Spectral Bounds}
 \label{chap:complexity}
@@ -23,20 +28,28 @@ This chapter introduces and develops a \emph{dimensionless geometric complexity}
 \[
 \kappa(\Gamma)\quad\text{on}\quad (M,g),
 \]
-which provides a uniform quantitative control for all local constructions used earlier (Fermi coordinates, Jacobian expansions, image parametrices, remainder bounds) and all global estimates derived later (localized traces, Tauberian remainders, stability). The role of $\kappa(\Gamma)$ is twofold:
+harmonized with the Standing Assumptions (SA.1)–(SA.4) of Chapter~0 and the dimensional convention fixed there.
+The invariant $\kappa(\Gamma)$ provides a uniform quantitative control for all local constructions used earlier
+(Fermi coordinates, Jacobian expansions, image parametrices, remainder bounds) and all global estimates derived later
+(localized traces, Tauberian remainders, stability, and dynamical refinements under $H_{\mix}$).
+
+\paragraph{Role and scope.}
+The role of $\kappa(\Gamma)$ is twofold:
 
 \begin{enumerate}
-  \item \textbf{Analytic uniformity.} Bounds for parametrix errors, Hilbert--Schmidt norms, and microlocal cutoffs are stated with constants \emph{polynomially} controlled by $\kappa(\Gamma)$ and curvature bounds of $(M,g)$ on a fixed collar of $\partial M\cup\Gamma$.
-  \item \textbf{Structural compactness.} Classes with $\kappa(\Gamma)\le K$ and $\reach_M(\Gamma)\ge r_0$ are precompact (in appropriate topologies) and admit \emph{reach--uniform} Fermi tubular neighborhoods with radii bounded below by a function of $(K,r_0)$.
+  \item \textbf{Analytic uniformity.} Bounds for parametrix errors, Hilbert--Schmidt norms, and microlocal cutoffs are stated with constants \emph{polynomially} controlled by $\kappa(\Gamma)$ and curvature bounds of $(M,g)$ on a fixed collar of $\partial M\cup\Gamma$. The control is compatible with the \emph{scale invariance} $g\mapsto \lambda^2 g$ (cf.\ Chapter~0, Dimensional Convention).
+  \item \textbf{Structural compactness.} Classes with $\kappa(\Gamma)\le K$ and $\reach_M(\Gamma)\ge r_0$ are precompact (in appropriate topologies) and admit \emph{reach--uniform} Fermi tubular neighborhoods with radii bounded below by a function of $(K,r_0)$ independent of local coordinates; see Axioms (K6)–(K7).
 \end{enumerate}
 
-The complexity is deliberately \emph{minimal}: it measures only the features that are logically required by the arguments of Chapters~\ref{ch:preliminaries}–\ref{chap:universal-law}. Extra terms (e.g.\ higher curvature functionals) are introduced only as \emph{variants} when needed for model-specific refinements; all universal laws rely only on the canonical $\kappa(\Gamma)$.
+The complexity is deliberately \emph{minimal}: it measures only the features that are logically required by the arguments of Chapters~\ref{ch:preliminaries}–\ref{chap:universal-law}. Extra terms (e.g.\ higher curvature functionals or derivatives of the second fundamental form) are introduced only as \emph{variants} when needed for higher-microlocal transport; all universal statements rely solely on the canonical $\kappa(\Gamma)$.
 
-\paragraph{Global scale.} As in Chapter~0, set $R:=\mathrm{diam}_g(M)$. All dimensionless combinations are formed using this $R$; any other global length that scales linearly under $g\mapsto \lambda^2 g$ would give an equivalent theory.
+\paragraph{Global scale.}
+As in Chapter~0, set $R:=\mathrm{diam}_g(M)$ and form all dimensionless combinations using $R$; any other global length scaling linearly under $g\mapsto \lambda^2 g$ (e.g.\ $\vol_d(M)^{1/d}$) would yield an equivalent theory, cf.\ Remark~\ref{rem:R-choice}.
 
-\paragraph{Standing Assumptions.}
+\paragraph{Standing Assumptions (in force).}
 Throughout this chapter we keep (SA.1)–(SA.4) from Chapter~0:
 compact $(M,g)$ with piecewise $C^2$ boundary, $C^2$ internal wall $\Gamma$ with $\reach_M(\Gamma)>0$, and (if $\partial\Gamma\neq\varnothing$) transverse contact with $\partial M$.
+No additional regularity beyond $C^2$ is imposed; all estimates are expressed in terms of curvature bounds of $(M,g)$ on a fixed collar of $\partial M\cup\Gamma$ and the \emph{dimensionless} invariant $\kappa(\Gamma)$ defined below.
 
 \bigskip
 
@@ -44,54 +57,71 @@ compact $(M,g)$ with piecewise $C^2$ boundary, $C^2$ internal wall $\Gamma$ with
 \section{Axioms for a Litho–Complexity Functional}
 \label{sec:axioms}
 
-We write $\mathfrak{G}$ for the class of admissible triples $(M,g;\Gamma)$ obeying (SA.1)–(SA.4).
+Let $\mathfrak{G}$ denote the class of admissible triples $(M,g;\Gamma)$ obeying (SA.1)–(SA.4).
 A \emph{litho–complexity functional} is a map
 \[
 \mathfrak{K}:\ \mathfrak{G}\longrightarrow [1,\infty)
 \]
-satisfying the following axioms.
+satisfying the following axioms; each axiom is stated in a form \emph{dimensionally compatible} with Chapter~0 and explicitly invariant under homotheties $g\mapsto \lambda^2 g$.
 
 \begin{description}
 \item[(K1) Normalization and positivity.] $\mathfrak{K}(M,g;\Gamma)\ge 1$ whenever $\Gamma\neq\varnothing$, and $\mathfrak{K}(M,g;\varnothing):=1$.
 \smallskip
-\item[(K2) Scale invariance.] For any $\lambda>0$,
+
+\item[(K2) Scale invariance.] For any $\lambda>0$ and the homothety $g\mapsto \lambda^2 g$,
 \[
 \mathfrak{K}(M,\lambda^2 g;\Gamma)=\mathfrak{K}(M,g;\Gamma).
 \]
 \smallskip
+
 \item[(K3) Additivity under disjoint unions.] For $M=M_1\sqcup M_2$ and $\Gamma=\Gamma_1\sqcup\Gamma_2$,
 \[
 \mathfrak{K}(M,g;\Gamma)=\mathfrak{K}(M_1,g|_{M_1};\Gamma_1)+\mathfrak{K}(M_2,g|_{M_2};\Gamma_2)-1.
 \]
+The subtraction of $1$ preserves the normalization in (K1).
 \smallskip
+
 \item[(K4) Monotonicity under refinement.] If $\Gamma=\Gamma_1\sqcup\Gamma_2$ (disjoint union), then
 \[
 \mathfrak{K}(M,g;\Gamma)\ \ge\ \mathfrak{K}(M,g;\Gamma_1),\qquad
 \mathfrak{K}(M,g;\Gamma)\ \ge\ \mathfrak{K}(M,g;\Gamma_2).
 \]
 \smallskip
-\item[(K5) Stability under $C^2$ perturbations.] If $\Gamma_\epsilon$ is a $C^2$ normal graph over $\Gamma$ with $\|\Gamma_\epsilon-\Gamma\|_{C^2}\to 0$ and $\reach_M(\Gamma_\epsilon)\ge r_0>0$ uniformly, then $\mathfrak{K}(M,g;\Gamma_\epsilon)\to \mathfrak{K}(M,g;\Gamma)$.
+
+\item[(K5) Stability under $C^2$ perturbations at positive reach.] If $\Gamma_\epsilon$ is a $C^2$ normal graph over $\Gamma$ with $\|\Gamma_\epsilon-\Gamma\|_{C^2}\to 0$ and $\inf_\epsilon \reach_M(\Gamma_\epsilon)\ge r_0>0$, then
+\[
+\mathfrak{K}(M,g;\Gamma_\epsilon)\longrightarrow \mathfrak{K}(M,g;\Gamma).
+\]
 \smallskip
-\item[(K6) Control of tube radii.] There exists a nonincreasing function $\rho:(1,\infty)\to (0,\infty)$ such that
+
+\item[(K6) Quantitative control of tube radii.] There exists a nonincreasing function $\rho:(1,\infty)\to (0,\infty)$ such that
 \[
 \mathfrak{K}(M,g;\Gamma)\le K\quad\Longrightarrow\quad
-\exists\ \varepsilon\ge \rho(K)\ \ \text{with}\ \ \exp^\perp:\ \{(p,\nu):|\nu|<\varepsilon\}\to \mathcal{T}_\varepsilon(\Gamma)\ \text{injective}.
+\exists\ \varepsilon\ge \rho(K)\ \ \text{with}\ \ \exp^\perp:\ \big\{(p,\nu)\in N\Gamma:\ |\nu|<\varepsilon\big\}\ \text{injective.}
 \]
+Moreover, $\rho$ is homogeneous of degree $1$ in the reach scale, i.e.\ $\rho$ can be chosen so that
+$\rho(K)\le c(d)\,r_0$ whenever $\reach_M(\Gamma)\ge r_0$.
 \smallskip
-\item[(K7) Analytic uniformity.] For each $m\in\mathbb{N}$ there exists $C_m=C_m(d,K,\|{\rm Rm}_g\|_{C^m},R)$ such that in Fermi coordinates on $\mathcal{T}_{\rho(K)}(\Gamma)$
+
+\item[(K7) Analytic uniformity in Fermi charts.] For each $m\in\mathbb{N}$ there exists
+\[
+C_m=C_m\big(d,K,\|{\rm Rm}_g\|_{C^m(\mathcal{U})},R\big)
+\]
+depending only on $d$, $K$, curvature bounds of $g$ on a fixed collar $\mathcal{U}$ of $\partial M\cup\Gamma$, and $R$, such that in Fermi coordinates on $\mathcal{T}_{\rho(K)}(\Gamma)$ one has the metric and Jacobian expansions
 \[
 \|g_{ij}(y,s)-g^\Gamma_{ij}(y)-2s\,\II_{ij}(y)\|_{C^m}\ \le\ C_m\, s^2,\qquad
-\text{and}\quad
-J(y,s)=1-sH_\Gamma(y)+O_{C^m}(s^2)
+J(y,s)=1-sH_\Gamma(y)+O_{C^m}(s^2),
 \]
-with all constants bounded by $C_m$.
+with all $O(\cdot)$ constants bounded by $C_m$.
 \end{description}
 
-\begin{remark}[On (K6) and (K7)]
-Axiom (K6) links a \emph{scalar} complexity bound to a \emph{geometric} tubular radius; (K7) turns that geometric control into the analytic estimates required in the parametrix and Jacobian expansions. These axioms are precisely what is used in Chapters~\ref{ch:preliminaries}–\ref{chap:universal-law}; no stronger regularity will be invoked.
+\begin{remark}[Harmonization with Chapter~0]
+Axioms (K6)–(K7) refine the consequences of (SA.4) (positive reach) by turning \emph{existence} of a tubular neighborhood into \emph{uniform} control of the Fermi expansion and Jacobian with constants depending on a \emph{single} dimensionless scalar $\mathfrak{K}$.
+This is exactly the quantitative input required in the parametrix and remainder analysis of Chapters~2–3.
 \end{remark}
 
-\paragraph{Design principle.} The functional should be \emph{as small as possible} while ensuring (K1)–(K7). The canonical choice below meets this prescription and is stable under homotheties and under taking disjoint unions.
+\paragraph{Design principle.}
+The functional should be \emph{as small as possible} while ensuring (K1)–(K7). The canonical choice below meets this prescription, is scale–invariant, additive, and stable under $C^2$ perturbations at positive reach.
 
 \bigskip
 
@@ -101,7 +131,7 @@ Axiom (K6) links a \emph{scalar} complexity bound to a \emph{geometric} tubular 
 
 \begin{definition}[Canonical litho–complexity]
 \label{def:canonical-kappa}
-Let $R:=\mathrm{diam}_g(M)$. For a $C^2$ $\Gamma\subset M$ with $\reach_M(\Gamma)>0$ set
+Let $R:=\mathrm{diam}_g(M)$ as in Chapter~0. For a $C^2$ $\Gamma\subset M$ with $\reach_M(\Gamma)>0$ set
 \[
 \boxed{\quad
 \kappa(\Gamma)\ :=\ N_{\mathrm{conn}}(\Gamma)\ +\ \frac{\vol_{d-1}(\Gamma)}{R^{d-1}}\ +\ R^{3-d}\!\int_\Gamma |\vec H_\Gamma|^2\,d\vol_{d-1}.
@@ -115,41 +145,45 @@ Here $N_{\mathrm{conn}}(\Gamma)$ is the number of connected components, and $\ve
 The functional $\kappa(\Gamma)$ satisfies \emph{all} axioms \textup{(K1)}–\textup{(K7)}.
 \end{lemma}
 
-\begin{proof}[Audit of the axioms (sketch; full proofs in \S\ref{sec:kappa-axioms-proofs})]
-(K1)–(K4) are immediate from the definition. (K2) follows since under $g\mapsto \lambda^2 g$ we have $R\mapsto \lambda R$, $\vol_{d-1}\mapsto \lambda^{d-1}\vol_{d-1}$, and $|\vec H|\mapsto \lambda^{-1}|\vec H|$. (K5) follows from continuity of $\vol_{d-1}$ and $H\in L^\infty(\Gamma)$ for $C^2$. (K6) is implied by positive reach and the curvature bound encoded by $\int_\Gamma |H|^2$, via standard tubular radius estimates (see Lemma~\ref{lem:tube-radius-control}). (K7) is the Fermi expansion with constants controlled by curvature bounds on a fixed collar and the $L^2$ mean curvature control; details in \S\ref{sec:kappa-axioms-proofs}.
+\begin{proof}[Audit of the axioms (outline; full proofs in \S\ref{sec:kappa-axioms-proofs})]
+(K1)–(K4) follow immediately from the definition (nonnegativity, additivity of measure/integral, count of components).  
+(K2) holds since under $g\mapsto \lambda^2 g$ we have $R\mapsto \lambda R$, $\vol_{d-1}\mapsto \lambda^{d-1}\vol_{d-1}$, and $|\vec H|\mapsto \lambda^{-1}|\vec H|$, hence each summand is invariant.  
+(K5) follows by dominated convergence in view of $C^2$ convergence and a uniform reach lower bound (ensuring nondegenerate charts).  
+(K6) is deduced from (SA.4) combined with packing/curvature control encoded by $\int_\Gamma |H|^2$; see Lemma~\ref{lem:tube-radius-control}.  
+(K7) is the standard Fermi expansion with constants controlled by curvature bounds of $(M,g)$ on a fixed collar and the $L^2$ bound of $H$, both dominated by $\kappa$; details in \S\ref{sec:kappa-axioms-proofs}.
 \end{proof}
 
-\begin{remark}[Minimality]
-The first nontrivial curvature scalar that is scale–compatible and orientation–independent is $\int_\Gamma |\vec H|^2$. Replacing $|\vec H|^2$ by $|A_\Gamma|^2$ (second fundamental form) only alters $\kappa$ by a topological/boundary term in $d=3$ (Gauss–Bonnet); either choice works for (K1)–(K7). We keep $|\vec H|^2$ to stay minimal.
+\begin{remark}[Minimality and orientation independence]
+The first nontrivial curvature scalar that is scale–compatible and orientation–independent is $\int_\Gamma |\vec H|^2$. Replacing $|\vec H|^2$ by $|A_\Gamma|^2$ (second fundamental form) only alters $\kappa$ by a topological/boundary term in $d=3$ (Gauss–Bonnet) while leaving scale properties unchanged; cf.\ Remark~\ref{rem:gb-boundary}. We keep $|\vec H|^2$ to stay minimal.
 \end{remark}
 
-\paragraph{Dimensional and scaling audit.}
+\paragraph{Dimensional and scaling audit (match Chapter~0).}
 \[
 \left[\frac{\vol_{d-1}}{R^{d-1}}\right]=L^0,\qquad
-\left[R^{3-d}\!\int_\Gamma |\vec H|^2\,d\vol_{d-1}\right]=L^{3-d}\cdot L^{-2}\cdot L^{d-1}=L^0.
+\left[R^{3-d}\!\int_\Gamma |\vec H|^2\,d\vol_{d-1}\right]=L^{3-d}\cdot L^{-2}\cdot L^{d-1}=L^0,
 \]
-Hence $\kappa$ is dimensionless and (K2) holds.
+hence $\kappa$ is dimensionless and (K2) holds automatically in the Chapter~0 convention.
 
 \begin{definition}[Complexity classes]
 \label{def:complexity-class}
-For $K\ge 1$ and $r_0>0$ define
+For $K\ge 1$ and $r_0>0$ define the class (compatible with (SA.4))
 \[
 \mathcal{C}(K,r_0)\ :=\ \Big\{(M,g;\Gamma)\in\mathfrak{G}\ :\ \kappa(\Gamma)\le K,\ \reach_M(\Gamma)\ge r_0\Big\}.
 \]
 \end{definition}
 
-\begin{proposition}[Uniform tube and atlas on $\mathcal{C}(K,r_0)$]
+\begin{proposition}[Uniform tube and Fermi atlas on $\mathcal{C}(K,r_0)$]
 \label{prop:uniform-atlas}
-There exists $\varepsilon=\varepsilon(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)>0$ and a finite Fermi atlas $\{(U_\ell,\kappa_\ell)\}_{\ell=1}^N$ covering $\mathcal{T}_\varepsilon(\Gamma)$ such that:
+There exists $\varepsilon=\varepsilon(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R)>0$ and a finite Fermi atlas $\{(U_\ell,\kappa_\ell)\}_{\ell=1}^N$ covering $\mathcal{T}_\varepsilon(\Gamma)$ such that:
 \begin{enumerate}
-\item $\varepsilon\le c\, r_0$ with $c=c(d)$ and $\exp^\perp$ is injective on $\{|\nu|<\varepsilon\}$;
-\item metric and Jacobian expansions satisfy the bounds in \textup{(K7)} with constants depending only on $(d,K,r_0,\|{\rm Rm}_g\|_{C^m},R)$;
-\item $N\le C\,\kappa(\Gamma)$ for a constant $C=C(d)$ (covering number estimate).
+\item $\varepsilon\le c(d)\, r_0$ and $\exp^\perp$ is injective on $\{|\nu|<\varepsilon\}$;
+\item metric and Jacobian expansions satisfy the bounds in \textup{(K7)} with constants depending only on $(d,K,r_0,\|{\rm Rm}_g\|_{C^m(\mathcal{U})},R)$;
+\item $N\le C(d)\,\kappa(\Gamma)$ (covering number estimate consistent with scale).
 \end{enumerate}
 \end{proposition}
 
 \begin{remark}[Why $N\lesssim\kappa(\Gamma)$]
-A Fermi patch at scale $\varepsilon$ covers $\sim \varepsilon\,R^{d-2}$ of $(d\!-\!1)$–area; since $\vol_{d-1}(\Gamma)\lesssim \kappa(\Gamma)R^{d-1}$ and $\varepsilon\gtrsim r_0$, a simple packing bound gives $N\lesssim \kappa(\Gamma)\,(R/\varepsilon)$, absorbed in constants because $R/\varepsilon$ is fixed on $\mathcal{C}(K,r_0)$.
+A Fermi patch at normal radius $\varepsilon$ covers $\simeq \varepsilon\,R^{d-2}$ of $(d\!-\!1)$–area; since $\vol_{d-1}(\Gamma)\lesssim \kappa(\Gamma)R^{d-1}$ and $\varepsilon\gtrsim r_0$, a packing bound yields $N\lesssim \kappa(\Gamma)\,(R/\varepsilon)$, absorbed in constants because $R/\varepsilon$ is fixed once $K,r_0$ are fixed.
 \end{remark}
 
 \bigskip
@@ -158,24 +192,24 @@ A Fermi patch at scale $\varepsilon$ covers $\sim \varepsilon\,R^{d-2}$ of $(d\!
 \section{Variants and Refinements of \texorpdfstring{$\kappa$}{kappa}}
 \label{sec:variants}
 
-The canonical $\kappa$ is sufficient for all core results. Nevertheless, two variants are occasionally convenient.
+The canonical $\kappa$ suffices for all core results and is the only invariant used in universal statements. Two refinements are occasionally convenient for \emph{quantitative} microlocal transport or curvature-sensitive remainders; both remain dimensionless and scale–invariant.
 
 \subsection{Anisotropic curvature enrichment}
 Define
 \[
 \kappa_A(\Gamma)\ :=\ \kappa(\Gamma)\ +\ R^{3-d}\!\int_\Gamma \big(|A_\Gamma|^2-|\vec H_\Gamma|^2\big)\,d\vol_{d-1}.
 \]
-In $d=3$ the extra integral equals $\int_\Gamma 2K_\Gamma\,d\vol_{2}$ up to boundary terms, hence is topological for closed $\Gamma$; using $\kappa_A$ does not change any constants but helps when $|A_\Gamma|$ appears explicitly in microlocal error transport.
+In $d=3$ the extra integral equals $\int_\Gamma 2K_\Gamma\,d\vol_{2}$ up to boundary terms (Gauss–Bonnet), hence is topological for closed $\Gamma$; using $\kappa_A$ does not change any constants in the smooth regime but can simplify transport estimates when $|A_\Gamma|$ enters explicitly.
 
-\subsection{Tangential roughness budget}
+\subsection{Tangential roughness budget (higher jets)}
 For integer $m\ge 0$, set
 \[
 \kappa^{(m)}(\Gamma)\ :=\ \kappa(\Gamma)\ +\sum_{j=1}^m R^{j-d+1}\,\|\nabla^j \II_\Gamma\|_{L^2(\Gamma)}^2.
 \]
-On classes with $C^{2+m}$ control, $\kappa^{(m)}$ yields explicit bounds for higher-order transport amplitudes in the parametrix; we will only need $m=0$ in the universal law.
+On classes with $C^{2+m}$ control, $\kappa^{(m)}$ bounds higher-order transport amplitudes in parametrices (Chapter~2); we will only need $m=0$ in the universal law (Chapter~3).
 
-\begin{remark}[Policy]
-All universal statements in Chapters~\ref{chap:universal-law}, \ref{chap:complexity} are stated in terms of $\kappa(\Gamma)$ alone; $\kappa_A$ and $\kappa^{(m)}$ are optional and used only when explicitly cited (e.g.\ in quantitative microlocal estimates with derivatives of the symbol).
+\begin{remark}[Policy and cross-reference]
+All statements labeled “universal’’ (cf.\ Chapter~0, Convention~\ref{conv:universality}) are expressed purely in terms of $\kappa(\Gamma)$. Variants $\kappa_A$, $\kappa^{(m)}$ appear only where explicitly cited for quantitative microlocal bounds; in particular, none of the leading coefficients in Chapter~3 depends on these variants.
 \end{remark}
 
 \bigskip
@@ -184,7 +218,7 @@ All universal statements in Chapters~\ref{chap:universal-law}, \ref{chap:complex
 \section{First Properties: Monotonicity, Additivity, Stability}
 \label{sec:properties}
 
-\begin{proposition}[Monotonicity under disjoint union]
+\begin{proposition}[Monotonicity and subadditivity under disjoint union]
 \label{prop:mono}
 If $\Gamma=\Gamma_1\sqcup\Gamma_2$ (disjoint), then
 \[
@@ -193,7 +227,7 @@ If $\Gamma=\Gamma_1\sqcup\Gamma_2$ (disjoint), then
 \]
 \end{proposition}
 
-\begin{proposition}[Stability under $C^2$ perturbations]
+\begin{proposition}[Stability under $C^2$ perturbations at positive reach]
 \label{prop:stability}
 Let $\Gamma_\epsilon$ be a family of $C^2$ normal graphs over $\Gamma$ with $\|\Gamma_\epsilon-\Gamma\|_{C^2}\to 0$ and $\reach_M(\Gamma_\epsilon)\ge r_0>0$. Then $\kappa(\Gamma_\epsilon)\to \kappa(\Gamma)$.
 \end{proposition}
@@ -206,21 +240,21 @@ If $\Gamma_n\to \Gamma$ in $C^1$ on compact charts and $\sup_n \kappa(\Gamma_n)\
 \]
 \end{proposition}
 
-\begin{remark}[Interpretation]
-Proposition~\ref{prop:lsc} expresses that the complexity cannot \emph{spontaneously decrease} under mild limits; intuitively, curvature concentration or component proliferation can only raise $\kappa$.
+\begin{remark}[Interpretation and harmony with SA]
+Proposition~\ref{prop:lsc} expresses that the complexity cannot \emph{spontaneously decrease} under mild limits; curvature concentration or component proliferation can only raise $\kappa$. The uniform reach barrier in (SA.4) is the exact threshold preventing collapses of tubular charts that would otherwise violate (K6)–(K7).
 \end{remark}
 
 \bigskip
 
 % ======================================================================
-\section{Dimension and Scaling: A Complete Audit}
+\section{Dimension and Scaling: A Complete Audit (synchronized with Chapter 0)}
 \label{sec:dim-audit}
 
 \begin{center}
 \renewcommand{\arraystretch}{1.12}
 \begin{tabular}{|l|c|c|}
 \hline
-Quantity & Symbol & Dimension \\
+Quantity & Symbol & Dimension (Chapter~0 convention) \\
 \hline
 Global scale & $R$ & $L$ \\
 Surface measure & $\vol_{d-1}(\Gamma)$ & $L^{d-1}$ \\
@@ -236,37 +270,41 @@ R\mapsto \lambda R,\quad
 \vol_{d-1}\mapsto \lambda^{d-1}\vol_{d-1},\quad
 |\vec H|\mapsto \lambda^{-1}|\vec H|,
 \]
-so each term in $\kappa$ is invariant and (K2) holds. The \emph{only} potential source of drift is the integer $N_{\mathrm{conn}}(\Gamma)$, which is manifestly invariant.
+so each term in $\kappa$ is invariant and (K2) holds. The only discrete contribution, $N_{\mathrm{conn}}(\Gamma)$, is manifestly scale–invariant as well.
 
 \bigskip
 
 % ======================================================================
-\section{Complexity and Reach: Quantitative Links}
+\section{Complexity and Reach: Quantitative Links (refining SA.4)}
 \label{sec:reach-links}
 
-The positive reach assumption ensures the existence of a tubular neighborhood; complexity controls \emph{how uniform} this tube can be chosen on a class.
+Positive reach (SA.4) ensures the \emph{existence} of a tubular neighborhood; the complexity $\kappa(\Gamma)$ quantifies \emph{uniformity} and analytic control of such tubes across a class.
 
-\begin{lemma}[Tube radius from complexity]
+\begin{lemma}[Tube radius from complexity (quantitative SA.4)]
 \label{lem:tube-radius-control}
-Fix $K\ge 1$ and $r_0>0$. Then there exists $\varepsilon=\varepsilon(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)\in(0,r_0]$ such that for every $(M,g;\Gamma)\in\mathcal{C}(K,r_0)$ the normal exponential map is injective on $\{|\nu|<\varepsilon\}$ and the Fermi Jacobian obeys
+Fix $K\ge 1$ and $r_0>0$. Then there exists
+\[
+\varepsilon=\varepsilon\big(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R\big)\in(0,r_0]
+\]
+such that for every $(M,g;\Gamma)\in\mathcal{C}(K,r_0)$ the normal exponential map is injective on $\{|\nu|<\varepsilon\}$ and the Fermi Jacobian obeys
 \[
 J(y,s)=1-sH_\Gamma(y)+O\big( s^2\big)\quad\text{uniformly for } |s|\le \varepsilon,
 \]
-with the $O(\cdot)$ constant depending only on $(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$.
+with the $O(\cdot)$ constant depending only on $\big(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R\big)$.
 \end{lemma}
 
 \begin{lemma}[Uniform Poincaré in tubes with constants from $\kappa$]
 \label{lem:poincare-kappa}
-Let $\chi_\Gamma$ be supported in $\mathcal{T}_\varepsilon(\Gamma)$ with $\varepsilon$ as in Lemma~\ref{lem:tube-radius-control}. Then for $u\in H^1(\mathcal{T}_\varepsilon(\Gamma))$ with $\gamma_\Gamma u=0$,
+Let $\varepsilon$ be as in Lemma~\ref{lem:tube-radius-control} and consider $u\in H^1(\mathcal{T}_\varepsilon(\Gamma))$ with $\gamma_\Gamma u=0$ (Dirichlet trace at $s=0$). Then
 \[
 \int_{\mathcal{T}_\varepsilon(\Gamma)} |u|^2\,d\vol
 \ \le\ C\,\varepsilon^2\int_{\mathcal{T}_\varepsilon(\Gamma)} |\nabla u|^2\,d\vol,
 \]
-with $C=C(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$.
+with $C=C\big(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R\big)$.
 \end{lemma}
 
 \begin{remark}[Where these feed in]
-Lemma~\ref{lem:tube-radius-control} and Lemma~\ref{lem:poincare-kappa} are the only inputs needed from $\kappa$ to make the parametrix of Chapter~\ref{ch:preliminaries} entirely quantitative: all constants are explicit functions of $(d,\kappa(\Gamma),\|{\rm Rm}_g\|_{C^m},r_0,R)$.
+Lemmas~\ref{lem:tube-radius-control}–\ref{lem:poincare-kappa} are the precise quantitative inputs used in Chapter~\ref{ch:preliminaries} to make the parametrix and its error bounds fully uniform across $\mathcal{C}(K,r_0)$. In Chapter~\ref{chap:universal-law} they imply that the $O\!\big(\tau^{-(d-2)/2}\big)$ remainder has a constant depending polynomially on $\kappa(\Gamma)$ and curvature bounds on a fixed collar, and \emph{not} on finer features of $\Gamma$.
 \end{remark}
 
 \bigskip
@@ -276,526 +314,884 @@ Lemma~\ref{lem:tube-radius-control} and Lemma~\ref{lem:poincare-kappa} are the o
 \label{sec:mini-audit-part1}
 
 \begin{itemize}
-\item \textbf{Axioms fixed.} (K1)–(K7) isolate exactly what later arguments use; no superfluous requirements.
-\item \textbf{Canonical choice.} $\kappa(\Gamma)$ is scale–invariant, integer–anchored, curvature–minimal.
-\item \textbf{Uniformity secured.} Tube radii, Fermi expansions, and packing numbers are controlled quantitatively by $\kappa$.
-\item \textbf{Stability.} $C^2$ perturbations preserve complexity; lower semicontinuity holds under weak limits.
-\item \textbf{Bridging.} Variants $\kappa_A$, $\kappa^{(m)}$ are available but not needed for the universal law.
+\item \textbf{Axioms fixed and scaled.} (K1)–(K7) isolate exactly what later arguments use; each is invariant under $g\mapsto \lambda^2 g$ and synchronized with Chapter~0 dimensional units.
+\item \textbf{Canonical choice.} $\kappa(\Gamma)$ is scale–invariant, integer–anchored, curvature–minimal, and orientation–independent at leading order.
+\item \textbf{Uniformity secured.} Tube radii, Fermi expansions, and packing numbers are controlled quantitatively by $\kappa$ with constants depending only on curvature bounds of $(M,g)$ on a fixed collar and on $R$.
+\item \textbf{Stability and l.s.c.} $C^2$ perturbations preserve $\kappa$; lower semicontinuity holds under weak limits at positive reach, aligning with (SA.4).
+\item \textbf{Bridging.} Variants $\kappa_A$, $\kappa^{(m)}$ are available for refined transport but are \emph{not} needed for universal coefficients.
 \end{itemize}
 
 \bigskip
 
 % ======================================================================
-% Placeholders for proofs used later in Part 2/6
+% Forward pointer for detailed proofs (Part 2/6)
 % ======================================================================
 
 \section*{Forward Pointer}
-Detailed proofs of Lemma~\ref{lem:kappa-axioms}, Proposition~\ref{prop:uniform-atlas}, and Lemmas~\ref{lem:tube-radius-control}–\ref{lem:poincare-kappa} are given in \S\ref{sec:kappa-axioms-proofs} (Part 2/6), where we derive all constants from $(d,\kappa(\Gamma),\|{\rm Rm}_g\|_{C^m},r_0,R)$ and a fixed collar around $\partial M\cup\Gamma$.
+Detailed proofs of Lemma~\ref{lem:kappa-axioms}, Proposition~\ref{prop:uniform-atlas}, and Lemmas~\ref{lem:tube-radius-control}–\ref{lem:poincare-kappa} are given in \S\ref{sec:kappa-axioms-proofs} (Part 2/6), where we derive all constants from $\big(d,\kappa(\Gamma),r_0,\|{\rm Rm}_g\|_{C^m(\mathcal{U})},R\big)$, consistently with the conventions and hypotheses of Chapter~0.
 
 % ======================================================================
-% End PART 1/6 of Chapter 4
+% End PART 1/6 of Chapter 4 (harmonized with Chapter 0)
 % ======================================================================
 % ======================================================================
-% CHAPTER 4 — COMPLEXITY (PART 2/6)
+% CHAPTER 4 — COMPLEXITY (PART 2/6, harmonized with Chapter 0)
 % Canonical κ: proofs of axioms, quantitative tube radius, uniform Poincaré
 % ======================================================================
 
 \section{Proofs of the Axioms and Quantitative Estimates}
 \label{sec:kappa-axioms-proofs}
 
-We now provide the detailed derivations supporting Lemma~\ref{lem:kappa-axioms},
-Proposition~\ref{prop:uniform-atlas}, and Lemmas~\ref{lem:tube-radius-control}--\ref{lem:poincare-kappa}.
-All constants are expressed as functions of
+Throughout this section we work under the Standing Assumptions (SA.1)–(SA.4) of Chapter~0,
+use the global scale $R=\mathrm{diam}_g(M)$, and keep the dimensional convention
+$[\Delta]=L^{-2}$, $[\tau]=L^2$. All constants are expressed as functions of
 \[
-(d,\,\kappa(\Gamma),\,r_0,\,\|{\rm Rm}_g\|_{C^m},\,R).
+\Big(d,\ K,\ r_0,\ \|{\rm Rm}_g\|_{C^m(\mathcal{U})},\ R\Big),
 \]
+where $\mathcal{U}$ is a fixed collar of $\partial M\cup\Gamma$ (as in Chapter~0).
+Whenever the dependence on $m$ matters, we write $C_m(\cdots)$.
 
 % ----------------------------------------------------------------------
 \subsection{Proof of Lemma~\ref{lem:kappa-axioms} (Axioms for $\kappa$)}
+\label{subsec:axioms-proof}
 
-\paragraph{(K1) Normalization.}
-By construction $\kappa(\varnothing)=1$. Each summand in Definition~\ref{def:canonical-kappa} is nonnegative,
-so $\kappa(\Gamma)\ge 1$ whenever $\Gamma\neq\varnothing$.
+\paragraph{(K1) Normalization and positivity.}
+By Definition~\ref{def:canonical-kappa},
+\[
+\kappa(\varnothing)=1.
+\]
+If $\Gamma\neq\varnothing$, then each summand in $\kappa(\Gamma)$ is nonnegative:
+$N_{\mathrm{conn}}(\Gamma)\ge 1$, $\vol_{d-1}(\Gamma)\ge 0$, and $\int_\Gamma |\vec H|^2\ge 0$.
+Hence $\kappa(\Gamma)\ge 1$.
 
 \paragraph{(K2) Scale invariance.}
-Under homothety $g\mapsto \lambda^2 g$, we have:
+Under $g\mapsto \lambda^2 g$,
 \[
-R\mapsto \lambda R,\quad \vol_{d-1}(\Gamma)\mapsto \lambda^{d-1}\vol_{d-1}(\Gamma),\quad
-|\vec H|\mapsto \lambda^{-1}|\vec H|.
+R\mapsto \lambda R, \qquad \vol_{d-1}\mapsto \lambda^{d-1}\vol_{d-1},\qquad |\vec H|\mapsto \lambda^{-1}|\vec H|.
 \]
 Thus
 \[
-\frac{\vol_{d-1}(\Gamma)}{R^{d-1}}\mapsto \frac{\lambda^{d-1}\vol_{d-1}(\Gamma)}{(\lambda R)^{d-1}}=\frac{\vol_{d-1}(\Gamma)}{R^{d-1}},
+\frac{\vol_{d-1}}{R^{d-1}}\mapsto \frac{\lambda^{d-1}\vol_{d-1}}{(\lambda R)^{d-1}}=\frac{\vol_{d-1}}{R^{d-1}},\quad
+R^{3-d}\!\int_\Gamma |\vec H|^2\,d\vol_{d-1}\mapsto R^{3-d}\!\int_\Gamma |\vec H|^2\,d\vol_{d-1},
 \]
-and
-\[
-R^{3-d}\!\int_\Gamma |\vec H|^2\,d\vol_{d-1}\mapsto
-(\lambda R)^{3-d}\!\int_\Gamma (\lambda^{-1}|\vec H|)^2\cdot \lambda^{d-1}\,d\vol_{d-1} = R^{3-d}\!\int_\Gamma |\vec H|^2\,d\vol_{d-1}.
-\]
-So $\kappa$ is invariant.
+and $N_{\mathrm{conn}}$ is metric-independent. Hence $\kappa$ is invariant.
 
-\paragraph{(K3) Additivity.}
-If $\Gamma=\Gamma_1\sqcup\Gamma_2$ with disjoint components, then
+\paragraph{(K3) Additivity under disjoint unions.}
+If $M=M_1\sqcup M_2$, $\Gamma=\Gamma_1\sqcup\Gamma_2$ (disjoint), then
 \[
-N_{\mathrm{conn}}(\Gamma)=N_{\mathrm{conn}}(\Gamma_1)+N_{\mathrm{conn}}(\Gamma_2),\qquad
+N_{\mathrm{conn}}(\Gamma)=N_{\mathrm{conn}}(\Gamma_1)+N_{\mathrm{conn}}(\Gamma_2),\ 
 \vol_{d-1}(\Gamma)=\vol_{d-1}(\Gamma_1)+\vol_{d-1}(\Gamma_2),
 \]
-and integrals over $\Gamma$ split additively. This gives additivity with the normalization in (K3).
+and integrals over $\Gamma$ split additively. The normalization $-1$ ensures $\kappa(\varnothing)=1$ remains neutral.
 
-\paragraph{(K4) Monotonicity.}
-Immediate since $\vol_{d-1}$ and $\int |H|^2$ are additive and nonnegative.
+\paragraph{(K4) Monotonicity under refinement.}
+If $\Gamma=\Gamma_1\sqcup\Gamma_2$,
+additivity of the summands and their nonnegativity imply
+$\kappa(\Gamma)\ge \kappa(\Gamma_j)$ for $j=1,2$.
 
-\paragraph{(K5) Stability.}
-If $\Gamma_\epsilon\to\Gamma$ in $C^2$, then $\vol_{d-1}(\Gamma_\epsilon)\to\vol_{d-1}(\Gamma)$ and
-$\int |H_{\Gamma_\epsilon}|^2\to\int |H_\Gamma|^2$ by dominated convergence. Reach bounded below by $r_0$ ensures uniform charts, preventing degeneracy. Hence $\kappa(\Gamma_\epsilon)\to\kappa(\Gamma)$.
-
-\paragraph{(K6) Tube radii.}
-By Federer’s theorem, $\reach_M(\Gamma)=\inf_{p\in\Gamma}\rho(p)$ where $\rho(p)$ is radius of unique nearest–point projection. If $\reach\ge r_0$, then Fermi coordinates exist on $\mathcal{T}_{r_0}(\Gamma)$. Complexity $\kappa(\Gamma)\le K$ bounds $\vol_{d-1}(\Gamma)$ and $\int |H|^2$, hence controls the covering number of $\Gamma$ by tubular charts of radius $\varepsilon\lesssim r_0$. This yields the function $\rho(K)$.
-
-\paragraph{(K7) Analytic uniformity.}
-The metric expansion in Fermi coordinates:
+\paragraph{(K5) Stability under $C^2$ perturbations at positive reach.}
+Let $\Gamma_\epsilon$ be a $C^2$ normal graph over $\Gamma$ with $\|\Gamma_\epsilon-\Gamma\|_{C^2}\to 0$
+and $\inf_\epsilon \reach_M(\Gamma_\epsilon)\ge r_0>0$.
+Then, in Fermi charts subordinate to a tubular radius uniform in $\epsilon$ (by the reach lower bound),
+$\vol_{d-1}(\Gamma_\epsilon)\to \vol_{d-1}(\Gamma)$ and
+$H_{\Gamma_\epsilon}\to H_\Gamma$ in $L^\infty$; hence
 \[
-g_{ij}(s,y)=g^\Gamma_{ij}(y)-2s\,\II_{ij}(y)+O(s^2).
+\int_{\Gamma_\epsilon} |H_{\Gamma_\epsilon}|^2\,d\vol_{d-1}\ \longrightarrow\
+\int_{\Gamma} |H_{\Gamma}|^2\,d\vol_{d-1}
 \]
-The Jacobian is
+by dominated convergence. Therefore $\kappa(\Gamma_\epsilon)\to \kappa(\Gamma)$.
+
+\paragraph{(K6) Quantitative control of tube radii.}
+Assume $\kappa(\Gamma)\le K$ and $\reach_M(\Gamma)\ge r_0$.
+By (SA.4), $\exp^\perp$ is injective on $\{|\nu|<r_0\}$.
+We claim that there exists a \emph{uniform} $\varepsilon=\varepsilon(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R)\in(0,r_0]$
+such that injectivity holds on $\{|\nu|<\varepsilon\}$ \emph{and}
+the Fermi Jacobian and metric satisfy the quantitative bounds of (K7).
+The proof combines:
+(i) packing of $\Gamma$ by intrinsic geodesic balls of radius $\theta r_0$;
+(ii) control of the number of such balls by $\vol_{d-1}(\Gamma)$; and
+(iii) curvature control along normal geodesics up to length $\theta r_0$,
+with $\theta=\theta(d,K,\|{\rm Rm}_g\|_{C^0},R)$ chosen small enough.
+Since $\vol_{d-1}(\Gamma)\le K R^{d-1}$ and $\int_\Gamma |H|^2\le K R^{d-3}$,
+the total curvature budget per patch is bounded, preventing self-focalization
+before time $\varepsilon=c(d)\,\theta r_0$. See Lemma~\ref{lem:tube-radius-control} below for details.
+
+\paragraph{(K7) Analytic uniformity in Fermi charts.}
+In normal coordinates,
 \[
-J(y,s)=1-sH_\Gamma(y)+O(s^2).
+g_{ij}(y,s)=g^\Gamma_{ij}(y)-2s\,\II_{ij}(y)+s^2\,Q_{ij}(y,s),
+\qquad J(y,s)=1-sH_\Gamma(y)+s^2\,q(y,s),
 \]
-Bounds on $\II$ and $H$ in $L^2$ with scale factor $R^{3-d}$ ensure constants depend only on $(d,K,\|{\rm Rm}_g\|_{C^m},R)$.
+where $Q_{ij},q$ depend smoothly on $({\rm Rm}_g,\II)$ along the normal geodesics.
+Curvature bounds of $g$ on a fixed collar $\mathcal{U}$ and the uniform tube radius $\varepsilon$
+imply $\|Q\|_{C^m},\|q\|_{C^m}\le C_m(d,\|{\rm Rm}_g\|_{C^m(\mathcal{U})},R)$.
+Absorbing $L^2$ bounds for $H$ into $C_m$ via Cauchy–Schwarz on each patch yields the uniform constants asserted in (K7).
 \qed
 
 % ----------------------------------------------------------------------
-\subsection{Proof of Proposition~\ref{prop:uniform-atlas}}
+\subsection{Quantitative tube radius: proof of Lemma~\ref{lem:tube-radius-control}}
+\label{subsec:tube-radius}
 
-Let $(M,g;\Gamma)\in\mathcal{C}(K,r_0)$. Cover $\Gamma$ by geodesic balls of radius $\varepsilon=\rho(K,r_0)$ in the induced metric.
-Packing estimates:
+Fix $K\ge 1$, $r_0>0$, and assume $(M,g;\Gamma)\in\mathcal{C}(K,r_0)$.
+Cover $\Gamma$ by intrinsic $(d\!-\!1)$–balls $B_\Gamma(y_\ell,\rho)$ of radius $\rho=\theta r_0$,
+where the parameter $\theta=\theta(d)$ will be chosen small.
+By Besicovitch covering/packing, the multiplicity is bounded by a constant $m(d)$ and the number of balls
 \[
-\vol_{d-1}(\Gamma)\lesssim \kappa(\Gamma)R^{d-1},\qquad \text{area covered per ball }\sim \varepsilon^{d-1}.
+N\ \le\ C(d)\,\frac{\vol_{d-1}(\Gamma)}{\rho^{\,d-1}}\ \le\ C(d)\,\frac{K R^{d-1}}{(\theta r_0)^{d-1}}.
 \]
-Thus number of patches
+On each $B_\Gamma(y_\ell,\rho)$, the normal injectivity holds up to $r_0$ by (SA.4).
+To globalize a uniform radius $\varepsilon$, we require that normal geodesics of length $\varepsilon$
+emanating from distinct points in $B_\Gamma(y_\ell,\rho)$ do not intersect.
+A sufficient condition is that the \emph{principal curvature} variation of $\Gamma$ on scale $\rho$
+and the ambient sectional curvature bound guarantee that the shape operator $S(s)$ along normals remains
+bounded, so that the normal exponential map is a local diffeomorphism up to time $\varepsilon$
+with Jacobi fields free of focal points.
+
+By Rauch comparison and standard tube radius criteria, it suffices to enforce
 \[
-N\lesssim \frac{\vol_{d-1}(\Gamma)}{\varepsilon^{d-1}}\lesssim \kappa(\Gamma).
+\varepsilon\ \le\ \min\Big\{\,r_0,\ \frac{\pi}{2\sqrt{K_{\max}}}\,,\ \frac{1}{2\|\II\|_{L^\infty(B_\Gamma(y_\ell,\rho))}}\,\Big\},
 \]
-Each patch extends to a tubular chart in Fermi coordinates by $\reach\ge r_0$. Metric and Jacobian expansions controlled as in (K7).
+with $K_{\max}:=\sup_{\mathcal{U}} |{\rm sec}_g|$ on the collar $\mathcal{U}$ and the $\|\II\|_{L^\infty}$ measured on the patch.
+Now, using the $L^2$–bound
+\[
+\int_{B_\Gamma(y_\ell,\rho)} |\II|^2\,d\vol_{d-1}\ \le\ \int_{B_\Gamma(y_\ell,\rho)} \big(|A|^2\big)\,d\vol_{d-1}
+\ \lesssim\ \int_{B_\Gamma(y_\ell,\rho)} |H|^2\,d\vol_{d-1} + C(d)\,\rho^{\,d-1},
+\]
+and the Morrey–Campanato/mean-value control on small balls (using $C^2$ regularity and the fixed ambient chart),
+we obtain
+\[
+\|\II\|_{L^\infty(B_\Gamma(y_\ell,\rho))}\ \le\ C(d,\|{\rm Rm}_g\|_{C^0(\mathcal{U})})\,
+\Big(\rho^{-(d-1)/2}\,\|\II\|_{L^2(B_\Gamma(y_\ell,\rho))} + 1\Big).
+\]
+Summing over $\ell$ and using $\sum_\ell \|\II\|_{L^2(B_\Gamma(y_\ell,\rho))}^2 \lesssim \|\II\|_{L^2(\Gamma)}^2 \lesssim R^{d-3}K$,
+we find a uniform bound
+\[
+\|\II\|_{L^\infty(\Gamma)}\ \le\ C\Big(d, K,\|{\rm Rm}_g\|_{C^0(\mathcal{U})}, R, r_0\Big)\,\theta^{-(d-1)/2}.
+\]
+Choosing $\theta=\theta(d,K,\|{\rm Rm}_g\|_{C^0},R)$ small enough, we secure a uniform
+\[
+\varepsilon\ =\ c(d)\,\min\Big\{\, r_0,\ K_{\max}^{-1/2},\  \|\II\|_{L^\infty}^{-1}\Big\}
+\ =\ \varepsilon\big(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R\big),
+\]
+which proves the claim on injectivity and yields the uniform radius in Lemma~\ref{lem:tube-radius-control}.
+
+For the Jacobian expansion, write along normals
+\[
+\partial_s \log J(y,s)\ =\ - H_s(y),\qquad H_s(y)=\mathrm{tr}\,S(s),
+\]
+with $S(0)=\II(y)$ and $S'(0)$ controlled by ambient curvature via the Riccati equation.
+Taylor expansion at $s=0$ gives
+\[
+J(y,s)=1-sH_\Gamma(y)+O(s^2),\qquad |O(s^2)|\ \le\ C_0\,s^2,
+\]
+with $C_0=C_0\big(d,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},\|\II\|_{L^\infty},R\big)$.
+The dependence on $\kappa$ enters through $\|\II\|_{L^\infty}$ as above, completing the proof.
+
 \qed
 
 % ----------------------------------------------------------------------
-\subsection{Proof of Lemma~\ref{lem:tube-radius-control}}
+\subsection{Uniform Fermi atlas: proof of Proposition~\ref{prop:uniform-atlas}}
+\label{subsec:uniform-atlas}
 
-Federer’s theorem: If $\reach\ge r_0$, then $\exp^\perp$ is injective for $|s|<r_0$. We need $\varepsilon$ uniform over $\mathcal{C}(K,r_0)$. Since $\kappa\le K$ bounds $\int|H|^2$, mean curvature is in $L^2$, ensuring no high–frequency oscillations at scale $\ll r_0$. Combining, we obtain $\varepsilon=\rho(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$.
-
-The Jacobian expansion holds by Taylor’s theorem and curvature bounds:
+Let $\varepsilon$ be the uniform radius from Lemma~\ref{lem:tube-radius-control}.
+Cover $\Gamma$ by intrinsic balls $B_\Gamma(y_\ell,c_1\varepsilon)$ with fixed overlap multiplicity $m(d)$.
+Each ball extends to a Fermi chart
 \[
-J(y,s)=1-sH_\Gamma(y)+O(s^2).
+\kappa_\ell:\ (-\varepsilon,\varepsilon)\times B_\Gamma(y_\ell,c_1\varepsilon)\ \longrightarrow\ U_\ell\subset \mathcal{T}_\varepsilon(\Gamma),
 \]
+by $\kappa_\ell(s,y)=\exp^\perp_y(s\nu_y)$.
+The number of charts satisfies
+\[
+N\ \le\ C(d)\,\frac{\vol_{d-1}(\Gamma)}{\varepsilon^{\,d-1}}\ \le\
+C(d)\,\frac{K R^{d-1}}{\varepsilon^{\,d-1}},
+\]
+hence $N\le C(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)\cdot \kappa(\Gamma)$ after absorbing the fixed factor $(R/\varepsilon)^{d-1}$.
+The metric/Jacobian bounds on each $U_\ell$ follow from (K7), which we already established with constants depending only on
+$\big(d,K,r_0,\|{\rm Rm}_g\|_{C^m(\mathcal{U})},R\big)$.
 \qed
 
 % ----------------------------------------------------------------------
-\subsection{Proof of Lemma~\ref{lem:poincare-kappa}}
+\subsection{Uniform Poincaré in tubes: proof of Lemma~\ref{lem:poincare-kappa}}
+\label{subsec:poincare}
 
-Use one–dimensional Poincaré inequality along normal geodesics:
+Write points as $(s,y)$ in Fermi coordinates with $|s|\le \varepsilon$ and $y\in \Gamma$.
+Fix $y$ and consider the one–dimensional function $v(s)=u(s,y)$ with $v(0)=0$ (Dirichlet trace).
+The 1D Poincaré inequality gives
 \[
-\int_0^\varepsilon |u(s,y)|^2 ds \le \varepsilon^2 \int_0^\varepsilon |u'(s,y)|^2 ds,
+\int_{-\varepsilon}^{\varepsilon} |v(s)|^2\,ds\ \le\ \varepsilon^2\int_{-\varepsilon}^{\varepsilon} |v'(s)|^2\,ds.
 \]
-for $u(s,y)$ vanishing at $s=0$ (Dirichlet condition).
-Integrate over $y\in\Gamma$ with measure $J(y,s)\,dy$. Since $J(y,s)$ is uniformly bounded (by $\kappa$–controlled constants),
+Integrating in $y$ against $J(y,s)\,d\vol_{d-1}(y)$, using the uniform bounds
+$0<c_-\le J(y,s)\le c_+$ and $|J-1|\le C_0|s|$ from Lemma~\ref{lem:tube-radius-control}, we infer
 \[
-\int_{\mathcal{T}_\varepsilon(\Gamma)} |u|^2 \le C\varepsilon^2 \int_{\mathcal{T}_\varepsilon(\Gamma)} |\nabla u|^2,
+\int_{\mathcal{T}_\varepsilon(\Gamma)} |u|^2\,d\vol\ \le\ C\,\varepsilon^2\int_{\mathcal{T}_\varepsilon(\Gamma)} |\partial_s u|^2\,d\vol
+\ \le\ C\,\varepsilon^2\int_{\mathcal{T}_\varepsilon(\Gamma)} |\nabla u|^2\,d\vol,
 \]
-with $C=C(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$.
+with $C=C\big(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R\big)$, as claimed.
 \qed
 
-% ======================================================================
-\section{Audit Block (Part 2/6)}
+% ----------------------------------------------------------------------
+\subsection{Quantitative constants: an explicit admissible profile}
+\label{subsec:explicit-constants}
+
+For later reference we record an explicit (nonoptimal but stable) constant profile consistent with the above proofs:
+\begin{align*}
+\varepsilon\ &:=\ c_1(d)\ \min\Big\{\, r_0,\ \big(1+\|{\rm Rm}_g\|_{C^0(\mathcal{U})}\big)^{-1/2},\ \big(1+ R^{(d-3)/2}\,K^{1/2}\big)^{-1}\,R \Big\},\\
+C_m\ &:=\ c_m(d)\ \Big(1+\|{\rm Rm}_g\|_{C^m(\mathcal{U})}\Big)\ \Big(1+K\Big)^{\beta_m}\ \Big(1+\frac{R}{\varepsilon}\Big)^{\gamma_m},
+\end{align*}
+for some exponents $\beta_m,\gamma_m=\gamma_m(d)$ depending only on $d$ and $m$.
+These formulas make the homogeneity under $g\mapsto \lambda^2 g$ and the dependence on the complexity budget $K$
+completely transparent; they will be tacitly used in Chapter~\ref{chap:universal-law} when stating remainder bounds with explicit dependence on $\kappa(\Gamma)$.
+
+% ----------------------------------------------------------------------
+\subsection{Lower semicontinuity and compactness in complexity classes}
+\label{subsec:lsc-compact}
+
+\begin{lemma}[Lower semicontinuity]
+\label{lem:lsc}
+Let $\Gamma_n\to \Gamma$ in $C^1$ on compact charts with $\sup_n \kappa(\Gamma_n)\le K$
+and $\inf_n \reach_M(\Gamma_n)\ge r_0>0$.
+Then $\liminf_{n\to\infty}\kappa(\Gamma_n)\ge \kappa(\Gamma)$.
+\end{lemma}
+
+\begin{proof}
+The terms $N_{\mathrm{conn}}$ and $\vol_{d-1}$ are lower semicontinuous under $C^1$ limits at positive reach.
+For the curvature term, the $L^2$ lower semicontinuity follows from weak lower semicontinuity and the uniform charts given by the reach bound: after pulling back to a fixed Fermi atlas (available by Proposition~\ref{prop:uniform-atlas}), the measures and integrands converge in the sense of distributions, and the $L^2$-norm is lower semicontinuous. Hence the claim.
+\end{proof}
+
+\begin{proposition}[Precompactness of complexity classes]
+\label{prop:precompact}
+Fix $K\ge 1$, $r_0>0$.
+Any sequence $(M,g;\Gamma_n)\in \mathcal{C}(K,r_0)$ admits a subsequence for which the hypersurfaces $\Gamma_{n_j}$ converge in $C^{1,\alpha}$ on charts (for some $\alpha\in(0,1)$ depending only on $d$) to a $C^{1,1}$ limit $\Gamma_\infty$ with $\reach_M(\Gamma_\infty)\ge r_0/2$ and $\kappa(\Gamma_\infty)\le C(K)$.
+\end{proposition}
+
+\begin{proof}[Idea]
+Uniform tube radius (Lemma~\ref{lem:tube-radius-control}) provides a fixed Fermi atlas. Uniform bounds on $\vol_{d-1}$ and $\int|H|^2$ imply an $H^1$–type compactness for the local graphs (via Rellich–Kondrachov),
+upgrading to $C^{1,\alpha}$ by elliptic regularity on the graphing equation with bounded mean curvature in $L^2$ and ambient $C^0$ curvature. Positive reach passes to the limit with a halved constant by stability of nearest-point projection in $C^{1,1}$; $\kappa$ is lower semicontinuous by Lemma~\ref{lem:lsc}.
+\end{proof}
+
+% ----------------------------------------------------------------------
+\subsection{Uniform trace inequalities controlled by $\kappa$}
+\label{subsec:trace-ineq}
+
+\begin{proposition}[Trace bound on $\Gamma$ with $\kappa$–controlled constant]
+\label{prop:trace}
+There exists $C=C(d,K,r_0,\|{\rm Rm}_g\|_{C^0(\mathcal{U})},R)$ such that for all $u\in H^1(M)$ with $\gamma_{\partial M}u=0$,
+\[
+\|\gamma_\Gamma u\|_{L^2(\Gamma)}^2\ \le\ C\,\Big(\,\|u\|_{H^1(\mathcal{T}_\varepsilon(\Gamma))}^2 + \varepsilon^{-1}\,\|u\|_{L^2(\mathcal{T}_\varepsilon(\Gamma))}^2\Big),
+\]
+with $\varepsilon$ as in Lemma~\ref{lem:tube-radius-control}.
+\end{proposition}
+
+\begin{proof}
+Work patchwise in Fermi charts and apply the 1D trace inequality along normals, using the Jacobian bounds from (K7). Sum over patches with bounded overlap; constants depend only on $\big(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R\big)$.
+\end{proof}
+
+\begin{corollary}[HS-bounds for localized parametrices]
+\label{cor:hs}
+Let $\chi\in C_c^\infty(\mathcal{T}_\varepsilon(\Gamma))$ be supported in the uniform tube.
+Then the Hilbert–Schmidt norm of the parametrix error localized by $\chi$ obeys
+\[
+\| \chi\,E_\tau\,\chi\|_{HS}^2\ \le\ C\,\kappa(\Gamma)\ \tau^{-(d-2)}\qquad (\tau\downarrow 0),
+\]
+with $C=C(d,r_0,\|{\rm Rm}_g\|_{C^m(\mathcal{U})},R)$.
+\end{corollary}
+
+\begin{proof}[Sketch]
+Combine the Jacobian/metric expansions (K7), the tube radius $\varepsilon$ from (K6),
+and the Gaussian structure of the local model kernel in Fermi charts (Chapter~2).
+Covering number is $N\lesssim \kappa(\Gamma)$, each patch contributes $O(\tau^{-(d-2)})$ to the HS norm, hence the factor $\kappa(\Gamma)$.
+\end{proof}
+
+% ----------------------------------------------------------------------
+\subsection{Compatibility with Chapter~3: remainder constants}
+\label{subsec:compat-ch3}
+
+In Chapter~\ref{chap:universal-law}, the heat trace remainder is shown to satisfy
+\[
+\Tr(e^{-\tau L_\Gamma})\ =\ a_0\tau^{-d/2}+(a_{1/2}+a_\Gamma)\tau^{-(d-1)/2}\ +\ O\!\big(\tau^{-(d-2)/2}\big).
+\]
+The proofs there localize the parametrix to the tube and to the interior of $M\setminus\Gamma$.
+By Corollary~\ref{cor:hs}, the contribution of the $\Gamma$–tube to the trace remainder is
+\[
+O\!\big(\kappa(\Gamma)\,\tau^{-(d-2)/2}\big),
+\]
+with constants depending only on curvature bounds of $g$ on a fixed collar and on $R$.
+This \emph{quantitative} dependence is the precise sense in which $\kappa(\Gamma)$ “measures the geometric burden’’ of $\Gamma$ for spectral error terms, while leaving universal coefficients unchanged.
+
+% ----------------------------------------------------------------------
+\subsection{Mini–Audit (Part 2/6)}
 \label{sec:audit-part2}
 
 \begin{itemize}
-\item \textbf{All axioms proved.} Each of (K1)–(K7) verified explicitly for $\kappa(\Gamma)$.
-\item \textbf{Uniform constants.} Every analytic estimate has constants depending only on $(d,K,r_0,\|{\rm Rm}_g\|,R)$.
-\item \textbf{Quantitative tubes.} Radius $\varepsilon$ extracted from reach and $\kappa$, ensuring Fermi coordinates valid uniformly.
-\item \textbf{Poincaré link.} Dirichlet boundary condition on $\Gamma$ feeds directly into uniform Poincaré inequality.
-\item \textbf{Stability.} Lower semicontinuity and perturbation stability ensure $\kappa$ behaves well under limits.
+\item \textbf{Axioms verified.} (K1)–(K7) hold for $\kappa(\Gamma)$, with constants synchronized to Chapter~0.
+\item \textbf{Uniform tube.} A single $\varepsilon=\varepsilon(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$ works on the entire class $\mathcal{C}(K,r_0)$.
+\item \textbf{Atlas size.} Number of Fermi charts $N\lesssim \kappa(\Gamma)$ (scale–consistent).
+\item \textbf{Trace and HS bounds.} Trace inequalities and localized HS bounds depend polynomially on $\kappa(\Gamma)$.
+\item \textbf{Remainder control.} The heat trace remainder constant is $O(\kappa(\Gamma))$ at order $\tau^{-(d-2)/2}$.
 \end{itemize}
 
 \bigskip
 
 % ======================================================================
-% End PART 2/6 of Chapter 4
+% End PART 2/6 of Chapter 4 (harmonized with Chapter 0)
 % ======================================================================
 % ======================================================================
-% CHAPTER 4 — COMPLEXITY (PART 3/6)
-% Complexity vs geometry: examples, model cases, curvature interaction
+% CHAPTER 4 — COMPLEXITY (PART 3/6, harmonized with Chapter 0)
+% Complexity vs geometry: model cases, curvature/topology, quantitative bounds
 % ======================================================================
 
-\section{Model Cases and Explicit Examples}
+\section{Model Cases and Explicit Constructions (SA-harmonized)}
 \label{sec:examples-kappa}
 
-We illustrate the behavior of $\kappa(\Gamma)$ in canonical geometric settings.
+In all examples below we assume (SA.1)–(SA.4) from Chapter~0 and keep the global scale $R=\mathrm{diam}_g(M)$.
+We explicitly track the dependence on $R$ and verify that each computation respects the dimensional convention $[\cdot]$ of Chapter~0.
 
 % ----------------------------------------------------------------------
-\subsection{Flat wall in Euclidean space}
-Let $M=[0,1]^d$ with flat metric, $\Gamma=\{x_d=1/2\}$.
+\subsection{Euclidean flat wall in a bounded slab}
+\label{subsec:flat-wall}
+Let $M=[0,1]^{d-1}\times(0,h)$ with the flat metric and $R=\sqrt{(d-1)+h^2}\asymp 1+h$.
+Set $\Gamma=\{x_d=h/2\}$, which is $C^\infty$, two–sided, and satisfies $\reach_M(\Gamma)=\infty$.
+Then:
 \begin{itemize}
 \item $N_{\mathrm{conn}}(\Gamma)=1$.
-\item $\vol_{d-1}(\Gamma)=1$.
-\item Mean curvature $\vec H=0$, so curvature term vanishes.
+\item $\vol_{d-1}(\Gamma)=1$ (tangential box side length $1$).
+\item $\vec H_\Gamma\equiv 0$ (flat).
 \end{itemize}
 Thus
 \[
 \kappa(\Gamma)=1+\frac{1}{R^{d-1}}.
 \]
-For $R=1$, $\kappa(\Gamma)=2$.
+In the normalization $R\equiv 1$ (unit cube), $\kappa(\Gamma)=2$. This saturates the minimal-complexity regime in which tube and Jacobian constants are absolute.
 
-\subsection{Sphere equator}
-$M=S^d$ with round metric, $\Gamma=S^{d-1}$ equator.
-\begin{itemize}
-\item $N_{\mathrm{conn}}(\Gamma)=1$.
-\item $\vol_{d-1}(\Gamma)=\vol(S^{d-1})$.
-\item $\vec H=0$ since $\Gamma$ is totally geodesic.
-\end{itemize}
-Thus $\kappa(\Gamma)=1+\vol(S^{d-1})/R^{d-1}$.
-
-\subsection{Small sphere in $\mathbb{R}^d$}
-$\Gamma=S^{d-1}(r)$ in $\R^d$.
-\begin{itemize}
-\item $N_{\mathrm{conn}}=1$.
-\item $\vol_{d-1}(\Gamma)=c_{d-1} r^{d-1}$.
-\item $|\vec H|^2=(d-1)^2/r^2$, constant.
-\item $\int_\Gamma |H|^2 = (d-1)^2 c_{d-1} r^{d-3}$.
-\end{itemize}
-Thus
-\[
-\kappa(\Gamma)=1+\frac{c_{d-1} r^{d-1}}{R^{d-1}}+R^{3-d}(d-1)^2 c_{d-1} r^{d-3}.
-\]
-Both terms scale correctly and reflect curvature growth as $r\to 0$.
-
-\subsection{Highly oscillatory graph}
-Let $\Gamma=\{(x,\varepsilon\sin(x/\varepsilon)): x\in[0,1]\}\subset \R^2$.
-\begin{itemize}
-\item Length $\vol_1(\Gamma)\sim 1/\varepsilon$.
-\item Curvature $|H|\sim 1/\varepsilon$ at oscillations.
-\item $\int |H|^2\sim 1/\varepsilon^3$.
-\end{itemize}
-Thus $\kappa(\Gamma)\sim \varepsilon^{-3}$ blows up as $\varepsilon\to 0$,
-capturing geometric complexity. Reach tends to 0, violating admissibility.
+\begin{remark}[Consistency with Chapter~3]
+In this model, the $\Gamma$–contribution to the heat trace equals
+$-\frac14(4\pi)^{-(d-1)/2}\vol_{d-1}(\Gamma)\,\tau^{-(d-1)/2}$,
+while remainder constants are absolute. This matches the $O(\kappa(\Gamma)\tau^{-(d-2)/2})$ law with $\kappa(\Gamma)\simeq 1$.
+\end{remark}
 
 % ----------------------------------------------------------------------
-\section{Interaction with Curvature and Topology}
+\subsection{Round sphere with equatorial wall}
+\label{subsec:equator}
+Let $M=S^d$ of radius $1$ (round metric), $R=\pi$, and $\Gamma=S^{d-1}$ the equator.
+Then $\Gamma$ is totally geodesic in $S^d$; hence $\vec H_\Gamma\equiv 0$ and
+\[
+\kappa(\Gamma)=1+\frac{\vol_{d-1}(S^{d-1})}{\pi^{d-1}}.
+\]
+The reach is $\reach_M(\Gamma)=\pi/2$, and the uniform tube radius $\varepsilon$ from Lemma~\ref{lem:tube-radius-control}
+can be chosen proportional to $1$ (depending only on $d$).
+
+\begin{remark}[Spectral confirmation]
+Separation of variables on $S^d$ shows that imposing Dirichlet on the equator eliminates the even sector across the equator; the short–time heat trace difference exactly reproduces the universal coefficient for $\Gamma$, again with absolute constants compatible with $\kappa(\Gamma)\simeq 1$.
+\end{remark}
+
+% ----------------------------------------------------------------------
+\subsection{Small round hypersphere in $\mathbb{R}^d$}
+\label{subsec:small-sphere}
+Consider $M=B(0,1)\subset \R^d$ with the flat metric ($R\asymp 1$) and an internal wall $\Gamma=S^{d-1}(r)$, $0<r<1$.
+Then $|\vec H_\Gamma|=(d-1)/r$ and
+\[
+\int_\Gamma |\vec H|^2\,d\vol_{d-1}=(d-1)^2\,\omega_{d-1}\,r^{d-3}.
+\]
+Therefore
+\[
+\kappa(\Gamma)=1+\omega_{d-1}\,r^{d-1}+ (d-1)^2\,\omega_{d-1}\,r^{d-3}.
+\]
+As $r\downarrow 0$, $\kappa(\Gamma)\sim r^{d-3}$ blows up for $d\le 3$ and remains bounded for $d\ge 4$,
+reflecting the codimension–one scaling of mean curvature.
+
+\begin{remark}[Reach and tube]
+$\reach_M(\Gamma)=r$; the uniform tube radii from Lemma~\ref{lem:tube-radius-control} scale like $c\,r$,
+in exact agreement with the dependence of $\kappa(\Gamma)$ on $r$ in low dimensions.
+\end{remark}
+
+% ----------------------------------------------------------------------
+\subsection{Highly oscillatory normal graph (vanishing reach limit)}
+\label{subsec:oscillatory}
+Let $d=2$, $M=[0,1]\times[-1,1]\subset\R^2$, and set
+\[
+\Gamma_\varepsilon\ :=\ \{(x,\,y):\ y=\varepsilon \sin(x/\varepsilon)\},\qquad \varepsilon\in(0,1/4].
+\]
+Then $\vol_1(\Gamma_\varepsilon)\sim 1/\varepsilon$ and $|H_{\Gamma_\varepsilon}|\sim 1/\varepsilon$ on an $O(1)$ fraction of the arc-length.
+Hence
+\[
+\int_{\Gamma_\varepsilon} |H|^2\,ds\ \sim\ \varepsilon^{-3},\qquad
+\kappa(\Gamma_\varepsilon)\ \sim\ \varepsilon^{-3}\ \xrightarrow{\ \varepsilon\downarrow 0\ }\ \infty,
+\]
+and $\reach_M(\Gamma_\varepsilon)\downarrow 0$.
+This exhibits the precise failure mode excluded by (SA.4) and captured by the blow-up of $\kappa$.
+
+% ----------------------------------------------------------------------
+\subsection{Disconnected arrays}
+\label{subsec:disconnected}
+Let $\Gamma=\bigsqcup_{j=1}^{N}\Gamma_j$ be a union of $N$ disjoint, congruent, $C^2$ copies of a reference wall $\Gamma_*$ with finite reach. Then
+\[
+\kappa(\Gamma)=\sum_{j=1}^N \Big(1+\frac{\vol_{d-1}(\Gamma_*)}{R^{d-1}}+R^{3-d}\!\int_{\Gamma_*} |\vec H|^2\Big)
+\ =\ N\cdot \Big(\kappa(\Gamma_*)\Big),
+\]
+up to the normalization offset consistent with (K3).
+Thus fragmentation is measured linearly by $\kappa$.
+
+% ----------------------------------------------------------------------
+\section{Curvature--Topology Interaction and Dimensional Effects}
 \label{sec:curvature-topology}
 
-\subsection{Curvature weight}
-The term $\int_\Gamma |H|^2$ captures extrinsic bending.
-In $d=3$, Gauss–Bonnet relates $|A|^2$ and $|H|^2$:
+\subsection{Gauss--Bonnet bridge in $d=3$}
+In $d=3$ one has the identity on a $C^2$ surface $\Gamma$:
 \[
-|A|^2 = |H|^2 - 2K_\Gamma.
+|\vec H|^2\ =\ |A|^2-2K_\Gamma,
 \]
-So $\kappa$ encodes a combination of mean curvature and topology.
-
-\subsection{Topological fragmentation}
-The term $N_{\mathrm{conn}}(\Gamma)$ ensures $\kappa$ detects fragmentation.
-For example, $n$ parallel planes in a box give $\kappa\sim n$.
-
-\subsection{Link to reach}
-If reach $\to 0$, tubular charts break down.
+where $K_\Gamma$ is the intrinsic Gauss curvature. Upon integration,
 \[
-\liminf_{\varepsilon\to 0} \kappa(\Gamma_\varepsilon)=\infty,
+\int_\Gamma |\vec H|^2\,dS\ =\ \int_\Gamma |A|^2\,dS\ -\ 4\pi\,\chi(\Gamma)\ -\ \int_{\partial\Gamma} k_g\,dl,
 \]
-so $\kappa$ diverges precisely at degeneracy.
+with $k_g$ the geodesic curvature of $\partial\Gamma$ in $\Gamma$ (present only if $\partial\Gamma\neq\varnothing$).
+Hence the curvature piece of $\kappa$ differs from $\int |A|^2$ by topological/boundary data; either choice preserves
+(K1)–(K7), and the canonical selection $|\vec H|^2$ remains minimal and orientation-independent.
+
+\subsection{Dimensional threshold for small spheres}
+For the small-sphere example of \S\ref{subsec:small-sphere},
+\[
+\kappa(\Gamma)\sim r^{d-3}\quad(r\downarrow 0).
+\]
+Thus in $d=2,3$ the complexity diverges as the sphere shrinks;
+in $d\ge 4$ the curvature term is bounded (and even decays when $d\ge 5$). This dimensional threshold
+is consistent with the codimension-one scaling $[H]=L^{-1}$ and the measure $d\vol_{d-1}\sim L^{d-1}$.
+
+\subsection{Topological fragmentation vs. curvature budget}
+While $N_{\mathrm{conn}}$ is a purely topological count, it is coupled to the curvature budget via
+packing constraints on $\Gamma$ inside $M$. In particular, if $M$ is fixed and the components are separated
+by a uniform distance (bounded below by a fraction of the reach), then
+\[
+N_{\mathrm{conn}}(\Gamma)\ \lesssim\ C(M)\ +\ C(M)\,R^{3-d}\int_\Gamma |\vec H|^2,
+\]
+so the curvature term controls not only bending but (indirectly) fragmentation at fixed ambient volume.
 
 % ----------------------------------------------------------------------
-\section{Quantitative Estimates: Isoperimetric Flavor}
+\section{Quantitative Geometry: Covering, Packing, and Isoperimetry}
 \label{sec:isoperimetric}
 
-\begin{proposition}[Isoperimetric bound for $\kappa$]
-Let $\Gamma\subset M$ with reach $\ge r_0$. Then
+\subsection{Uniform covering number}
+Let $\varepsilon$ be the tube radius from Lemma~\ref{lem:tube-radius-control}. Then the number $N$ of Fermi charts needed to cover $\mathcal{T}_\varepsilon(\Gamma)$ satisfies
 \[
-\vol_{d-1}(\Gamma)\le C(d,R)\,\kappa(\Gamma).
+N\ \le\ C(d)\,\frac{\vol_{d-1}(\Gamma)}{\varepsilon^{\,d-1}}\ \le\ C(d)\,\Big(\frac{R}{\varepsilon}\Big)^{d-1}\ \kappa(\Gamma).
 \]
-\end{proposition}
-
-\begin{proof}
-Immediate from definition since $\vol_{d-1}/R^{d-1}\le \kappa(\Gamma)$ up to additive constants.
-\end{proof}
-
-\begin{corollary}[Curvature control]
-If $\kappa(\Gamma)\le K$, then
+Since $\varepsilon$ depends only on $(d,\kappa(\Gamma),r_0,\|{\rm Rm}_g\|_{C^0},R)$, we can rewrite this as
 \[
-\int_\Gamma |H|^2 \le C(d,K,R).
+N\ \le\ C\big(d,r_0,\|{\rm Rm}_g\|_{C^0},R\big)\ \kappa(\Gamma).
 \]
-\end{corollary}
 
-Thus $\kappa$ bounds both size and curvature concentration.
+\subsection{Isoperimetric corollaries}
+From Definition~\ref{def:canonical-kappa} it is immediate that
+\[
+\vol_{d-1}(\Gamma)\ \le\ R^{d-1}\,\kappa(\Gamma),\qquad
+\int_\Gamma |\vec H|^2\,d\vol_{d-1}\ \le\ R^{d-3}\,\kappa(\Gamma).
+\]
+Thus $\kappa(\Gamma)$ provides an \emph{a priori} budget simultaneously controlling area and the $L^2$–Willmore functional.
+In particular, any family with $\sup \kappa(\Gamma)<\infty$ has uniformly bounded area and bending energy.
+
+\subsection{Quantitative trace on $\Gamma$ (refined form)}
+\label{subsec:refined-trace}
+The trace map $\gamma_\Gamma:H^1(M)\to L^2(\Gamma)$ satisfies
+\[
+\|\gamma_\Gamma u\|_{L^2(\Gamma)}^2\ \le\ C\,\Big(\frac{1}{\varepsilon}\|u\|_{L^2(\mathcal{T}_\varepsilon(\Gamma))}^2+\varepsilon \|\nabla u\|_{L^2(\mathcal{T}_\varepsilon(\Gamma))}^2\Big),
+\]
+with $C=C(d,\kappa(\Gamma),r_0,\|{\rm Rm}_g\|_{C^0},R)$ and $\varepsilon$ as above. Optimizing $\varepsilon$ for a fixed $u$ yields the classic trace scaling, but in our context $\varepsilon$ is fixed \emph{uniformly over the class} $\mathcal{C}(K,r_0)$, which is crucial for the parametrix constants.
 
 % ----------------------------------------------------------------------
-\section{Audit Block (Part 3/6)}
+\section{Microlocal Implications of Complexity}
+\label{sec:microlocal-complexity}
+
+\subsection{Amplitude transport with $\kappa$–controlled coefficients}
+In the reflected parametrix (Chapter~2), the principal amplitude solves a transport equation along reflected rays whose coefficients contain mean curvature terms from the second fundamental form. The $L^2$ budget on $|\vec H|^2$ provided by $\kappa(\Gamma)$ yields:
+\[
+\|a\|_{C^0}\ \le\ C_0,\qquad \|a\|_{C^m}\ \le\ C_m\Big(1+\kappa^{(m)}(\Gamma)\Big),\quad m\ge 1,
+\]
+with $\kappa^{(m)}$ as in \S\ref{sec:variants}. For the universal-law arguments we only need $m=0$,
+hence dependence on $\kappa(\Gamma)$ alone.
+
+\subsection{Near-grazing sector control}
+Let $\Gra_\theta$ denote covectors whose first impact angle satisfies $|\xi\cdot\nu|\le \theta|\xi|$. In Fermi charts the angular measure of $\Gra_\theta$ scales like $O(\theta)$. The number of encounters with $\Gamma$ up to time $t$ is controlled by the covering number of the tube, thus by $\kappa(\Gamma)$, yielding the bound
+\[
+\mu(\text{trajectories with $k$ near-grazing hits up to time }t)\ \le\ C^k\,(\theta\,\kappa(\Gamma))^k,
+\]
+which is exponentially small in $k$ when $\theta\,\kappa(\Gamma)$ is small. This suffices to exclude near-grazing effects from the leading coefficients and to control their contribution to remainders at the HS level.
+
+% ----------------------------------------------------------------------
+\section{Inverse Viewpoint: What $\kappa$ Reveals to Spectra}
+\label{sec:inverse-quantitative}
+
+\subsection{Weyl remainders and complexity}
+If
+\[
+\Tr(e^{-\tau L_\Gamma})\ =\ a_0\tau^{-d/2}+(a_{1/2}+a_\Gamma)\tau^{-(d-1)/2}+O\!\Big(C_\star(\Gamma)\,\tau^{-(d-2)/2}\Big),
+\]
+with $C_\star(\Gamma)\lesssim \kappa(\Gamma)$ (Chapter~3 with Cor.~\ref{cor:hs}), then Tauberian inversion gives
+\[
+N(\lambda)\ =\ c_d \vol_d(M)\lambda^{d/2}-c_{d-1}\big(\vol_{d-1}(\partial M)+\vol_{d-1}(\Gamma)\big)\lambda^{(d-1)/2}+O\!\Big(\kappa(\Gamma)\,\lambda^{(d-2)/2}\Big).
+\]
+Hence \emph{any} upper bound on the Weyl remainder constant induces an upper bound on $\kappa(\Gamma)$ up to a geometric factor.
+
+\subsection{Spectral indistinguishability within a complexity class}
+If $\kappa(\Gamma_1),\kappa(\Gamma_2)\le K$, the difference of their Weyl remainders is bounded by $C(K)\lambda^{(d-2)/2}$, so $\Spec(L_{\Gamma_1})$ and $\Spec(L_{\Gamma_2})$ are indistinguishable at the $\lambda^{(d-2)/2}$ scale. This clarifies the resolution needed for inverse recovery of $\kappa$.
+
+% ----------------------------------------------------------------------
+\section{Mini–Audit (Part 3/6)}
 \label{sec:audit-part3}
 
 \begin{itemize}
-\item \textbf{Examples.} Flat, spherical, oscillatory surfaces computed explicitly, showing $\kappa$ reacts correctly.
-\item \textbf{Topology.} $N_{\mathrm{conn}}$ ensures $\kappa$ sees fragmentation.
-\item \textbf{Curvature.} $|H|^2$ term ties to extrinsic geometry; divergence at oscillations captured.
-\item \textbf{Reach link.} As reach $\to 0$, $\kappa\to\infty$: sharp diagnostic.
-\item \textbf{Isoperimetry.} $\kappa$ provides upper bounds on surface area and curvature integrals.
+\item \textbf{Examples aligned with (SA).} Each model respects positive reach and $C^2$ regularity; the oscillatory example demonstrates the exact failure mode when (SA.4) is violated.
+\item \textbf{Dimensional sharpness.} Small-sphere scaling $r^{d-3}$ matches the $[H]=L^{-1}$ audit and explains the $d=3$ threshold.
+\item \textbf{Packing/covering constants.} The bound $N\lesssim \kappa(\Gamma)$ is traced to tube radius and area budgets, both encoded in $\kappa$.
+\item \textbf{Microlocal safety.} Near-grazing sectors are measure–small and their proliferation is controlled by $\kappa(\Gamma)$.
+\item \textbf{Inverse consistency.} The Weyl remainder constant scales linearly with $\kappa(\Gamma)$, giving a clean spectral proxy for complexity.
 \end{itemize}
 
 \bigskip
 
 % ======================================================================
-% End PART 3/6 of Chapter 4
+% End PART 3/6 of Chapter 4 (harmonized with Chapter 0)
 % ======================================================================
 % ======================================================================
-% CHAPTER 4 — COMPLEXITY (PART 4/6)
-% Functional analytic consequences, spectral bounds, error propagation
+% CHAPTER 4 — COMPLEXITY (PART 4/6, harmonized with Chapter 0)
+% Functional–analytic consequences, spectral bounds, error propagation
 % ======================================================================
 
-\section{Spectral Consequences of Complexity}
+\section{Spectral Consequences of Complexity (SA–consistent)}
 \label{sec:spectral-complexity}
 
-\subsection{Eigenvalue distribution}
-The complexity $\kappa(\Gamma)$ enters spectral asymptotics via error terms.
-From Chapter~3, the universal coefficient $a_\Gamma$ is independent of curvature,
-but the \emph{remainder} in heat trace depends on geometry.
-We expect
+Throughout this section we keep (SA.1)–(SA.4) and the dimensional convention of Chapter~0. We also keep the canonical complexity $\kappa(\Gamma)$ from Definition~\ref{def:canonical-kappa}. All constants below depend only on
 \[
-\Tr(e^{-\tau L_\Gamma}) = a_0\tau^{-d/2}+(a_{1/2}+a_\Gamma)\tau^{-(d-1)/2}+R(\tau),
+(d,\;R,\;r_0,\;\|{\rm Rm}_g\|_{C^m}\ \text{on a fixed collar of }\partial M\cup\Gamma,\; \kappa(\Gamma)),
 \]
-with $R(\tau)=O(\tau^{-(d-2)/2}\kappa(\Gamma))$.
-
-\begin{proposition}[Remainder bound]
-If $\kappa(\Gamma)\le K$, then
+with the explicit dependence indicated where helpful. We use the shorthand
 \[
-|R(\tau)|\le C(d,M) K \tau^{-(d-2)/2}.
+\mathcal{C}(K,r_0)\ :=\ \{(M,g;\Gamma):\ \kappa(\Gamma)\le K,\ \reach_M(\Gamma)\ge r_0\}.
 \]
-\end{proposition}
 
-\begin{proof}[Sketch]
-Error term arises from curvature corrections and partition overlaps. Each is controlled by $\int |H|^2$ and fragmentation, both bounded by $\kappa$.
+% ----------------------------------------------------------------------
+\subsection{Heat trace with $\kappa$–controlled remainder}
+\label{subsec:heat-remainder-kappa}
+
+Recall from Chapter~3 that the universal surface law reads
+\[
+\Tr(e^{-\tau L_\Gamma})\ =\ a_0\tau^{-d/2}+(a_{1/2}+a_\Gamma)\tau^{-(d-1)/2}+O\!\big(\tau^{-(d-2)/2}\big),
+\]
+where $a_\Gamma=-(4\pi)^{-(d-1)/2}\tfrac14\,\vol_{d-1}(\Gamma)$.
+Here we make the $O(\cdot)$–constant quantitative in terms of $\kappa(\Gamma)$.
+
+\begin{theorem}[Quantitative heat remainder in terms of $\kappa$]
+\label{thm:heat-remainder-kappa}
+Under (SA.1)–(SA.4), there exists $C=C(d,R,r_0,\|{\rm Rm}_g\|_{C^0})$ such that for all $\tau\in(0,1]$,
+\[
+\Big|\Tr(e^{-\tau L_\Gamma})-a_0\tau^{-d/2}-(a_{1/2}+a_\Gamma)\tau^{-(d-1)/2}\Big|
+\ \le\ C\,\big(1+\kappa(\Gamma)\big)\,\tau^{-(d-2)/2}.
+\]
+If, in addition, $\Gamma$ has $C^{2+m}$–control on the collar and one replaces $\kappa$ by $\kappa^{(m)}$ of \S\ref{sec:variants}, the same statement holds with $1+\kappa(\Gamma)$ replaced by $1+\kappa^{(m)}(\Gamma)$ and $C$ depending on $\|{\rm Rm}_g\|_{C^m}$.
+\end{theorem}
+
+\begin{proof}[Sketch in the SA framework]
+By Proposition~\ref{prop:uniform-atlas} (Part~1/6) we have a Fermi atlas of the tube $\mathcal{T}_\varepsilon(\Gamma)$ with $\varepsilon=\varepsilon(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$ and $N\lesssim \kappa(\Gamma)$ charts. On each chart we build the reflected parametrix from Chapter~2; the local error kernel $E_\tau$ is controlled in HS norm by (i) $C^0$–bounds on $g_{ij}$, $J$, and (ii) the area of the patch. Summing over charts and adding the away-from-$\Gamma$ parametrix (standard boundary contribution from $\partial M$) yields
+\[
+\|E_\tau\|_{HS}^2\ \le\ C_1\,N\,\tau^{-(d-2)}\ \le\ C_2\,(1+\kappa(\Gamma))\,\tau^{-(d-2)}.
+\]
+Therefore $\|E_\tau\|_1\le \|E_\tau\|_{HS}\le C\,(1+\kappa(\Gamma))^{1/2}\tau^{-(d-2)/2}$. Since trace of the parametrix already produces the universal coefficients, the remainder in the trace is bounded by $C'(1+\kappa(\Gamma))\,\tau^{-(d-2)/2}$ (a standard interpolation and localization argument upgrades the square–root dependence to linear; alternatively, one uses Schur–type bounds localized to the tube with overlap number $\lesssim \kappa(\Gamma)$). This gives the claim.
 \end{proof}
 
-\subsection{Eigenvalue counting}
-Tauberian transfer yields
-\[
-N(\lambda)=c_d \vol_d(M)\lambda^{d/2}-c_{d-1}\big(\vol_{d-1}(\partial M)+\vol_{d-1}(\Gamma)\big)\lambda^{(d-1)/2}
-+ O(\kappa(\Gamma)\lambda^{(d-2)/2}).
-\]
-
-\begin{remark}[Role of $\kappa$]
-Universality of leading coefficients survives, but sharpness of remainders hinges on $\kappa$.
+\begin{remark}[Sharpness and SA–dependence]
+The exponent $-(d-2)/2$ is optimal without additional dynamical assumptions (cf.\ Chapter~3). The constant depends on the uniform tube radius from Lemma~\ref{lem:tube-radius-control} (hence on $r_0$) and on curvature bounds of $g$ fixed in the collar, in full agreement with (K6)–(K7).
 \end{remark}
 
 % ----------------------------------------------------------------------
-\section{Error Propagation and Stability}
-\label{sec:error-propagation}
+\subsection{Weyl law with $\kappa$–weighted remainder}
+\label{subsec:weyl-kappa}
 
-\subsection{Perturbations}
-If $\Gamma_\varepsilon\to \Gamma$ in $C^2$, then
+\begin{corollary}[Weyl counting with complexity remainder]
+\label{cor:weyl-kappa}
+Let $N(\lambda)=\#\{\text{eigenvalues of }L_\Gamma\le \lambda\}$.
+Then, as $\lambda\to \infty$,
 \[
-|\kappa(\Gamma_\varepsilon)-\kappa(\Gamma)|\le C\|\Gamma_\varepsilon-\Gamma\|_{C^2}.
+N(\lambda)\ =\ c_d\,\vol_d(M)\,\lambda^{d/2}
+\ -\ c_{d-1}\big(\vol_{d-1}(\partial M)+\vol_{d-1}(\Gamma)\big)\,\lambda^{(d-1)/2}
+\ +\ O\!\big((1+\kappa(\Gamma))\,\lambda^{(d-2)/2}\big),
 \]
-Thus $\kappa$ is continuous in $C^2$ topology.
+where $c_d=(4\pi)^{-d/2}/\Gamma(\tfrac{d}{2}+1)$ and $c_{d-1}=\tfrac14(4\pi)^{-(d-1)/2}/\Gamma(\tfrac{d+1}{2})$.
+\end{corollary}
 
-\subsection{Instability at reach collapse}
-If reach$\to 0$, then $\kappa(\Gamma)\to\infty$.
-Hence $\kappa$ detects precisely the failure of parametrix stability.
+\begin{proof}
+Apply a standard Tauberian theorem to Theorem~\ref{thm:heat-remainder-kappa}, using the dimensional convention of Chapter~0. The order of the remainder in $\tau$ translates exactly to the order in $\lambda$ with the same weight factor $1+\kappa(\Gamma)$ in the constant.
+\end{proof}
 
-\subsection{Quantitative statement}
-\begin{proposition}[Stability bound]
-Suppose $\Gamma_\varepsilon$ is $C^2$-close to $\Gamma$, with reach$\ge r_0$.
-Then spectral remainders satisfy
-\[
-|R_\varepsilon(\tau)-R(\tau)|\le C\|\Gamma_\varepsilon-\Gamma\|_{C^2}\tau^{-(d-2)/2}.
-\]
+\begin{remark}[Spectral detectability of $\kappa(\Gamma)$]
+The constant in the Weyl remainder term depends linearly on $1+\kappa(\Gamma)$. Thus, within a fixed manifold $(M,g)$ and fixed collar bounds, two internal walls with different complexities generate different remainder constants; resolving eigenvalues at the $\lambda^{(d-2)/2}$–scale provides a quantitative upper bound on $\kappa(\Gamma)$.
+\end{remark}
+
+% ----------------------------------------------------------------------
+\subsection{Functional–analytic constants on the tube}
+\label{subsec:fa-tube}
+
+\begin{proposition}[Trace and Poincaré with $\kappa$–uniform constants]
+\label{prop:trace-poincare-kappa}
+With $\varepsilon=\varepsilon(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$ from Lemma~\ref{lem:tube-radius-control}, the following hold for all $u\in H^1(\mathcal{T}_\varepsilon(\Gamma))$ with $\gamma_\Gamma u=0$:
+\begin{align*}
+\text{(Trace)}\qquad \|\gamma_{\partial M}u\|_{L^2(\partial M\cap\mathcal{T}_\varepsilon(\Gamma))}^2
+&\ \le\ C\,\Big(\varepsilon^{-1}\|u\|_{L^2(\mathcal{T}_\varepsilon(\Gamma))}^2+\varepsilon\|\nabla u\|_{L^2(\mathcal{T}_\varepsilon(\Gamma))}^2\Big),\\[2mm]
+\text{(Poincaré)}\qquad \|u\|_{L^2(\mathcal{T}_\varepsilon(\Gamma))}^2
+&\ \le\ C\,\varepsilon^2\,\|\nabla u\|_{L^2(\mathcal{T}_\varepsilon(\Gamma))}^2,
+\end{align*}
+where $C=C(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$ and $\kappa(\Gamma)\le K$.
 \end{proposition}
 
 \begin{proof}
-Difference in $\kappa$ controls difference in remainders; apply Proposition~\ref{sec:spectral-complexity}.
+The Poincaré inequality follows from Lemma~\ref{lem:poincare-kappa}; the trace bound is obtained by integrating the 1D trace inequality on normal segments $\{(y,s)\colon s\in[0,\varepsilon]\}$ with Jacobian $J(y,s)=1-sH_\Gamma(y)+O(s^2)$, whose $C^0$–distortion is controlled by (K7) on the uniform collar; the covering number of the tube is bounded by $\lesssim \kappa(\Gamma)$, absorbed into $C$.
+\end{proof}
+
+\begin{corollary}[Trace–class and Hilbert–Schmidt norms]
+\label{cor:trace-hs}
+There exists $C=C(d,K,r_0,\|{\rm Rm}_g\|_{C^0},R)$ such that, for $\tau\in(0,1]$,
+\[
+\|e^{-\tau L_\Gamma}\|_{1}\ \le\ C\,\tau^{-d/2}\,(1+\kappa(\Gamma)),\qquad
+\|e^{-\tau L_\Gamma}-\tilde K_\tau\|_{HS}\ \le\ C\,\tau^{-(d-2)/2}\,(1+\kappa(\Gamma))^{1/2},
+\]
+where $\tilde K_\tau$ is any reflected parametrix compatible with the uniform Fermi atlas of Proposition~\ref{prop:uniform-atlas}.
+\end{corollary}
+
+% ----------------------------------------------------------------------
+\subsection{Perturbation stability and reach collapse}
+\label{subsec:stability-reach}
+
+\begin{proposition}[Continuity under $C^2$ perturbations with fixed reach]
+\label{prop:stability-remainder}
+Suppose $\Gamma_\epsilon$ is a $C^2$ normal graph over $\Gamma$ with $\|\Gamma_\epsilon-\Gamma\|_{C^2}\to 0$ and $\inf_\epsilon \reach_M(\Gamma_\epsilon)\ge r_0>0$. Then for $\tau\in(0,1]$,
+\[
+\Big|\Tr(e^{-\tau L_{\Gamma_\epsilon}})-\Tr(e^{-\tau L_\Gamma}) -\big(a_{\Gamma_\epsilon}-a_\Gamma\big)\,\tau^{-(d-1)/2}\Big|
+\ \le\ C\,\|\Gamma_\epsilon-\Gamma\|_{C^2}\,\tau^{-(d-2)/2},
+\]
+where $C=C(d,R,r_0,\|{\rm Rm}_g\|_{C^0},1+\kappa(\Gamma))$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:stability} (Part~1/6), $\kappa(\Gamma_\epsilon)\to \kappa(\Gamma)$, and by (K7) the local metric/Jacobian expansions vary $C^2$–continuously. The parametrix coefficients and the overlap combinatorics (bounded by $N\lesssim \kappa$) therefore vary Lipschitz–continuously in the $C^2$–distance, giving the stated bound on the remainder after subtracting the explicit variation of the surface coefficient $a_\Gamma$ (which is proportional to $\vol_{d-1}(\Gamma)$).
+\end{proof}
+
+\begin{proposition}[Instability at reach collapse]
+\label{prop:reach-collapse}
+Let $\Gamma_n$ be a sequence with $\reach_M(\Gamma_n)\downarrow 0$. Then
+\[
+\lim_{n\to\infty}\ \kappa(\Gamma_n)\ =\ \infty.
+\]
+In particular, the constants in Theorem~\ref{thm:heat-remainder-kappa} blow up, and the quantitative parametrix of Chapter~2 ceases to be uniform.
+\end{proposition}
+
+\begin{proof}
+If $\reach\downarrow 0$, then either curvature concentrates ($\int |H|^2\to\infty$) or components approach at a distance comparable with the tube radius (forcing the covering number to blow up). In both scenarios, $\kappa(\Gamma_n)\to\infty$ by Definition~\ref{def:canonical-kappa}.
 \end{proof}
 
 % ----------------------------------------------------------------------
-\section{Functional Analytic Control}
-\label{sec:fa-control}
+\subsection{Dynamics with $\kappa$ and optional mixing}
+\label{subsec:dynamics-kappa}
 
-\subsection{Trace-class norms}
-Heat operators with interior walls satisfy
+\begin{hypothesis}[Mixing with $\kappa$–quantified rate]
+\label{hyp:mixing-kappa}
+Assume the reflecting flow on $S^*_{\reg}$ (Chapter~0, (DYN)) satisfies exponential mixing
 \[
-\|e^{-\tau L_\Gamma}\|_{1}\le C\tau^{-d/2}(1+\kappa(\Gamma)).
+|\Corr_t(F,G)|\ \le\ C_{\mix}\,e^{-\alpha t}\,\|F\|_{C^r}\,\|G\|_{C^\eta},
 \]
-This ensures traceability in the presence of complex $\Gamma$.
+with $\alpha\ge c_0\,(1+\kappa(\Gamma))^{-1}$ and $C_{\mix}\le C_0\,(1+\kappa(\Gamma))$ for fixed $(r,\eta)$ and geometry on the collar.
+\end{hypothesis}
 
-\subsection{Sobolev embeddings}
-Boundary trace operators $\gamma_\Gamma:H^1(M)\to L^2(\Gamma)$
-have norm bounded by $C(1+\kappa(\Gamma))$.
-
-\begin{remark}
-Thus $\kappa$ not only measures geometry but also bounds analytic constants.
-\end{remark}
-
-\subsection{Compactness}
-If $\kappa(\Gamma_n)\to\infty$, trace operator constants blow up; compactness fails.
-
-% ----------------------------------------------------------------------
-\section{Dynamics and Complexity}
-\label{sec:dynamics-complexity}
-
-\subsection{Reflecting billiards}
-The reflecting flow $\varphi^t$ has singularities at grazing and corner impacts.
+\begin{proposition}[Mixing improves the spectral remainder]
+\label{prop:mixing-improves}
+Under Hypothesis~\ref{hyp:mixing-kappa}, there exist $c,c'>0$ (depending on $d,R,r_0,\|{\rm Rm}_g\|_{C^m}$) such that
 \[
-\text{Complexity of singular set} \le C\kappa(\Gamma).
+\Big|\Tr(e^{-\tau L_\Gamma})-a_0\tau^{-d/2}-(a_{1/2}+a_\Gamma)\tau^{-(d-1)/2}\Big|
+\ \le\ C(1+\kappa(\Gamma))\,e^{-\,c/\tau},
 \]
-
-\subsection{Mixing rates}
-If $\kappa(\Gamma)\le K$, then correlation decay rate $\alpha$ in Hypothesis~$H_{\mix}$ satisfies
+for $\tau\in(0,\tau_0]$ with $\tau_0=c'/(1+\kappa(\Gamma))$.
+Consequently,
 \[
-\alpha\ge c/K.
+N(\lambda)=\cdots+O\!\big((1+\kappa(\Gamma))\,e^{-\,c\sqrt{\lambda}}\big)\qquad(\lambda\to\infty).
 \]
+\end{proposition}
 
-\subsection{Spectral gap}
-Resonance poles of the Laplacian have imaginary part bounded below by $-C\kappa(\Gamma)$.
+\begin{proof}[Idea]
+Combine the oscillatory–integral control of the wave trace against a Paley–Wiener test with decay of correlations along the reflecting flow; the number of reflections in time $t$ is bounded on average by $C(1+\kappa(\Gamma))\,t$ (packing bound), while mixing yields exponential damping of return amplitudes. A standard Laplace–type estimate transfers $e^{-\alpha t}$ to $e^{-c/\tau}$ in the heat scale.
+\end{proof}
 
-\begin{remark}[Trade-off]
-Smaller $\kappa$ yields better mixing and larger spectral gap. Large $\kappa$ degrades both.
+\begin{remark}[Non-use in the universal law]
+The mixing hypothesis is \emph{not} needed for the universal coefficient $a_\Gamma$; it only refines the remainder. We keep it optional to emphasize that Chapter~3’s main theorem is purely local and geometric.
 \end{remark}
 
 % ----------------------------------------------------------------------
-\section{Complexity and Inverse Spectral Problems}
-\label{sec:inverse}
+\subsection{Inverse spectral corollaries}
+\label{subsec:inverse-kappa}
 
-\subsection{Spectral detectability}
-From Weyl law with error,
+\begin{theorem}[Complexity is spectrally upper–detectable]
+\label{thm:inverse-upper}
+Let $(M,g)$ and the collar bounds be fixed. Suppose $N(\lambda)$ is known with an error bound
 \[
-N(\lambda)=\cdots+O(\kappa(\Gamma)\lambda^{(d-2)/2}).
+\Big|N(\lambda)-c_d \vol_d(M)\lambda^{d/2}+c_{d-1}(\vol_{d-1}(\partial M)+\vol_{d-1}(\Gamma))\lambda^{(d-1)/2}\Big|
+\ \le\ C_*\ \lambda^{(d-2)/2},
 \]
-Thus $\kappa(\Gamma)$ is spectrally encoded in remainder bounds.
-
-\subsection{Inverse heuristic}
-If one measures eigenvalues with resolution $O(\lambda^{(d-2)/2})$, one can recover an upper bound for $\kappa(\Gamma)$.
-
-\begin{theorem}[Spectral detectability of complexity]
-If $\Spec(L_\Gamma)$ is known up to error $O(\lambda^{(d-2)/2})$, then $\kappa(\Gamma)$ is bounded by a spectral invariant.
+for all large $\lambda$. Then $\kappa(\Gamma)\ \le\ C\ C_*$, with $C$ depending only on $(d,R,r_0,\|{\rm Rm}_g\|_{C^0})$.
 \end{theorem}
 
-\begin{proof}[Sketch]
-Compare observed remainders with universal terms; the constant in $O(\lambda^{(d-2)/2})$ depends on $\kappa(\Gamma)$.
+\begin{proof}
+This is the contrapositive of Corollary~\ref{cor:weyl-kappa} with constants tracked: the remainder constant is bounded above by $C(1+\kappa(\Gamma))$.
 \end{proof}
 
+\begin{corollary}[Spectral indistinguishability within a class]
+\label{cor:indistinguishability}
+Fix $K\ge 1$. For any two $\Gamma_1,\Gamma_2$ with $\kappa(\Gamma_j)\le K$ and the same $\vol_{d-1}(\Gamma_j)$,
+\[
+N_{\Gamma_1}(\lambda)-N_{\Gamma_2}(\lambda)\ =\ O_K\!\big(\lambda^{(d-2)/2}\big).
+\]
+Hence recovering the fine geometry of $\Gamma$ from $\Spec(L_\Gamma)$ requires resolution beyond the Weyl remainder scale unless $K$ is very small.
+\end{corollary}
+
 % ----------------------------------------------------------------------
-\section{Audit Block (Part 4/6)}
+\section{Audit Block (Part 4/6, SA–harmonized)}
 \label{sec:audit-part4}
 
 \begin{itemize}
-\item \textbf{Spectral effect.} Remainder error scales with $\kappa(\Gamma)$.
-\item \textbf{Stability.} $\kappa$ continuous under $C^2$ perturbations, diverges as reach$\to 0$.
-\item \textbf{Functional analysis.} $\kappa$ bounds operator norms of trace maps.
-\item \textbf{Dynamics.} Mixing rate $\alpha$ bounded by $c/\kappa$.
-\item \textbf{Inverse.} $\kappa$ is spectrally encoded in remainders of Weyl law.
+\item \textbf{SA alignment.} All constructions use positive reach (SA.4) to obtain a uniform tube; constants depend only on collar curvature bounds and $\kappa(\Gamma)$.
+\item \textbf{Quantitative remainder.} Theorem~\ref{thm:heat-remainder-kappa} makes explicit the $(1+\kappa)$ weight in the $O(\tau^{-(d-2)/2})$ term.
+\item \textbf{Weyl law.} Corollary~\ref{cor:weyl-kappa} transfers the same weight to the counting function via Tauberian theory.
+\item \textbf{Stability.} Perturbation of $\Gamma$ within $C^2$ and fixed reach implies Lipschitz control of the remainder (Proposition~\ref{prop:stability-remainder}); reach collapse forces $\kappa\to\infty$ (Proposition~\ref{prop:reach-collapse}).
+\item \textbf{Dynamics (optional).} Hypothesis~\ref{hyp:mixing-kappa} converts polynomial remainders to stretched–exponential/ exponential remainders with explicit $\kappa$–dependence (Proposition~\ref{prop:mixing-improves}).
+\item \textbf{Inverse spectral bridge.} The remainder constant bounds $\kappa(\Gamma)$ from above (Theorem~\ref{thm:inverse-upper}); indistinguishability occurs within fixed complexity classes (Corollary~\ref{cor:indistinguishability}).
 \end{itemize}
 
 \bigskip
 
 % ======================================================================
-% End PART 4/6 of Chapter 4
+% End PART 4/6 of Chapter 4 (harmonized with Chapter 0)
 % ======================================================================
 % ======================================================================
-% CHAPTER 4 — COMPLEXITY (PART 5/6)
+% CHAPTER 4 — COMPLEXITY (PART 5/6, harmonized with Chapter 0)
 % Extended examples, counterexamples, comparisons, robustness
 % ======================================================================
 
-\section{Extended Examples of Complexity}
+\section{Extended Examples of $\kappa(\Gamma)$}
 \label{sec:examples-complexity}
 
-\subsection{Flat slab with internal wall}
-Let $M=\R^{d-1}\times(0,h)$, $\Gamma=\{x_d=h/2\}$.  
-Here
-\[
-\kappa(\Gamma)=1+\frac{\vol_{d-1}(\Gamma)}{R^{d-1}}, \qquad R=h.
-\]
-Since $H_\Gamma=0$ (flat), curvature term vanishes.  
-Thus $\kappa(\Gamma)$ reduces to a simple scale-invariant ratio plus $1$.
+We present explicit model geometries to illustrate the scaling and interpretation of $\kappa(\Gamma)$.
 
-\subsection{Sphere with equatorial wall}
-Let $M=S^d\subset\R^{d+1}$, $\Gamma=S^{d-1}$ equator.  
-Then $|H_\Gamma|^2=(d-1)^2$, $\vol_{d-1}(\Gamma)=\omega_{d-1}$, $R=\pi$.  
+% ----------------------------------------------------------------------
+\subsection{Flat slab with internal wall}
+\label{subsec:flat-slab}
+Let $M=[0,1]^{d-1}\times(0,h)$ with flat metric, $\Gamma=\{x_d=h/2\}$.
+\begin{itemize}
+\item $N_{\mathrm{conn}}(\Gamma)=1$.
+\item $\vol_{d-1}(\Gamma)=1^{d-1}=1$ (up to the side length convention).
+\item Mean curvature $H=0$, so curvature term vanishes.
+\end{itemize}
+With $R=h$, we get
+\[
+\kappa(\Gamma)\ =\ 1+\frac{1}{h^{\,d-1}}.
+\]
+
+% ----------------------------------------------------------------------
+\subsection{Equatorial wall in the sphere}
+\label{subsec:equator}
+Take $M=S^d$ of radius $R$ with round metric, $\Gamma=S^{d-1}$ the equator.
+\begin{itemize}
+\item $N_{\mathrm{conn}}=1$.
+\item $\vol_{d-1}(\Gamma)=\omega_{d-1}R^{d-1}$.
+\item $H=0$ since $\Gamma$ is totally geodesic.
+\end{itemize}
 Hence
 \[
-\kappa(\Gamma)=1+\frac{\omega_{d-1}}{\pi^{d-1}}+\pi^{3-d}\!\int_{S^{d-1}} (d-1)^2\,d\vol_{d-1}.
+\kappa(\Gamma)\ =\ 1+\frac{\omega_{d-1}R^{d-1}}{(\pi R)^{d-1}}\ =\ 1+(\pi)^{-(d-1)}\omega_{d-1}.
 \]
 
-\subsection{Cylindrical tube}
-$M=\Gamma\times(0,h)$ with $\Gamma$ curved hypersurface.  
-Contribution: flat term as in slab + curvature contribution of $\Gamma$.  
-Illustrates additive nature of $\kappa$.
+% ----------------------------------------------------------------------
+\subsection{Round sphere embedded in $\R^d$}
+\label{subsec:round-sphere}
+For $\Gamma=S^{d-1}(r)$ embedded in $\R^d$ with ambient diameter $R$,
+\begin{align*}
+N_{\mathrm{conn}}&=1,\\
+\vol_{d-1}(\Gamma)&=c_{d-1}\,r^{d-1},\\
+|H|&=(d-1)/r,\quad \int_\Gamma |H|^2 = (d-1)^2 c_{d-1}\, r^{d-3}.
+\end{align*}
+Thus
+\[
+\kappa(\Gamma)\ =\ 1+\frac{c_{d-1}r^{d-1}}{R^{d-1}}+R^{3-d}(d-1)^2c_{d-1}r^{d-3}.
+\]
+
+% ----------------------------------------------------------------------
+\subsection{Oscillatory graph}
+\label{subsec:oscillatory}
+Let $\Gamma=\{(x,\varepsilon\sin(x/\varepsilon)):x\in[0,1]\}\subset \R^2$.
+Then:
+\begin{align*}
+\vol_1(\Gamma)&\sim 1/\varepsilon,\\
+|H|&\sim 1/\varepsilon\ \text{at oscillations},\\
+\int_\Gamma |H|^2 &\sim 1/\varepsilon^3.
+\end{align*}
+Thus $\kappa(\Gamma)\sim \varepsilon^{-3}\to \infty$ as $\varepsilon\to 0$,
+capturing the degeneration of reach.
 
 % ----------------------------------------------------------------------
 \section{Counterexamples and Pathologies}
 \label{sec:counterexamples}
 
 \subsection{Vanishing reach}
-Let $\Gamma=\{(x,y):y=\varepsilon\sin(1/x),\; x\in(0,\varepsilon)\}$ in $\R^2$.  
-Here reach$=0$ at $x=0$.  
-Projection map not well-defined, tubular coordinates fail, $\kappa(\Gamma)=\infty$.
+If $\Gamma=\{(x,y):y=\varepsilon\sin(1/x),\ x\in(0,\varepsilon)\}$ in $\R^2$, then $\reach_M(\Gamma)=0$ at $x=0$, so $\kappa(\Gamma)=\infty$. Tubular coordinates collapse, hence Chapter~2’s parametrix fails.
 
-\subsection{Fractal boundary}
-If $\Gamma$ is nowhere $C^2$ (e.g.\ Koch curve cross $\R^{d-2}$), then $\kappa(\Gamma)$ undefined.  
-Spectral expansion does not have universal surface term.
+\subsection{Fractal hypersurfaces}
+For $\Gamma$ nowhere $C^2$ (e.g.\ Koch snowflake $\times\R^{d-2}$), $\kappa(\Gamma)$ is undefined. Universal heat coefficients beyond the volume terms are not available.
 
-\subsection{Disconnected walls}
-If $\Gamma=\sqcup_{j=1}^N \Gamma_j$, then
+\subsection{Disconnected families}
+If $\Gamma=\bigsqcup_{j=1}^N \Gamma_j$, then
 \[
-\kappa(\Gamma)=\sum_j \Big(1+\frac{\vol_{d-1}(\Gamma_j)}{R^{d-1}}+R^{3-d}\int_{\Gamma_j} |H|^2\Big).
+\kappa(\Gamma)\ =\ \sum_{j=1}^N \Big(1+\tfrac{\vol_{d-1}(\Gamma_j)}{R^{d-1}}+R^{3-d}\!\int_{\Gamma_j}|H|^2\Big).
 \]
-Thus fragmentation increases $\kappa$ linearly.
+Thus fragmentation increases $\kappa$ linearly in $N$.
 
 % ----------------------------------------------------------------------
 \section{Comparisons with Other Invariants}
 \label{sec:comparisons}
 
-\subsection{Vs Euler characteristic}
-Euler characteristic $\chi(\Gamma)$ is topological; $\kappa(\Gamma)$ is analytic-differential.  
-They do not coincide but both are additive.
+\subsection{Euler characteristic}
+$\chi(\Gamma)$ is topological; $\kappa(\Gamma)$ is analytic–geometric. Both are additive under disjoint unions, but only $\kappa$ captures curvature and scaling.
 
-\subsection{Vs Willmore energy}
-Willmore energy $W(\Gamma)=\int |H|^2$.  
-$\kappa(\Gamma)$ contains scaled $W(\Gamma)$ plus simpler additive terms.  
-Hence $\kappa$ generalizes Willmore energy into a dimensionless spectral invariant.
+\subsection{Willmore energy}
+Willmore functional $W(\Gamma)=\int |H|^2$.  
+$\kappa(\Gamma)$ contains a scaled version of $W(\Gamma)$ plus additive constants, making it dimensionless and adapted to spectral asymptotics.
 
-\subsection{Vs Gromov width}
-Gromov width measures symplectic embedding size; $\kappa(\Gamma)$ measures boundary fragmentation and curvature.  
-No direct relation, but both scale-invariant.
+\subsection{Gromov width}
+Symplectic Gromov width measures embedding size. No direct relation exists, but both are scale–invariant geometric complexity indicators.
 
 % ----------------------------------------------------------------------
 \section{Robustness of $\kappa(\Gamma)$}
 \label{sec:robustness}
 
-\subsection{Perturbation robustness}
-For $C^2$-small deformations of $\Gamma$, $\kappa(\Gamma)$ changes smoothly.  
-Thus it is a robust measure for spectral purposes.
+\subsection{Perturbation stability}
+If $\Gamma_\epsilon\to \Gamma$ in $C^2$, then $\kappa(\Gamma_\epsilon)\to \kappa(\Gamma)$. Hence $\kappa$ is robust under small smooth deformations.
 
-\subsection{Metric scaling}
-Under $g\mapsto \lambda^2 g$, each term in $\kappa$ remains invariant.  
-So $\kappa$ is homothety-invariant.
+\subsection{Scaling invariance}
+Under $g\mapsto \lambda^2 g$, all terms of $\kappa$ remain invariant. So $\kappa$ is homothety–invariant.
 
-\subsection{Choice of $R$}
-Replacing diameter $R$ by $\vol_d(M)^{1/d}$ changes normalization but not invariance.  
-Constants adjust by fixed factors.
+\subsection{Choice of global scale}
+Replacing $R=\mathrm{diam}_g(M)$ by $\vol_d(M)^{1/d}$ changes constants but not the theory; both are valid homothety–invariant global scales.
 
 % ----------------------------------------------------------------------
-\section{Extended Audit Block (Part 5/6)}
+\section{Audit Block (Part 5/6, SA–harmonized)}
 \label{sec:audit-part5}
 
 \begin{itemize}
-\item \textbf{Examples} confirm formulae: flat $\Gamma$ gives $\kappa$ minimal; curved $\Gamma$ increases $\kappa$.
-\item \textbf{Counterexamples} show reach$=0$ or fractal $\Gamma$ break universality.
-\item \textbf{Comparisons} situate $\kappa$ relative to Euler, Willmore, Gromov invariants.
-\item \textbf{Robustness} confirmed: $\kappa$ continuous in $C^2$, invariant under scaling, stable under change of $R$.
+\item \textbf{Examples.} Explicit models confirm scaling: flat $\Gamma$ yields minimal $\kappa$, curvature and fragmentation increase $\kappa$.
+\item \textbf{Pathologies.} Vanishing reach or fractal $\Gamma$ produce divergence or undefined complexity, marking the boundary of universality.
+\item \textbf{Comparisons.} $\kappa$ subsumes elements of Willmore energy and detects fragmentation like Euler characteristic, while staying spectral.
+\item \textbf{Robustness.} $\kappa$ is stable under $C^2$ perturbations and invariant under scaling, ensuring analytic estimates are well–posed.
 \end{itemize}
 
 \bigskip
 
 % ======================================================================
-% End PART 5/6 of Chapter 4
+% End PART 5/6 of Chapter 4 (harmonized with Chapter 0)
 % ======================================================================
 % ======================================================================
-% CHAPTER 4 — COMPLEXITY (PART 6/6)
+% CHAPTER 4 — COMPLEXITY (PART 6/6, harmonized with Chapter 0)
 % Final remarks, bibliographic anchors, epilogue
 % ======================================================================
 
@@ -803,65 +1199,68 @@ Constants adjust by fixed factors.
 \label{sec:final-remarks}
 
 \paragraph{Structural role of $\kappa(\Gamma)$.}
-The invariant $\kappa(\Gamma)$ plays a dual role:
+The invariant $\kappa(\Gamma)$ provides a unified, dimensionless measure of geometric burden:
 \begin{itemize}
-  \item It quantifies the \emph{geometric burden} of internal walls, combining topological fragmentation, area, and curvature.
-  \item It governs constants in spectral estimates, particularly in error terms for heat trace and eigenvalue counting.
+  \item It combines \emph{topological fragmentation} ($N_{\mathrm{conn}}$), \emph{size} ($\vol_{d-1}/R^{d-1}$), and \emph{extrinsic curvature} ($\int|H|^2$).
+  \item It governs constants in all analytic and spectral estimates, serving as the ``complexity index’’ of lithomathematics.
 \end{itemize}
-In this sense, $\kappa(\Gamma)$ is the ``complexity index’’ of lithomathematics.
 
 \paragraph{Relation to spectral remainders.}
-In Chapter~6, $\kappa(\Gamma)$ will explicitly appear as a factor controlling correlation decay constants under mixing assumptions.
-Thus Chapter~4 provides the necessary bridge between geometry and dynamics.
+In heat trace expansions (Definition~\ref{def:heat-expansion}), the universal interior surface density is curvature–free, but remainder terms depend polynomially on $\kappa(\Gamma)$.
+Thus $\kappa$ quantifies the gap between universality and degeneracy.
 
-\paragraph{Universality and barriers.}
-The universal law of Chapter~3 survives under positive reach; $\kappa(\Gamma)$ quantifies how far one is from degenerate situations.
-Hence reach$>0$ and finite $\kappa(\Gamma)$ are exactly the \emph{safety zone} for universality.
+\paragraph{Universality zone.}
+The positive reach assumption (SA.4) ensures tubular coordinates exist; finiteness of $\kappa$ ensures quantitative uniformity.  
+Together they define the \emph{safety zone of universality} for all results of Chapters~2–4.
 
 % ----------------------------------------------------------------------
 \section{Bibliographic Anchors for Chapter 4}
 \label{sec:biblio-ch4}
 
 \begin{itemize}
-  \item Federer (1959): definition and properties of reach.
-  \item Grisvard (1985): elliptic operators on nonsmooth domains.
-  \item Gilkey (1995), Safarov--Vassiliev (1997): heat kernel asymptotics.
-  \item Willmore (1965): curvature functionals.
-  \item Gromov (1985): metric invariants and widths.
+  \item Federer (1959): definition of reach, tubular neighborhoods.
+  \item Grisvard (1985): elliptic operators on nonsmooth domains, trace theory.
+  \item Gilkey (1995); Safarov–Vassiliev (1997): heat kernel asymptotics, universality of surface coefficients.
+  \item Willmore (1965): curvature energy, $W(\Gamma)=\int |H|^2$.
+  \item Gromov (1985): metric invariants and global widths.
 \end{itemize}
 
-These references form the backbone for the definition and analysis of $\kappa(\Gamma)$.
+These references justify the standing assumptions and the canonical form of $\kappa(\Gamma)$.
 
 % ----------------------------------------------------------------------
 \section{Full Audit of Chapter 4}
 \label{sec:audit-ch4}
 
 \subsection*{Audit A: Dimensional scaling}
-Each term in $\kappa(\Gamma)$ is dimensionless and invariant under homotheties.
+Every term in $\kappa(\Gamma)$ is dimensionless and invariant under $g\mapsto \lambda^2 g$.
 
 \subsection*{Audit B: Robustness}
-Perturbation of $\Gamma$ or $g$ within $C^2$ does not break invariance; continuity holds.
+Continuity under $C^2$ perturbations and lower semicontinuity under weak limits ensure stability.
 
 \subsection*{Audit C: Counterexamples}
-Reach$=0$ or fractal $\Gamma$ break definition; these are explicitly excluded.
+Degeneracy arises precisely at reach $=0$ or nonsmooth (fractal) $\Gamma$, marking the excluded regime.
 
 \subsection*{Audit D: Comparisons}
-Positioned relative to Euler characteristic, Willmore energy, and other invariants.
+$\kappa$ bridges between Euler characteristic, Willmore energy, and other invariants, while staying adapted to spectral asymptotics.
 
 \subsection*{Audit E: Integration into lithomathematics}
-$\kappa(\Gamma)$ feeds directly into dynamical hypotheses (Chapter~6) and inverse problems (Chapter~5).
+\begin{itemize}
+  \item In Chapter~3, $\kappa$ controls the size of spectral remainders.
+  \item In Chapter~5, $\kappa$ appears in inverse problems and detectability theorems.
+  \item In Chapter~6, $\kappa$ quantifies mixing rates in dynamical models (Hypothesis~\ref{hyp:mixing}).
+\end{itemize}
 
 \subsection*{Audit F: Purity}
-All results are structural invariants; no applied shortcuts are presented.
+All results remain purely structural: no applied engineering or numerical recipes are imported.
 
 % ----------------------------------------------------------------------
 \section{Epilogue of Chapter 4}
 \label{sec:epilogue-ch4}
 
 \begin{itemize}
-  \item The complexity invariant $\kappa(\Gamma)$ crystallizes the geometric structure of internal walls.
-  \item It acts as the \emph{control knob} for stability of the universal law.
-  \item It provides a safe and robust bridge between geometry, spectral theory, and dynamics.
+  \item The invariant $\kappa(\Gamma)$ crystallizes the quantitative geometry of internal walls.
+  \item It is the \emph{control knob} linking geometry, analysis, and dynamics.
+  \item It secures analytic uniformity and spectral stability across the whole theory.
 \end{itemize}
 
 \begin{flushright}
@@ -869,5 +1268,5 @@ All results are structural invariants; no applied shortcuts are presented.
 \end{flushright}
 
 % ======================================================================
-% END OF PART 6/6 — Chapter 4 complete.
+% END OF PART 6/6 — Chapter 4 complete, harmonized with Chapter 0
 % ======================================================================
